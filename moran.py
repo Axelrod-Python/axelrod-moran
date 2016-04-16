@@ -1,15 +1,19 @@
 # Python 3
 
+from __future__ import print_function
+
 import csv
 from collections import defaultdict, Counter
 import itertools
+from pathlib import Path
 import random
+import sys
 
 import numpy as np
 
 import axelrod as axl
 
-def get_strategies():
+def selected_strategies():
     strategies = [
         axl.Aggravater,
         axl.ALLCorALLD,
@@ -109,125 +113,72 @@ def get_strategies():
     strategies = [s for s in strategies if axl.obey_axelrod(s())]
     return strategies
 
-def fitness_proportionate_selection(scores):
-    """Randomly selects an individual proportionally to score."""
-    csums = np.cumsum(scores)
-    total = csums[-1]
-    r = random.random() * total
-
-    for i, x in enumerate(csums):
-        if x >= r:
-            return i
-
-def print_dict_sorted(d):
-    """Prints a dictionary sorted by the values."""
-    items = [(v, k) for (k, v) in d.items()]
-    for v, k in sorted(items):
-        print("{v}: {k}".format(v=v, k=k))
-
-# Moran Process
-
-def moran_process(players, turns=10, verbose=True, noise=0):
-    """The Moran process.
-
-    Parameters
-    ----------
-    players: sequence
-        a collection of Axelrod players
-    turns: int, 10
-        the number of turns in each interaction
-    verbose: bool, True
-        report progress as rounds proceed
-
-    Returns
-    -------
-    populations, list[dict]
-        the populations in each round, indexed by player name
-    scores, list[dict]
-        the scores for each player each round, indexed by name
-    """
-
-    populations = []
-    round_scores = []
-    N = len(players)
-    for round_number in itertools.count(1):
-        player_names = [str(player) for player in players]
-        counter = Counter(player_names)
-        populations.append(counter)
-
-        # Exit condition: Population consists of a single player type
-        if len(set(player_names)) == 1:
-            break
-        # Otherwise report progress
-        if verbose:
-            print("\nRound:", round_number)
-            print_dict_sorted(counter)
-
-        # Everyone plays everyone else
-        scores = [0] * N
-        for i in range(len(players)):
-            for j in range(i + 1, len(players)):
-                player1 = players[i]
-                player2 = players[j]
-                player1.reset()
-                player2.reset()
-                match = axl.Match((player1, player2), turns, noise=noise)
-                results = match.play()
-                match_scores = np.sum(match.scores(), axis=0) / float(turns)
-                scores[i] += match_scores[0]
-                scores[j] += match_scores[1]
-        # Save the scores
-        score_dict = defaultdict(float, dict(zip(player_names, scores)))
-        for k, v in counter.items():
-            score_dict[k] /= (float(v) * turns)
-        round_scores.append(score_dict)
-        # Update the population
-        # Fitness proportionate selection
-        j = fitness_proportionate_selection(scores)
-        # Randomly remove a strategy
-        i = random.randrange(0, N)
-        # Replace player i with player j
-        players[i] = players[j].clone()
-    if verbose:
-        print("\n", str(players[0]), "is the winner!")
-    return populations, round_scores
+#def print_dict_sorted(d):
+    #"""Prints a dictionary sorted by the values."""
+    #items = [(v, k) for (k, v) in d.items()]
+    #for v, k in sorted(items):
+        #print("{v}: {k}".format(v=v, k=k))
 
 
-def run_simulations(N=2, turns=100, repetitions=1000, noise=0):
-    outfile_name = "sims_{N}.csv".format(N=N)
-    outfile = csv.writer(open(outfile_name, 'a'))
+def build_population(players, weights):
+    population = []
+    for player, weight in zip(players, weights):
+        for _ in range(weight):
+            population.append(player.clone())
+    return population
 
-    players = [s() for s in get_strategies()]
+def output_players(players, outfilename="players.csv"):
+    rows = [(i, str(player)) for (i, player) in enumerate(players)]
+    path = Path("results") / outfilename
+    with path.open('w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(outfilename)
+
+def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilename=None):
+    """This function conducts many moran processes to empirically estimate
+    fixation probabilities. For each pair of strategies, the population consists
+    of 1 player of the first type and N-1 players of the second type."""
+    path = Path("results")
+    if not outfilename:
+        outfilename = "sims_{N}.csv".format(N=N)
+    path = path / outfilename
+    outfile = csv.writer(path.open('a'))
+
+    # Cache names to reverse winners to ids later
     names = dict(zip([str(p) for p in players], range(len(players))))
 
+    # For each distinct pair of players, play `repetitions` number of Moran matches
     for i, player_1 in enumerate(players):
+        print(i, len(players))
         for j, player_2 in enumerate(players):
-            if j <= i:
+            if i == j:
                 continue
-            reps = 1
-            if player_1.classifier['stochastic'] or player_2.classifier['stochastic'] or noise:
-                reps = repetitions
-            for _ in range(reps):
-                player_1.reset()
-                player_2.reset()
-                sim_players = []
-                # 50-50
-                #for _ in range(N // 2):
-                    #sim_players.append(player_1.clone())
-                    #sim_players.append(player_2.clone())
-                # Single mutant
-                sim_players.append(player_1.clone())
-                for _ in range(N - 1):
-                    sim_players.append(player_2.clone())
-                populations, scores = moran_process(sim_players, verbose=False,
-                                                    noise=noise)
+            rows = []
+            initial_population = build_population([player_1, player_2], [1, N-1])
+            mp = axl.MoranProcess(initial_population, turns=turns, noise=noise)
+            for _ in range(repetitions):
+                mp.reset()
+                populations = mp.play()
+                winner_name = mp.winning_strategy_name
                 winner_name = list(populations[-1].keys())[0]
-                #rounds = len(populations)
                 row = [i, j, names[winner_name]]
-                outfile.writerow(row)
-                print(i, j, str(player_1), str(player_2), winner_name)
+                rows.append(row)
+            outfile.writerows(rows)
+
+def main():
+    N = int(sys.argv[1]) # Population size
+    try:
+        repetitions = int(sys.argv[2])
+    except IndexError:
+        repetitions = 1000
+    # Make sure the data folder exists
+    path = Path("results")
+    path.mkdir(exist_ok=True)
+    #players = [s() for s in selected_strategies()]
+    players = [s() for s in axl.ordinary_strategies]
+    output_players(players)
+    run_simulations(players, N=N, repetitions=repetitions, outfilename="test.csv")
+
 
 if __name__ == "__main__":
-    import sys
-    N = int(sys.argv[1])
-    run_simulations(N)
+    main()

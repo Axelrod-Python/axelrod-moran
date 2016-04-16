@@ -214,7 +214,4 @@ def combine_all_results(pop_sizes=range(2, 15)):
 
 if __name__ == "__main__":
     results = combine_data()
-    #all_results = combine_all_results
-    #ax = prep_heatmap(results, pop_size)
-    #plt.show()
     best_strategy(results)
