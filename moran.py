@@ -13,109 +13,10 @@ import numpy as np
 
 import axelrod as axl
 
-def selected_strategies():
-    strategies = [
-        axl.Aggravater,
-        axl.ALLCorALLD,
-        axl.Alternator,
-        axl.AlternatorHunter,
-        axl.AntiCycler,
-        axl.AntiTitForTat,
-        axl.APavlov2006,
-        axl.APavlov2011,
-        axl.Appeaser,
-        axl.AverageCopier,
-        axl.BackStabber,
-        axl.Bully,
-        axl.Calculator,
-        axl.Champion,
-        axl.Cooperator,
-        axl.CyclerCCCCCD,
-        axl.CyclerCCCD,
-        axl.CyclerCCD,
-        axl.Davis,
-        axl.Defector,
-        axl.DoubleCrosser,
-        axl.Eatherley,
-        axl.Feld,
-        axl.FirmButFair,
-        axl.FoolMeForever,
-        axl.FoolMeOnce,
-        axl.ForgetfulFoolMeOnce,
-        axl.ForgetfulGrudger,
-        axl.Forgiver,
-        axl.ForgivingTitForTat,
-        axl.PSOGambler,
-        axl.GTFT,
-        axl.GoByMajority,
-        axl.GoByMajority10,
-        axl.GoByMajority20,
-        axl.GoByMajority40,
-        axl.GoByMajority5,
-        axl.HardGoByMajority,
-        axl.HardGoByMajority10,
-        axl.HardGoByMajority20,
-        axl.HardGoByMajority40,
-        axl.HardGoByMajority5,
-        axl.Golden,
-        axl.Grofman,
-        axl.Grudger,
-        axl.Grumpy,
-        axl.HardProber,
-        axl.HardTitFor2Tats,
-        axl.HardTitForTat,
-        axl.Inverse,
-        axl.InversePunisher,
-        axl.Joss,
-        axl.LimitedRetaliate,
-        axl.LimitedRetaliate2,
-        axl.LimitedRetaliate3,
-        axl.EvolvedLookerUp,
-        axl.MathConstantHunter,
-        axl.NiceAverageCopier,
-        axl.Nydegger,
-        axl.OmegaTFT,
-        axl.OnceBitten,
-        axl.OppositeGrudger,
-        axl.Pi,
-        axl.Prober,
-        axl.Prober2,
-        axl.Prober3,
-        axl.Punisher,
-        axl.Random,
-        axl.RandomHunter,
-        axl.Retaliate,
-        axl.Retaliate2,
-        axl.Retaliate3,
-        axl.Shubik,
-        axl.SneakyTitForTat,
-        axl.SoftJoss,
-        axl.StochasticWSLS,
-        axl.SuspiciousTitForTat,
-        axl.Tester,
-        axl.ThueMorse,
-        axl.TitForTat,
-        axl.TitFor2Tats,
-        axl.TrickyCooperator,
-        axl.TrickyDefector,
-        axl.Tullock,
-        axl.TwoTitsForTat,
-        axl.WinStayLoseShift,
-        axl.ZDExtort2,
-        axl.ZDExtort2v2,
-        axl.ZDExtort4,
-        axl.ZDGen2,
-        axl.ZDGTFT2,
-        axl.ZDSet2,
-        axl.e,
-    ]
-
-    strategies = [s for s in strategies if axl.obey_axelrod(s())]
-    return strategies
 
 def output_players(players, outfilename="players.csv"):
     """Cache players to disk for later retrieval."""
-    rows = [(i, str(player)) for (i, player) in enumerate(players)]
+    rows = [(i, str(player), player.classifier["stochastic"]) for (i, player) in enumerate(players)]
     path = Path("results") / outfilename
     with path.open('w') as csvfile:
         writer = csv.writer(csvfile)
@@ -147,6 +48,8 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
         for j, player_2 in enumerate(players):
             if i == j:
                 continue
+            if player_1.classifier["stochastic"] and player_2.classifier["stochastic"]:
+                continue
             rows = []
             initial_population = build_population([player_1, player_2], [1, N-1])
             mp = axl.MoranProcess(initial_population, turns=turns, noise=noise)
@@ -158,20 +61,51 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
                 rows.append(row)
             outfile.writerows(rows)
 
+def relative_fitnesses_deterministic(strategies, turns=100):
+    """For deterministic strategies we can compute the fixation probability
+    from the relative fitness. Input strategies are assumed deterministic."""
+    fitness = []
+    for i, player1 in strategies:
+        for j, player2 in strategies:
+            match = axl.Match((player1, player2), turns=turns)
+            match.play()
+            match_scores = np.sum(match.scores(), axis=0) / float(turns)
+            fitness.append((i, j, match_scores[0], match_scores[1]))
+    path = Path("results") / "deterministic.csv"
+    with path.open('w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(fitness)
+
+def filter_strategies(strategies):
+    stochastic = []
+    deterministic = []
+    for i, strategy in enumerate(strategies):
+        if strategy.classifier["stochastic"]:
+            stochastic.append((i, strategy))
+        else:
+            deterministic.append((i, strategy))
+    return stochastic, deterministic
+
+def do_deterministic(strategies, turns):
+    stochastic, deterministic = filter_strategies(strategies)
+    relative_fitnesses_deterministic(deterministic, turns=turns)
+
 def main():
     N = int(sys.argv[1]) # Population size
     try:
         repetitions = int(sys.argv[2])
     except IndexError:
         repetitions = 1000
+    turns = 100
     # Make sure the data folder exists
     path = Path("results")
     path.mkdir(exist_ok=True)
-    #players = [s() for s in selected_strategies()]
-    players = [s() for s in axl.ordinary_strategies]
-    output_players(players)
-    run_simulations(players, N=N, repetitions=repetitions)
 
+    strategies = list(map(lambda x: x(), axl.ordinary_strategies))
+    output_players(strategies)
+    #do_deterministic(strategies, turns=turns)
+
+    run_simulations(strategies, N=N, repetitions=repetitions, turns=turns)
 
 if __name__ == "__main__":
     main()
