@@ -156,16 +156,16 @@ def ranks_versus_population(pop_sizes=range(2, 14)):
 
     plt.show()
 
-
-
-def versus_heatmap(player_name, pop_sizes=range(2, 14)):
+def versus_heatmap(player_name, pop_sizes=range(2, 15), all_results=None):
     """Make a heatmap of the player_name's fixation probabilities versus all
     other players versus population size."""
+
+    if not all_results:
+        all_results = combine_all_results(pop_sizes)
 
     players = get_strategies()
     player_names = [str(p) for p in players]
     N = len(players)
-    xs = list(pop_sizes)
 
     player_index = None
     for i, name in enumerate(player_names):
@@ -173,27 +173,29 @@ def versus_heatmap(player_name, pop_sizes=range(2, 14)):
             player_index = i
             break
 
+    xs = list(pop_sizes)
     ys = list(range(N))
     cs = np.zeros((len(xs), len(ys)))
 
+    i = player_index
+    lower = pop_sizes[0]
     for pop_size in pop_sizes:
-        i = player_index
-        path = Path("sims_{i}.csv".format(i=pop_size))
-        results = combine_data(str(path))
-
+        results = all_results[pop_size]
         for j in range(N):
             if i == j:
-                cs[pop_size][j] = 1.
+                cs[pop_size-lower][j] = 1. / pop_size
             else:
+                rho = None
                 try:
                     r = results[(i, j)]
-                    cs[pop_size][j] = pop_size * r
+                    rho =  r
                 except KeyError:
                     r = results[(j, i)]
-                    cs[pop_size][j] = pop_size * (1. - r)
+                    rho = (1. - r)
+                cs[pop_size-lower][j] = rho
 
-    ax = plt.pcolor(xs, ys, cs, cmap=plt.cm.viridis)
-    plt.xlim(pop_sizes[0], pop_sizes[-1])
+    ax = plt.pcolor(xs, ys, cs.transpose(), cmap=plt.cm.viridis)
+    plt.xlim(pop_sizes[0], pop_sizes[-1] + 1)
     plt.ylim((0, N))
     #names = [str(p) for p in players]
     #plt.xticks(range(N), reversed(ranked_names), rotation=90)
@@ -202,9 +204,17 @@ def versus_heatmap(player_name, pop_sizes=range(2, 14)):
     plt.tight_layout()
     return ax
 
+def combine_all_results(pop_sizes=range(2, 15)):
+    l = dict()
+    for pop_size in pop_sizes:
+        path = Path("sims_{i}.csv".format(i=pop_size))
+        results = combine_data(str(path))
+        l[pop_size] = results
+    return l
 
 if __name__ == "__main__":
     results = combine_data()
+    #all_results = combine_all_results
     #ax = prep_heatmap(results, pop_size)
     #plt.show()
     best_strategy(results)
