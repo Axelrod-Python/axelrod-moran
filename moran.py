@@ -48,8 +48,6 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
         for j, player_2 in enumerate(players):
             if i == j:
                 continue
-            if player_1.classifier["stochastic"] and player_2.classifier["stochastic"]:
-                continue
             rows = []
             initial_population = build_population([player_1, player_2], [1, N-1])
             mp = axl.MoranProcess(initial_population, turns=turns, noise=noise)
@@ -60,35 +58,6 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
                 row = [i, j, names_inv[winner_name]]
                 rows.append(row)
             outfile.writerows(rows)
-
-def relative_fitnesses_deterministic(strategies, turns=100):
-    """For deterministic strategies we can compute the fixation probability
-    from the relative fitness. Input strategies are assumed deterministic."""
-    fitness = []
-    for i, player1 in strategies:
-        for j, player2 in strategies:
-            match = axl.Match((player1, player2), turns=turns)
-            match.play()
-            match_scores = np.sum(match.scores(), axis=0) / float(turns)
-            fitness.append((i, j, match_scores[0], match_scores[1]))
-    path = Path("results") / "deterministic.csv"
-    with path.open('w') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(fitness)
-
-def filter_strategies(strategies):
-    stochastic = []
-    deterministic = []
-    for i, strategy in enumerate(strategies):
-        if strategy.classifier["stochastic"]:
-            stochastic.append((i, strategy))
-        else:
-            deterministic.append((i, strategy))
-    return stochastic, deterministic
-
-def do_deterministic(strategies, turns):
-    stochastic, deterministic = filter_strategies(strategies)
-    relative_fitnesses_deterministic(deterministic, turns=turns)
 
 def main():
     N = int(sys.argv[1]) # Population size
@@ -103,7 +72,6 @@ def main():
 
     strategies = list(map(lambda x: x(), axl.ordinary_strategies))
     output_players(strategies)
-    #do_deterministic(strategies, turns=turns)
 
     run_simulations(strategies, N=N, repetitions=repetitions, turns=turns)
 
