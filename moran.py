@@ -113,12 +113,13 @@ def selected_strategies():
     strategies = [s for s in strategies if axl.obey_axelrod(s())]
     return strategies
 
-#def print_dict_sorted(d):
-    #"""Prints a dictionary sorted by the values."""
-    #items = [(v, k) for (k, v) in d.items()]
-    #for v, k in sorted(items):
-        #print("{v}: {k}".format(v=v, k=k))
-
+def output_players(players, outfilename="players.csv"):
+    """Cache players to disk for later retrieval."""
+    rows = [(i, str(player)) for (i, player) in enumerate(players)]
+    path = Path("results") / outfilename
+    with path.open('w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(rows)
 
 def build_population(players, weights):
     population = []
@@ -126,13 +127,6 @@ def build_population(players, weights):
         for _ in range(weight):
             population.append(player.clone())
     return population
-
-def output_players(players, outfilename="players.csv"):
-    rows = [(i, str(player)) for (i, player) in enumerate(players)]
-    path = Path("results") / outfilename
-    with path.open('w') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(outfilename)
 
 def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilename=None):
     """This function conducts many moran processes to empirically estimate
@@ -145,7 +139,7 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
     outfile = csv.writer(path.open('a'))
 
     # Cache names to reverse winners to ids later
-    names = dict(zip([str(p) for p in players], range(len(players))))
+    names_inv = dict(zip([str(p) for p in players], range(len(players))))
 
     # For each distinct pair of players, play `repetitions` number of Moran matches
     for i, player_1 in enumerate(players):
@@ -160,8 +154,7 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
                 mp.reset()
                 populations = mp.play()
                 winner_name = mp.winning_strategy_name
-                winner_name = list(populations[-1].keys())[0]
-                row = [i, j, names[winner_name]]
+                row = [i, j, names_inv[winner_name]]
                 rows.append(row)
             outfile.writerows(rows)
 
@@ -177,7 +170,7 @@ def main():
     #players = [s() for s in selected_strategies()]
     players = [s() for s in axl.ordinary_strategies]
     output_players(players)
-    run_simulations(players, N=N, repetitions=repetitions, outfilename="test.csv")
+    run_simulations(players, N=N, repetitions=repetitions)
 
 
 if __name__ == "__main__":
