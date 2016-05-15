@@ -13,6 +13,7 @@ import numpy as np
 
 import axelrod as axl
 
+from strategies import selected_strategies
 
 def output_players(players, outfilename="players.csv"):
     """Cache players to disk for later retrieval."""
@@ -70,7 +71,8 @@ def main():
     path = Path("results")
     path.mkdir(exist_ok=True)
 
-    strategies = list(map(lambda x: x(), axl.ordinary_strategies))
+    #strategies = list(map(lambda x: x(), axl.ordinary_strategies))
+    strategies = list(map(lambda x: x(), axl.selected_strategies))
     output_players(strategies)
 
     run_simulations(strategies, N=N, repetitions=repetitions, turns=turns)
