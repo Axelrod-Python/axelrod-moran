@@ -3,13 +3,8 @@
 from __future__ import print_function
 
 import csv
-from collections import defaultdict, Counter
-import itertools
 from pathlib import Path
-import random
 import sys
-
-import numpy as np
 
 import axelrod as axl
 
@@ -47,8 +42,6 @@ def run_simulations(players, N=2, turns=100, repetitions=1000, noise=0, outfilen
     for i, player_1 in enumerate(players):
         print(i, len(players))
         for j, player_2 in enumerate(players):
-            if i == j:
-                continue
             rows = []
             initial_population = build_population([player_1, player_2], [1, N-1])
             mp = axl.MoranProcess(initial_population, turns=turns, noise=noise)
@@ -72,7 +65,7 @@ def main():
     path.mkdir(exist_ok=True)
 
     #strategies = list(map(lambda x: x(), axl.ordinary_strategies))
-    strategies = list(map(lambda x: x(), axl.selected_strategies))
+    strategies = [s() for s in selected_strategies()]
     output_players(strategies)
 
     run_simulations(strategies, N=N, repetitions=repetitions, turns=turns)

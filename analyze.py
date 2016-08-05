@@ -5,9 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-import axelrod as axl
-import moran
-
 
 def load_player_data():
     """Loads the list of player names."""
@@ -16,7 +13,7 @@ def load_player_data():
     with path.open() as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
-            i, player_name = line
+            i, player_name, det = line
             names.append(player_name)
     return names
 
@@ -47,7 +44,7 @@ def sort_results(results, reverse=False, central_function=np.median):
     for k, v in results.items():
         i, j = k
         l[i].append(v)
-        l[j].append(1-v)
+        # l[j].append(1-v)
 
     # Sort by median
     centers = [(central_function(l[i]), i) for i in range(N)]
@@ -72,7 +69,8 @@ def pairwise_heatmap(results, pop_size):
     domain, ranked_names = sort_results(results, reverse=True)
 
     player_names = load_player_data()
-    n = len(player_names)
+    n = len(domain)
+    # print(n, len(domain))
     xs = list(reversed(range(n)))
     ys = list(range(n))
     cs = np.zeros((n, n))
@@ -80,17 +78,20 @@ def pairwise_heatmap(results, pop_size):
         for j in domain:
             if i == j:
                 cs[i][j] = 1.
-            else:
-                r = results[(i, j)]
-                cs[i][j] = pop_size * r
+            # elif i < j:
+            r = results[(i, j)]
+            cs[i][j] = pop_size * r
+            # else:
+            #     r = results[(j, i)]
+            #     cs[i][j] = pop_size * (1 - r)
+
     ax = plt.pcolor(xs, ys, cs, cmap=plt.cm.viridis)
+    plt.colorbar()
     plt.xlim((0, n))
     plt.ylim((0, n))
-    #names = [str(p) for p in players]
     plt.xticks(range(n), reversed(ranked_names), rotation=90)
     plt.yticks(range(n), ranked_names)
-    plt.colorbar()
-    plt.tight_layout()
+    # plt.tight_layout()
     return ax
 
 def fixation_boxplots(results, pop_size=None):
@@ -179,9 +180,12 @@ def versus_heatmap(player_name, pop_sizes=range(2, 15), all_results=None):
         for j in range(n):
             if i == j:
                 cs[pop_size-lower][j] = 1. / pop_size
-            else:
-                r = results[(i, j)]
-                cs[pop_size-lower][j] = r
+            # elif i < j:
+            r = results[(i, j)]
+            cs[pop_size-lower][j] = r
+            # else:
+            #     r = results[(j, i)]
+            #     cs[pop_size - lower][j] = 1 - r
 
     ax = plt.pcolor(xs, ys, cs.transpose(), cmap=plt.cm.viridis)
     plt.xlim(pop_sizes[0], pop_sizes[-1] + 1)
@@ -197,7 +201,7 @@ def combine_all_results(pop_sizes=range(2, 15)):
     l = dict()
     for pop_size in pop_sizes:
         try:
-            path = Path("results") / "sims_{i}.csv".format(i=pop_size)
+            path = Path("results2") / "sims_{i}.csv".format(i=pop_size)
             results = combine_data(str(path))
             l[pop_size] = results
         except IOError:
