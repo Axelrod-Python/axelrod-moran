@@ -54,9 +54,6 @@ def sort_results(results, reverse=False, central_function=np.median):
     names = load_player_data()
     ranked_names = [names[y] for (x, y) in centers]
 
-    l2 = []
-    for i in domain:
-        l2.append(l[i])
     if reverse:
         domain = list(reversed(domain))
         ranked_names = list(reversed(ranked_names))
@@ -77,10 +74,10 @@ def pairwise_heatmap(results, pop_size):
     for i in reversed(domain):
         for j in domain:
             if i == j:
-                cs[i][j] = 1.
+                cs[i][j] = 1. / pop_size
             # elif i < j:
             r = results[(i, j)]
-            cs[i][j] = pop_size * r
+            cs[i][j] = r
             # else:
             #     r = results[(j, i)]
             #     cs[i][j] = pop_size * (1 - r)
@@ -201,7 +198,7 @@ def combine_all_results(pop_sizes=range(2, 15)):
     l = dict()
     for pop_size in pop_sizes:
         try:
-            path = Path("results2") / "sims_{i}.csv".format(i=pop_size)
+            path = Path("results") / "sims_{i}.csv".format(i=pop_size)
             results = combine_data(str(path))
             l[pop_size] = results
         except IOError:
