@@ -74,10 +74,11 @@ def pairwise_heatmap(results, pop_size):
     for i in reversed(domain):
         for j in domain:
             if i == j:
-                cs[i][j] = 1. / pop_size
+                cs[i][j] = 1.
+            else:
             # elif i < j:
-            r = results[(i, j)]
-            cs[i][j] = r
+                r = results[(i, j)]
+                cs[i][j] = r * pop_size
             # else:
             #     r = results[(j, i)]
             #     cs[i][j] = pop_size * (1 - r)
