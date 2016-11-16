@@ -116,3 +116,6 @@ def selected_strategies():
 
     strategies = [s for s in strategies if axl.obey_axelrod(s())]
     return strategies
+
+if __name__ == "__main__":
+    print(len(selected_strategies()))
