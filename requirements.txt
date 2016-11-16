@@ -1,0 +1,2 @@
+axelrod==1.16.0
+pathlib==1.0.1
