@@ -86,8 +86,8 @@ def main():
     try:
         repetitions = int(sys.argv[2])
     except IndexError:
-        repetitions = 4
-    turns = 5
+        repetitions = 1000
+    turns = 100
     # Make sure the data folder exists
     path = Path("results")
     path.mkdir(exist_ok=True)
