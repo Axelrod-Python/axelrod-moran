@@ -1,14 +1,14 @@
 import axelrod as axl
 import numpy as np
 
-class Pdf:
+class Pdf(object):
     """A class for a probability distribution"""
     def __init__(self, counter):
         """Take as an instance of collections.counter"""
         self.sample_space, self.counts = zip(*counter.items())
         self.size = len(self.sample_space)
         self.total = sum(self.counts)
-        self.probability = list([v / self.total  for v in self.counts])
+        self.probability = list([v / self.total for v in self.counts])
 
     def sample(self):
         """Sample from the pdf"""
@@ -29,7 +29,7 @@ class ApproximateMoranProcess(axl.MoranProcess):
     from a dictionary of play tuples to distribution of match outcomes
     """
     def __init__(self, players, cached_outcomes=None, mutation_rate=0.):
-        super(ApproximateMoranProcess, self).__init__(players, turns=0, noise=1, deterministic_cache=None, mutation_rate=0.)
+        super(ApproximateMoranProcess, self).__init__(players, turns=0, noise=0, deterministic_cache=None, mutation_rate=0.)
         self.cached_outcomes = cached_outcomes
 
     def _play_next_round(self):
@@ -51,8 +51,6 @@ class ApproximateMoranProcess(axl.MoranProcess):
                     match_scores = self.cached_outcomes[player_names[::-1]].sample()
                     scores[i] += match_scores[1]
                     scores[j] += match_scores[0]
-                #print("------")
-                #print(self.players[i], scores[i], self.players[j], scores[j])
         self.score_history.append(scores)
         return scores
 
