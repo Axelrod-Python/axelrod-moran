@@ -78,8 +78,8 @@ def write_winner(filename, turns, repetitions, noise, i, j, seed=None):
     pairs = (players[i]().clone(), players[j]().clone())
     match = axl.Match(pairs, turns=turns, noise=noise)
     rs = repetitions
-    if not match._stochastic:
-        rs = 1
+    if not match._stochastic and noise == 0:
+        print(noise)
     outcomes = []
     for _ in range(rs):
         match.play()
@@ -122,17 +122,21 @@ if __name__ == "__main__":
     #            and not s().classifier['long_run_time']
     #            and axl.obey_axelrod(s())]
 
-    players = [s for s in axl.all_strategies if axl.obey_axelrod(s())]
+    players = [s for s in axl.all_strategies if axl.obey_axelrod(s())
+               and not s().classifier['long_run_time']]
 
     print(len(list(map(str, players))))
 
-    os.remove("outcomes.csv")
+    try:
+        os.remove("outcomes.csv")
+    except FileNotFoundError:
+        pass
+
+    # sample_match_outcomes_parallel(turns=200, repetitions=100,
+    #                                filename="outcomes.csv", noise=0,
+    #                                processes=4)
 
     sample_match_outcomes_parallel(turns=200, repetitions=100,
-                                   filename="outcomes.csv", noise=0,
-                                   processes=4)
-
-    sample_match_outcomes_parallel(turns=200, repetitions=10,
                                    filename="outcomes_noise.csv", noise=0.05,
                                    processes=4)
 
