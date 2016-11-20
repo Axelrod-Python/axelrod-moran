@@ -29,10 +29,10 @@ def combine_data(filename="sims_2.csv"):
     d = defaultdict(int)
     count = defaultdict(int)
     for line in load_data(filename):
-        i, j, w = line
-        count[(i, j)] += 1
+        i, j, w, c = line
+        count[(i, j)] += c
         if i == w:
-            d[(i, j)] += 1
+            d[(i, j)] += c
     results = dict()
     for k, v in count.items():
         results[k] = d[k] / float(count[k])

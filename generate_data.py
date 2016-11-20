@@ -23,8 +23,7 @@ def read_csv(filename="outcomes.csv"):
     for row in reader:
         p1, p2, s1, s2, count = row
         outcomes[(p1, p2)][(float(s1), float(s2))] = int(count)
-        if p1 != p2:
-            outcomes[(p2, p1)][(float(s2), float(s1))] = int(count)
+        outcomes[(p2, p1)][(float(s2), float(s1))] = int(count)
     return outcomes
 
 def generate_matchups(players):
