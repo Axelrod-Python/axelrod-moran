@@ -28,8 +28,11 @@ class ApproximateMoranProcess(axl.MoranProcess):
     Instead of playing the matches, the result is sampled
     from a dictionary of play tuples to distribution of match outcomes
     """
-    def __init__(self, players, cached_outcomes=None, mutation_rate=0.):
-        super(ApproximateMoranProcess, self).__init__(players, turns=0, noise=0, deterministic_cache=None, mutation_rate=0.)
+    def __init__(self, players, cached_outcomes=None, turns=0,
+                 noise=0, mutation_rate=0.):
+        super(ApproximateMoranProcess, self).__init__(
+            players, turns=turns, noise=noise, deterministic_cache=None,
+            mutation_rate=mutation_rate)
         self.cached_outcomes = cached_outcomes
 
     def _play_next_round(self):
