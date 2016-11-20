@@ -79,7 +79,7 @@ def write_winner(filename, turns, repetitions, noise, i, j, seed=None):
     match = axl.Match(pairs, turns=turns, noise=noise)
     rs = repetitions
     if not match._stochastic and noise == 0:
-        print(noise)
+        rs = 1
     outcomes = []
     for _ in range(rs):
         match.play()
@@ -129,14 +129,15 @@ if __name__ == "__main__":
 
     try:
         os.remove("outcomes.csv")
+        os.remove("outcomes_noise.csv")
     except FileNotFoundError:
         pass
 
-    # sample_match_outcomes_parallel(turns=200, repetitions=100,
-    #                                filename="outcomes.csv", noise=0,
-    #                                processes=4)
-
-    sample_match_outcomes_parallel(turns=200, repetitions=100,
-                                   filename="outcomes_noise.csv", noise=0.05,
+    sample_match_outcomes_parallel(turns=200, repetitions=1000,
+                                   filename="outcomes.csv", noise=0,
                                    processes=4)
+
+    # sample_match_outcomes_parallel(turns=200, repetitions=100,
+    #                                filename="outcomes_noise.csv", noise=0.05,
+    #                                processes=4)
 
