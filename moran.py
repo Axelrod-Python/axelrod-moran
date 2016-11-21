@@ -15,45 +15,6 @@ from strategies import selected_strategies
 from approximate_moran import ApproximateMoranProcess, Pdf
 from generate_data import read_csv
 
-# class Sampler(object):
-#     """Extracts the data for the player pair from the cached outcomes and provides
-#     a sampleable PDF of the score distribution."""
-#
-#     def __init__(self, outcomes, pair_names):
-#         counter, reverse = self.extract_data(outcomes, pair_names)
-#         self.csums = np.cumsum(
-#             normalize([v for k, v in sorted(counter.items())]))
-#         self.scores = [k for k, v in sorted(counter.items())]
-#         self.reverse = reverse
-#
-#     def extract_data(self, outcomes, pair):
-#         try:
-#             outcomes = self.outcomes[pairs]
-#             reverse = False
-#         except KeyError:
-#             try:
-#                 pair_ = (pair[1], pair[0])
-#                 outcomes = self.outcomes[pair]
-#                 reverse = True
-#             except KeyError:
-#                 print("No cached data for pair {}".format(pair))
-#                 raise ValueError
-#         return outcomes, reverse
-#
-#     @classmethod
-#     def fps(csums):
-#         r = random.random()
-#         for j, x in enumerate(csums):
-#             if x >= r:
-#                 return j
-#
-#     def sample(self, pair):
-#         # Need to reverse
-#         scores = self.scores[self.fps(self.csums)]
-#         if reverse:
-#             scores = [scores[1], scores[0]]
-#         return scores
-
 
 def output_players(players, outfilename="players.csv"):
     """Cache players to disk for later retrieval."""
@@ -97,10 +58,7 @@ def write_winner(outfilename, turns, noise, names_inv, repetitions,
         mp.reset()
         mp.play()
         winner_name = mp.winning_strategy_name
-
-        # row = [i, j, names_inv[winner_name]]
         data[names_inv[winner_name]] += 1
-        # rows.append(row)
     path = Path("results")
     path = path / outfilename
     outputfile = csv.writer(path.open('a'))
@@ -122,11 +80,6 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
 
     # Cache names to reverse winners to ids later
     names_inv = dict(zip([str(p) for p in players], range(len(players))))
-
-    # For each distinct pair of players, play `repetitions` number of Moran matches
-    #for i, player_1 in enumerate(players):
-        #print(i, len(players))
-        #for j, player_2 in enumerate(players):
 
     player_indices = range(len(players))
     if processes is None:
@@ -155,17 +108,13 @@ def main():
     path = Path("results")
     path.mkdir(exist_ok=True)
 
-    # strategies = [s() for s in selected_strategies()]
-
-    # strategies = [s for s in axl.all_strategies if axl.obey_axelrod(s())
-    #            and not s().classifier['long_run_time']]
-
     output_players(players)
 
     run_simulations(N=N, repetitions=repetitions, turns=turns,
                     processes=4)
 
 if __name__ == "__main__":
+    # match_outcomes and players are global
     match_outcomes = read_csv("outcomes.csv")
     for k, v in match_outcomes.items():
         match_outcomes[k] = Pdf(v)
