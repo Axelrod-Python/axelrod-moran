@@ -110,17 +110,12 @@ def sample_match_outcomes_parallel(turns, repetitions, filename, noise=0,
                                  noise)
         p = multiprocessing.Pool(processes)
 
-        # args = itertools.product(player_indices, player_indices)
         args = generate_matchups_indices(len(players))
         p.starmap(func, args)
 
 
 if __name__ == "__main__":
-    # players = [s for s in axl.all_strategies if
-    #            not s().classifier['stochastic']
-    #            and not s().classifier['long_run_time']
-    #            and axl.obey_axelrod(s())]
-
+    # players are global
     players = [s for s in axl.all_strategies if axl.obey_axelrod(s())
                and not s().classifier['long_run_time']]
 
@@ -136,7 +131,7 @@ if __name__ == "__main__":
                                    filename="outcomes.csv", noise=0,
                                    processes=4)
 
-    # sample_match_outcomes_parallel(turns=200, repetitions=100,
-    #                                filename="outcomes_noise.csv", noise=0.05,
-    #                                processes=4)
+    sample_match_outcomes_parallel(turns=200, repetitions=100,
+                                   filename="outcomes_noise.csv", noise=0.05,
+                                   processes=4)
 
