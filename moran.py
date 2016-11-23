@@ -10,6 +10,7 @@ import multiprocessing
 import itertools
 
 import axelrod as axl
+import pandas as pd
 
 from strategies import selected_strategies
 from approximate_moran import ApproximateMoranProcess, Pdf
@@ -33,8 +34,21 @@ def build_population(i, j, weights):
             population.append(player.clone())
     return population
 
-def write_winner(outfilename, turns, noise, names_inv, repetitions,
-                 N, i, j, seed=None):
+
+def obtain_current_count(filename):
+    """Count the number of repetitions for a given strategy pair"""
+    df = pd.read_csv(filename, header=None, names=["Strategy 1 index",
+                                                   "Strategy 2 index",
+                                                   "Winner index",
+                                                   "Count"])
+    counts = {pair: f["Count"].sum()
+              for pair, f in df.groupby(["Strategy 1 index",
+                                         "Strategy 2 index"])}
+    return counts
+
+
+def write_winner(outfilename, turns, noise, names_inv,
+                 N, i, j, repetitions, seed=None):
     """
     Write the winner of a Moran process to file
     """
@@ -53,12 +67,14 @@ def write_winner(outfilename, turns, noise, names_inv, repetitions,
     # mp = axl.MoranProcess(initial_population, turns=turns, noise=noise)
     mp = ApproximateMoranProcess(initial_population, cached_outcomes=outcomes,
                                  turns=turns, noise=noise)
+
     data = {i: 0, j: 0}
     for _ in range(repetitions):
         mp.reset()
         mp.play()
         winner_name = mp.winning_strategy_name
         data[names_inv[winner_name]] += 1
+
     path = Path("results")
     path = path / outfilename
     outputfile = csv.writer(path.open('a'))
@@ -69,14 +85,17 @@ def write_winner(outfilename, turns, noise, names_inv, repetitions,
         outputfile.writerow(row)
 
 
-
 def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
-                    outfilename=None, processes=None):
+                    outfilename=None, processes=None, count=False):
     """This function conducts many moran processes to empirically estimate
     fixation probabilities. For each pair of strategies, the population consists
     of 1 player of the first type and N-1 players of the second type."""
     if not outfilename:
         outfilename = "sims_{N}.csv".format(N=N)
+
+    # Obtain current count of obtained values
+    if count is True:
+        counts = obtain_current_count("results/" + outfilename)
 
     # Cache names to reverse winners to ids later
     names_inv = dict(zip([str(p) for p in players], range(len(players))))
@@ -84,25 +103,44 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
     player_indices = range(len(players))
     if processes is None:
         for i in player_indices:
-            print(i, len(players))
             for j in player_indices:
-                # for seed in range(repetitions):
-                    write_winner(outfilename, turns, noise,
-                                 names_inv, repetitions, N, i, j)
+
+                    if i != j:
+
+                        if count is True:
+                            reps = repetitions - counts.get((i, j), 0)
+                        else:
+                            reps = repetitions
+
+                        if reps > 0:
+                            write_winner(outfilename, turns, noise,
+                                         names_inv, N, i, j, reps)
     else:
+        if processes == 0:
+            processes = multiprocessing.cpu_count()
         func = functools.partial(write_winner, outfilename,
                                  turns, noise,
-                                 names_inv, repetitions, N)
+                                 names_inv, N)
         p = multiprocessing.Pool(processes)
-        args = itertools.product(player_indices, player_indices)
+
+        player_index_pairs = [(i, j)
+                              for i, j in itertools.product(player_indices,
+                                                            player_indices)
+                              if i != j]
+        if count is True:
+            reps = [repetitions - counts.get(pair, 0)
+                    for pair in player_index_pairs]
+        else:
+            reps = [repetitions for pair in player_index_pairs]
+        args = (pair + (reps[i],) for i, pair in enumerate(player_index_pairs)
+                if reps[i] > 0)
         p.starmap(func, args)
 
 def main():
     N = int(sys.argv[1]) # Population size
-    try:
-        repetitions = int(sys.argv[2])
-    except IndexError:
-        repetitions = 1000
+    count = "-count" in sys.argv
+
+    repetitions = 1000
     turns = 200
     # Make sure the data folder exists
     path = Path("results")
@@ -111,7 +149,7 @@ def main():
     output_players(players)
 
     run_simulations(N=N, repetitions=repetitions, turns=turns,
-                    processes=4)
+                    processes=0, count=count)
 
 if __name__ == "__main__":
     # match_outcomes and players are global
