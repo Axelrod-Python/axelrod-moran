@@ -103,7 +103,7 @@ class TestPdf(unittest.TestCase):
             self.assertEqual(sample, self.pdf.sample())
 
 
-class ApproximateMoranProcess(unittest.TestCase):
+class TestApproximateMoranProcess(unittest.TestCase):
     """A suite of tests for the ApproximateMoranProcess"""
     players = [axl.Cooperator(), axl.Defector()]
     cached_outcomes = {}
