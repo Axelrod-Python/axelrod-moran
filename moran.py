@@ -45,7 +45,7 @@ def obtain_current_count(filename):
     return counts
 
 
-def write_winner(outfilename, turns, noise, names_inv,
+def write_winner(outfilename, names_inv,
                  N, i, j, repetitions, seed=None):
     """
     Write the winner of a Moran process to file
@@ -62,8 +62,7 @@ def write_winner(outfilename, turns, noise, names_inv,
     for pair in [(s1, s1), (s1, s2), (s2, s1), (s2, s2)]:
         outcomes[pair] = match_outcomes[pair]
 
-    mp = ApproximateMoranProcess(initial_population, cached_outcomes=outcomes,
-                                 noise=noise)
+    mp = ApproximateMoranProcess(initial_population, cached_outcomes=outcomes)
 
     data = {i: 0, j: 0}
     for _ in range(repetitions):
@@ -114,13 +113,11 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
                             reps = repetitions
 
                         if reps > 0:
-                            write_winner(outfilename, turns, noise,
-                                         names_inv, N, i, j, reps)
+                            write_winner(outfilename, names_inv, N, i, j, reps)
     else:
         if processes == 0:
             processes = multiprocessing.cpu_count()
         func = functools.partial(write_winner, outfilename,
-                                 turns, noise,
                                  names_inv, N)
         p = multiprocessing.Pool(processes)
 
@@ -144,7 +141,7 @@ def main():
     except IndexError:
         outfilename = None
 
-    repetitions = 10
+    repetitions = 1000
     # Make sure the data folder exists
     path = Path("results")
     path.mkdir(exist_ok=True)
