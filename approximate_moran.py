@@ -13,11 +13,13 @@ class Pdf(object):
     def sample(self):
         """Sample from the pdf"""
         index = np.random.choice(a=range(self.size), p=self.probability)
-        # Numpy cannot sample from a list of n dimensional objects for n > 1, need to sample an index
+        # Numpy cannot sample from a list of n dimensional objects for n > 1,
+        # need to sample an index
         return self.sample_space[index]
 
     def __repr__(self):
-        return "Sample space: {} - Probabilities: {}".format(self.sample_space, self.probability)
+        return "Sample space: {} - Probabilities: {}".format(self.sample_space,
+                                                             self.probability)
 
 
 class ApproximateMoranProcess(axl.MoranProcess):
@@ -56,5 +58,3 @@ class ApproximateMoranProcess(axl.MoranProcess):
                     scores[j] += match_scores[0]
         self.score_history.append(scores)
         return scores
-
-
