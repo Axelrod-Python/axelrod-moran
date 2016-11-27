@@ -12,7 +12,6 @@ import itertools
 import axelrod as axl
 import pandas as pd
 
-from strategies import selected_strategies
 from approximate_moran import ApproximateMoranProcess, Pdf
 from generate_data import read_csv
 
@@ -33,7 +32,6 @@ def build_population(i, j, weights):
         for _ in range(weight):
             population.append(player.clone())
     return population
-
 
 def obtain_current_count(filename):
     """Count the number of repetitions for a given strategy pair"""
@@ -64,9 +62,8 @@ def write_winner(outfilename, turns, noise, names_inv,
     for pair in [(s1, s1), (s1, s2), (s2, s1), (s2, s2)]:
         outcomes[pair] = match_outcomes[pair]
 
-    # mp = axl.MoranProcess(initial_population, turns=turns, noise=noise)
     mp = ApproximateMoranProcess(initial_population, cached_outcomes=outcomes,
-                                 turns=turns, noise=noise)
+                                 noise=noise)
 
     data = {i: 0, j: 0}
     for _ in range(repetitions):
@@ -95,7 +92,11 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
 
     # Obtain current count of obtained values
     if count is True:
-        counts = obtain_current_count("results/" + outfilename)
+        try:
+            counts = obtain_current_count("results/" + outfilename)
+        except OSError:
+            # If file does not exist then don't count
+            count = False
 
     # Cache names to reverse winners to ids later
     names_inv = dict(zip([str(p) for p in players], range(len(players))))
@@ -137,23 +138,31 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
         p.starmap(func, args)
 
 def main():
-    N = int(sys.argv[1]) # Population size
-    count = "-count" in sys.argv
+    N = int(sys.argv[1])  # Population size
+    try:
+        outfilename = sys.argv[3]
+    except IndexError:
+        outfilename = None
 
-    repetitions = 1000
-    turns = 200
+    repetitions = 10
     # Make sure the data folder exists
     path = Path("results")
     path.mkdir(exist_ok=True)
 
     output_players(players)
 
-    run_simulations(N=N, repetitions=repetitions, turns=turns,
-                    processes=0, count=count)
+    run_simulations(N=N, repetitions=repetitions, processes=0, count=True,
+                    outfilename=outfilename)
 
 if __name__ == "__main__":
     # match_outcomes and players are global
-    match_outcomes = read_csv("outcomes_noise_10000.csv")
+    # Run with `python moran.py <N> <outcome_file> <filename>`
+    try:
+        match_outcomes_file = sys.argv[2]
+    except IndexError:
+        match_outcomes_file = "outcomes.csv"
+
+    match_outcomes = read_csv(match_outcomes_file)
     for k, v in match_outcomes.items():
         match_outcomes[k] = Pdf(v)
 
