@@ -15,6 +15,10 @@ import pandas as pd
 from approximate_moran import ApproximateMoranProcess, Pdf
 from generate_data import read_csv
 
+# For tests
+import unittest
+import tempfile
+
 
 def output_players(players, outfilename="players.csv"):
     """Cache players to disk for later retrieval."""
@@ -24,14 +28,16 @@ def output_players(players, outfilename="players.csv"):
         writer = csv.writer(csvfile)
         writer.writerows(rows)
 
-def build_population(i, j, weights):
-    # players = [s() for s in selected_strategies()]
+
+def build_population(players, i, j, weights):
+    """Return the population of strategies according to a given weights"""
     sub_players = players[i], players[j]
     population = []
     for player, weight in zip(sub_players, weights):
         for _ in range(weight):
             population.append(player.clone())
     return population
+
 
 def obtain_current_count(filename):
     """Count the number of repetitions for a given strategy pair"""
@@ -52,7 +58,7 @@ def write_winner(outfilename, names_inv,
     """
     if seed:
         axl.seed(seed)  # Seed the process
-    initial_population = build_population(i, j, [1, N-1])
+    initial_population = build_population(players, i, j, [1, N-1])
 
     s1 = str(players[i].clone())
     s2 = str(players[j].clone())
@@ -167,3 +173,35 @@ if __name__ == "__main__":
                and not s().classifier['long_run_time']]
 
     main()
+
+
+#########
+# Tests #
+#########
+
+
+class Test_output_players(unittest.TestCase):
+    """Test the output players function"""
+    def test_output(self):
+        outfile = tempfile.NamedTemporaryFile('w')
+        players = [s() for s in axl.demo_strategies]
+        output_players(players, outfile.name)
+        with open(outfile.name, 'r') as outfile:
+            test_output = [row for row in csv.reader(outfile)]
+        expected_output = [['0', 'Cooperator', 'False'],
+                           ['1', 'Defector', 'False'],
+                           ['2', 'Tit For Tat', 'False'],
+                           ['3', 'Grudger', 'False'],
+                           ['4', 'Random: 0.5', 'True']]
+        self.assertEqual(test_output, expected_output)
+
+
+class Test_build_population(unittest.TestCase):
+    """Test the output players function"""
+    def test_build_pop(self):
+        players = [axl.Cooperator(), axl.Defector()]
+        for weights in [(1, 1), (1, 5), (5, 3), (0, 0), (4, 12)]:
+            population = build_population(players, 0, 1, weights)
+            str_population = [str(p) for p in population]
+            self.assertEqual(str_population, ['Cooperator'] * weights[0] +
+                                             ['Defector'] * weights[1])
