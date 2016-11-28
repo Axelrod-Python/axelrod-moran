@@ -16,8 +16,9 @@ from approximate_moran import ApproximateMoranProcess, Pdf
 from generate_data import read_csv
 
 # For tests
-import unittest
+import collections
 import tempfile
+import unittest
 
 
 def output_players(players, outfilename="players.csv"):
@@ -52,12 +53,11 @@ def obtain_current_count(filename):
 
 
 def write_winner(outfilename, names_inv,
-                 N, i, j, repetitions, seed=None):
+                 N, i, j, repetitions):
     """
     Write the winner of a Moran process to file
     """
-    if seed:
-        axl.seed(seed)  # Seed the process
+
     initial_population = build_population(players, i, j, [1, N-1])
 
     s1 = str(players[i].clone())
@@ -71,7 +71,8 @@ def write_winner(outfilename, names_inv,
     mp = ApproximateMoranProcess(initial_population, cached_outcomes=outcomes)
 
     data = {i: 0, j: 0}
-    for _ in range(repetitions):
+    for seed in range(repetitions):
+        axl.seed(seed)
         mp.reset()
         mp.play()
         winner_name = mp.winning_strategy_name
@@ -205,3 +206,47 @@ class Test_build_population(unittest.TestCase):
             str_population = [str(p) for p in population]
             self.assertEqual(str_population, ['Cooperator'] * weights[0] +
                                              ['Defector'] * weights[1])
+
+
+class Test_obtain_current_count(unittest.TestCase):
+    """Test the obtain current count function"""
+    def test_obtain_current_count(self):
+        data = [(0, 1, 0, 5), (0, 1, 1, 1), (0, 2, 0, 1), (0, 2, 1, 3)]
+        df = pd.DataFrame(data)
+        temp_file = tempfile.NamedTemporaryFile("w")
+        df.to_csv(temp_file.name, header=False)
+        current_count = obtain_current_count(temp_file.name)
+        for pair, count in [((0, 1), 6), ((0, 2), 4)]:
+            self.assertEqual(current_count[pair], count)
+        temp_file.close()
+
+
+class Test_write_winner(unittest.TestCase):
+    """Test that the output of a given simulation is as expected"""
+    global players
+    players = [axl.Cooperator(), axl.Defector()]
+
+    global match_outcomes
+    players = [axl.Cooperator(), axl.Defector()]
+    match_outcomes = {}
+    counter = collections.Counter([(5, 0)])
+    pdf = Pdf(counter)
+    match_outcomes[('Defector', 'Cooperator')] = pdf
+    counter = collections.Counter([(0, 5)])
+    pdf = Pdf(counter)
+    match_outcomes[('Cooperator', 'Defector')] = pdf
+    counter = collections.Counter([(3, 3)])
+    pdf = Pdf(counter)
+    match_outcomes[('Cooperator', 'Cooperator')] = pdf
+    counter = collections.Counter([(1, 1)])
+    pdf = Pdf(counter)
+    match_outcomes[('Defector', 'Defector')] = pdf
+
+    temp_file = tempfile.NamedTemporaryFile()
+    names_inv = {"Cooperator": 0, "Defector": 1}
+
+    def test_write_winner(self):
+        write_winner(self.temp_file.name, self.names_inv, 2, 0, 1, 10)
+        df = pd.read_csv(self.temp_file.name, header=None)
+        self.assertEqual(list(df.ix[:, 3]), [0, 10])
+        self.temp_file.close()
