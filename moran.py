@@ -115,7 +115,7 @@ def main():
 
 if __name__ == "__main__":
     # match_outcomes and players are global
-    match_outcomes = read_csv("outcomes.csv")
+    match_outcomes = read_csv("outcomes_noise_10000.csv")
     for k, v in match_outcomes.items():
         match_outcomes[k] = Pdf(v)
 

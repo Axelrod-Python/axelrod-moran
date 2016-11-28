@@ -127,11 +127,11 @@ if __name__ == "__main__":
     except FileNotFoundError:
         pass
 
-    sample_match_outcomes_parallel(turns=200, repetitions=1000,
+    sample_match_outcomes_parallel(turns=200, repetitions=10000,
                                    filename="outcomes.csv", noise=0,
                                    processes=4)
 
-    sample_match_outcomes_parallel(turns=200, repetitions=100,
+    sample_match_outcomes_parallel(turns=200, repetitions=10000,
                                    filename="outcomes_noise.csv", noise=0.05,
                                    processes=4)
 

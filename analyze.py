@@ -38,13 +38,16 @@ def combine_data(filename="sims_2.csv"):
         results[k] = d[k] / float(count[k])
     return results
 
-def sort_results(results, reverse=False, central_function=np.median):
+def sort_results(results, reverse=False, central_function=np.median,
+                 direction="invasion"):
     N = max(k[1] for k in results.keys()) + 1
     l = [[] for _ in range(N)]
     for k, v in results.items():
         i, j = k
-        l[i].append(v)
-        # l[j].append(1-v)
+        if direction == "invasion":
+            l[i].append(v)
+        else:
+            l[j].append(v)
 
     # Sort by median
     centers = [(central_function(l[i]), i) for i in range(N)]
@@ -59,11 +62,12 @@ def sort_results(results, reverse=False, central_function=np.median):
         ranked_names = list(reversed(ranked_names))
     return domain, ranked_names
 
-def pairwise_heatmap(results, pop_size):
+def pairwise_heatmap(results, pop_size, direction="invasion"):
     """Heatmap for the given population size for all players versus all other
     players."""
 
-    domain, ranked_names = sort_results(results, reverse=True)
+    domain, ranked_names = sort_results(results, reverse=True,
+                                        direction=direction)
 
     player_names = load_player_data()
     n = len(domain)
@@ -75,10 +79,13 @@ def pairwise_heatmap(results, pop_size):
         for j in domain:
             if i == j:
                 cs[i][j] = 1.
-            else:
-            # elif i < j:
+            elif direction == "invasion":
                 r = results[(i, j)]
                 cs[i][j] = r * pop_size
+            else:
+                r = results[(j, i)]
+                cs[i][j] = r * pop_size
+
             # else:
             #     r = results[(j, i)]
             #     cs[i][j] = pop_size * (1 - r)
@@ -92,15 +99,17 @@ def pairwise_heatmap(results, pop_size):
     # plt.tight_layout()
     return ax
 
-def fixation_boxplots(results, pop_size=None):
+def fixation_boxplots(results, pop_size=None, direction="invasion"):
     """Plot the boxplots of the fixation probability distributions of each
     player, sorted by median."""
     n = max(k[1] for k in results.keys()) + 1
     l = [[] for _ in range(n)]
     for k, v in results.items():
         i, j = k
-        l[i].append(v)
-        l[j].append(1-v)
+        if direction == "invasion":
+            l[i].append(v)
+        else:
+            l[j].append(v)
 
     # Sort by median
     centers = [(np.median(l[i]), i) for i in range(n)]
@@ -195,11 +204,11 @@ def versus_heatmap(player_name, pop_sizes=range(2, 15), all_results=None):
     plt.tight_layout()
     return ax
 
-def combine_all_results(pop_sizes=range(2, 15)):
+def combine_all_results(pop_sizes=range(2, 15), directory="results"):
     l = dict()
     for pop_size in pop_sizes:
         try:
-            path = Path("results") / "sims_{i}.csv".format(i=pop_size)
+            path = Path(directory) / "sims_{i}.csv".format(i=pop_size)
             results = combine_data(str(path))
             l[pop_size] = results
         except IOError:
