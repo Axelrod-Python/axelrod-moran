@@ -53,12 +53,12 @@ def obtain_current_count(filename):
 
 
 def write_winner(outfilename, names_inv,
-                 N, i, j, repetitions):
+                 N, i, j, repetitions, n=1):
     """
     Write the winner of a Moran process to file
     """
 
-    initial_population = build_population(players, i, j, [1, N-1])
+    initial_population = build_population(players, i, j, [n, N-n])
 
     s1 = str(players[i].clone())
     s2 = str(players[j].clone())
@@ -89,10 +89,10 @@ def write_winner(outfilename, names_inv,
 
 
 def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
-                    outfilename=None, processes=None, count=False):
+                    outfilename=None, processes=None, count=False, n=1):
     """This function conducts many moran processes to empirically estimate
     fixation probabilities. For each pair of strategies, the population consists
-    of 1 player of the first type and N-1 players of the second type."""
+    of n player of the first type and N-n players of the second type."""
     if not outfilename:
         outfilename = "sims_{N}.csv".format(N=N)
 
@@ -137,14 +137,20 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
                     for pair in player_index_pairs]
         else:
             reps = [repetitions for pair in player_index_pairs]
-        args = (pair + (reps[i],) for i, pair in enumerate(player_index_pairs)
+        args = (pair + (reps[i], n) for i, pair in enumerate(player_index_pairs)
                 if reps[i] > 0)
         p.starmap(func, args)
 
 def main():
     N = int(sys.argv[1])  # Population size
+
     try:
-        outfilename = sys.argv[3]
+        n = sys.argv[2]
+    except IndexError:
+        n = 1
+
+    try:
+        outfilename = sys.argv[4]
     except IndexError:
         outfilename = None
 
@@ -156,13 +162,13 @@ def main():
     output_players(players)
 
     run_simulations(N=N, repetitions=repetitions, processes=0, count=True,
-                    outfilename=outfilename)
+                    outfilename=outfilename, n=n)
 
 if __name__ == "__main__":
     # match_outcomes and players are global
-    # Run with `python moran.py <N> <outcome_file> <filename>`
+    # Run with `python moran.py <N> <n> <outcome_file> <filename>`
     try:
-        match_outcomes_file = sys.argv[2]
+        match_outcomes_file = sys.argv[3]
     except IndexError:
         match_outcomes_file = "outcomes.csv"
 
