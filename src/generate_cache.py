@@ -122,8 +122,8 @@ if __name__ == "__main__":
     print(len(list(map(str, players))))
 
     try:
-        os.remove("outcomes.csv")
-        os.remove("outcomes_noise.csv")
+        os.remove("../data/outcomes.csv")
+        os.remove("../data/outcomes_noise.csv")
     except FileNotFoundError:
         pass
 
@@ -131,9 +131,9 @@ if __name__ == "__main__":
     turns = 200
 
     sample_match_outcomes_parallel(turns=turns, repetitions=repetitions,
-                                   filename="outcomes.csv", noise=0,
+                                   filename="../data/outcomes.csv", noise=0,
                                    processes=4)
 
     sample_match_outcomes_parallel(turns=turns, repetitions=repetitions,
-                                   filename="outcomes_noise.csv", noise=0.05,
+                                   filename="../data/outcomes_noise.csv", noise=0.05,
                                    processes=4)
