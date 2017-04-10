@@ -3,12 +3,16 @@
 % Packages
 \usepackage[margin=1.5cm, includefoot, footskip=30pt]{geometry}
 \usepackage{hyperref}
-
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{xstring}
+\usepackage{subcaption}
+\usepackage{graphicx}
 
 % Title
 \title{A numerical study of fixation probabilities for strategies in the
 Iterated Prisoner's Dilemma}
-\author{Marc Harper and Vincent Knight}
+\author{Marc Harper \and Vincent Knight}
 \date{}
 
 
@@ -28,44 +32,97 @@ Main questions are:
     \item How do 1 and 2 change as a function of population size?
 \end{enumerate}
 
-A key point here is that the relative fitness of a strategy depends on the population distribution. The original Moran process assumes a relative fitness of r of one strategy over the other, giving a fixation probability for the starting population $(i, N-i)$ (when $r != 1$)
+A key point here is that the relative fitness of a strategy depends on the
+population distribution. The original Moran process assumes a relative fitness
+of r of one strategy over the other, giving a fixation probability for the
+starting population $(i, N-i)$ (when $r != 1$)
 
 \[ \rho = \frac{1 - r^{-i}}{1 - r^{-N}}\]
 and $\rho = 1 / N$ if $r=1$ (the neutral fixation probability).
 
-This corresponds to a game matrix [[1, 1], [r, r]] (or [[r, r], [1, 1]]), which is of course not what we have -- it's a little complicated because our "fitness" is not the payout from the game matrix, rather the sum of the total scores of all the interactions each round. So ALLC and TFT are neutral wrt to each other because they will have the same score each round, giving an effective fitness landscape $f(i, N-i) = A [i, N-i]^T$ given by the matrix $A = [[1,1],[1,1]]$. This means that noise and the number of turns per Moran round are significant parameters. I think we should fix the turns at 200; some recent authors run the turns to infinity (to reach stationarity on the sub-"Markov process" on the states (C, C), (C, D), (D, C), (D, D)) but we can't analytically compute the stationary distribution for strategies that use more than one round of memory (and it's not really a Markov process for more than one round of memory anyway). Plus it's unrealistic, and ultimately just amounts to a transform of the game matrix.
+This corresponds to a game matrix [[1, 1], [r, r]] (or [[r, r], [1, 1]]), which
+is of course not what we have -- it's a little complicated because our "fitness"
+is not the payout from the game matrix, rather the sum of the total scores of
+all the interactions each round. So ALLC and TFT are neutral wrt to each other
+because they will have the same score each round, giving an effective fitness
+landscape $f(i, N-i) = A [i, N-i]^T$ given by the matrix $A = [[1,1],[1,1]]$.
+This means that noise and the number of turns per Moran round are significant
+parameters. I think we should fix the turns at 200; some recent authors run the
+turns to infinity (to reach stationarity on the sub-"Markov process" on the
+states (C, C), (C, D), (D, C), (D, D)) but we can't analytically compute the
+stationary distribution for strategies that use more than one round of memory
+(and it's not really a Markov process for more than one round of memory anyway).
+Plus it's unrealistic, and ultimately just amounts to a transform of the game
+matrix.
 
-To see if one strategy is not neutral with respect to another, we want to empirically measure the fixation probability and compare to the neutral rate. To do this right we need a lot of counts, since we're estimating a binomial probability p with variance $p(1-p) / k$ and $p$ is close to $1 / N$. To get the variance small you need something like $k>1000$ observations ( we can work out the precise requirements).
+To see if one strategy is not neutral with respect to another, we want to
+empirically measure the fixation probability and compare to the neutral rate. To
+do this right we need a lot of counts, since we're estimating a binomial
+probability p with variance $p(1-p) / k$ and $p$ is close to $1 / N$. To get the
+variance small you need something like $k>1000$ observations ( we can work out
+the precise requirements).
 
-Note we're not estimating $r$ for each strategy (pair) since we're in a frequency dependent situation, so we need to look at the population states (1, N-1) and (N-1, 1) for every pair of strategies, i.e. we can't assume that we're in a $\rho \leftrightarrow 1-\rho$ symmetry. More precisely, $\rho_{(1, N-1)} != 1 - \rho_{(N-1, 1)}$ in general. However we can (for fun) compute $r$ from $\rho$ with Newton's method (it's not easily invertable for $N > 3$), or take a Bayesian approach on what the distribution of $\rho$ is and then compute a distribution for $r$ in the usual way.
+Note we're not estimating $r$ for each strategy (pair) since we're in a
+frequency dependent situation, so we need to look at the population states (1,
+N-1) and (N-1, 1) for every pair of strategies, i.e. we can't assume that we're
+in a $\rho \leftrightarrow 1-\rho$ symmetry. More precisely, $\rho_{(1, N-1)} !=
+1 - \rho_{(N-1, 1)}$ in general. However we can (for fun) compute $r$ from
+$\rho$ with Newton's method (it's not easily invertable for $N > 3$), or take a
+Bayesian approach on what the distribution of $\rho$ is and then compute a
+distribution for $r$ in the usual way.
 
-A nice addition would be, for an interesting combination of strategies, to measure the fixation value for all $(i, N-i)$ and compare to the above formula for the value of $r$ derived from the $(1, N-1)$ case. This would show how much we deviate from frequency independence.
+A nice addition would be, for an interesting combination of strategies, to
+measure the fixation value for all $(i, N-i)$ and compare to the above formula
+for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
+we deviate from frequency independence.
 
 Beyond the raw data, we should try to estimate the strategies that are
 1) most resistant to invasion
 2) the best invaders
 3) "most neutral"
 
-as a function of N across the entire population of strategies. This can really open up if you want to say optimize a parameterized strategy to be most resistant to invasion (a topic of future work, perhaps) -- for example Random(p) for what p is best?
+as a function of N across the entire population of strategies. This can really
+open up if you want to say optimize a parameterized strategy to be most
+resistant to invasion (a topic of future work, perhaps) -- for example Random(p)
+for what p is best?
 
-The existing notebook attempts to get at 1 and 2 by looking at the distributions of fixation probabilities for each strategy -- that's what the box plots for each N try to visualize for particular N, and the "Player Rankings by Median vs. Population Size" for how the cooperative strategies become more successful as N increases. That plot is the main takeaway IMO, and reinforces the "evolution of cooperation" narrative that's so popular. We can tie back to Press and Dyson here -- yes, ZD strategies are good Head-to-Head and in small populations, but they aren't great when the population size gets bigger. How much bigger? Even at N=4 there is a dramatic decline for ZD-extort. Note that this goes against the claims of Stewart and Plotkin (they claimed that ZD strategies basically dominate the Moran process no matter how much memory you allow). This also matches our tournament results -- ZD strategies win matches but not tournaments.
+The existing notebook attempts to get at 1 and 2 by looking at the distributions
+of fixation probabilities for each strategy -- that's what the box plots for
+each N try to visualize for particular N, and the "Player Rankings by Median vs.
+Population Size" for how the cooperative strategies become more successful as N
+increases. That plot is the main takeaway IMO, and reinforces the "evolution of
+cooperation" narrative that's so popular. We can tie back to Press and Dyson
+here -- yes, ZD strategies are good Head-to-Head and in small populations, but
+they aren't great when the population size gets bigger. How much bigger? Even at
+N=4 there is a dramatic decline for ZD-extort. Note that this goes against the
+claims of Stewart and Plotkin (they claimed that ZD strategies basically
+dominate the Moran process no matter how much memory you allow). This also
+matches our tournament results -- ZD strategies win matches but not tournaments.
 
-It would be great to see how the ensemble strategies (meta strategies) fare, if we don't mind burning the CPU cycles. I left them out of my initial analysis.
+It would be great to see how the ensemble strategies (meta strategies) fare, if
+we don't mind burning the CPU cycles. I left them out of my initial analysis.
 
-Further Variants (possible additions or future papers):
-* Noise
-* Spatial structure
-* More than two types in the population
-* Modified Moran processes (e.g. Fermi selection with the strength of selection coefficient)
-* Altered game matrices
+Further Variants (possible additions or future papers): * Noise * Spatial
+structure * More than two types in the population * Modified Moran processes
+(e.g. Fermi selection with the strength of selection coefficient) * Altered game
+matrices
 
-Noise is especially interesting because a lot of the cooperative strategies are going to appear neutral to each other (since neither will cast a D unprovoked). A little bit of noise should shuffle the ranks around quite a bit, and show off the abilities of e.g. OmegaTFT. Might be worth including at least one of the "Player Rankings by Median vs. Population Size" plots for some value of noise (such as 0.05).
+Noise is especially interesting because a lot of the cooperative strategies are
+going to appear neutral to each other (since neither will cast a D unprovoked).
+A little bit of noise should shuffle the ranks around quite a bit, and show off
+the abilities of e.g. OmegaTFT. Might be worth including at least one of the
+"Player Rankings by Median vs. Population Size" plots for some value of noise
+(such as 0.05).
 
-More future work:
-* Mutation -- for mutation we no longer have fixation, rather a stationary distribution. This may require some more programming to compute efficiently (perhaps my stationary library). There's a lot of interesting work to do here.
+More future work: * Mutation -- for mutation we no longer have fixation, rather
+a stationary distribution. This may require some more programming to compute
+efficiently (perhaps my stationary library). There's a lot of interesting work
+to do here.
 
-I think we'd want to include a few of the heatmaps in the final section of the notebook for some interesting cases, like FoolMeOnce, EvolvedLookerUp, etc. Pushing N higher will make all the plots more interesting. How high we can get N? I'd really like to get it to N >= 12.
-
+Ip think we'd want to include a few of the heatmaps in the final section of the
+notebook for some interesting cases, like FoolMeOnce, EvolvedLookerUp, etc.
+Pushing N higher will make all the plots more interesting. How high we can get
+N? I'd really like to get it to N >= 11.
 
 Structure:
 
@@ -75,7 +132,62 @@ Structure:
     \item Short discussion about the Axelrod library.
 \end{itemize}
 
-I'm happy to write this section. We can lift some references from one of my papers on the Moran process.
+I'm happy to write this section. We can lift some references from one of my
+papers on the Moran process.
+
+\section{Methodology}\label{sec:methodology}
+
+To carry out this large numerical experiment 172 strategies are used from
+\cite{axelrodproject}. These include 169 default strategies in the library at
+the time (excluding strategies classified as having a long run time) as well as
+the following 3 finite state machine strategies:
+
+% TODO Include details about the 3 extra FSM strategies.
+
+Appendix~\ref{app:list_of_players} shows all the players in question. More
+information about each player can be obtained in the documentation for
+\cite{axelrodproject}. The memory depth of the used strategies is shown in
+Table~\ref{tbl:memory_depth_count}.
+
+\begin{table}[!hbtp]
+    \centering
+        \begin{subfigure}[t]{\textwidth}
+            \centering
+                \input{../tbl/memory_depth_count.tex}
+                \caption{Memory depth}
+                \label{tbl:memory_depth_count}
+        \end{subfigure}
+        \vspace{.5cm}
+
+        \begin{subfigure}[t]{\textwidth}
+            \centering
+                \input{../tbl/stochastic_count.tex}
+                \caption{Stochastic versus deterministic}
+                \label{tbl:stochastic_count}
+        \end{subfigure}
+        \caption{Summary of properties of used strategies}
+\end{table}
+
+All strategies are paired and these pairs are used in 1000 repetitions of a
+Moran process assuming a starting population of \((N/2, N/2)\). This is repeated
+for even \(N\) between 2 and 14. The fixation probability is then estimated for
+each value of \(N\).
+
+Note that due to the high computational cost of these experiments, for any given
+interaction between two players within the Moran process the outcome is sampled
+from a pre computed cache of 10000 match outcomes. This is carried out using the
+approximate Moran process implemented in \cite{axelrodproject}.
+
+As an example, Figure~\ref{fig:players_with_most_scores} shows the scores
+between two players that over the 10000 outcomes gives 6817 different scores.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.4\textwidth]{../img/players_with_most_scores.pdf}
+    \caption{All possible scores for the pair of strategies that have the most
+    different number of match outcomes}
+    \label{fig:players_with_most_scores}
+\end{figure}
 
 \section{Validation}\label{sec:validation}
 
@@ -99,4 +211,15 @@ Structure:
 
 \bibliographystyle{plain}
 \bibliography{./bibliography.bib}
+
+\appendix
+
+\section{List of players}\label{app:list_of_players}
+
+\begin{multicols}{3}
+	\begin{enumerate}
+		\input{../tbl/list_of_players.tex}
+	\end{enumerate}
+\end{multicols}
+
 \end{document}
