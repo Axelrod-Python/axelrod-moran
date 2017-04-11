@@ -12,7 +12,7 @@ import itertools
 import axelrod as axl
 import pandas as pd
 
-from approximate_moran import ApproximateMoranProcess, Pdf
+from axelrod import ApproximateMoranProcess, Pdf
 from generate_data import read_csv
 
 # For tests
