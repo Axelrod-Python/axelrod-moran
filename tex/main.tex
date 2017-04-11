@@ -9,6 +9,10 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 
+\usepackage[backend=biber, firstinits=false, backref=false, url=true,
+            isbn=true, style=numeric]{biblatex}
+\addbibresource{bibliography.bib}
+
 % Title
 \title{A numerical study of fixation probabilities for strategies in the
        Iterated Prisoner's Dilemma}
@@ -221,8 +225,7 @@ Structure:
 
 \section{Conclusion}\label{sec:conclusion}
 
-\bibliographystyle{plain}
-\bibliography{./bibliography.bib}
+\printbibliography
 
 \appendix
 
