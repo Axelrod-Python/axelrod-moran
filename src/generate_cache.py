@@ -80,9 +80,13 @@ def write_winner(filename, turns, repetitions, noise, i, j, seed=None):
     if not match._stochastic and noise == 0:
         rs = 1
     outcomes = []
+
     for _ in range(rs):
-        match.play()
-        outcomes.append(match.final_score_per_turn())
+        try:
+            match.play()
+            outcomes.append(match.final_score_per_turn())
+        except KeyError:
+            print(turns, repetitions, noise, i, j, seed)
 
     counts = Counter(outcomes)
     player_names = tuple(map(str, pairs))
