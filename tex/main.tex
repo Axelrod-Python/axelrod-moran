@@ -8,6 +8,7 @@
 \usepackage{xstring}
 \usepackage{subcaption}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
 \usepackage[backend=biber, firstinits=false, backref=false, url=true,
             isbn=true, style=numeric]{biblatex}
@@ -16,7 +17,7 @@
 % Title
 \title{A numerical study of fixation probabilities for strategies in the
        Iterated Prisoner's Dilemma}
-\author{Marc Harper \and Vincent Knight}
+\author{Marc Harper \and Vincent Knight} % TODO Authors?
 \date{}
 
 
@@ -144,7 +145,7 @@ Structure:
 
 \begin{itemize}
     \item Overview of Moran processes;
-    \item Review of the literature (\cite{Lee2015, Nowak});
+    \item Review of the literature (\cite{Lee2015, Nowak, Moran1957});
     \item Short discussion about the Axelrod library.
 \end{itemize}
 
@@ -207,12 +208,135 @@ between two players that over the 10000 outcomes gives 6817 different scores.
 
 \section{Validation}\label{sec:validation}
 
-Structure:
+As described in \cite{Nowak} Consider the payoff matrix:
 
-\begin{itemize}
-    \item Compute fitness landscape for some strategy pairs;
-    \item Verify against the data;
-\end{itemize}
+\begin{equation}\label{equ:payoff_matrix}
+    M = \begin{pmatrix}
+        a, b\\
+        c, d
+        \end{pmatrix}
+\end{equation}
+
+The expected payoffs of \(i\) players of the first type in a population with \(N
+- i\) players of the second type are given by:
+
+\begin{equation}\label{equ:expected_payoff_one}
+    F_i = \frac{a(i - 1) + b(N - i)}{N - 1}
+\end{equation}
+
+\begin{equation}\label{equ:expected_payoff_two}
+    G_i = \frac{ci + d(N - i - 1)}{N - 1}
+\end{equation}
+
+With an intensity of selection \(\omega\) the fitness of both strategies is
+given by:
+
+\begin{equation}\label{equ:expected_payoff_one}
+    f_i = 1 - \omega + \omega F_i
+\end{equation}
+
+\begin{equation}\label{equ:expected_payoff_two}
+    g_i = 1 - \omega + \omega G_i
+\end{equation}
+
+The transitions within the birth death process that underpins the Moran process
+are then given by:
+
+\begin{align}
+	p_{i, i+1}&= \frac{if_i}{if_i+(N-i)g_i}\frac{N-i}{N}\label{equ:p_up}\\
+	p_{i, i-1}&= \frac{(N-i)g_i}{if_i+(N-i)g_i}\frac{i}{N}\label{equ:p_down}\\
+	p_{ii} &= 1 - p_{i, i+1} - p_{i, i-1}\label{equ:p_stay}
+\end{align}
+
+Using this it is a known result that the fixation probability of the first
+strategy in a population of \(i\) individuals of the first type (and \(N-i\)
+individuals of the second. We have:
+
+\begin{equation}\label{equ:fixation_probability}
+x_i = \frac{1 + \sum_{j=1}^{i-1}\prod_{k=1}^{j}\gamma_j}{1 + \sum_{j=1}^{N-1}\prod_{k=1}^{j}\gamma_j}
+\end{equation}
+
+where:
+
+\[
+\gamma_j = \frac{p_{j, j-1}}{p_{j, j+1}}
+\]
+
+Using this comparisons of \(x_{N/2}\) are shown in
+Figure~\ref{fig:comparison_deterministic}. Note that these are all deterministic
+strategies and show a perfect match up between the expected value of
+(\ref{equ:fixation_probability}) and the actual Moran process.
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Cooperator_1000_repetitions.pdf}
+        \caption{Alternator and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Defector_1000_repetitions.pdf}
+        \caption{Alternator and Defector}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Tit_For_Tat_1000_repetitions.pdf}
+        \caption{Alternator and Tit For Tat}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Cooperator_v_Tit_For_Tat_1000_repetitions.pdf}
+        \caption{Cooperator and Tit For Tat}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Cooperator_1000_repetitions.pdf}
+        \caption{Defector and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Tit_For_Tat_1000_repetitions.pdf}
+        \caption{Defector and Tit For Tat}
+    \end{subfigure}%
+    \caption{Comparison of theoretic and actual Moran Process fixation probabilities for \textbf{deterministic} strategies}
+    \label{fig:comparison_deterministic}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Cooperator_1000_repetitions.pdf}
+        \caption{Random and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Defector_1000_repetitions.pdf}
+        \caption{Random and Defector}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Tit_For_Tat_1000_repetitions.pdf}
+        \caption{Random and Tit For Tat}
+    \end{subfigure}%
+    % TODO Input more of these
+    \caption{Comparison of theoretic and actual Moran Process fixation probabilities for \textbf{stochastic} strategies}
+    \label{fig:comparison_stochastic}
+\end{figure}
+
+Figure~\ref{fig_comparison_stochastic} shows the fixation probabilities for
+stochastic strategies. These are no longer a good match which highlights the
+weakness of the analytical formulae the relies on the average payoffs. A
+detailed analysis of the 172 strategies considered will be shown in the next
+Section.
 
 \section{Numerical results}\label{sec:numerical_results}
 

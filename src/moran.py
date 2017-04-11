@@ -13,7 +13,7 @@ import axelrod as axl
 import pandas as pd
 
 from axelrod import ApproximateMoranProcess, Pdf
-from generate_data import read_csv
+from generate_cache import read_csv
 
 # For tests
 import collections
