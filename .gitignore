@@ -1,0 +1,23 @@
+# LaTeX files
+
+*aux
+*bbl
+*blg
+*fdb_latexmk
+*fls
+*log
+*out
+*bcf
+*run.xml
+
+# Ipynb checkpoints
+
+*-checkpoint.ipynb
+
+# Data Files
+
+data
+
+# Python
+
+*pyc

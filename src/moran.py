@@ -12,7 +12,7 @@ import itertools
 import axelrod as axl
 import pandas as pd
 
-from approximate_moran import ApproximateMoranProcess, Pdf
+from axelrod import ApproximateMoranProcess, Pdf
 from generate_data import read_csv
 
 # For tests
@@ -176,8 +176,9 @@ if __name__ == "__main__":
     for k, v in match_outcomes.items():
         match_outcomes[k] = Pdf(v)
 
-    players = [s() for s in axl.all_strategies if axl.obey_axelrod(s())
-               and not s().classifier['long_run_time']]
+    # players are global
+    from players import selected_players
+    players = selected_players()
 
     main()
 
