@@ -28,12 +28,11 @@ def read_csv(filename="outcomes.csv"):
 
 def generate_matchups(players):
     # Want the triangular product
-    for i in range(len(players)):
-        for j in range(i, len(players)):
-            if i == j:
-                yield players[i].clone(), players[j]
-            else:
-                yield players[i], players[j]
+    for i, j in generate_matchups_indices(len(players)):
+        if i == j:
+            yield players[i].clone(), players[j]
+        else:
+            yield players[i], players[j]
 
 def generate_matchups_indices(num_players):
     # Want the triangular product
