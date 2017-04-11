@@ -69,7 +69,7 @@ def sample_match_outcomes(players, turns, repetitions, noise=0):
 
 def write_winner(filename, turns, repetitions, noise, i, j, seed=None):
     """
-    Write the winner of a Moran process to file
+    Write the outcome of a match to file.
     """
     if seed:
         axl.seed(seed)  # Seed the process
@@ -81,8 +81,11 @@ def write_winner(filename, turns, repetitions, noise, i, j, seed=None):
         rs = 1
     outcomes = []
     for _ in range(rs):
-        match.play()
-        outcomes.append(match.final_score_per_turn())
+        try:
+            match.play()
+            outcomes.append(match.final_score_per_turn())
+        except KeyError:
+            print(turns, repetitions, noise, i, j, seed)
 
     counts = Counter(outcomes)
     player_names = tuple(map(str, pairs))
@@ -127,8 +130,8 @@ if __name__ == "__main__":
     except FileNotFoundError:
         pass
 
-    repetitions = 10000
-    turns = 200
+    repetitions = 200
+    turns = 50
 
     sample_match_outcomes_parallel(turns=turns, repetitions=repetitions,
                                    filename="outcomes.csv", noise=0,
