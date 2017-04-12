@@ -93,15 +93,6 @@ measure the fixation value for all $(i, N-i)$ and compare to the above formula
 for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
 we deviate from frequency independence.
 
-Beyond the raw data, we should try to estimate the strategies that are
-1) most resistant to invasion
-2) the best invaders
-3) "most neutral"
-
-as a function of N across the entire population of strategies. This can really
-open up if you want to say optimize a parameterized strategy to be most
-resistant to invasion (a topic of future work, perhaps) -- for example Random(p)
-for what p is best?
 
 The existing notebook attempts to get at 1 and 2 by looking at the distributions
 of fixation probabilities for each strategy -- that's what the box plots for
@@ -118,18 +109,6 @@ matches our tournament results -- ZD strategies win matches but not tournaments.
 
 It would be great to see how the ensemble strategies (meta strategies) fare, if
 we don't mind burning the CPU cycles. I left them out of my initial analysis.
-
-Further Variants (possible additions or future papers): * Noise * Spatial
-structure * More than two types in the population * Modified Moran processes
-(e.g. Fermi selection with the strength of selection coefficient) * Altered game
-matrices
-
-Noise is especially interesting because a lot of the cooperative strategies are
-going to appear neutral to each other (since neither will cast a D unprovoked).
-A little bit of noise should shuffle the ranks around quite a bit, and show off
-the abilities of e.g. OmegaTFT. Might be worth including at least one of the
-"Player Rankings by Median vs. Population Size" plots for some value of noise
-(such as 0.05).
 
 More future work: * Mutation -- for mutation we no longer have fixation, rather
 a stationary distribution. This may require some more programming to compute
@@ -348,6 +327,28 @@ Structure:
 \end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
+
+Beyond the raw data, we should try to estimate the strategies that are
+1) most resistant to invasion
+2) the best invaders
+3) "most neutral"
+
+as a function of N across the entire population of strategies. This can really
+open up if you want to say optimize a parameterized strategy to be most
+resistant to invasion (a topic of future work, perhaps) -- for example Random(p)
+for what p is best?
+
+Further Variants (possible additions or future papers): * Noise * Spatial
+structure * More than two types in the population * Modified Moran processes
+(e.g. Fermi selection with the strength of selection coefficient) * Altered game
+matrices
+
+Noise is especially interesting because a lot of the cooperative strategies are
+going to appear neutral to each other (since neither will cast a D unprovoked).
+A little bit of noise should shuffle the ranks around quite a bit, and show off
+the abilities of e.g. OmegaTFT. Might be worth including at least one of the
+"Player Rankings by Median vs. Population Size" plots for some value of noise
+(such as 0.05).
 
 \printbibliography
 
