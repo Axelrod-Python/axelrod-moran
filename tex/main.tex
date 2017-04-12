@@ -25,7 +25,8 @@
 
 \maketitle
 
-\abstract{The Iterated Prisoner's Dilemma is a well established framework for
+\begin{abstract}
+    The Iterated Prisoner's Dilemma is a well established framework for
           the study of emergent behaviour. In this paper an extensive numerical
           study of the evolutionary dynamics of this framework are presented.
 
@@ -37,22 +38,32 @@
           such study. It allows for insights about the behaviour and
           performance of strategies with regard to their survival in an
           evolutionary setting.
-          }  % TODO Add main conclusion/finding.
+\end{abstract}  % TODO Add main conclusion/finding.
 
 \section{Introduction}\label{sec:introduction}
 
-Main questions are:
+Since the formulation of the Moran Process in \cite{Moran1957}, this model of
+evolutionary population dynamics has been used to gain insights about the
+evolutionary stability of strategies in a number of settings. Similarly since
+the first Iterated Prisoner's Dilemma (IPD) tournament described in
+\cite{Axelrod1980a} the Prisoner's dilemma has been used to understand the
+evolution of cooperative behaviour in complex systems.
+
+The analytical models of a Moran process are based on the relative fitness
+between two strategies and take this to be a fixed value \(r\) \cite{Nowak}.
+This is a valid model for simple strategies of the Prisoner's Dilemma such as to
+\textit{always cooperate} or \textit{always defect}. This manuscript provides a
+detailed numerical analysis of \textbf{172} complex and adaptive strategies for
+the IPD\@. In this case the relative fitness of a strategy is dependent on the
+population distribution.
+
+This provides answers to the following questions:
 
 \begin{enumerate}
     \item What strategies are good invaders?
     \item What strategies are good at resisting invasion?
-    \item How do 1 and 2 change as a function of population size?
+    \item How does the population size affect these findings?
 \end{enumerate}
-
-A key point here is that the relative fitness of a strategy depends on the
-population distribution. The original Moran process assumes a relative fitness
-of r of one strategy over the other, giving a fixation probability for the
-starting population $(i, N-i)$ (when $r != 1$)
 
 \[ \rho = \frac{1 - r^{-i}}{1 - r^{-N}}\]
 and $\rho = 1 / N$ if $r=1$ (the neutral fixation probability).
@@ -93,15 +104,6 @@ measure the fixation value for all $(i, N-i)$ and compare to the above formula
 for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
 we deviate from frequency independence.
 
-Beyond the raw data, we should try to estimate the strategies that are
-1) most resistant to invasion
-2) the best invaders
-3) "most neutral"
-
-as a function of N across the entire population of strategies. This can really
-open up if you want to say optimize a parameterized strategy to be most
-resistant to invasion (a topic of future work, perhaps) -- for example Random(p)
-for what p is best?
 
 The existing notebook attempts to get at 1 and 2 by looking at the distributions
 of fixation probabilities for each strategy -- that's what the box plots for
@@ -118,18 +120,6 @@ matches our tournament results -- ZD strategies win matches but not tournaments.
 
 It would be great to see how the ensemble strategies (meta strategies) fare, if
 we don't mind burning the CPU cycles. I left them out of my initial analysis.
-
-Further Variants (possible additions or future papers): * Noise * Spatial
-structure * More than two types in the population * Modified Moran processes
-(e.g. Fermi selection with the strength of selection coefficient) * Altered game
-matrices
-
-Noise is especially interesting because a lot of the cooperative strategies are
-going to appear neutral to each other (since neither will cast a D unprovoked).
-A little bit of noise should shuffle the ranks around quite a bit, and show off
-the abilities of e.g. OmegaTFT. Might be worth including at least one of the
-"Player Rankings by Median vs. Population Size" plots for some value of noise
-(such as 0.05).
 
 More future work: * Mutation -- for mutation we no longer have fixation, rather
 a stationary distribution. This may require some more programming to compute
@@ -149,8 +139,15 @@ Structure:
     \item Short discussion about the Axelrod library.
 \end{itemize}
 
-I'm happy to write this section. We can lift some references from one of my
-papers on the Moran process.
+Some work has looked at evolutionary stability of strategies within the
+Prisoner's Dilemma \cite{Li2014} but this is not done in the more widely used
+setting of the Moran process but in terms of infinite population stability.
+
+In \cite{Baek2016} Moran processes are looked at in a theoretic framework for a
+small subset of strategies.
+
+In \cite{Lee2015} machine learning techniques are used to train a strategy
+capable of resisting invasion and also invade any memory one strategy.
 
 \section{Methodology}\label{sec:methodology}
 
@@ -348,6 +345,28 @@ Structure:
 \end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
+
+Beyond the raw data, we should try to estimate the strategies that are
+1) most resistant to invasion
+2) the best invaders
+3) "most neutral"
+
+as a function of N across the entire population of strategies. This can really
+open up if you want to say optimize a parameterized strategy to be most
+resistant to invasion (a topic of future work, perhaps) -- for example Random(p)
+for what p is best?
+
+Further Variants (possible additions or future papers): * Noise * Spatial
+structure * More than two types in the population * Modified Moran processes
+(e.g. Fermi selection with the strength of selection coefficient) * Altered game
+matrices
+
+Noise is especially interesting because a lot of the cooperative strategies are
+going to appear neutral to each other (since neither will cast a D unprovoked).
+A little bit of noise should shuffle the ranks around quite a bit, and show off
+the abilities of e.g. OmegaTFT. Might be worth including at least one of the
+"Player Rankings by Median vs. Population Size" plots for some value of noise
+(such as 0.05).
 
 \printbibliography
 
