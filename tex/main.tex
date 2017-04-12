@@ -37,22 +37,32 @@
           such study. It allows for insights about the behaviour and
           performance of strategies with regard to their survival in an
           evolutionary setting.
-          }  % TODO Add main conclusion/finding.
+\end{abstract}  % TODO Add main conclusion/finding.
 
 \section{Introduction}\label{sec:introduction}
 
-Main questions are:
+Since the formulation of the Moran Process in \cite{Moran1957}, this model of
+evolutionary population dynamics has been used to gain insights about the
+evolutionary stability of strategies in a number of settings. Similarly since
+the first Iterated Prisoner's Dilemma (IPD) tournament described in
+\cite{Axelrod1980a} the Prisoner's dilemma has been used to understand the
+evolution of cooperative behaviour in complex systems.
+
+The analytical models of a Moran process are based on the relative fitness
+between two strategies and take this to be a fixed value \(r\) \cite{Nowak}.
+This is a valid model for simple strategies of the Prisoner's Dilemma such as to
+\textit{always cooperate} or \textit{always defect}. This manuscript provides a
+detailed numerical analysis of \textbf{172} complex and adaptive strategies for
+the IPD\@. In this case the relative fitness of a strategy is dependent on the
+population distribution.
+
+This provides answers to the following questions:
 
 \begin{enumerate}
     \item What strategies are good invaders?
     \item What strategies are good at resisting invasion?
-    \item How do 1 and 2 change as a function of population size?
+    \item How does the population size affect these findings?
 \end{enumerate}
-
-A key point here is that the relative fitness of a strategy depends on the
-population distribution. The original Moran process assumes a relative fitness
-of r of one strategy over the other, giving a fixation probability for the
-starting population $(i, N-i)$ (when $r != 1$)
 
 \[ \rho = \frac{1 - r^{-i}}{1 - r^{-N}}\]
 and $\rho = 1 / N$ if $r=1$ (the neutral fixation probability).
