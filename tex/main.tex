@@ -9,6 +9,10 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes}
 
 \usepackage[backend=biber, firstinits=false, backref=false, url=true,
             isbn=true, style=numeric]{biblatex}
@@ -70,23 +74,51 @@ This work provides answers to the following questions:
     \item How does the population size affect these findings?
 \end{enumerate}
 
-Structure:
+Figure~\ref{fig:moran_process} shows a diagrammatic representation of the Moran
+process. The Moran process is a stochastic birth death process on a finite
+population in which the population size stays constant over time. Individuals
+are \textbf{selected} according to a given fitness landscape. Once selected, a
+given individual is reproduced and similarly another individual is chosen to be
+removed from the population. In some settings mutation is also considered but
+without mutation (the case considered in this work) this process will arrive at
+an absorbing state where the population is entirely made up of a single
+individual. The probability with which a given strategy is the survivor is call
+the absorption probability. A more detailed analytic description of this is
+given in Section~\ref{sec:validation}.
 
-\begin{itemize}
-    \item Overview of Moran processes;
-    \item Review of the literature (\cite{Lee2015, Nowak, Moran1957});
-    \item Short discussion about the Axelrod library.
-\end{itemize}
+\begin{figure}[!hbtp]
+    \centering
+    \input{../img/moran_process.tex}
+    \label{fig:moran_process}
+    \caption{A diagrammatic representation of a Moran process}
+\end{figure}
 
-Some work has looked at evolutionary stability of strategies within the
-Prisoner's Dilemma \cite{Li2014} but this is not done in the more widely used
-setting of the Moran process but in terms of infinite population stability.
+The Moran process was initially introduced in \cite{Moran1957} in a genetic
+setting. It has sine been used in a variety of settings including the
+understanding of the spread of cooperative behaviour. However, as stated before,
+these mainly consider non sophisticated strategies. Some work has looked at
+evolutionary stability of strategies within the Prisoner's Dilemma \cite{Li2014}
+but this is not done in the more widely used setting of the Moran process but in
+terms of infinite population stability. In \cite{Baek2016} Moran processes are
+looked at in a theoretic framework for a small subset of strategies. In
+\cite{Lee2015} machine learning techniques are used to train a strategy capable
+of resisting invasion and also invade any memory one strategy.
+% TODO Is this OK? We should add more.
 
-In \cite{Baek2016} Moran processes are looked at in a theoretic framework for a
-small subset of strategies.
+The contribution of this work is a detailed and extensive analysis of absorption
+probabilities for 172 strategies. These strategies and the numerical simulations
+are from~\cite{axelrodproject} which is an open source research library written
+for the study of the IPD. The strategies and simulation frameworks are
+automatically tested in accordance to best practice. The large number of
+strategies are available thanks to the open source nature of the project with
+over 40 contributions made by different programmers.
 
-In \cite{Lee2015} machine learning techniques are used to train a strategy
-capable of resisting invasion and also invade any memory one strategy.
+Section~\ref{sec:methodology} will explain the methodological approach used,
+Section~\ref{sec:validation} will validate the methodology by comparing
+simulated results to analytical results. The main results of this manuscript are
+presented in Section~\ref{sec:numerical_results} which will present a detailed
+analysis of all the data generated. Finally, Section~\ref{sec:conclusion} will
+conclude and offer future avenues for the work presented here.
 
 \section{Methodology}\label{sec:methodology}
 
@@ -128,11 +160,11 @@ each value of \(N\).
 
 Note that due to the high computational cost of these experiments, for any given
 interaction between two players within the Moran process the outcome is sampled
-from a pre computed cache of 10000 match outcomes. This is carried out using the
+from a pre computed cache of 1000 match outcomes. This is carried out using the
 approximate Moran process implemented in \cite{axelrodproject}.
 
 As an example, Figure~\ref{fig:players_with_most_scores} shows the scores
-between two players that over the 10000 outcomes gives 6817 different scores.
+between two players that over the 1000 outcomes gives 971 different scores.
 
 \begin{figure}[!htbp]
     \centering
@@ -141,6 +173,11 @@ between two players that over the 10000 outcomes gives 6817 different scores.
     different number of match outcomes}
     \label{fig:players_with_most_scores}
 \end{figure}
+
+% TODO Cite all relevant pieces of software: pandas, matplotlib, scipy, axelrod
+% etc...
+
+% TODO Introduce the next section.
 
 \section{Validation}\label{sec:validation}
 
@@ -203,6 +240,7 @@ Figure~\ref{fig:comparison_deterministic}. Note that these are all deterministic
 strategies and show a perfect match up between the expected value of
 (\ref{equ:fixation_probability}) and the actual Moran process.
 
+% TODO Include more of these when finished.
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
