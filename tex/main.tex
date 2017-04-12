@@ -57,7 +57,12 @@ detailed numerical analysis of \textbf{172} complex and adaptive strategies for
 the IPD\@. In this case the relative fitness of a strategy is dependent on the
 population distribution.
 
-This provides answers to the following questions:
+Further deviations from the analytical model occur when interactions between
+players are subject to uncertainty. This is referred to as noise and has been
+considered in the IPD setting in \cite{Bendor1993, Nowak1993, Wu1995}. Noise is
+also considered here.
+
+This work provides answers to the following questions:
 
 \begin{enumerate}
     \item What strategies are good invaders?
@@ -103,7 +108,6 @@ A nice addition would be, for an interesting combination of strategies, to
 measure the fixation value for all $(i, N-i)$ and compare to the above formula
 for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
 we deviate from frequency independence.
-
 
 The existing notebook attempts to get at 1 and 2 by looking at the distributions
 of fixation probabilities for each strategy -- that's what the box plots for
@@ -324,12 +328,47 @@ strategies and show a perfect match up between the expected value of
         \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Tit_For_Tat_1000_repetitions.pdf}
         \caption{Random and Tit For Tat}
     \end{subfigure}%
-    % TODO Input more of these
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Cooperator_1000_repetitions.pdf}
+        \caption{All C or all D and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Defector_1000_repetitions.pdf}
+        \caption{All C or all D and Defector}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Random_0_5_1000_repetitions.pdf}
+        \caption{Calculator and Random}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_ALLCorALLD_1000_repetitions.pdf}
+        \caption{Calculator and All C or all D}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Arrogant_QLearner_1000_repetitions.pdf}
+        \caption{Calculator and Arrogant Q learner}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Tit_For_Tat_1000_repetitions.pdf}
+        \caption{All C or all D and Tit For Tat}
+    \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process fixation probabilities for \textbf{stochastic} strategies}
     \label{fig:comparison_stochastic}
 \end{figure}
 
-Figure~\ref{fig_comparison_stochastic} shows the fixation probabilities for
+Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
 stochastic strategies. These are no longer a good match which highlights the
 weakness of the analytical formulae the relies on the average payoffs. A
 detailed analysis of the 172 strategies considered will be shown in the next
