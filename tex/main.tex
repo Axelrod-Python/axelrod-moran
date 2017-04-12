@@ -70,71 +70,6 @@ This work provides answers to the following questions:
     \item How does the population size affect these findings?
 \end{enumerate}
 
-\[ \rho = \frac{1 - r^{-i}}{1 - r^{-N}}\]
-and $\rho = 1 / N$ if $r=1$ (the neutral fixation probability).
-
-This corresponds to a game matrix [[1, 1], [r, r]] (or [[r, r], [1, 1]]), which
-is of course not what we have -- it's a little complicated because our "fitness"
-is not the payout from the game matrix, rather the sum of the total scores of
-all the interactions each round. So ALLC and TFT are neutral wrt to each other
-because they will have the same score each round, giving an effective fitness
-landscape $f(i, N-i) = A [i, N-i]^T$ given by the matrix $A = [[1,1],[1,1]]$.
-This means that noise and the number of turns per Moran round are significant
-parameters. I think we should fix the turns at 200; some recent authors run the
-turns to infinity (to reach stationarity on the sub-"Markov process" on the
-states (C, C), (C, D), (D, C), (D, D)) but we can't analytically compute the
-stationary distribution for strategies that use more than one round of memory
-(and it's not really a Markov process for more than one round of memory anyway).
-Plus it's unrealistic, and ultimately just amounts to a transform of the game
-matrix.
-
-To see if one strategy is not neutral with respect to another, we want to
-empirically measure the fixation probability and compare to the neutral rate. To
-do this right we need a lot of counts, since we're estimating a binomial
-probability p with variance $p(1-p) / k$ and $p$ is close to $1 / N$. To get the
-variance small you need something like $k>1000$ observations ( we can work out
-the precise requirements).
-
-Note we're not estimating $r$ for each strategy (pair) since we're in a
-frequency dependent situation, so we need to look at the population states (1,
-N-1) and (N-1, 1) for every pair of strategies, i.e. we can't assume that we're
-in a $\rho \leftrightarrow 1-\rho$ symmetry. More precisely, $\rho_{(1, N-1)} !=
-1 - \rho_{(N-1, 1)}$ in general. However we can (for fun) compute $r$ from
-$\rho$ with Newton's method (it's not easily invertable for $N > 3$), or take a
-Bayesian approach on what the distribution of $\rho$ is and then compute a
-distribution for $r$ in the usual way.
-
-A nice addition would be, for an interesting combination of strategies, to
-measure the fixation value for all $(i, N-i)$ and compare to the above formula
-for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
-we deviate from frequency independence.
-
-The existing notebook attempts to get at 1 and 2 by looking at the distributions
-of fixation probabilities for each strategy -- that's what the box plots for
-each N try to visualize for particular N, and the "Player Rankings by Median vs.
-Population Size" for how the cooperative strategies become more successful as N
-increases. That plot is the main takeaway IMO, and reinforces the "evolution of
-cooperation" narrative that's so popular. We can tie back to Press and Dyson
-here -- yes, ZD strategies are good Head-to-Head and in small populations, but
-they aren't great when the population size gets bigger. How much bigger? Even at
-N=4 there is a dramatic decline for ZD-extort. Note that this goes against the
-claims of Stewart and Plotkin (they claimed that ZD strategies basically
-dominate the Moran process no matter how much memory you allow). This also
-matches our tournament results -- ZD strategies win matches but not tournaments.
-
-It would be great to see how the ensemble strategies (meta strategies) fare, if
-we don't mind burning the CPU cycles. I left them out of my initial analysis.
-
-More future work: * Mutation -- for mutation we no longer have fixation, rather
-a stationary distribution. This may require some more programming to compute
-efficiently (perhaps my stationary library). There's a lot of interesting work
-to do here.
-
-Ip think we'd want to include a few of the heatmaps in the final section of the
-notebook for some interesting cases, like FoolMeOnce, EvolvedLookerUp, etc.
-Pushing N higher will make all the plots more interesting. How high we can get
-N? I'd really like to get it to N >= 11.
-
 Structure:
 
 \begin{itemize}
@@ -375,6 +310,71 @@ detailed analysis of the 172 strategies considered will be shown in the next
 Section.
 
 \section{Numerical results}\label{sec:numerical_results}
+
+\[ \rho = \frac{1 - r^{-i}}{1 - r^{-N}}\]
+and $\rho = 1 / N$ if $r=1$ (the neutral fixation probability).
+
+This corresponds to a game matrix [[1, 1], [r, r]] (or [[r, r], [1, 1]]), which
+is of course not what we have -- it's a little complicated because our "fitness"
+is not the payout from the game matrix, rather the sum of the total scores of
+all the interactions each round. So ALLC and TFT are neutral wrt to each other
+because they will have the same score each round, giving an effective fitness
+landscape $f(i, N-i) = A [i, N-i]^T$ given by the matrix $A = [[1,1],[1,1]]$.
+This means that noise and the number of turns per Moran round are significant
+parameters. I think we should fix the turns at 200; some recent authors run the
+turns to infinity (to reach stationarity on the sub-"Markov process" on the
+states (C, C), (C, D), (D, C), (D, D)) but we can't analytically compute the
+stationary distribution for strategies that use more than one round of memory
+(and it's not really a Markov process for more than one round of memory anyway).
+Plus it's unrealistic, and ultimately just amounts to a transform of the game
+matrix.
+
+To see if one strategy is not neutral with respect to another, we want to
+empirically measure the fixation probability and compare to the neutral rate. To
+do this right we need a lot of counts, since we're estimating a binomial
+probability p with variance $p(1-p) / k$ and $p$ is close to $1 / N$. To get the
+variance small you need something like $k>1000$ observations ( we can work out
+the precise requirements).
+
+Note we're not estimating $r$ for each strategy (pair) since we're in a
+frequency dependent situation, so we need to look at the population states (1,
+N-1) and (N-1, 1) for every pair of strategies, i.e. we can't assume that we're
+in a $\rho \leftrightarrow 1-\rho$ symmetry. More precisely, $\rho_{(1, N-1)} !=
+1 - \rho_{(N-1, 1)}$ in general. However we can (for fun) compute $r$ from
+$\rho$ with Newton's method (it's not easily invertable for $N > 3$), or take a
+Bayesian approach on what the distribution of $\rho$ is and then compute a
+distribution for $r$ in the usual way.
+
+A nice addition would be, for an interesting combination of strategies, to
+measure the fixation value for all $(i, N-i)$ and compare to the above formula
+for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
+we deviate from frequency independence.
+
+The existing notebook attempts to get at 1 and 2 by looking at the distributions
+of fixation probabilities for each strategy -- that's what the box plots for
+each N try to visualize for particular N, and the "Player Rankings by Median vs.
+Population Size" for how the cooperative strategies become more successful as N
+increases. That plot is the main takeaway IMO, and reinforces the "evolution of
+cooperation" narrative that's so popular. We can tie back to Press and Dyson
+here -- yes, ZD strategies are good Head-to-Head and in small populations, but
+they aren't great when the population size gets bigger. How much bigger? Even at
+N=4 there is a dramatic decline for ZD-extort. Note that this goes against the
+claims of Stewart and Plotkin (they claimed that ZD strategies basically
+dominate the Moran process no matter how much memory you allow). This also
+matches our tournament results -- ZD strategies win matches but not tournaments.
+
+It would be great to see how the ensemble strategies (meta strategies) fare, if
+we don't mind burning the CPU cycles. I left them out of my initial analysis.
+
+More future work: * Mutation -- for mutation we no longer have fixation, rather
+a stationary distribution. This may require some more programming to compute
+efficiently (perhaps my stationary library). There's a lot of interesting work
+to do here.
+
+Ip think we'd want to include a few of the heatmaps in the final section of the
+notebook for some interesting cases, like FoolMeOnce, EvolvedLookerUp, etc.
+Pushing N higher will make all the plots more interesting. How high we can get
+N? I'd really like to get it to N >= 11.
 
 Structure:
 
