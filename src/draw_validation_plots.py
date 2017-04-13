@@ -88,7 +88,7 @@ if __name__ == "__main__":
                     (axl.Alternator(), axl.WinStayLoseShift()),
                     (axl.Calculator(), axl.ALLCorALLD()),
                     (axl.Calculator(), axl.ArrogantQLearner()),
-                    (axl.Calculator(), axl.Random())
+                    (axl.Calculator(), axl.Random()),
                     (axl.Cooperator(), axl.TitForTat()),
                     (axl.Defector(), axl.Cooperator()),
                     (axl.Defector(), axl.TitForTat()),
