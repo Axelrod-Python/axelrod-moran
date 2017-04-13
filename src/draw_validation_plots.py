@@ -62,6 +62,7 @@ def plot_theoretic_vs_simulated(max_N, repetitions, utilities, player1, player2)
 
     plt.xlabel("Population size $N$")
     plt.title("Fixation probability for {} against {}".format(*player_names))
+    plt.xticks(ns)
     plt.legend()
     plt.ylim(0, 1)
 
@@ -88,7 +89,7 @@ if __name__ == "__main__":
                     (axl.Alternator(), axl.WinStayLoseShift()),
                     (axl.Calculator(), axl.ALLCorALLD()),
                     (axl.Calculator(), axl.ArrogantQLearner()),
-                    (axl.Calculator(), axl.Random())
+                    (axl.Calculator(), axl.Random()),
                     (axl.Cooperator(), axl.TitForTat()),
                     (axl.Defector(), axl.Cooperator()),
                     (axl.Defector(), axl.TitForTat()),
