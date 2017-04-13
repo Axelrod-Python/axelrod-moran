@@ -21,3 +21,6 @@ data
 # Python
 
 *pyc
+
+# Standalone tex img files
+img/moran_process.pdf
