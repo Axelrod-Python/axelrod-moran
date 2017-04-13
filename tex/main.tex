@@ -108,7 +108,7 @@ of resisting invasion and also invade any memory one strategy.
 The contribution of this work is a detailed and extensive analysis of absorption
 probabilities for 172 strategies. These strategies and the numerical simulations
 are from~\cite{axelrodproject} which is an open source research library written
-for the study of the IPD. The strategies and simulation frameworks are
+for the study of the IPD\@. The strategies and simulation frameworks are
 automatically tested in accordance to best practice. The large number of
 strategies are available thanks to the open source nature of the project with
 over 40 contributions made by different programmers.
@@ -125,9 +125,10 @@ conclude and offer future avenues for the work presented here.
 To carry out this large numerical experiment 172 strategies are used from
 \cite{axelrodproject}. These include 169 default strategies in the library at
 the time (excluding strategies classified as having a long run time) as well as
-the following 3 finite state machine strategies:
+the following 3 finite state machine machine strategies \cite{Ashlock2006}:
 
 % TODO Include details about the 3 extra FSM strategies.
+% Possibly draw pictorial representations?
 
 Appendix~\ref{app:list_of_players} shows all the players in question. More
 information about each player can be obtained in the documentation for
@@ -174,10 +175,18 @@ between two players that over the 1000 outcomes gives 971 different scores.
     \label{fig:players_with_most_scores}
 \end{figure}
 
-% TODO Cite all relevant pieces of software: pandas, matplotlib, scipy, axelrod
-% etc...
+A variety of software libraries have been used in this work:
 
-% TODO Introduce the next section.
+\begin{itemize}
+    \item The Axelrod library (IPD strategies and Moran processes)
+        \cite{axelrodproject}.
+    \item The matplotlib library (visualisation) \cite{hunter2007matplotlib}.
+    \item The pandas and numpy libraries (data manipulation)
+        \cite{mckinney2010data, walt2011numpy}
+\end{itemize}
+
+Section~\ref{sec:validation} will validate this approach against theoretic
+results.
 
 \section{Validation}\label{sec:validation}
 
@@ -238,9 +247,8 @@ where:
 Using this comparisons of \(x_{N/2}\) are shown in
 Figure~\ref{fig:comparison_deterministic}. Note that these are all deterministic
 strategies and show a perfect match up between the expected value of
-(\ref{equ:fixation_probability}) and the actual Moran process for almost all
+(\ref{equ:fixation_probability}) and the actual Moran process for all
 strategies pairs.
-% TODO Discuss why WSLS And TFT do not match.
 
 \begin{figure}[!hbtp]
     \centering
@@ -291,7 +299,12 @@ strategies pairs.
         \includegraphics[width=.8\textwidth]{../img/Alternator_v_Win-Stay_Lose-Shift_C.pdf}
         \caption{Alternator and Win Stay Lose Shift}
     \end{subfigure}%
-    % TODO Add Defector v WSLS
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Win-Stay_Lose-Shift_C.pdf}
+        \caption{Defector and Win Stay Lose Shift}
+    \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process fixation
              probabilities for \textbf{deterministic} strategies}
     \label{fig:comparison_deterministic}
