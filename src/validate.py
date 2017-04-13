@@ -101,6 +101,6 @@ if __name__ == "__main__":
 
 
     args = ((N, *players)
-            for N, players in itertools.product(range(1, max_N + 1, 2),
+            for N, players in itertools.product(range(2, max_N + 1, 2),
                                                 player_pairs))
     p.starmap(func, args)
