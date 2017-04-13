@@ -35,7 +35,7 @@ def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
         axl.seed(seed)
         mp.reset()
         mp.play()
-        if mp.winning_strategy_name == players[0].name:
+        if mp.winning_strategy_name == str(players[0]):
             win_count += 1
 
     return win_count / repetitions
