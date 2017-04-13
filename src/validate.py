@@ -10,6 +10,7 @@ import theoretic
 
 import functools
 import multiprocessing
+import itertools
 
 
 def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
@@ -40,44 +41,28 @@ def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
     return win_count / repetitions
 
 
-def plot_theoretic_vs_simulated(max_N, repetitions, utilities, player1, player2):
+def theoretic_vs_simulated(repetitions, utilities, filename,
+                           N, player1, player2):
     """
-    Plot the theoretic value vs the simulated value
+    Return the theoretic values and the simulated values
     """
     players = (player1, player2)
-    ns = range(2, max_N + 1, 2)
     repetitions = repetitions
 
     player_names = [p.__repr__() for p in players]
-    calculated = [theoretic.fixation(player_names, n, n // 2,
-                                     utilities=utilities)
-                 for n in ns]
-    simulated = [simulated_fixation(players,  n, n // 2,
-                                    repetitions=repetitions)
-                 for n in ns]
-    plt.figure()
-    plt.plot(ns, calculated, label="Theoretic $x_{N/2}$")
-    plt.scatter(ns, simulated, label="Simulated $x_{N/2}$")
+    t = theoretic.fixation(player_names, N, N // 2, utilities=utilities)
+    s = simulated_fixation(players,  N, N // 2, repetitions=repetitions)
 
-
-    plt.xlabel("Population size $N$")
-    plt.title("Fixation probability for {} against {}".format(*player_names))
-    plt.xticks(ns)
-    plt.legend()
-    plt.ylim(0, 1)
-
-    filename = "img/{}_v_{}_{}_repetitions".format(*player_names, repetitions)
-    for substr in [".", ": ", ":", " "]:  # Clean up special characters
-        filename = filename.replace(substr, "_")
-    filename += ".pdf"
-    filename = "../" + filename
-
-    plt.savefig(filename)
+    with open(filename, "a") as f:
+        f.write(",".join(map(str, [repetitions, N, *player_names, t, s])) + "\n")
 
 
 if __name__ == "__main__":
 
     outcomes_file = "../data/outcomes.csv"
+    output_file = "../data/fixation_validation.csv"
+    with open(output_file, "w") as f:
+        f.write("Repetitions, N, Player 1, Player 2, Theoretic, Simulated\n")
 
     player_pairs = [(axl.ALLCorALLD(), axl.Cooperator()),
                     (axl.ALLCorALLD(), axl.Defector()),
@@ -110,8 +95,12 @@ if __name__ == "__main__":
 
     processes = multiprocessing.cpu_count()
 
-    func = functools.partial(plot_theoretic_vs_simulated, max_N, repetitions,
-                             utilities)
+    func = functools.partial(theoretic_vs_simulated, repetitions,
+                             utilities, output_file)
     p = multiprocessing.Pool(processes)
 
-    p.starmap(func, player_pairs)
+
+    args = ((N, *players)
+            for N, players in itertools.product(range(1, max_N + 1, 2),
+                                                player_pairs))
+    p.starmap(func, args)
