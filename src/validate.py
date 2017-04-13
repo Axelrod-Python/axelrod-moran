@@ -62,7 +62,7 @@ if __name__ == "__main__":
     outcomes_file = "../data/outcomes.csv"
     output_file = "../data/fixation_validation.csv"
     with open(output_file, "w") as f:
-        f.write("Repetitions, N, Player 1, Player 2, Theoretic, Simulated\n")
+        f.write("Repetitions,N,Player 1,Player 2,Theoretic,Simulated\n")
 
     player_pairs = [(axl.ALLCorALLD(), axl.Cooperator()),
                     (axl.ALLCorALLD(), axl.Defector()),
@@ -84,7 +84,7 @@ if __name__ == "__main__":
                     (axl.WinStayLoseShift(), axl.TitForTat())]
 
     max_N = 20
-    repetitions = 1000
+    repetitions = 20
 
     df = pd.read_csv(outcomes_file, header=None,
                      names=["Player 1", "Player 2",
