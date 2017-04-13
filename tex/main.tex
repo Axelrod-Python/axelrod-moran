@@ -238,47 +238,62 @@ where:
 Using this comparisons of \(x_{N/2}\) are shown in
 Figure~\ref{fig:comparison_deterministic}. Note that these are all deterministic
 strategies and show a perfect match up between the expected value of
-(\ref{equ:fixation_probability}) and the actual Moran process.
+(\ref{equ:fixation_probability}) and the actual Moran process for almost all
+strategies pairs.
+% TODO Discuss why WSLS And TFT do not match.
 
-% TODO Include more of these when finished.
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Cooperator_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Cooperator.pdf}
         \caption{Alternator and Cooperator}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Defector_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Defector.pdf}
         \caption{Alternator and Defector}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Tit_For_Tat_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Tit_For_Tat.pdf}
         \caption{Alternator and Tit For Tat}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Cooperator_v_Tit_For_Tat_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Cooperator_v_Tit_For_Tat.pdf}
         \caption{Cooperator and Tit For Tat}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Defector_v_Cooperator_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Cooperator.pdf}
         \caption{Defector and Cooperator}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Defector_v_Tit_For_Tat_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Tit_For_Tat.pdf}
         \caption{Defector and Tit For Tat}
     \end{subfigure}%
-    \caption{Comparison of theoretic and actual Moran Process fixation probabilities for \textbf{deterministic} strategies}
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Win-Stay_Lose-Shift_C_v_Tit_For_Tat.pdf}
+        \caption{Win Stay Lose Shift and Tit For Tat}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Win-Stay_Lose-Shift_C.pdf}
+        \caption{Alternator and Win Stay Lose Shift}
+    \end{subfigure}%
+    % TODO Add Defector v WSLS
+    \caption{Comparison of theoretic and actual Moran Process fixation
+             probabilities for \textbf{deterministic} strategies}
     \label{fig:comparison_deterministic}
 \end{figure}
 
@@ -286,58 +301,59 @@ strategies and show a perfect match up between the expected value of
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Cooperator_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Cooperator.pdf}
         \caption{Random and Cooperator}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Defector_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Defector.pdf}
         \caption{Random and Defector}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Tit_For_Tat_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Random_0_5_v_Tit_For_Tat.pdf}
         \caption{Random and Tit For Tat}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Cooperator_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Cooperator.pdf}
         \caption{All C or all D and Cooperator}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Defector_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Defector.pdf}
         \caption{All C or all D and Defector}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Random_0_5_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Random_0_5.pdf}
         \caption{Calculator and Random}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Calculator_v_ALLCorALLD_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_ALLCorALLD.pdf}
         \caption{Calculator and All C or all D}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Arrogant_QLearner_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Arrogant_QLearner.pdf}
         \caption{Calculator and Arrogant Q learner}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Tit_For_Tat_1000_repetitions.pdf}
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Tit_For_Tat.pdf}
         \caption{All C or all D and Tit For Tat}
     \end{subfigure}%
-    \caption{Comparison of theoretic and actual Moran Process fixation probabilities for \textbf{stochastic} strategies}
+    \caption{Comparison of theoretic and actual Moran Process
+             fixation probabilities for \textbf{stochastic} strategies}
     \label{fig:comparison_stochastic}
 \end{figure}
 
