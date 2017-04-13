@@ -71,7 +71,7 @@ if __name__ == "__main__":
                     (axl.Alternator(), axl.Defector()),
                     (axl.Alternator(), axl.TitForTat()),
                     (axl.Alternator(), axl.WinStayLoseShift()),
-                    (axl.Alternator(), axl.WinStayLoseShift()),
+                    (axl.Defector(), axl.WinStayLoseShift()),
                     (axl.Calculator(), axl.ALLCorALLD()),
                     (axl.Calculator(), axl.ArrogantQLearner()),
                     (axl.Calculator(), axl.Random()),
