@@ -373,29 +373,12 @@ strategies pairs.
 
 Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
 stochastic strategies. These are no longer a good match which highlights the
-weakness of the analytical formulae the relies on the average payoffs. A
+weakness of the analytical formulae that relies on the average payoffs. A
 detailed analysis of the 172 strategies considered will be shown in the next
 Section.
 
 \section{Numerical results}\label{sec:numerical_results}
 
-\[ \rho = \frac{1 - r^{-i}}{1 - r^{-N}}\]
-and $\rho = 1 / N$ if $r=1$ (the neutral fixation probability).
-
-This corresponds to a game matrix [[1, 1], [r, r]] (or [[r, r], [1, 1]]), which
-is of course not what we have -- it's a little complicated because our "fitness"
-is not the payout from the game matrix, rather the sum of the total scores of
-all the interactions each round. So ALLC and TFT are neutral wrt to each other
-because they will have the same score each round, giving an effective fitness
-landscape $f(i, N-i) = A [i, N-i]^T$ given by the matrix $A = [[1,1],[1,1]]$.
-This means that noise and the number of turns per Moran round are significant
-parameters. I think we should fix the turns at 200; some recent authors run the
-turns to infinity (to reach stationarity on the sub-"Markov process" on the
-states (C, C), (C, D), (D, C), (D, D)) but we can't analytically compute the
-stationary distribution for strategies that use more than one round of memory
-(and it's not really a Markov process for more than one round of memory anyway).
-Plus it's unrealistic, and ultimately just amounts to a transform of the game
-matrix.
 
 To see if one strategy is not neutral with respect to another, we want to
 empirically measure the fixation probability and compare to the neutral rate. To
@@ -417,7 +400,6 @@ A nice addition would be, for an interesting combination of strategies, to
 measure the fixation value for all $(i, N-i)$ and compare to the above formula
 for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
 we deviate from frequency independence.
-
 The existing notebook attempts to get at 1 and 2 by looking at the distributions
 of fixation probabilities for each strategy -- that's what the box plots for
 each N try to visualize for particular N, and the "Player Rankings by Median vs.
@@ -453,15 +435,6 @@ Structure:
 
 \section{Conclusion}\label{sec:conclusion}
 
-Beyond the raw data, we should try to estimate the strategies that are
-1) most resistant to invasion
-2) the best invaders
-3) "most neutral"
-
-as a function of N across the entire population of strategies. This can really
-open up if you want to say optimize a parameterized strategy to be most
-resistant to invasion (a topic of future work, perhaps) -- for example Random(p)
-for what p is best?
 
 Further Variants (possible additions or future papers): * Noise * Spatial
 structure * More than two types in the population * Modified Moran processes
