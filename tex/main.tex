@@ -379,74 +379,36 @@ Section.
 
 \section{Numerical results}\label{sec:numerical_results}
 
+% TODO Compare fixation rates to neutral fixation 1/2 (because we're in the N/2)
+% case.
 
-To see if one strategy is not neutral with respect to another, we want to
-empirically measure the fixation probability and compare to the neutral rate. To
-do this right we need a lot of counts, since we're estimating a binomial
-probability p with variance $p(1-p) / k$ and $p$ is close to $1 / N$. To get the
-variance small you need something like $k>1000$ observations ( we can work out
-the precise requirements).
+% TODO Discuss effect of size on performance of strategies. Relate to Press and
+% Dyson work: "ZD strategies win matches but not tournaments".
 
-Note we're not estimating $r$ for each strategy (pair) since we're in a
-frequency dependent situation, so we need to look at the population states (1,
-N-1) and (N-1, 1) for every pair of strategies, i.e. we can't assume that we're
-in a $\rho \leftrightarrow 1-\rho$ symmetry. More precisely, $\rho_{(1, N-1)} !=
-1 - \rho_{(N-1, 1)}$ in general. However we can (for fun) compute $r$ from
-$\rho$ with Newton's method (it's not easily invertable for $N > 3$), or take a
-Bayesian approach on what the distribution of $\rho$ is and then compute a
-distribution for $r$ in the usual way.
+% TODO Redo everything with Meta strategies? This was a comment by MH. I suggest
+% we leave this for this paper.
 
-A nice addition would be, for an interesting combination of strategies, to
-measure the fixation value for all $(i, N-i)$ and compare to the above formula
-for the value of $r$ derived from the $(1, N-1)$ case. This would show how much
-we deviate from frequency independence.
-The existing notebook attempts to get at 1 and 2 by looking at the distributions
-of fixation probabilities for each strategy -- that's what the box plots for
-each N try to visualize for particular N, and the "Player Rankings by Median vs.
-Population Size" for how the cooperative strategies become more successful as N
-increases. That plot is the main takeaway IMO, and reinforces the "evolution of
-cooperation" narrative that's so popular. We can tie back to Press and Dyson
-here -- yes, ZD strategies are good Head-to-Head and in small populations, but
-they aren't great when the population size gets bigger. How much bigger? Even at
-N=4 there is a dramatic decline for ZD-extort. Note that this goes against the
-claims of Stewart and Plotkin (they claimed that ZD strategies basically
-dominate the Moran process no matter how much memory you allow). This also
-matches our tournament results -- ZD strategies win matches but not tournaments.
+% TODO Include discussion about noise.
 
-It would be great to see how the ensemble strategies (meta strategies) fare, if
-we don't mind burning the CPU cycles. I left them out of my initial analysis.
-
-More future work: * Mutation -- for mutation we no longer have fixation, rather
-a stationary distribution. This may require some more programming to compute
-efficiently (perhaps my stationary library). There's a lot of interesting work
-to do here.
-
-Ip think we'd want to include a few of the heatmaps in the final section of the
-notebook for some interesting cases, like FoolMeOnce, EvolvedLookerUp, etc.
-Pushing N higher will make all the plots more interesting. How high we can get
-N? I'd really like to get it to N >= 11.
-
-Structure:
-
-\begin{itemize}
-    \item General overview of the data obtained;
-    \item Inclusion of most of the work in \texttt{Moran.ipynb}.
-\end{itemize}
+% TODO Discuss some particular interesting cases; strategies that perform well
+% in the overall tournament for v2.8.0 perhaps?
 
 \section{Conclusion}\label{sec:conclusion}
 
+% TODO Write overall conclusion. (Perhaps: weakness of short memory
+% strategies?)
 
-Further Variants (possible additions or future papers): * Noise * Spatial
-structure * More than two types in the population * Modified Moran processes
-(e.g. Fermi selection with the strength of selection coefficient) * Altered game
-matrices
+Further work:
 
-Noise is especially interesting because a lot of the cooperative strategies are
-going to appear neutral to each other (since neither will cast a D unprovoked).
-A little bit of noise should shuffle the ranks around quite a bit, and show off
-the abilities of e.g. OmegaTFT. Might be worth including at least one of the
-"Player Rankings by Median vs. Population Size" plots for some value of noise
-(such as 0.05).
+\begin{itemize}
+    \item Spatial structure;
+    \item More than two types in the population;
+    \item Modified Moran processes (Fermi selection);
+    \item Mutation;
+\end{itemize}
+% TODO Write this section.
+
+
 
 \printbibliography
 
