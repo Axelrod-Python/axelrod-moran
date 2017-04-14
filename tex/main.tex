@@ -82,9 +82,9 @@ given individual is reproduced and similarly another individual is chosen to be
 removed from the population. In some settings mutation is also considered but
 without mutation (the case considered in this work) this process will arrive at
 an absorbing state where the population is entirely made up of a single
-individual. The probability with which a given strategy is the survivor is call
-the absorption probability. A more detailed analytic description of this is
-given in Section~\ref{sec:validation}.
+individual. The probability with which a given strategy is the survivor is
+called the absorption probability. A more detailed analytic description of this
+is given in Section~\ref{sec:validation}.
 
 \begin{figure}[!hbtp]
     \centering
@@ -182,7 +182,7 @@ A variety of software libraries have been used in this work:
         \cite{axelrodproject}.
     \item The matplotlib library (visualisation) \cite{hunter2007matplotlib}.
     \item The pandas and numpy libraries (data manipulation)
-        \cite{mckinney2010data, walt2011numpy}
+        \cite{mckinney2010data, walt2011numpy}.
 \end{itemize}
 
 Section~\ref{sec:validation} will validate this approach against theoretic
@@ -235,7 +235,8 @@ strategy in a population of \(i\) individuals of the first type (and \(N-i\)
 individuals of the second. We have:
 
 \begin{equation}\label{equ:fixation_probability}
-x_i = \frac{1 + \sum_{j=1}^{i-1}\prod_{k=1}^{j}\gamma_j}{1 + \sum_{j=1}^{N-1}\prod_{k=1}^{j}\gamma_j}
+x_i = \frac{1 + \sum_{j=1}^{i-1}\prod_{k=1}^{j}\gamma_j}{1 + \sum_{j=1}^{N-1}
+      \prod_{k=1}^{j}\gamma_j}
 \end{equation}
 
 where:
