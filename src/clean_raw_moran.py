@@ -32,7 +32,7 @@ for N in range(2, 14 + 1, 2):
                 p2 = index_to_players[index2]
                 winner = index_to_players[indexwinner]
 
-                if index1 > index2:
+                if str(p1) > str(p2):
                     p1, p2 = p2, p1
 
                 data.append([noise, int(N), p1, p2, winner, int(winnercount)])

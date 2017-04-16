@@ -380,8 +380,135 @@ Section.
 
 \section{Numerical results}\label{sec:numerical_results}
 
-% TODO Compare fixation rates to neutral fixation 1/2 (because we're in the N/2)
-% case.
+Figures~\ref{fig:fixation_heatmap_std} and~\ref{fig:fixation_heatmap_noise}
+shows the fixation rates of each player on the y axis against each player on the
+x axis.
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_std.pdf}
+        \caption{\(N=2\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_std.pdf}
+        \caption{\(N=4\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_std.pdf}
+        \caption{\(N=6\)}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_std.pdf}
+        \caption{\(N=8\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_std.pdf}
+        \caption{\(N=10\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_std.pdf}
+        \caption{\(N=12\)}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_std.pdf}
+        \caption{\(N=14\)}
+    \end{subfigure}%
+    \caption{Fixation probabilities of all strategies}
+    \label{fig:fixation_heatmap_std}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_noise.pdf}
+        \caption{\(N=2\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_noise.pdf}
+        \caption{\(N=4\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_noise.pdf}
+        \caption{\(N=6\)}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_noise.pdf}
+        \caption{\(N=8\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_noise.pdf}
+        \caption{\(N=10\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_noise.pdf}
+        \caption{\(N=12\)}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_noise.pdf}
+        \caption{\(N=14\)}
+    \end{subfigure}%
+    \caption{Fixation probabilities of all strategies (with noise)}
+    \label{fig:fixation_heatmap_std}
+\end{figure}
+
+Figure~\ref{fig:histograms_all_fixation_rates_std}
+and~\ref{fig:histograms_all_fixation_rates_noise} show the distribution of the
+fixation rates for all strategies.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.8\textwidth]{../img/histograms_all_fixation_rates_std.pdf}
+    \caption{Distribution of fixation rates for all players}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.8\textwidth]{../img/histograms_all_fixation_rates_noise.pdf}
+    \caption{Distribution of fixation rates for all players (noise)}
+\end{figure}
+
+Figure~\ref{fig:histograms_median_fixation_rates_std}
+and~\ref{fig:histograms_median_fixation_rates_noise} show the distribution of the
+fixation rates for all strategies.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.8\textwidth]{../img/histograms_median_fixation_rates_std.pdf}
+    \caption{Distribution of median fixation rates for all players}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.8\textwidth]{../img/histograms_median_fixation_rates_noise.pdf}
+    \caption{Distribution of median fixation rates for all players (noise)}
+\end{figure}
 
 Figures~\ref{fig:ranks_v_size_standard} and~\ref{fig:ranks_v_size_noisy} show
 the median rank of each strategy against population size in the standard and
@@ -391,15 +518,29 @@ are given the average rank.
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[width=\textwidth]{../img/median_rank_vs_population_size_std.pdf}
-    \caption{Median (inverse) rank of players against population size}
+    \caption{Median rank of players against population size}
     \label{fig:ranks_v_size_standard}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[width=\textwidth]{../img/median_rank_vs_population_size_noisy.pdf}
-    \caption{Median (inverse) rank of players against population size with noise}
+    \caption{Median  rank of players against population size with noise}
     \label{fig:ranks_v_size_noisy}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_std.pdf}
+    \caption{Relationship between Median rank for population size}
+    \label{fig:relationship_ranks_v_size_standard}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_noisy.pdf}
+    \caption{Relationship between Median rank for population size with noise}
+    \label{fig:relationship_ranks_v_size_noise}
 \end{figure}
 
 Tables~\ref{tbl:ranks_in_size_2_std},~\ref{tbl:ranks_in_size_14_std},~\ref{tbl:ranks_in_size_2_noisy}
