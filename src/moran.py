@@ -13,7 +13,7 @@ import axelrod as axl
 import pandas as pd
 
 from axelrod import ApproximateMoranProcess, Pdf
-from generate_data import read_csv
+from generate_cache import read_csv
 
 # For tests
 import collections
@@ -24,7 +24,7 @@ import unittest
 def output_players(players, outfilename="players.csv"):
     """Cache players to disk for later retrieval."""
     rows = [(i, str(player), player.classifier["stochastic"]) for (i, player) in enumerate(players)]
-    path = Path("results") / outfilename
+    path = Path("../data") / outfilename
     with path.open('w') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(rows)
@@ -78,18 +78,16 @@ def write_winner(outfilename, names_inv,
         winner_name = mp.winning_strategy_name
         data[names_inv[winner_name]] += 1
 
-    path = Path("results")
+    path = Path("../data")
     path = path / outfilename
-    outputfile = csv.writer(path.open('a'))
-    rows = []
-    for winner, count in data.items():
-        rows.append([i, j, winner, count])
-    for row in rows:
-        outputfile.writerow(row)
+    with path.open('a') as f:
+        outputfile = csv.writer(f)
+        for winner, count in data.items():
+            outputfile.writerow([i, j, winner, count])
 
 
-def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
-                    outfilename=None, processes=None, count=False, n=1):
+def run_simulations(N=2, repetitions=1000, outfilename=None,
+                    processes=None, count=False, n=1):
     """This function conducts many moran processes to empirically estimate
     fixation probabilities. For each pair of strategies, the population consists
     of n player of the first type and N-n players of the second type."""
@@ -99,7 +97,7 @@ def run_simulations(N=2, turns=100, repetitions=1000, noise=0,
     # Obtain current count of obtained values
     if count is True:
         try:
-            counts = obtain_current_count("results/" + outfilename)
+            counts = obtain_current_count("../data/" + outfilename)
         except OSError:
             # If file does not exist then don't count
             count = False
@@ -145,7 +143,7 @@ def main():
     N = int(sys.argv[1])  # Population size
 
     try:
-        n = sys.argv[2]
+        n = int(sys.argv[2])  # Initial population (n, N - n)
     except IndexError:
         n = 1
 
@@ -156,7 +154,7 @@ def main():
 
     repetitions = 1000
     # Make sure the data folder exists
-    path = Path("results")
+    path = Path("../data")
     path.mkdir(exist_ok=True)
 
     output_players(players)
@@ -170,7 +168,7 @@ if __name__ == "__main__":
     try:
         match_outcomes_file = sys.argv[3]
     except IndexError:
-        match_outcomes_file = "outcomes.csv"
+        match_outcomes_file = "../data/outcomes.csv"
 
     match_outcomes = read_csv(match_outcomes_file)
     for k, v in match_outcomes.items():

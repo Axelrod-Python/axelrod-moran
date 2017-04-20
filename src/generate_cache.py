@@ -126,7 +126,7 @@ if __name__ == "__main__":
     except FileNotFoundError:
         pass
 
-    repetitions = 10000
+    repetitions = 1000
     turns = 200
 
     sample_match_outcomes_parallel(turns=turns, repetitions=repetitions,
