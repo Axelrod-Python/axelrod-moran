@@ -649,6 +649,31 @@ are given the average rank.
     \label{fig:relationship_ranks_v_size_noise}
 \end{figure}
 
+Tables~\ref{tbl:linear_coeficients_std} and~\ref{tbl:linear_coeficients_noisy}
+show the coefficients and \(R^2\) value of the linear model relating the rank in
+a particular sized population to the ranks in other populations sizes.
+% TODO Discuss these tables: show that none of the models are great (R^2) BUT it
+% does show that the coefficient of the N=2 column is always low whereas the
+% coefficient of the N=14 column is high even in the N=4 row. So how well you do
+% in  a match (N=2) has got very little to do with an evolutionary process.
+
+\begin{table}[!hbtp]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \input{"../tbl/linear_coeficients_std.tex"}
+        \caption{Linear model coefficients for ranks without noise}
+        \label{tbl:linear_coeficients_std}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \input{"../tbl/linear_coeficients_noisy.tex"}
+        \caption{Linear model coefficients for ranks with noise}
+        \label{tbl:linear_coeficients_noisy}
+    \end{subfigure}
+    \caption{Linear coefficients}
+\end{table}
+
 Tables~\ref{tbl:ranks_in_size_2_std},~\ref{tbl:ranks_in_size_14_std},~\ref{tbl:ranks_in_size_2_noisy}
 and~\ref{tbl:ranks_in_size_14_noisy} show the rankings across population size
 based for the top on bottom performers across the extreme population sizes.
