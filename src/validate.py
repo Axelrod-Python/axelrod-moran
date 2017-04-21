@@ -40,44 +40,24 @@ def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
 
     return win_count / repetitions
 
-def exact_fixation(strategy_pair, N, i=1, repetitions=10,
-                   turns=200):
-    """Run an exact Moran process and obtain the fixation probabilities"""
 
-    players = []
-    for _ in range(i):
-        players.append(strategy_pair[0])
-    for _ in range(N - i):
-        players.append(strategy_pair[1])
-    mp = axl.MoranProcess(players, turns=turns)
-
-    win_count = 0
-    for seed in range(repetitions):
-        axl.seed(seed)
-        mp.reset()
-        mp.play()
-        if mp.winning_strategy_name == str(players[0]):
-            win_count += 1
-
-    return win_count / repetitions
-
-
-def theoretic_vs_simulated_vs_exact(repetitions, utilities, filename,
-                                    N, turns, player1, player2):
+def theoretic_vs_simulated(repetitions, utilities, filename,
+                           N, player1, player2):
     """
     Return the theoretic values and the simulated values
     """
     players = (player1, player2)
 
-    for i in [1, N // 2, N - 1]:
+    starting_pop = [1, N // 2, N - 1] if N != 2 else [1]
+
+    for i in starting_pop:
         player_names = [p.__repr__() for p in players]
         t = theoretic.fixation(player_names, N, i, utilities=utilities)
         s = simulated_fixation(players,  N, i, repetitions=repetitions)
-        e = exact_fixation(players,  N, i, turns=turns, repetitions=repetitions)
 
         with open(filename, "a") as f:
             f.write(",".join(map(str,
-                           [repetitions, N, i, *player_names, t, s, e])) + "\n")
+                           [repetitions, N, i, *player_names, t, s])) + "\n")
 
 
 if __name__ == "__main__":
@@ -85,7 +65,7 @@ if __name__ == "__main__":
     outcomes_file = "../data/outcomes.csv"
     output_file = "../data/fixation_validation.csv"
     with open(output_file, "w") as f:
-        f.write("Repetitions,N,i,Player 1,Player 2,Theoretic,Simulated,Exact\n")
+        f.write("Repetitions,N,i,Player 1,Player 2,Theoretic,Simulated\n")
 
     player_pairs = [(axl.ALLCorALLD(), axl.Cooperator()),
                     (axl.ALLCorALLD(), axl.Defector()),
@@ -106,9 +86,8 @@ if __name__ == "__main__":
                     (axl.Random(), axl.TitForTat()),
                     (axl.WinStayLoseShift(), axl.TitForTat())]
 
-    max_N = 14
+    max_N = 20
     repetitions = 1000
-    turns = 200
 
     df = pd.read_csv(outcomes_file, header=None,
                      names=["Player 1", "Player 2",
@@ -119,10 +98,9 @@ if __name__ == "__main__":
 
     processes = multiprocessing.cpu_count()
 
-    func = functools.partial(theoretic_vs_simulated_vs_exact, repetitions,
-                             utilities, output_file, turns)
+    func = functools.partial(theoretic_vs_simulated, repetitions,
+                             utilities, output_file)
     p = multiprocessing.Pool(processes)
-
 
     args = ((N, *players)
             for N, players in itertools.product(range(2, max_N + 1, 2),
