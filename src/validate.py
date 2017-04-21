@@ -86,8 +86,8 @@ if __name__ == "__main__":
                     (axl.Random(), axl.TitForTat()),
                     (axl.WinStayLoseShift(), axl.TitForTat())]
 
-    max_N = 20
-    repetitions = 1000
+    max_N = 8
+    repetitions = 40
 
     df = pd.read_csv(outcomes_file, header=None,
                      names=["Player 1", "Player 2",
