@@ -19,24 +19,27 @@ with open("../data/players.csv", "r") as f:
 data = []
 for N in range(2, 14 + 1, 2):
     # Read N = 2 data
-    for noise, filename in enumerate(["../data/sims_n_over_2/sims_{}.csv".format(N),
-                                 "../data/sims_n_over_2/noise_sims_{0:02d}.csv".format(N)]):
-        noise = bool(noise)
+    for filename in ["../data/sims_n_over_2/sims_{}.csv".format(N),
+                     "../data/sims_1/sims_{0:02d}.csv".format(N),
+                     "../data/sims_n_over_2/noise_sims_{0:02d}.csv".format(N)]:
 
-        with open(filename, "r") as f:
-            reader = csv.reader(f)
-            for row in reader:
+        noise = "noise" in filename
+        i = 1 if "1" in filename else N // 2
 
-                index1, index2, indexwinner, winnercount = row
+        try:
+            with open(filename, "r") as f:
+                reader = csv.reader(f)
+                for row in reader:
 
-                p1 = index_to_players[index1]
-                p2 = index_to_players[index2]
-                winner = index_to_players[indexwinner]
+                    index1, index2, indexwinner, winnercount = row
 
-                if str(p1) > str(p2):
-                    p1, p2 = p2, p1
+                    p1 = index_to_players[index1]
+                    p2 = index_to_players[index2]
+                    winner = index_to_players[indexwinner]
 
-                data.append([noise, int(N), N // 2, p1, p2, winner, int(winnercount)])
+                    data.append([noise, int(N), i, p1, p2, winner, int(winnercount)])
+        except FileNotFoundError:
+            pass
 
 full_data = pd.DataFrame(data, columns=["Noise", "N", "i", "P1", "P2",
                                         "Winner", "Winner count"])
