@@ -24,7 +24,7 @@ for N in range(2, 14 + 1, 2):
                      "../data/sims_n_over_2/noise_sims_{0:02d}.csv".format(N)]:
 
         noise = "noise" in filename
-        i = 1 if "1" in filename else N // 2
+        i = 1 if "sims_1/" in filename else N // 2
 
         try:
             with open(filename, "r") as f:
