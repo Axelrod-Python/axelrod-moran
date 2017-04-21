@@ -18,8 +18,9 @@ with open("../data/players.csv", "r") as f:
 # Read in the data
 data = []
 for N in range(2, 14 + 1, 2):
-    for noise, filename in enumerate(["../data/sims_{}.csv".format(N),
-                                 "../data/noise_sims_{0:02d}.csv".format(N)]):
+    # Read N = 2 data
+    for noise, filename in enumerate(["../data/sims_n_over_2/sims_{}.csv".format(N),
+                                 "../data/sims_n_over_2/noise_sims_{0:02d}.csv".format(N)]):
         noise = bool(noise)
 
         with open(filename, "r") as f:
@@ -35,17 +36,17 @@ for N in range(2, 14 + 1, 2):
                 if str(p1) > str(p2):
                     p1, p2 = p2, p1
 
-                data.append([noise, int(N), p1, p2, winner, int(winnercount)])
+                data.append([noise, int(N), N // 2, p1, p2, winner, int(winnercount)])
 
-full_data = pd.DataFrame(data, columns=["Noise", "N", "P1", "P2",
+full_data = pd.DataFrame(data, columns=["Noise", "N", "i", "P1", "P2",
                                         "Winner", "Winner count"])
 
 # Clean and write the data to file.
 with open("../data/sims_summary.csv", "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["P1", "P2", "N", "Noise",
+    writer.writerow(["P1", "P2", "N", "i", "Noise",
                      "Repetitions", "P1 fixation", "P2 fixation"])
-    for players_n_noise, df in full_data.groupby(["P1", "P2", "N", "Noise"]):
+    for players_n_noise, df in full_data.groupby(["P1", "P2", "N", "i", "Noise"]):
 
         total = df["Winner count"].sum()
 

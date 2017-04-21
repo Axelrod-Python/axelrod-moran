@@ -44,7 +44,7 @@ dictionaries of match outcomes.
 The file `moran.py` is used to generate data files for the Moran process.
 
 ```
-$ python moran.py 4 2 ../data/outcomes.csv ../data/sims_4.csv
+$ python moran.py 4 2 ../data/outcomes.csv ../data/sims_n_over_2/ sims_4.csv
 ```
 
 This will run the Moran process for all pairs of players in a population of size
