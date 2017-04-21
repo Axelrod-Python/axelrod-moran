@@ -152,11 +152,7 @@ def main():
     except IndexError:
         outfilename = None
 
-    # If not in symmetric case run twice as many.
-    if n != N / 2:
-        repetitions = 2000
-    else:
-        repetitions = 1000
+    repetitions = 1000
     # Make sure the data folder exists
     path = Path("../data")
     path.mkdir(exist_ok=True)
