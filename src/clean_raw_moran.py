@@ -68,6 +68,6 @@ if __name__ == "__main__":
     print("Writing summary data")
     write(full_data)
 
-    print("Computing relative fitness")
+    print("Writing final data file")
     fitness_df = write_fitness.read()
-    fitness_df.to_csv("../data/relative_fitness.csv")
+    fitness_df.to_csv("../data/main.csv")
