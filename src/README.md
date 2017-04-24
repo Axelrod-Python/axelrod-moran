@@ -60,5 +60,17 @@ The file `clean_raw_moran.py` is used to clean all the data generated from
 Noise, P1, P2, N, repetitions, P1_fixation, P2_fixation
 ```
 
+The file `write_fitness.py` is used to write the relative fitness for each
+strategy pair to `..data/relative_fitness.csv`:
 
+```
+player, opponent, N, noise, r_1, r_{N/2}, r_{N-1}
+```
 
+Where:
+
+- `r_1`: is relative fitness of 1 player with N - 1 opponents
+- `r_{N/2}`: is relative fitness of N/2 players with N/2 opponents
+- `r_{N-1}`: is relative fitness of N-1 players with 1 opponent.
+
+**Fitness is automatically re written when running `clean_raw_moran.py`**.
