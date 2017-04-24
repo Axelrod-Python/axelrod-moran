@@ -1,5 +1,8 @@
 """
 A script to write the relative fitness to file
+
+TODO: Get rid of the intermediate step in `clean_raw_moran.py` and do it all in
+one go.
 """
 import pandas as pd
 import theoretic
@@ -15,24 +18,27 @@ def read():
                                                              "P2", "Noise"]):
         try:
             p1 = df[df["i"] == 1].iloc[0]["P1 fixation"]
-            r1 = theoretic.find_relative_fitness(N, 1, p1)
-        except (IndexError, RuntimeError):
+            pminus1 = df[df["i"] == 1].iloc[0]["P2 fixation"]
+            pnover2 = df[df["i"] == df["N"] / 2].iloc[0]["P1 fixation"]
+        except IndexError:
             p1 = float("nan")
+            pminus1 = float("nan")
+            pnover2 = float("nan")
+
+        try:
+            r1 = theoretic.find_relative_fitness(N, 1, p1)
+        except RuntimeError:
             r1 = float("nan")
 
         try:
-            pnover2 = df[df["i"] == df["N"] / 2].iloc[0]["P1 fixation"]
-            rnover2 = theoretic.find_relative_fitness(N, N / 2, pnover2)
-        except (IndexError, RuntimeError):
-            pnover2 = float("nan")
-            rnover2 = float("nan")
+            rminus1 = theoretic.find_relative_fitness(N, N - 1, pminus1)
+        except RuntimeError:
+            rminus1 = float("nan")
 
         try:
-            pminus1 = df[df["i"] == df["N"] - 1].iloc[0]["P1 fixation"]
-            rminus1 = theoretic.find_relative_fitness(N, N - 1, pminus1)
-        except (IndexError, RuntimeError):
-            pminus1 = float("nan")
-            rminus1 = float("nan")
+            rnover2 = theoretic.find_relative_fitness(N, N / 2, pnover2)
+        except RuntimeError:
+            rnover2 = float("nan")
 
         dfs[0].append(pd.DataFrame([[player, opponent, N, Noise, p1, pnover2,
                                      r1, rnover2]],
@@ -47,4 +53,5 @@ def read():
 
 if __name__ == "__main__":
     fitness_df = read()
-    fitness_df.to_csv("../data/main.csv")
+    fitness_df = fitness_df[~fitness_df["Noise"]].drop("Noise", axis=1)
+    fitness_df.to_csv("../data/main.csv", index=False)

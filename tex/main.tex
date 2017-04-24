@@ -20,7 +20,7 @@
 \addbibresource{bibliography.bib}
 
 % Title
-\title{An empircal study of fixation probabilities for strategies in the
+\title{An empirical study of fixation for strategies in the
        Iterated Prisoner's Dilemma}
 \author{Marc Harper \and Vincent Knight} % TODO Authors?
 \date{}
@@ -64,8 +64,7 @@ population distribution.
 
 Further deviations from the analytical model occur when interactions between
 players are subject to uncertainty. This is referred to as noise and has been
-considered in the IPD setting in \cite{Bendor1993, Nowak1993, Wu1995}. Noise is
-also considered here.
+considered in the IPD setting in \cite{Bendor1993, Nowak1993, Wu1995}.
 
 This work provides answers to the following questions:
 
@@ -387,176 +386,128 @@ Section.
 
 \section{Numerical results}\label{sec:numerical_results}
 
-Figures~\ref{fig:fixation_heatmap_1_std},~\ref{fig:fixation_heatmap_n_over_2_std}
-and~\ref{fig:fixation_heatmap_n_over_2_noise} shows the fixation rates of each
+Figures~\ref{fig:fixation_heatmap_invade}
+and~\ref{fig:fixation_heatmap_coexist} show the fixation rates of each
 player on the y axis against each player on the x axis.
 
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_invade.pdf}
         \caption{\((N,i)=(2, 1)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_invade.pdf}
         \caption{\((N,i)=(4, 1)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_invade.pdf}
         \caption{\((N,i)=(6, 1)\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_invade.pdf}
         \caption{\((N,i)=(8, 1)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_invade.pdf}
         \caption{\((N,i)=(10, 1)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_invade.pdf}
         \caption{\((N,i)=(12, 1)\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_invade.pdf}
         \caption{\((N,i)=(14, 1)\)}
     \end{subfigure}%
     \caption{Pairwise fixation probability \(x_{1}\) of all strategies}
-    \label{fig:fixation_heatmap_1_std}
+    \label{fig:fixation_heatmap_invade}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_1_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_coexist.pdf}
         \caption{\((N,i)=(2, 1)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_2_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_coexist.pdf}
         \caption{\((N,i)=(4, 2)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_3_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_coexist.pdf}
         \caption{\((N,i)=(6, 3)\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_4_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_coexist.pdf}
         \caption{\((N,i)=(8, 4)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_5_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_coexist.pdf}
         \caption{\((N,i)=(10, 5)\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_6_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_coexist.pdf}
         \caption{\((N,i)=(12, 6)\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_7_std.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_coexist.pdf}
         \caption{\((N,i)=(14, 7)\)}
     \end{subfigure}%
     \caption{Pairwise fixation probability \(x_{N/2}\) of all strategies}
-    \label{fig:fixation_heatmap_n_over_2_std}
+    \label{fig:fixation_heatmap_coexist}
 \end{figure}
 
-
-\begin{figure}[!hbtp]
-    \centering
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_1_noise.pdf}
-        \caption{\((N,i)=(2, 1)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_2_noise.pdf}
-        \caption{\((N,i)=(4, 2)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_3_noise.pdf}
-        \caption{\((N,i)=(6, 3)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_4_noise.pdf}
-        \caption{\((N,i)=(8, 4)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_5_noise.pdf}
-        \caption{\((N,i)=(10, 5)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_6_noise.pdf}
-        \caption{\((N,i)=(12, 6)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_7_noise.pdf}
-        \caption{\((N,i)=(14, 7)\)}
-    \end{subfigure}%
-    \caption{Pairwise fixation probabilities of all strategies with noise}
-    \label{fig:fixation_heatmap_n_over_2_noise}
-\end{figure}
-
-Figure~\ref{fig:invasion_boxplot_std} shows the fixation probabilities for each
+Figure~\ref{fig:invasion_boxplot_invade} shows the fixation probabilities for each
 strategy when invading another strategy.
-Figure~\ref{fig:resistance_boxplot_std} shows the fixation probabilities for
+Figure~\ref{fig:resistance_boxplot_resist} shows the fixation probabilities for
 each strategy when resisting another strategy.
-Figure~\ref{fig:coexistance_boxplot_std} shows the fixation probabilities for
+Figure~\ref{fig:coexistance_boxplot_coexist} shows the fixation probabilities for
 each strategy when initially coexisting with another strategy.
 
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/invasion_boxplot_2_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_2_invade.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/invasion_boxplot_4_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_4_invade.pdf}
         \caption{\(N=4\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/invasion_boxplot_6_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_6_invade.pdf}
         \caption{\(N=6\)}
     \end{subfigure}%
 
@@ -564,25 +515,25 @@ each strategy when initially coexisting with another strategy.
     % currently have data
     %\begin{subfigure}[htbp]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/invasion_boxplot_8_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_8_invade.pdf}
         %\caption{\(N=8\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/invasion_boxplot_10_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_10_invade.pdf}
         %\caption{\(N=10\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/invasion_boxplot_12_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_12_invade.pdf}
         %\caption{\(N=12\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/invasion_boxplot_14_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_14_invade.pdf}
         %\caption{\(N=14\)}
     %\end{subfigure}%
     \caption{Invasion fixation probabilities of all strategies}
@@ -593,19 +544,19 @@ each strategy when initially coexisting with another strategy.
     \centering
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/resistance_boxplot_2_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_2_resist.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/resistance_boxplot_4_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_4_resist.pdf}
         \caption{\(N=4\)}
     \end{subfigure}%
 
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/resistance_boxplot_6_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_6_resist.pdf}
         \caption{\(N=6\)}
     \end{subfigure}%
 
@@ -613,25 +564,25 @@ each strategy when initially coexisting with another strategy.
     % currently have data
     %\begin{subfigure}[htbp]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/resistance_boxplot_8_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_8_resist.pdf}
         %\caption{\(N=8\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/resistance_boxplot_10_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_10_resist.pdf}
         %\caption{\(N=10\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/resistance_boxplot_12_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_12_resist.pdf}
         %\caption{\(N=12\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/resistance_boxplot_14_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_14_resist.pdf}
         %\caption{\(N=14\)}
     %\end{subfigure}%
     \caption{Resistance fixation probabilities of all strategies}
@@ -642,43 +593,43 @@ each strategy when initially coexisting with another strategy.
     \centering
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/coexistance_boxplot_2_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_2_coexist.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/coexistance_boxplot_4_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_4_coexist.pdf}
         %\caption{\(N=4\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/coexistance_boxplot_6_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_6_coexist.pdf}
         %\caption{\(N=6\)}
     %\end{subfigure}%
 
     \begin{subfigure}[htbp]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/coexistance_boxplot_8_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_8_coexist.pdf}
         \caption{\(N=8\)}
     \end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/coexistance_boxplot_10_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_10_coexist.pdf}
         %\caption{\(N=10\)}
     %\end{subfigure}%
 
     %\begin{subfigure}[t]{\textwidth}
         %\centering
-        %\includegraphics[width=\textwidth]{../img/coexistance_boxplot_12_std.pdf}
+        %\includegraphics[width=\textwidth]{../img/boxplot_12_coexist.pdf}
         %\caption{\(N=12\)}
     %\end{subfigure}%
 
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/coexistance_boxplot_14_std.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_14_coexist.pdf}
         \caption{\(N=14\)}
     \end{subfigure}%
     \caption{Coexistance fixation probabilities of all strategies}
@@ -686,23 +637,23 @@ each strategy when initially coexisting with another strategy.
 \end{figure}
 
 
-Figures~\ref{fig:ranks_v_size_invasion},~\ref{fig:ranks_v_size_resistance}
+Figures~\ref{fig:ranks_v_size_invade},~\ref{fig:ranks_v_size_resist}
 and~\ref{fig:ranks_v_size_coexist} show the median rank of each strategy against
 population size in the standard and noisy settings. Note that these ranks are
 not necessarily integers as group ties are given the average rank.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[height=.9\textheight]{../img/median_rank_vs_population_size_invasion.pdf}
-    \caption{Invasion}
-    \label{fig:ranks_v_size_invasion}
+    \includegraphics[height=.9\textheight]{../img/median_rank_vs_population_size_invade.pdf}
+    \caption{invade}
+    \label{fig:ranks_v_size_invade}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[height=.9\textheight]{../img/median_rank_vs_population_size_resistance.pdf}
-    \caption{Resistance}
-    \label{fig:ranks_v_size_resistance}
+    \includegraphics[height=.9\textheight]{../img/median_rank_vs_population_size_resist.pdf}
+    \caption{resist}
+    \label{fig:ranks_v_size_resist}
 \end{figure}
 
 \begin{figure}[!hbtp]
@@ -714,7 +665,7 @@ not necessarily integers as group ties are given the average rank.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_invasion.pdf}
+    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_invade.pdf}
     \caption{Relationship between Median rank for population size for strategies
     invading}
     \label{fig:relationship_ranks_v_size_invasion}
@@ -722,7 +673,7 @@ not necessarily integers as group ties are given the average rank.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_resistance.pdf}
+    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_resist.pdf}
     \caption{Relationship between Median rank for population size for strategies
     resisting}
     \label{fig:relationship_ranks_v_size_resistance}
@@ -736,7 +687,7 @@ not necessarily integers as group ties are given the average rank.
     \label{fig:relationship_ranks_v_size_coexist}
 \end{figure}
 
-Tables~\ref{tbl:linear_coeficients_invasion},~\ref{tbl:linear_coeficients_resistance}
+Tables~\ref{tbl:linear_coeficients_invade},~\ref{tbl:linear_coeficients_resist}
 and~\ref{tbl:linear_coeficients_coexist} show the coefficients and \(R^2\) value
 of the linear model relating the rank in a particular sized population to the
 ranks in other populations sizes.
@@ -749,16 +700,16 @@ ranks in other populations sizes.
     \centering
     \begin{subfigure}{.5\textwidth}
         \centering
-        \input{"../tbl/linear_coeficients_invasion.tex"}
+        \input{"../tbl/linear_coeficients_invade.tex"}
         \caption{Linear model coefficients for ranks for invasion}
-        \label{tbl:linear_coeficients_invasion}
+        \label{tbl:linear_coeficients_invade}
     \end{subfigure}%
     ~
     \begin{subfigure}{.5\textwidth}
         \centering
-        \input{"../tbl/linear_coeficients_resistance.tex"}
+        \input{"../tbl/linear_coeficients_resist.tex"}
         \caption{Linear model coefficients for ranks for resistance}
-        \label{tbl:linear_coeficients_resistance}
+        \label{tbl:linear_coeficients_resist}
     \end{subfigure}
 
     \begin{subfigure}{.5\textwidth}
@@ -772,7 +723,6 @@ ranks in other populations sizes.
 
 % TODO Discuss effect of size on performance of strategies. Relate to Press and
 % Dyson work: "ZD strategies win matches but not tournaments".
-% TODO Include discussion about noise.
 
 % TODO Redo everything with Meta strategies? This was a comment by MH. I suggest
 % we leave this for this paper.
