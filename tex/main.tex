@@ -122,7 +122,7 @@ we are taking in to effect the reputation of a strategy during each interaction.
 Section~\ref{sec:methodology} will explain the methodological approach used,
 Section~\ref{sec:validation} will validate the methodology by comparing
 simulated results to analytical results. The main results of this manuscript are
-presented in Section~\ref{sec:numerical_results} which will present a detailed
+presented in Section~\ref{sec:empirical_results} which will present a detailed
 analysis of all the data generated. Finally, Section~\ref{sec:conclusion} will
 conclude and offer future avenues for the work presented here.
 
@@ -384,11 +384,13 @@ weakness of the analytical formulae that relies on the average payoffs. A
 detailed analysis of the 172 strategies considered will be shown in the next
 Section.
 
-\section{Numerical results}\label{sec:numerical_results}
+\section{Empirical results}\label{sec:empirical_results}
 
-Figures~\ref{fig:fixation_heatmap_invade}
-and~\ref{fig:fixation_heatmap_coexist} show the fixation rates of each
-player on the y axis against each player on the x axis.
+\subsection{Strong invaders}\label{sec:strong_invaders}
+
+Figures~\ref{fig:fixation_heatmap_invade} shows the pairwise fitness for
+strategies on the columns axis invading a population of strategies on the row
+axis.
 
 \begin{figure}[!hbtp]
     \centering
@@ -437,59 +439,8 @@ player on the y axis against each player on the x axis.
     \label{fig:fixation_heatmap_invade}
 \end{figure}
 
-\begin{figure}[!hbtp]
-    \centering
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_coexist.pdf}
-        \caption{\((N,i)=(2, 1)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_coexist.pdf}
-        \caption{\((N,i)=(4, 2)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_coexist.pdf}
-        \caption{\((N,i)=(6, 3)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_coexist.pdf}
-        \caption{\((N,i)=(8, 4)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_coexist.pdf}
-        \caption{\((N,i)=(10, 5)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_coexist.pdf}
-        \caption{\((N,i)=(12, 6)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_coexist.pdf}
-        \caption{\((N,i)=(14, 7)\)}
-    \end{subfigure}%
-    \caption{Pairwise fixation probability \(x_{N/2}\) of all strategies}
-    \label{fig:fixation_heatmap_coexist}
-\end{figure}
-
 Figure~\ref{fig:invasion_boxplot_invade} shows the fixation probabilities for each
 strategy when invading another strategy.
-Figure~\ref{fig:resistance_boxplot_resist} shows the fixation probabilities for
-each strategy when resisting another strategy.
-Figure~\ref{fig:coexistance_boxplot_coexist} shows the fixation probabilities for
-each strategy when initially coexisting with another strategy.
 
 \begin{figure}[!hbtp]
     \centering
@@ -539,6 +490,59 @@ each strategy when initially coexisting with another strategy.
     \caption{Invasion fixation probabilities of all strategies}
     \label{fig:invasion_boxplot_std}
 \end{figure}
+
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_coexist.pdf}
+        \caption{\((N,i)=(2, 1)\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_coexist.pdf}
+        \caption{\((N,i)=(4, 2)\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_coexist.pdf}
+        \caption{\((N,i)=(6, 3)\)}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_coexist.pdf}
+        \caption{\((N,i)=(8, 4)\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_coexist.pdf}
+        \caption{\((N,i)=(10, 5)\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_coexist.pdf}
+        \caption{\((N,i)=(12, 6)\)}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_coexist.pdf}
+        \caption{\((N,i)=(14, 7)\)}
+    \end{subfigure}%
+    \caption{Pairwise fixation probability \(x_{N/2}\) of all strategies}
+    \label{fig:fixation_heatmap_coexist}
+\end{figure}
+
+Figure~\ref{fig:resistance_boxplot_resist} shows the fixation probabilities for
+each strategy when resisting another strategy.
+Figure~\ref{fig:coexistance_boxplot_coexist} shows the fixation probabilities for
+each strategy when initially coexisting with another strategy.
 
 \begin{figure}[!hbtp]
     \centering
