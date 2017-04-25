@@ -19,7 +19,10 @@ def read():
         try:
             p1 = df[df["i"] == 1].iloc[0]["P1 fixation"]
             pminus1 = df[df["i"] == 1].iloc[0]["P2 fixation"]
-            pnover2 = df[df["i"] == df["N"] / 2].iloc[0]["P1 fixation"]
+            if N % 2 == 0:
+                pnover2 = df[df["i"] == df["N"] / 2].iloc[0]["P1 fixation"]
+            else:
+                pnover2 = float("nan")
         except IndexError:
             p1 = float("nan")
             pminus1 = float("nan")
@@ -35,9 +38,12 @@ def read():
         except RuntimeError:
             rminus1 = float("nan")
 
-        try:
-            rnover2 = theoretic.find_relative_fitness(N, N / 2, pnover2)
-        except RuntimeError:
+        if N % 2 == 0:
+            try:
+                rnover2 = theoretic.find_relative_fitness(N, N / 2, pnover2)
+            except RuntimeError:
+                rnover2 = float("nan")
+        else:
             rnover2 = float("nan")
 
         dfs[0].append(pd.DataFrame([[player, opponent, N, Noise, p1, pnover2,
@@ -51,7 +57,10 @@ def read():
 
     return dfs[0].merge(dfs[1], on=["player", "N","opponent", "Noise"])
 
+def write(df):
+    df = df[~df["Noise"]].drop("Noise", axis=1)
+    df.to_csv("../data/main.csv", index=False)
+
 if __name__ == "__main__":
     fitness_df = read()
-    fitness_df = fitness_df[~fitness_df["Noise"]].drop("Noise", axis=1)
-    fitness_df.to_csv("../data/main.csv", index=False)
+    write(fitness_df)
