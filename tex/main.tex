@@ -75,15 +75,15 @@ This work provides answers to the following questions:
 \end{enumerate}
 
 Figure~\ref{fig:moran_process} shows a diagrammatic representation of the Moran
-process. The Moran process is a stochastic birth death process on a finite
-population in which the population size stays constant over time. Individuals
-are \textbf{selected} according to a given fitness landscape. Once selected, a
-given individual is reproduced and similarly another individual is chosen to be
+process. This process is a stochastic birth death process on a finite population
+in which the population size stays constant over time. Individuals are
+\textbf{selected} according to a given fitness landscape. Once selected, a given
+individual is reproduced and similarly another individual is chosen to be
 removed from the population. In some settings mutation is also considered but
 without mutation (the case considered in this work) this process will arrive at
 an absorbing state where the population is entirely made up of a single
 individual. The probability with which a given strategy is the survivor is
-called the absorption probability. A more detailed analytic description of this
+called the fixation probability. A more detailed analytic description of this
 is given in Section~\ref{sec:validation}.
 
 \begin{figure}[!hbtp]
@@ -94,7 +94,7 @@ is given in Section~\ref{sec:validation}.
 \end{figure}
 
 The Moran process was initially introduced in \cite{Moran1957} in a genetic
-setting. It has sine been used in a variety of settings including the
+setting. It has since been used in a variety of settings including the
 understanding of the spread of cooperative behaviour. However, as stated before,
 these mainly consider non sophisticated strategies. Some work has looked at
 evolutionary stability of strategies within the Prisoner's Dilemma \cite{Li2014}
@@ -112,12 +112,13 @@ The contribution of this work is a detailed and extensive analysis of absorption
 probabilities for 172 strategies. These strategies and the numerical simulations
 are from~\cite{axelrodproject} which is an open source research library written
 for the study of the IPD\@. The strategies and simulation frameworks are
-automatically tested in accordance to best practice. The large number of
-strategies are available thanks to the open source nature of the project with
-over 40 contributions made by different programmers. Thus by considering Moran
-processes with population size greater than 2 we are taking in to account the
-effect of complex population dynamics. By considering sophisticated strategies
-we are taking in to effect the reputation of a strategy during each interaction.
+automatically tested in accordance to best research software practice. The large
+number of strategies are available thanks to the open source nature of the
+project with over 40 contributions made by different programmers. Thus by
+considering Moran processes with population size greater than 2 we are taking in
+to account the effect of complex population dynamics. By considering
+sophisticated strategies we are taking in to effect the reputation of a strategy
+during each interaction.
 
 Section~\ref{sec:methodology} will explain the methodological approach used,
 Section~\ref{sec:validation} will validate the methodology by comparing
@@ -138,61 +139,76 @@ the following 3 finite state machine machine strategies \cite{Ashlock2006}:
 
 Appendix~\ref{app:list_of_players} shows all the players in question. More
 information about each player can be obtained in the documentation for
-\cite{axelrodproject}. The memory depth of the used strategies is shown in
-Table~\ref{tbl:memory_depth_count}.
+\cite{axelrodproject}. There are \input{../tbl/num_stochastic.tex}stochastic and
+\input{../tbl/num_deterministic.tex}deterministic strategies. Their memory
+depth is shown in Table~\ref{tbl:memory_depth_count}.
 
 \begin{table}[!hbtp]
     \centering
-        \begin{subfigure}[t]{\textwidth}
-            \centering
-                \input{../tbl/memory_depth_count.tex}
-                \caption{Memory depth}
-                \label{tbl:memory_depth_count}
-        \end{subfigure}
-        \vspace{.5cm}
-
-        \begin{subfigure}[t]{\textwidth}
-            \centering
-                \input{../tbl/stochastic_count.tex}
-                \caption{Stochastic versus deterministic}
-                \label{tbl:stochastic_count}
-        \end{subfigure}
-        \caption{Summary of properties of used strategies}
+        \input{../tbl/memory_depth_count.tex}
+        \caption{Memory depth}
+        \label{tbl:memory_depth_count}
 \end{table}
 
-All strategies are paired and these pairs are used in 2000 repetitions of a
+All strategies are paired and these pairs are used in 1000 repetitions of a
 Moran process assuming a starting population of \((N/2, N/2)\). This is repeated
 for even \(N\) between 2 and 14. The fixation probability is then estimated for
 each value of \(N\).
+% TODO The above is no longer true.
 
 Note that due to the high computational cost of these experiments, for any given
 interaction between two players within the Moran process the outcome is sampled
-from a pre computed cache of 1000 match outcomes. This is carried out using the
-approximate Moran process implemented in \cite{axelrodproject}.
+from a pre computed cache of 1000 match outcomes. This is carried out using an
+software written for the purpose of this work. This has been
+implemented in \cite{axelrodproject} ensuring that it can be used to either
+reproduce the work or carry out further work.
 
-As an example, Figure~\ref{fig:players_with_most_scores} shows the scores
-between two players that over the 1000 outcomes gives 971 different scores.
+Figure~\ref{fig:number_of_stochastic_match_outcomes} shows the distribution of
+the number of outcomes between all strategy pairs.
+Tables~\ref{tbl:number_of_stochastic_match_outcomes} shows that 95\% of the
+stochastic matches have less than 786 unique outcomes whilst the maximum number
+is 971. This ensures that using a set of cached results from 1000 precomputed
+matches is sufficient for the analysis taking place here.
 
-\begin{figure}[!htbp]
+\begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=.4\textwidth]{../img/players_with_most_scores.pdf}
-    \caption{All possible scores for the pair of strategies that have the most
-    different number of match outcomes}
-    \label{fig:players_with_most_scores}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{../img/number_of_match_outcomes.pdf}
+        \caption{All matches}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{../img/number_of_stochastic_match_outcomes.pdf}
+        \caption{Stochastic matches}
+    \end{subfigure}%
+    \caption{The distribution of the number of unique outcomes used as the
+    cached results}
+    \label{fig:number_of_stochastic_match_outcomes}
 \end{figure}
 
-A variety of software libraries have been used in this work:
 
-\begin{itemize}
-    \item The Axelrod library (IPD strategies and Moran processes)
-        \cite{axelrodproject}.
-    \item The matplotlib library (visualisation) \cite{hunter2007matplotlib}.
-    \item The pandas and numpy libraries (data manipulation)
-        \cite{mckinney2010data, walt2011numpy}.
-\end{itemize}
+\begin{table}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \input{../tbl/number_of_match_outcomes.tex}
+        \caption{All matches}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \input{../tbl/number_of_stochastic_match_outcomes.tex}
+        \caption{Stochastic matches}
+    \end{subfigure}%
+    \caption{Summary statistics for the number of different match outcomes used
+    as the cached results}
+    \label{tbl:number_of_stochastic_match_outcomes}
+\end{table}
 
-Section~\ref{sec:validation} will validate this approach against theoretic
-results.
+Section~\ref{sec:validation} will validate the methodology used here against
+known theoretic results.
 
 \section{Validation}\label{sec:validation}
 
@@ -251,7 +267,7 @@ where:
 \gamma_j = \frac{p_{j, j-1}}{p_{j, j+1}}
 \]
 
-Using this comparisons of \(x_{N/2}\) are shown in
+Using this comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
 Figure~\ref{fig:comparison_deterministic}. The points represent the simulated
 values and the line shows the theoretic value. Note that these are all
 deterministic strategies and show a perfect match up between the expected value
@@ -381,269 +397,206 @@ strategies pairs.
 Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
 stochastic strategies. These are no longer a good match which highlights the
 weakness of the analytical formulae that relies on the average payoffs. A
-detailed analysis of the 172 strategies considered will be shown in the next
-Section.
+detailed analysis of the 172 strategies considered, using direct Moran processes
+will be shown in the next Section.
 
 \section{Empirical results}\label{sec:empirical_results}
 
+This section will outline the data analysis carried out:
+
+\begin{itemize}
+    \item Section~\ref{sec:two_individuals} will consider the specific case of
+        \(N=2\).
+    \item Section~\ref{sec:strong_invaders} will investigate the effect of
+        population size on the ability of a strategy to invade another
+        population. This will highlight how complex strategies with long
+        memories outperform simpler strategies.
+    \item Section~\ref{sec:strong_resistors} will similarly investigate the
+        ability to defend against an invasion.
+    \item Section~\ref{sec:population_size} will investigate the relationship
+        between performance for differing population sizes. This highlights the
+        importance of considering population dynamics over large populations.
+    \item Section~\ref{sec:fitness} will calculate the relative fitness of all
+        strategies.
+\end{itemize}
+
+\subsection{The special case of \(N=2\)}\label{sec:two_individuals}
+
+% TODO Move the case 2 graphics to here.
+
 \subsection{Strong invaders}\label{sec:strong_invaders}
 
-Figures~\ref{fig:fixation_heatmap_invade} shows the pairwise fitness for
-strategies on the columns axis invading a population of strategies on the row
-axis.
+In this section \(x_i\) will be investigated: the probability of 1 individual of
+a given type successfully becoming fixated in a population of \(N - 1\) other
+individuals. Figures~\ref{fig:fixation_heatmap_invade} shows these values for
+the players along the vertical axis when matched against the players on the
+horizontal axis. It can be seen that invasion is in general more challenging for
+\(N=7\) and \(N=11\) in comparison to \(N=2\).
+%TODO Change this to N=14
+This information is summarised in Figure~\ref{fig:fixation_boxplot_invade}
+showing the median fixation as well as the neutral fixation for each given
+scenario.
 
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
         \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_invade.pdf}
-        \caption{\((N,i)=(2, 1)\)}
+        \caption{\(N=2\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_invade.pdf}
-        \caption{\((N,i)=(4, 1)\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_7_invade.pdf}
+        \caption{\(N=7\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_invade.pdf}
-        \caption{\((N,i)=(6, 1)\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_11_invade.pdf}
+        \caption{\(N=11\)}
+
+    %TODO Replace N=11 with N=14
     \end{subfigure}%
 
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_invade.pdf}
-        \caption{\((N,i)=(8, 1)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_invade.pdf}
-        \caption{\((N,i)=(10, 1)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_invade.pdf}
-        \caption{\((N,i)=(12, 1)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_invade.pdf}
-        \caption{\((N,i)=(14, 1)\)}
-    \end{subfigure}%
     \caption{Pairwise fixation probability \(x_{1}\) of all strategies}
     \label{fig:fixation_heatmap_invade}
 \end{figure}
 
-Figure~\ref{fig:invasion_boxplot_invade} shows the fixation probabilities for each
-strategy when invading another strategy.
-
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{\textwidth}
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../img/boxplot_2_invade.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
-
-    \begin{subfigure}[t]{\textwidth}
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_4_invade.pdf}
-        \caption{\(N=4\)}
+        \includegraphics[width=\textwidth]{../img/boxplot_7_invade.pdf}
+        \caption{\(N=7\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../img/boxplot_11_invade.pdf}
+        \caption{\(N=11\)}
     \end{subfigure}%
 
-    \begin{subfigure}[t]{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_6_invade.pdf}
-        \caption{\(N=6\)}
-    \end{subfigure}%
-
-    % TODO be more selective here: just picking out the ones for which we
-    % currently have data
-    %\begin{subfigure}[htbp]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_8_invade.pdf}
-        %\caption{\(N=8\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_10_invade.pdf}
-        %\caption{\(N=10\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_12_invade.pdf}
-        %\caption{\(N=12\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_14_invade.pdf}
-        %\caption{\(N=14\)}
-    %\end{subfigure}%
-    \caption{Invasion fixation probabilities of all strategies}
-    \label{fig:invasion_boxplot_std}
+    % TODO Replace N=11 with N=14 (when we have more data).
+    \caption{Median probabilities \(x_{1}\) of all strategies as well as the
+    neutral fixation probability}
+    \label{fig:fixation_boxplot_invade}
 \end{figure}
 
+For \(N\in\{2, 7, 11\}\) the top five strategies are given in
+% TODO Change N=11 to N=14
+Tables~\ref{tbl:top_five_invade}. It can be seen that for \(N=2\), as described
+in~\cite{Press2012}, zero determinant strategies perform well. There is a
+single strategy with infinite memory in the top five but this is in fact a meta
+strategy that plays with a team of memory one strategies picking out the top
+performer at each stage. The remaining strategy ``Feld" is the corresponding
+strategy submitted to the first tournament by Axelrod~\cite{Axelrod1980a}. All
+these strategies are stochastic.
+
+\begin{table}[!hbtp]
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \input{../tbl/summary_top_2_invade.tex}
+        \caption{\(N=2\)}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \input{../tbl/summary_top_7_invade.tex}
+        \caption{\(N=7\)}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \input{../tbl/summary_top_11_invade.tex}
+        \caption{\(N=11\)}
+    \end{subfigure}
+    %TODO Change N=11 to N=14
+    \caption{Properties of top five invaders}
+    \label{tbl:top_five_invade}
+\end{table}
+
+% TODO Write a little conclusion about invaders and introduce next section.
+
+\subsection{Strong resistors}\label{sec:strong_resistors}
 
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_coexist.pdf}
-        \caption{\((N,i)=(2, 1)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_4_coexist.pdf}
-        \caption{\((N,i)=(4, 2)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_6_coexist.pdf}
-        \caption{\((N,i)=(6, 3)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_8_coexist.pdf}
-        \caption{\((N,i)=(8, 4)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_10_coexist.pdf}
-        \caption{\((N,i)=(10, 5)\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_coexist.pdf}
-        \caption{\((N,i)=(12, 6)\)}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_14_coexist.pdf}
-        \caption{\((N,i)=(14, 7)\)}
-    \end{subfigure}%
-    \caption{Pairwise fixation probability \(x_{N/2}\) of all strategies}
-    \label{fig:fixation_heatmap_coexist}
-\end{figure}
-
-Figure~\ref{fig:resistance_boxplot_resist} shows the fixation probabilities for
-each strategy when resisting another strategy.
-Figure~\ref{fig:coexistance_boxplot_coexist} shows the fixation probabilities for
-each strategy when initially coexisting with another strategy.
-
-\begin{figure}[!hbtp]
-    \centering
-    \begin{subfigure}[t]{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_2_resist.pdf}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_invade.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
-
-    \begin{subfigure}[t]{\textwidth}
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_4_resist.pdf}
-        \caption{\(N=4\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_7_resist.pdf}
+        \caption{\(N=7\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_11_resist.pdf}
+        \caption{\(N=11\)}
+
+    %TODO Replace N=11 with N=14
     \end{subfigure}%
 
-    \begin{subfigure}[t]{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_6_resist.pdf}
-        \caption{\(N=6\)}
-    \end{subfigure}%
-
-    % TODO be more selective here: just picking out the ones for which we
-    % currently have data
-    %\begin{subfigure}[htbp]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_8_resist.pdf}
-        %\caption{\(N=8\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_10_resist.pdf}
-        %\caption{\(N=10\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_12_resist.pdf}
-        %\caption{\(N=12\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_14_resist.pdf}
-        %\caption{\(N=14\)}
-    %\end{subfigure}%
-    \caption{Resistance fixation probabilities of all strategies}
-    \label{fig:resistance_boxplot_std}
+    \caption{Pairwise fixation probability \(x_{N-1}\) of all strategies}
+    \label{fig:fixation_heatmap_resist}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{\textwidth}
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_2_coexist.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_2_invade.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_4_coexist.pdf}
-        %\caption{\(N=4\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_6_coexist.pdf}
-        %\caption{\(N=6\)}
-    %\end{subfigure}%
-
-    \begin{subfigure}[htbp]{\textwidth}
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_8_coexist.pdf}
-        \caption{\(N=8\)}
+        \includegraphics[width=\textwidth]{../img/boxplot_7_resist.pdf}
+        \caption{\(N=7\)}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../img/boxplot_11_resist.pdf}
+        \caption{\(N=11\)}
     \end{subfigure}%
 
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_10_coexist.pdf}
-        %\caption{\(N=10\)}
-    %\end{subfigure}%
-
-    %\begin{subfigure}[t]{\textwidth}
-        %\centering
-        %\includegraphics[width=\textwidth]{../img/boxplot_12_coexist.pdf}
-        %\caption{\(N=12\)}
-    %\end{subfigure}%
-
-    \begin{subfigure}[t]{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_14_coexist.pdf}
-        \caption{\(N=14\)}
-    \end{subfigure}%
-    \caption{Coexistance fixation probabilities of all strategies}
-    \label{fig:coexistance_boxplot_std}
+    % TODO Replace N=11 with N=14 (when we have more data).
+    \caption{Median probabilities \(x_{N-1}\) of all strategies as well as the
+    neutral fixation probability}
+    \label{fig:fixation_boxplot_resist}
 \end{figure}
 
+\begin{table}[!hbtp]
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \input{../tbl/summary_top_7_resist.tex}
+        \caption{\(N=7\)}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \input{../tbl/summary_top_11_resist.tex}
+        \caption{\(N=11\)}
+    \end{subfigure}
+    %TODO Change N=11 to N=14
+    \caption{Properties of top five strategies resistors}
+    \label{tbl:top_five_invade}
+\end{table}
+
+\subsection{The effect of population size}\label{sec:population_size}
 
 Figures~\ref{fig:ranks_v_size_invade},~\ref{fig:ranks_v_size_resist}
 and~\ref{fig:ranks_v_size_coexist} show the median rank of each strategy against
-population size in the standard and noisy settings. Note that these ranks are
+population size. Note that these ranks are
 not necessarily integers as group ties are given the average rank.
 
 \begin{figure}[!hbtp]
@@ -667,63 +620,64 @@ not necessarily integers as group ties are given the average rank.
     \label{fig:ranks_v_size_coexist}
 \end{figure}
 
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_invade.pdf}
-    \caption{Relationship between Median rank for population size for strategies
-    invading}
-    \label{fig:relationship_ranks_v_size_invasion}
-\end{figure}
-
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_resist.pdf}
-    \caption{Relationship between Median rank for population size for strategies
-    resisting}
-    \label{fig:relationship_ranks_v_size_resistance}
-\end{figure}
-
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[width=\textwidth]{../img/relationship_between_median_ranks_coexist.pdf}
-    \caption{Relationship between Median rank for population size for strategies
-    coexisting}
-    \label{fig:relationship_ranks_v_size_coexist}
-\end{figure}
-
-Tables~\ref{tbl:linear_coeficients_invade},~\ref{tbl:linear_coeficients_resist}
-and~\ref{tbl:linear_coeficients_coexist} show the coefficients and \(R^2\) value
-of the linear model relating the rank in a particular sized population to the
-ranks in other populations sizes.
-% TODO Discuss these tables: show that none of the models are great (R^2) BUT it
-% does show that the coefficient of the N=2 column is always low whereas the
-% coefficient of the N=14 column is high even in the N=4 row. So how well you do
-% in  a match (N=2) has got very little to do with an evolutionary process.
+Tables~\ref{tbl:correlation_coeficients_invade},~\ref{tbl:correlation_coeficients_resist}
+and~\ref{tbl:correlation_coeficients_coexist} show the correlation coefficients
+of the ranks in of strategies in differing population size. This is shown
+graphically in Figure~\ref{fig:correlation_coefficients}. It is immediate to
+note that how well a strategy performs in any Moran process for \(N>2\) has
+little to do with the performance for \(N=2\).
+% TODO This is a really good conclusion I think: it shows that when studying
+% population dynamics it is important to consider larger populations.
 
 \begin{table}[!hbtp]
     \centering
-    \begin{subfigure}{.5\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \input{"../tbl/linear_coeficients_invade.tex"}
-        \caption{Linear model coefficients for ranks for invasion}
-        \label{tbl:linear_coeficients_invade}
+        \input{"../tbl/correlation_coeficients_invade.tex"}
+        \caption{Correlation coefficients for ranks for invasion}
+        \label{tbl:correlation_coeficients_invade}
     \end{subfigure}%
-    ~
-    \begin{subfigure}{.5\textwidth}
+
+    \begin{subfigure}{\textwidth}
         \centering
-        \input{"../tbl/linear_coeficients_resist.tex"}
-        \caption{Linear model coefficients for ranks for resistance}
-        \label{tbl:linear_coeficients_resist}
+        \input{"../tbl/correlation_coeficients_resist.tex"}
+        \caption{Correlation coefficients for ranks for resistance}
+        \label{tbl:correlation_coeficients_resist}
     \end{subfigure}
 
-    \begin{subfigure}{.5\textwidth}
+    \begin{subfigure}{\textwidth}
         \centering
-        \input{"../tbl/linear_coeficients_coexist.tex"}
-        \caption{Linear model coefficients for ranks for coexistance}
-        \label{tbl:linear_coeficients_coexist}
+        \input{"../tbl/correlation_coeficients_coexist.tex"}
+        \caption{Correlation coefficients for ranks for coexistance}
+        \label{tbl:correlation_coeficients_coexist}
     \end{subfigure}
-    \caption{Linear coefficients}
+    \caption{Correlation coefficients}
 \end{table}
+
+\begin{figure}[!htbp]
+	\centering
+	\begin{subfigure}[t]{.3\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{../img/correlation_heatmap_invade.pdf}
+		\caption{Rank based on \(x_1\)}
+    \end{subfigure}
+    ~
+	\begin{subfigure}[t]{.3\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{../img/correlation_heatmap_resist.pdf}
+        \caption{Rank based on \(x_{N - 1}\)}
+    \end{subfigure}
+    ~
+	\begin{subfigure}[t]{.3\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{../img/correlation_heatmap_coexist.pdf}
+        \caption{Rank based on \(x_{N/2}\)}
+    \end{subfigure}
+    \caption{Correlation coefficients for ranks}
+    \label{fig:correlation_coefficients}
+\end{figure}
+
+
 
 % TODO Discuss effect of size on performance of strategies. Relate to Press and
 % Dyson work: "ZD strategies win matches but not tournaments".
@@ -753,6 +707,16 @@ Further work:
 
 This work was performed using the computational facilities of the Advanced
 Research Computing @ Cardiff (ARCCA) Division, Cardiff University.
+
+A variety of software libraries have been used in this work:
+
+\begin{itemize}
+    \item The Axelrod library (IPD strategies and Moran processes)
+        \cite{axelrodproject}.
+    \item The matplotlib library (visualisation) \cite{hunter2007matplotlib}.
+    \item The pandas and numpy libraries (data manipulation)
+        \cite{mckinney2010data, walt2011numpy}.
+\end{itemize}
 
 \printbibliography
 
