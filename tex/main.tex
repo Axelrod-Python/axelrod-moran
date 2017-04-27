@@ -58,7 +58,7 @@ The analytical models of a Moran process are based on the relative fitness
 between two strategies and take this to be a fixed value \(r\) \cite{Nowak}.
 This is a valid model for simple strategies of the Prisoner's Dilemma such as to
 \textit{always cooperate} or \textit{always defect}. This manuscript provides a
-detailed numerical analysis of \textbf{172} complex and adaptive strategies for
+detailed numerical analysis of \textbf{164} complex and adaptive strategies for
 the IPD\@. In this case the relative fitness of a strategy is dependent on the
 population distribution.
 
@@ -109,7 +109,7 @@ process context and only considers specific cases of memory 2 strategies.
 % TODO Is this OK? We should add more.
 
 The contribution of this work is a detailed and extensive analysis of absorption
-probabilities for 172 strategies. These strategies and the numerical simulations
+probabilities for 164 strategies. These strategies and the numerical simulations
 are from~\cite{axelrodproject} which is an open source research library written
 for the study of the IPD\@. The strategies and simulation frameworks are
 automatically tested in accordance to best research software practice. The large
@@ -129,9 +129,10 @@ conclude and offer future avenues for the work presented here.
 
 \section{Methodology}\label{sec:methodology}
 
-To carry out this large numerical experiment 172 strategies are used from
-\cite{axelrodproject}. These include 169 default strategies in the library at
-the time (excluding strategies classified as having a long run time) as well as
+To carry out this large numerical experiment 164 strategies are used from
+\cite{axelrodproject}. These include 161 default strategies in the library at
+the time (excluding strategies classified as having a long run time and those
+that make use of the length of the game) as well as
 the following 3 finite state machine machine strategies \cite{Ashlock2006}:
 
 % TODO Include details about the 3 extra FSM strategies.
@@ -166,7 +167,7 @@ reproduce the work or carry out further work.
 Figure~\ref{fig:number_of_stochastic_match_outcomes} shows the distribution of
 the number of outcomes between all strategy pairs.
 Tables~\ref{tbl:number_of_stochastic_match_outcomes} shows that 95\% of the
-stochastic matches have less than 786 unique outcomes whilst the maximum number
+stochastic matches have less than 788 unique outcomes whilst the maximum number
 is 971. This ensures that using a set of cached results from 1000 precomputed
 matches is sufficient for the analysis taking place here.
 
@@ -397,7 +398,7 @@ strategies pairs.
 Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
 stochastic strategies. These are no longer a good match which highlights the
 weakness of the analytical formulae that relies on the average payoffs. A
-detailed analysis of the 172 strategies considered, using direct Moran processes
+detailed analysis of the 164 strategies considered, using direct Moran processes
 will be shown in the next Section.
 
 \section{Empirical results}\label{sec:empirical_results}
@@ -416,13 +417,62 @@ This section will outline the data analysis carried out:
     \item Section~\ref{sec:population_size} will investigate the relationship
         between performance for differing population sizes. This highlights the
         importance of considering population dynamics over large populations.
-    \item Section~\ref{sec:fitness} will calculate the relative fitness of all
+    \item Section~\ref{sec:relative_fitness} will calculate the relative fitness of all
         strategies.
 \end{itemize}
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
 
-% TODO Move the case 2 graphics to here.
+The main fixation probabilities of interest are \(x_1\) and \(x_{N-1}\), these
+reflect a strategy's ability to invade or resist invasion.
+% TODO Perhaps mention that a lot of the research in to training fixation of
+% strategies assumes N=2? Is this true?
+For \(N=2\) these two cases coincide. Figure~\ref{fig:fixation_heatmap_2} shows
+all pairwise fixation probabilities for strategies on the vertical column when
+being matched against probabilities on the horizontal column. This is summarised
+in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2} It can be seen
+that, as described in in~\cite{Press2012}, zero determinant strategies perform
+well. The strategy with infinite memory \texttt{Collective} is a strategy with a
+handshake which implies that it will perform well against itself.. There is also
+one of the trained finite state machines in the top five.  The remaining
+strategy ``Feld" is the corresponding strategy submitted to the first tournament
+by Axelrod~\cite{Axelrod1980a}. All these strategies are stochastic.
+
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.5\textwidth]{../img/fixation_heatmap_2_invade.pdf}
+    \caption{The pairwise fixation probabilities for \(N=2\)}
+    \label{fig:fixation_heatmap_2}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.5\textheight]{../img/boxplot_2_invade.pdf}
+    \caption{The median fixation probabilities for \(N=2\)}
+    \label{fig:boxplot_2}
+\end{figure}
+
+\begin{table}[!hbtp]
+    \centering
+    \input{../tbl/summary_top_2_invade.tex}
+    \caption{Summary of top five strategies for \(N=2\)}
+    \label{tbl:summary_top_2}
+\end{table}
+
+As will be demonstrated in Section~\ref{sec:population_size} \(N=2\)
+is a particular case. In the next sections we will pay close attention to
+strategies who are strong invaders/resistors and shown diagrammatically in
+Figure~\ref{fig:invasion_resistance}.
+
+\begin{figure}[!hbtp]
+    \centering
+    \input{../img/invasion_resistance.tex}
+    \caption{A single individual will successfully invade the population with
+    probability \(x_1\). The group of Individuals will successfully resist with
+    probability \(x_{N-1}\)}
+    \label{fig:invasion_resistance}
+\end{figure}
 
 \subsection{Strong invaders}\label{sec:strong_invaders}
 
@@ -431,7 +481,7 @@ a given type successfully becoming fixated in a population of \(N - 1\) other
 individuals. Figures~\ref{fig:fixation_heatmap_invade} shows these values for
 the players along the vertical axis when matched against the players on the
 horizontal axis. It can be seen that invasion is in general more challenging for
-\(N=7\) and \(N=11\) in comparison to \(N=2\).
+\(N=7\) and \(N=11\) in comparison to \(N=3\).
 %TODO Change this to N=14
 This information is summarised in Figure~\ref{fig:fixation_boxplot_invade}
 showing the median fixation as well as the neutral fixation for each given
@@ -441,8 +491,8 @@ scenario.
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_invade.pdf}
-        \caption{\(N=2\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_3_invade.pdf}
+        \caption{\(N=3\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
@@ -467,8 +517,8 @@ scenario.
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_2_invade.pdf}
-        \caption{\(N=2\)}
+        \includegraphics[width=\textwidth]{../img/boxplot_3_invade.pdf}
+        \caption{\(N=3\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
@@ -489,21 +539,15 @@ scenario.
     \label{fig:fixation_boxplot_invade}
 \end{figure}
 
-For \(N\in\{2, 7, 11\}\) the top five strategies are given in
+For \(N\in\{3, 7, 11\}\) the top five strategies are given in
 % TODO Change N=11 to N=14
-Tables~\ref{tbl:top_five_invade}. It can be seen that for \(N=2\), as described
-in~\cite{Press2012}, zero determinant strategies perform well. There is a
-single strategy with infinite memory in the top five but this is in fact a meta
-strategy that plays with a team of memory one strategies picking out the top
-performer at each stage. The remaining strategy ``Feld" is the corresponding
-strategy submitted to the first tournament by Axelrod~\cite{Axelrod1980a}. All
-these strategies are stochastic.
+Tables~\ref{tbl:top_five_invade}.
 
 \begin{table}[!hbtp]
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \input{../tbl/summary_top_2_invade.tex}
-        \caption{\(N=2\)}
+        \input{../tbl/summary_top_3_invade.tex}
+        \caption{\(N=3\)}
     \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
         \centering
@@ -528,8 +572,8 @@ these strategies are stochastic.
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_2_invade.pdf}
-        \caption{\(N=2\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_3_resist.pdf}
+        \caption{\(N=3\)}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
@@ -554,7 +598,7 @@ these strategies are stochastic.
     \centering
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_2_invade.pdf}
+        \includegraphics[width=\textwidth]{../img/boxplot_3_resist.pdf}
         \caption{\(N=2\)}
     \end{subfigure}%
     ~
@@ -577,6 +621,11 @@ these strategies are stochastic.
 \end{figure}
 
 \begin{table}[!hbtp]
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \input{../tbl/summary_top_3_resist.tex}
+        \caption{\(N=3\)}
+    \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
         \centering
         \input{../tbl/summary_top_7_resist.tex}
@@ -677,13 +726,166 @@ little to do with the performance for \(N=2\).
     \label{fig:correlation_coefficients}
 \end{figure}
 
+\subsection{Relative fitness}\label{sec:relative_fitness}
 
+Under the assumption of a constant relative fitness \(r\) between two
+strategies~\cite{Nowak} the formula for \(x_i\) (for given \(N, r\) is:
+
+\begin{equation}\label{equ:fixation_probability_with_constant_relative_fitness}
+    x_i = x_i(r) = \frac{1-\frac{1}{r^{i}}}{1-\frac{1}{r^{N}}}
+\end{equation}
+
+Figure~\ref{fig:fixation_v_fitness_illustration} shows this function for
+\(N=10\) and \(i\in\{1, 5, 10\}\).
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.6\textwidth]{../img/fixation_v_fitness_illustration.pdf}
+    \caption{\(x_i(r)\)}
+    \label{fig:fixation_v_fitness_illustration}
+\end{figure}
+
+The first and second derivative of
+(\ref{equ:fixation_probability_with_constant_relative_fitness}) is given by equations
+(\ref{equ:fixation_probability_with_constant_relative_fitness_prime}) and
+(\ref{equ:fixation_probability_with_constant_relative_fitness_prime2}).
+
+\begin{equation}\label{equ:fixation_probability_with_constant_relative_fitness_prime}
+    \frac{dx_i}{dr} = \input{../tbl/fixation_probability_with_constant_relative_fitness_prime.tex}
+\end{equation}
+
+\begin{equation}\label{equ:fixation_probability_with_constant_relative_fitness_prime2}
+    \frac{d^2x_i}{dr^2} = \input{../tbl/fixation_probability_with_constant_relative_fitness_prime2.tex}
+\end{equation}
+
+Using these, Halley's method \cite{Alefeld2012} can be used to efficiently
+numerically invert \(x_i(r)\) to obtain a theoretic relative fitness \(r\) that
+gives the calculated \(x_i(r)\) between two strategies for a given \(N, i\).
+% TODO Say more things: I still think this is a bit cylic. The formula we are
+% using assumes a constant relative fitness which we know does not exist.
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Cooperator_fitness.pdf}
+        \caption{Alternator and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Defector_fitness.pdf}
+        \caption{Alternator and Defector}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Tit_For_Tat_fitness.pdf}
+        \caption{Alternator and Tit For Tat}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Cooperator_v_Tit_For_Tat_fitness.pdf}
+        \caption{Cooperator and Tit For Tat}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Cooperator_fitness.pdf}
+        \caption{Defector and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Tit_For_Tat_fitness.pdf}
+        \caption{Defector and Tit For Tat}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Win-Stay_Lose-Shift_v_Tit_For_Tat_fitness.pdf}
+        \caption{Win Stay Lose Shift and Tit For Tat}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Alternator_v_Win-Stay_Lose-Shift_fitness.pdf}
+        \caption{Alternator and Win Stay Lose Shift}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Defector_v_Win-Stay_Lose-Shift_fitness.pdf}
+        \caption{Defector and Win Stay Lose Shift}
+    \end{subfigure}%
+    \caption{Estimated relative fitness
+             for \textbf{deterministic} strategies}
+    \label{fig:comparison_deterministic}
+\end{figure}
+
+\begin{figure}[!hbtp]
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Random_v_Cooperator_fitness.pdf}
+        \caption{Random and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Random_v_Defector_fitness.pdf}
+        \caption{Random and Defector}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Random_v_Tit_For_Tat_fitness.pdf}
+        \caption{Random and Tit For Tat}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Cooperator_fitness.pdf}
+        \caption{All C or all D and Cooperator}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Defector_fitness.pdf}
+        \caption{All C or all D and Defector}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Random_fitness.pdf}
+        \caption{Calculator and Random}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_ALLCorALLD_fitness.pdf}
+        \caption{Calculator and All C or all D}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/Calculator_v_Arrogant_QLearner_fitness.pdf}
+        \caption{Calculator and Arrogant Q learner}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{../img/ALLCorALLD_v_Tit_For_Tat_fitness.pdf}
+        \caption{All C or all D and Tit For Tat}
+    \end{subfigure}%
+    \caption{Estimated relative fitness
+             for \textbf{stochastic} strategies}
+    \label{fig:comparison_stochastic}
+\end{figure}
 
 % TODO Discuss effect of size on performance of strategies. Relate to Press and
 % Dyson work: "ZD strategies win matches but not tournaments".
-
-% TODO Redo everything with Meta strategies? This was a comment by MH. I suggest
-% we leave this for this paper.
 
 % TODO Discuss some particular interesting cases; strategies that perform well
 % in the overall tournament for v2.8.0 perhaps?
