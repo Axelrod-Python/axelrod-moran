@@ -481,7 +481,7 @@ a given type successfully becoming fixated in a population of \(N - 1\) other
 individuals. Figures~\ref{fig:fixation_heatmap_invade} shows these values for
 the players along the vertical axis when matched against the players on the
 horizontal axis. It can be seen that invasion is in general more challenging for
-\(N=7\) and \(N=11\) in comparison to \(N=3\).
+\(N=7\) and \(N=12\) in comparison to \(N=3\).
 %TODO Change this to N=14
 This information is summarised in Figure~\ref{fig:fixation_boxplot_invade}
 showing the median fixation as well as the neutral fixation for each given
@@ -503,10 +503,10 @@ scenario.
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_11_invade.pdf}
-        \caption{\(N=11\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_invade.pdf}
+        \caption{\(N=12\)}
 
-    %TODO Replace N=11 with N=14
+    %TODO Replace N=12 with N=14
     \end{subfigure}%
 
     \caption{Pairwise fixation probability \(x_{1}\) of all strategies}
@@ -529,18 +529,18 @@ scenario.
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_11_invade.pdf}
-        \caption{\(N=11\)}
+        \includegraphics[width=\textwidth]{../img/boxplot_12_invade.pdf}
+        \caption{\(N=12\)}
     \end{subfigure}%
 
-    % TODO Replace N=11 with N=14 (when we have more data).
+    % TODO Replace N=12 with N=14 (when we have more data).
     \caption{Median probabilities \(x_{1}\) of all strategies as well as the
     neutral fixation probability}
     \label{fig:fixation_boxplot_invade}
 \end{figure}
 
-For \(N\in\{3, 7, 11\}\) the top five strategies are given in
-% TODO Change N=11 to N=14
+For \(N\in\{3, 7, 12\}\) the top five strategies are given in
+% TODO Change N=12 to N=14
 Tables~\ref{tbl:top_five_invade}.
 
 \begin{table}[!hbtp]
@@ -556,10 +556,10 @@ Tables~\ref{tbl:top_five_invade}.
     \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \input{../tbl/summary_top_11_invade.tex}
-        \caption{\(N=11\)}
+        \input{../tbl/summary_top_12_invade.tex}
+        \caption{\(N=12\)}
     \end{subfigure}
-    %TODO Change N=11 to N=14
+    %TODO Change N=12 to N=14
     \caption{Properties of top five invaders}
     \label{tbl:top_five_invade}
 \end{table}
@@ -584,10 +584,10 @@ Tables~\ref{tbl:top_five_invade}.
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_11_resist.pdf}
-        \caption{\(N=11\)}
+        \includegraphics[width=.8\textwidth]{../img/fixation_heatmap_12_resist.pdf}
+        \caption{\(N=12\)}
 
-    %TODO Replace N=11 with N=14
+    %TODO Replace N=12 with N=14
     \end{subfigure}%
 
     \caption{Pairwise fixation probability \(x_{N-1}\) of all strategies}
@@ -610,11 +610,11 @@ Tables~\ref{tbl:top_five_invade}.
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../img/boxplot_11_resist.pdf}
-        \caption{\(N=11\)}
+        \includegraphics[width=\textwidth]{../img/boxplot_12_resist.pdf}
+        \caption{\(N=12\)}
     \end{subfigure}%
 
-    % TODO Replace N=11 with N=14 (when we have more data).
+    % TODO Replace N=12 with N=14 (when we have more data).
     \caption{Median probabilities \(x_{N-1}\) of all strategies as well as the
     neutral fixation probability}
     \label{fig:fixation_boxplot_resist}
@@ -633,10 +633,10 @@ Tables~\ref{tbl:top_five_invade}.
     \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \input{../tbl/summary_top_11_resist.tex}
-        \caption{\(N=11\)}
+        \input{../tbl/summary_top_12_resist.tex}
+        \caption{\(N=12\)}
     \end{subfigure}
-    %TODO Change N=11 to N=14
+    %TODO Change N=12 to N=14
     \caption{Properties of top five strategies resistors}
     \label{tbl:top_five_invade}
 \end{table}
@@ -700,7 +700,7 @@ little to do with the performance for \(N=2\).
         \caption{Correlation coefficients for ranks for coexistance}
         \label{tbl:correlation_coeficients_coexist}
     \end{subfigure}
-    \caption{Correlation coefficients}
+    \caption{Correlation coefficients of rankings by population size}
 \end{table}
 
 \begin{figure}[!htbp]
@@ -722,7 +722,7 @@ little to do with the performance for \(N=2\).
 		\includegraphics[width=.9\textwidth]{../img/correlation_heatmap_coexist.pdf}
         \caption{Rank based on \(x_{N/2}\)}
     \end{subfigure}
-    \caption{Correlation coefficients for ranks}
+    \caption{Heatmap of correlation coefficients of rankings by population size}
     \label{fig:correlation_coefficients}
 \end{figure}
 
