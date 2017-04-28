@@ -106,7 +106,10 @@ of resisting invasion and also invade any memory one strategy. Recent work
 \cite{Hilbe2017} has investigated the effect of memory length on strategy
 performance and the emergence of cooperation but this is not done in Moran
 process context and only considers specific cases of memory 2 strategies.
-% TODO Is this OK? We should add more.
+% TODO Add discussion about ZD strategies and discuss how this corresponds to
+% case of N = 2. Include pointing at \cite{Adami2013} which discusses how ZD
+% strategies are not fantastic in population dynamics.
+% Add \cite{Li2014}
 
 The contribution of this work is a detailed and extensive analysis of absorption
 probabilities for 164 strategies. These strategies and the numerical simulations
@@ -430,27 +433,41 @@ reflect a strategy's ability to invade or resist invasion.
 For \(N=2\) these two cases coincide. Figure~\ref{fig:fixation_heatmap_2} shows
 all pairwise fixation probabilities for strategies on the vertical column when
 being matched against probabilities on the horizontal column. This is summarised
-in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2} It can be seen
-that, as described in in~\cite{Press2012}, zero determinant strategies perform
-well. The strategy with infinite memory \texttt{Collective} is a strategy with a
-handshake which implies that it will perform well against itself.. There is also
-one of the trained finite state machines in the top five.  The remaining
-strategy ``Feld" is the corresponding strategy submitted to the first tournament
-by Axelrod~\cite{Axelrod1980a}. All these strategies are stochastic.
+in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
+
+\begin{enumerate}
+    \item The top strategy is an extortionate Zero determinant
+        strategy~\cite{Press2012} with parameters \(l=1\) and \(s=1/4\).
+    \item The Collective strategy has a simple handshake mechanism (a
+        cooperation followed by a defection on the first move). It then either
+        cooperates or defects for all rounds~\cite{Li2009}.  This strategy was
+        specifically designed for Evolutionary processes so it is perhaps also
+        not surprising that it does well here.
+    \item The finite state machine stragegy % TODO Perhaps refer to earlier
+        % discussion in the methodology section about these FSM strategies
+    \item The Feld strategy is the corresponding strategy submitted to Axelrod's
+        first tournament~\cite{Axelrod1980a}: it punishes defections but
+        otherwise defects with a random probability that decays over time.
+    \item The final strategy in the top five is another extortionate Zero
+        determinant strategy~\cite{Press2012} with parameters \(l=p\).
+\end{enumerate}
 
 
 \begin{figure}[!hbtp]
-    \centering
-    \includegraphics[width=.5\textwidth]{../img/fixation_heatmap_2_invade.pdf}
-    \caption{The pairwise fixation probabilities for \(N=2\)}
-    \label{fig:fixation_heatmap_2}
-\end{figure}
-
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.5\textheight]{../img/boxplot_2_invade.pdf}
-    \caption{The median fixation probabilities for \(N=2\)}
-    \label{fig:boxplot_2}
+    \begin{subfigure}[t]{.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../img/fixation_heatmap_2_invade.pdf}
+        % TODO Remove this: I don't feel it is effective.
+        \caption{The pairwise fixation probabilities for \(N=2\)}
+        \label{fig:fixation_heatmap_2}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.6\textwidth}
+        \centering
+        \includegraphics[height=.8\textheight]{../img/boxplot_2_invade.pdf}
+        \caption{The median fixation probabilities for \(N=2\)}
+        \label{fig:boxplot_2}
+    \end{subfigure}
 \end{figure}
 
 \begin{table}[!hbtp]
@@ -508,6 +525,7 @@ scenario.
 
     %TODO Replace N=12 with N=14
     \end{subfigure}%
+    %TODO Remove these? I don't feel they are effective
 
     \caption{Pairwise fixation probability \(x_{1}\) of all strategies}
     \label{fig:fixation_heatmap_invade}
@@ -564,7 +582,32 @@ Tables~\ref{tbl:top_five_invade}.
     \label{tbl:top_five_invade}
 \end{table}
 
-% TODO Write a little conclusion about invaders and introduce next section.
+It can be seen that apart from the Collective strategy, none of the strategies
+of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 12\}\). The new
+% TODO Change N=12 to N=14
+high performing strategies are:
+
+\begin{itemize}
+    \item Predator, a finite state machine described in~\cite{Ashlock2006}.
+    \item Prober 4, complex strategy with an initial 20 move sequence of
+        cooperations and defections~\cite{prison}. This initial sequence serves
+        as some kind of handshake.
+    \item Remorseful Prober, a strategy that will not immediately retaliate when
+        it recognises that the opponent is itself retaliating to a random
+        defection~\cite{Li2011}.
+    \item  Worse and worse 2: plays tit for tat for 20 moves and then defects
+        with with growing probability~\cite{prison}.
+    \item Tester: a strategy submitted to the second of Axelrod's tournaments
+        \cite{Axelrod1980b}.
+        % TODO Check if this list is still correct for N=14
+\end{itemize}
+
+As well as noting that the memory length and complexity of these strategies are
+quite complex it is interesting to note that none of them are akin to memory one
+strategies. Most are not stochastic.
+
+In the next section the performance in terms of \(x_{N-1}\) will be described:
+what strategies are particularly good at resisting an invasion.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
 
@@ -589,6 +632,7 @@ Tables~\ref{tbl:top_five_invade}.
 
     %TODO Replace N=12 with N=14
     \end{subfigure}%
+    %TODO Remove these? I don't feel they are effective
 
     \caption{Pairwise fixation probability \(x_{N-1}\) of all strategies}
     \label{fig:fixation_heatmap_resist}
