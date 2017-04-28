@@ -6,9 +6,11 @@ one go.
 """
 import pandas as pd
 import theoretic
+import tempfile
 
-def read():
+def merged_df(N):
     summary = pd.read_csv("../data/sims_summary.csv")
+    summary = summary[summary["N"] == N]
 
     columns = [["player", "opponent", "N", "Noise", "$p_1$", "$p_{N/2}$",
                 "$r_1$", "$r_{N/2}$"],
@@ -19,14 +21,19 @@ def read():
         try:
             p1 = df[df["i"] == 1].iloc[0]["P1 fixation"]
             pminus1 = df[df["i"] == 1].iloc[0]["P2 fixation"]
+        except IndexError:
+            p1 = float("nan")
+            pminus1 = float("nan")
+
+
+        try:
             if N % 2 == 0:
                 pnover2 = df[df["i"] == df["N"] / 2].iloc[0]["P1 fixation"]
             else:
                 pnover2 = float("nan")
         except IndexError:
-            p1 = float("nan")
-            pminus1 = float("nan")
             pnover2 = float("nan")
+
 
         try:
             r1 = theoretic.find_relative_fitness(N, 1, p1)
@@ -56,6 +63,13 @@ def read():
     dfs = [pd.concat(dfs[0]), pd.concat(dfs[1])]
 
     return dfs[0].merge(dfs[1], on=["player", "N","opponent", "Noise"])
+
+def read():
+    dfs = []
+    for N in range(2, 14 + 1):
+        dfs.append(merged_df(N))
+
+    return pd.concat(dfs)
 
 def write(df):
     df = df[~df["Noise"]].drop("Noise", axis=1)
