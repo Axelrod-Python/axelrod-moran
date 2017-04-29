@@ -42,7 +42,14 @@
     such study. It allows for insights about the behaviour and
     performance of strategies with regard to their survival in an
     evolutionary setting.
-\end{abstract}  % TODO Add main conclusion/finding.
+
+    Evidence is presented that shows that classical analysis of evolutionary
+    dynamics with 2 individuals is misleading. Furthermore, it is shown that
+    players with long memories and sophisticated behaviours outperform many
+    strategies that perform well in a 2 individual setting (such as zero
+    determinant strategies).
+
+\end{abstract}
 
 \section{Introduction}\label{sec:introduction}
 
@@ -154,17 +161,18 @@ depth is shown in Table~\ref{tbl:memory_depth_count}.
 \end{table}
 
 All strategies are paired and these pairs are used in 1000 repetitions of a
-Moran process assuming a starting population of \((N/2, N/2)\). This is repeated
-for even \(N\) between 2 and 14. The fixation probability is then estimated for
-each value of \(N\).
-% TODO The above is no longer true.
+Moran process assuming a starting population distribution of \(1, N-1 \),
+\((N/2, N/2)\) and \(N-1 , 1\). This is repeated for \(N\) between 2 and 14. The
+% TODO Change 14 to 12 if we do not use the 14 case.
+fixation probability is then estimated for each value of \(N\).
 
 Note that due to the high computational cost of these experiments, for any given
 interaction between two players within the Moran process the outcome is sampled
-from a pre computed cache of 1000 match outcomes. This is carried out using an
+from a pre computed cache of 1000 match outcomes. This is carried out using
 software written for the purpose of this work. This has been
-implemented in \cite{axelrodproject} ensuring that it can be used to either
+implemented in~\cite{axelrodproject} ensuring that it can be used to either
 reproduce the work or carry out further work.
+% TODO Perhaps write some pseudo code for this?
 
 Figure~\ref{fig:number_of_stochastic_match_outcomes} shows the distribution of
 the number of outcomes between all strategy pairs.
@@ -445,7 +453,7 @@ in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
         cooperates. Otherwise it defects for all rounds~\cite{Li2009}.  This
         strategy was specifically designed for Evolutionary processes so it is
         perhaps also not surprising that it does well here.
-    \item The finite state machine stragegy % TODO Perhaps refer to earlier
+    \item The finite state machine strategy % TODO Perhaps refer to earlier
         % discussion in the methodology section about these FSM strategies
     \item The Feld strategy is the corresponding strategy submitted to Axelrod's
         first tournament~\cite{Axelrod1980a}: it punishes defections but
@@ -861,6 +869,8 @@ not extend to larger populations. This was discussed theoretically in
 \end{figure}
 
 \subsection{Relative fitness}\label{sec:relative_fitness}
+
+% TODO I do not understand the narrative for this and what it adds to the paper.
 
 Under the assumption of a constant relative fitness \(r\) between two
 strategies~\cite{Nowak} the formula for \(x_i\) (for given \(N, r\) is:
