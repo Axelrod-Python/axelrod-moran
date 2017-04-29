@@ -7,8 +7,10 @@ Prisoner's Dilemma.
 This directory is structured as follows:
 
 ```
-|---tex  # All tex source files
-     |--- main.tex
+|--- main.tex  # The main article file
+|---tex  # Further tex files
+     |--- bibliography.bib
+     |--- moran_process.tex
 |---src  # All python source files used to generate the data
      |--- generate_cache.py
      |--- ...?
@@ -16,6 +18,13 @@ This directory is structured as follows:
      |--- main.ipynb
 |---data  # All data files
 |---img  # All image files
-|---tbl  # All tex files for tables
 environment.yml  # a conda environment file
+```
+
+# Building the article:
+
+The following compiles the article using `Latexmk` version 4.41:
+
+```
+$ latexmk --xelatex main.tex
 ```

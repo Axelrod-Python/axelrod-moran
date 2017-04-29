@@ -51,7 +51,7 @@ This will run the Moran process for all pairs of players in a population of size
 4 and 2 players of the first type. A cached outcome of match results if read
 from `../data/outcomes.csv` and the output is `..data/sims_4.csv`.
 
-## Clean the data
+## Preprocessing of the raw data
 
 The file `clean_raw_moran.py` is used to clean all the data generated from
 `moran.py`. Creates one data file `..data/sims_summary.csv` of the form:
