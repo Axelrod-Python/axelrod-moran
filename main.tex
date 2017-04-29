@@ -405,6 +405,8 @@ will be shown in the next Section.
 
 \section{Empirical results}\label{sec:empirical_results}
 
+% TODO Archive all data (Zenodo) and include details/reference here.
+
 This section will outline the data analysis carried out:
 
 \begin{itemize}
@@ -738,38 +740,77 @@ the next section.
 
 Figures~\ref{fig:ranks_v_size_invade},~\ref{fig:ranks_v_size_resist}
 and~\ref{fig:ranks_v_size_coexist} show the median rank of each strategy against
-population size. Note that these ranks are
-not necessarily integers as group ties are given the average rank.
+population size. For all starting populations \(i\in\{1, N/2, N-1\}\) the ranks
+of strategies are relatively stable across the different values of \(N>2\)
+however for \(N=2\) there is a distinct difference. This confirms what has been
+discussed in previous sections.
+
+Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
+and~\ref{tbl:ranks_v_size_coexist} show the same information for the strategies
+that rated high for \(N=2\) and \(N=12\).
+% TODO Change to N=14?
 
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[height=.9\textheight]{./img/median_rank_vs_population_size_invade.pdf}
-    \caption{invade}
+    \caption{Ranks of all strategies according to \(x_1\) for different
+    population sizes}
     \label{fig:ranks_v_size_invade}
 \end{figure}
+
+\begin{table}[!hbtp]
+    \centering
+    \scriptsize
+    \input{./tex/change_of_rank_invade.tex}
+    \caption{Ranks of some strategies according to \(x_1\) for different
+    population sizes}
+    \label{tbl:ranks_v_size_invade}
+\end{table}
 
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[height=.9\textheight]{./img/median_rank_vs_population_size_resist.pdf}
-    \caption{resist}
+    \caption{Ranks of all strategies according to \(x_{N-1}\) for different
+    population sizes}
     \label{fig:ranks_v_size_resist}
 \end{figure}
+
+\begin{table}[!hbtp]
+    \centering
+    \scriptsize
+    \input{./tex/change_of_rank_resist.tex}
+    \caption{Ranks of some strategies according to \(x_{N-1}\) for different
+    population sizes}
+    \label{tbl:ranks_v_size_resist}
+\end{table}
 
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[height=.9\textheight]{./img/median_rank_vs_population_size_coexist.pdf}
-    \caption{Coexistance}
+    \caption{Ranks of all strategies according to \(x_{N/2}\) for different
+    population sizes}
     \label{fig:ranks_v_size_coexist}
 \end{figure}
+
+\begin{table}[!hbtp]
+    \centering
+    \scriptsize
+    \input{./tex/change_of_rank_coexist.tex}
+    \caption{Ranks of some strategies according to \(x_{N/2}\) for different
+    population sizes}
+    \label{tbl:ranks_v_size_coexist}
+\end{table}
 
 Tables~\ref{tbl:correlation_coeficients_invade},~\ref{tbl:correlation_coeficients_resist}
 and~\ref{tbl:correlation_coeficients_coexist} show the correlation coefficients
 of the ranks in of strategies in differing population size. This is shown
 graphically in Figure~\ref{fig:correlation_coefficients}. It is immediate to
 note that how well a strategy performs in any Moran process for \(N>2\) has
-little to do with the performance for \(N=2\).
-% TODO This is a really good conclusion I think: it shows that when studying
-% population dynamics it is important to consider larger populations.
+little to do with the performance for \(N=2\). This illustrates why the strong
+performance of zero determinant strategies predicted in \cite{Press2012} does
+not extend to larger populations. This was discussed theoretically in
+\cite{Adami2013} however not observed empirically at the scale presented here.
+
 
 \begin{table}[!hbtp]
     \centering
@@ -977,26 +1018,43 @@ gives the calculated \(x_i(r)\) between two strategies for a given \(N, i\).
     \label{fig:comparison_stochastic}
 \end{figure}
 
-% TODO Discuss effect of size on performance of strategies. Relate to Press and
-% Dyson work: "ZD strategies win matches but not tournaments".
-
-% TODO Discuss some particular interesting cases; strategies that perform well
-% in the overall tournament for v2.8.0 perhaps?
 
 \section{Conclusion}\label{sec:conclusion}
 
-% TODO Write overall conclusion. (Perhaps: weakness of short memory
-% strategies?)
+A detailed empirical analysis of 164 strategies of the IPD within a pairwise
+Moran process has been carried out. All \(\binom{164}{2}=13,366\) possible
+ordered pairs of strategies have been placed in a Moran process with different
+starting values allowing the each strategy to attempt to invade the other.
 
-Further work:
+This is the largest such experiment carried out and has lead to many insights.
 
-\begin{itemize}
-    \item Spatial structure;
-    \item More than two types in the population;
-    \item Modified Moran processes (Fermi selection);
-    \item Mutation;
-\end{itemize}
-% TODO Write this section.
+When studying evolutionary processes it is vital to consider \(N>2\) as the
+special case for \(N=2\) cannot be used to extrapolate performance in bigger
+populations. This was shown both observationally in
+Sections~\ref{sec:strong_invaders} and~\ref{sec:strong_resistors} but also by
+considering the correlation of the ranks in different population sizes in
+Section~\ref{sec:population_size}.
+
+For \(N=2\), memory one strategies perform well, in particular as predicted by
+\cite{Press2012} zero determinant strategies rank highly. However, there are no
+memory one strategies in the top 5 performing strategies for \(N>3\). This is
+due to their lack of sophistication which allows them to recognise and adjust to
+their opponent.
+
+It is felt that these findings are important for the ongoing understanding of
+population dynamics and offer evidence for some of the shortcomings of short
+memory which has started to be recognised by the community~\cite{Hilbe2017}.
+
+All source code for this work has been written in a sustainable manner: it is
+open source, under version control and tested which ensures that all results can
+be reproduced \cite{Prlic2012, Sandve2013, Wilson2014}. The raw data as well as
+the processed data has also been properly archived.
+
+There are various areas for further work to build on this. Firstly, an analysis
+of the effect of noise would offer insights about the stability of the findings.
+It would also be possible to consider three or more types of strategy in the
+population and finally mutation would also offer an interesting dimension to
+explore.
 
 \section*{Acknowledgements}
 
