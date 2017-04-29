@@ -35,9 +35,8 @@
     the study of emergent behaviour. In this paper an extensive numerical
     study of the evolutionary dynamics of this framework are presented.
 
-    Fixation probabilities for Moran processes are obtained for 172
-    different strategies. This is done in both a standard 200 turn
-    interaction and a noisy setting.
+    Fixation probabilities for Moran processes are obtained for 164
+    different strategies.
 
     To the authors knowledge this is the largest
     such study. It allows for insights about the behaviour and
@@ -439,10 +438,11 @@ in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
     \item The top strategy is an extortionate Zero determinant
         strategy~\cite{Press2012} with parameters \(l=1\) and \(s=1/4\).
     \item The Collective strategy has a simple handshake mechanism (a
-        cooperation followed by a defection on the first move). It then either
-        cooperates or defects for all rounds~\cite{Li2009}.  This strategy was
-        specifically designed for Evolutionary processes so it is perhaps also
-        not surprising that it does well here.
+        cooperation followed by a defection on the first move). As long as the
+        opponent plays the same handshake and does not defect in the future it
+        cooperates. Otherwise it defects for all rounds~\cite{Li2009}.  This
+        strategy was specifically designed for Evolutionary processes so it is
+        perhaps also not surprising that it does well here.
     \item The finite state machine stragegy % TODO Perhaps refer to earlier
         % discussion in the methodology section about these FSM strategies
     \item The Feld strategy is the corresponding strategy submitted to Axelrod's
@@ -611,6 +611,14 @@ what strategies are particularly good at resisting an invasion.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
 
+Figures~\ref{fig:fixation_heatmap_resist} show \(x_{N-1}\)
+the players along the vertical axis when matched against the players on the
+horizontal axis. It can be seen that as the population size \(N\) increases the
+probability of resistance increases.
+This information is summarised in Figure~\ref{fig:fixation_boxplot_resist}
+showing the median fixation as well as the neutral fixation for each given
+scenario.
+
 \begin{figure}[!hbtp]
     \centering
     \begin{subfigure}[t]{.3\textwidth}
@@ -664,6 +672,40 @@ what strategies are particularly good at resisting an invasion.
     \label{fig:fixation_boxplot_resist}
 \end{figure}
 
+Table~\ref{tbl:top_five_resist} shows the top five strategies when ranked
+according to \(x_{N-1}\) for \(N\in\{3, 7, 12\}\).
+% TODO Change 12 to 14
+Once again none of the short memory strategies from
+Section~\ref{sec:two_individuals} perform well for high \(N\).
+
+Three strategies have both high \(x_1\) and high \(x_{N-1}\):
+
+\begin{itemize}
+    \item Collective;
+    \item Predator;
+    \item Prober 4
+\end{itemize}
+
+However, Remorseful Prober, Worse and Worse 2 and Tester no longer do as well.
+There are two strategies that are only top performers in \(x_{N-1}\):
+
+\begin{itemize}
+    \item Handshake: a slightly less aggressive version of the Collective
+        strategy \cite{robson1989}. As long as the initial sequence is played
+        then it cooperates. Thus it will do well in a population consisting of
+        many members of itself: just as the Collective strategy does. However it
+        is not aggressive enough to invade other populations.
+    \item Winner 21: a strategy that makes it's decision deterministically based
+        on 1 round of it's own strategy and 2 of the opponents strategy
+        \cite{Mathieu2015}.
+\end{itemize}
+% TODO Revise this if need be for N=14
+
+Interestingly none of these strategies are deterministic: this is explained by
+the need of strategies to have a steady hand when interacting with their own
+kind. In essence: acting stochastically increase the chance of friendly fire.
+
+
 \begin{table}[!hbtp]
     \begin{subfigure}[t]{\textwidth}
         \centering
@@ -681,9 +723,16 @@ what strategies are particularly good at resisting an invasion.
         \caption{\(N=12\)}
     \end{subfigure}
     %TODO Change N=12 to N=14
-    \caption{Properties of top five strategies resistors}
-    \label{tbl:top_five_invade}
+    \caption{Properties of top five resistors}
+    \label{tbl:top_five_resist}
 \end{table}
+
+It is evident through
+Sections~\ref{sec:two_individuals},~\ref{sec:strong_invaders}
+and~\ref{sec:strong_resistors} that performance of strategies not only depends
+on the initial population distribution but also that there seems to be a
+difference depending on whether or not \(N>2\). This will be explored further in
+the next section.
 
 \subsection{The effect of population size}\label{sec:population_size}
 
