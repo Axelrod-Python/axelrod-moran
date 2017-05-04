@@ -22,7 +22,7 @@
 % Title
 \title{An empirical study of fixation for strategies in the
        Iterated Prisoner's Dilemma}
-\author{Marc Harper \and Vincent Knight} % TODO Authors?
+\author{Marc Harper \and Vincent Knight \and Nikoleta E. Glynatsi} % TODO Authors?
 \date{}
 
 
@@ -52,6 +52,15 @@
 \end{abstract}
 
 \section{Introduction}\label{sec:introduction}
+
+The Prisoner's Dilemma (PD)~\cite{Flood1958} is a fundamental two person game 
+in Game theory. Each player can choose between cooperation (C) or defection 
+(D). The decisions are made simultaneously and independently. The payoffs of
+the game are defined by the matrix $\begin{pmatrix} R & S \\ T & P
+\end{pmatrix}$, where $T > R > P> S$ and $2R > T + S$. The PD is a one 
+round game, but is commonly studied in a manner where the prior outcomes 
+matter, the game then extends to its `iterated'\ form, the Iterated Prisoner's 
+Dilemma (IPD). 
 
 Since the formulation of the Moran Process in \cite{Moran1957}, this model of
 evolutionary population dynamics has been used to gain insights about the
@@ -101,17 +110,24 @@ is given in Section~\ref{sec:validation}.
 
 The Moran process was initially introduced in \cite{Moran1957} in a genetic
 setting. It has since been used in a variety of settings including the
-understanding of the spread of cooperative behaviour. However, as stated before,
+understanding of the spread of cooperative behaviour. For instance, cancer 
+cells \cite{West2016}. Emergence of cooperative behaviour, also includes 
+studies in spatial topologies \cite{Nowak2017}. However, as stated before, 
 these mainly consider non sophisticated strategies. Some work has looked at
 evolutionary stability of strategies within the Prisoner's Dilemma \cite{Li2014}
 but this is not done in the more widely used setting of the Moran process but in
 terms of infinite population stability. In \cite{Baek2016} Moran processes are
-looked at in a theoretic framework for a small subset of strategies. In
-\cite{Lee2015} machine learning techniques are used to train a strategy capable
-of resisting invasion and also invade any memory one strategy. Recent work
-\cite{Hilbe2017} has investigated the effect of memory length on strategy
-performance and the emergence of cooperation but this is not done in Moran
-process context and only considers specific cases of memory 2 strategies.
+looked at in a theoretic framework for a small subset of strategies. 
+The subset included memory one strategies, strategies that recall the events 
+of the previous round only. In \cite{Press2012}, a set of memory one 
+strategies, the zero determinant strategies, were introduced. The ZD\@,
+strategies are highly praised and in \cite{Stewart26062012} argued that 
+generous ZD strategies are robust against invading strategies. However,
+in \cite{Lee2015} machine learning techniques are used to train a strategy 
+capable of resisting invasion and also able to invade any memory one strategy. 
+Recent work \cite{Hilbe2017} has investigated the effect of memory length on 
+strategy performance and the emergence of cooperation but this is not done in 
+Moran process context and only considers specific cases of memory 2 strategies.
 % TODO Add discussion about ZD strategies and discuss how this corresponds to
 % case of N = 2. Include pointing at \cite{Adami2013} which discusses how ZD
 % strategies are not fantastic in population dynamics.
@@ -223,7 +239,7 @@ known theoretic results.
 
 \section{Validation}\label{sec:validation}
 
-As described in \cite{Nowak} Consider the payoff matrix:
+As described in \cite{Nowak} consider the payoff matrix:
 
 \begin{equation}\label{equ:payoff_matrix}
     M = \begin{pmatrix}
