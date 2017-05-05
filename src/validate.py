@@ -15,7 +15,7 @@ import itertools
 
 def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
                        cachefile=None):
-    """Run a Moran process and obtain the fixation probabilities"""
+    """Run an approximate Moran process and obtain the fixation probabilities"""
     if cachefile is None:
         cachefile = "../data/outcomes.csv"
 
@@ -47,14 +47,17 @@ def theoretic_vs_simulated(repetitions, utilities, filename,
     Return the theoretic values and the simulated values
     """
     players = (player1, player2)
-    repetitions = repetitions
 
-    player_names = [p.__repr__() for p in players]
-    t = theoretic.fixation(player_names, N, N // 2, utilities=utilities)
-    s = simulated_fixation(players,  N, N // 2, repetitions=repetitions)
+    starting_pop = [1, N // 2, N - 1] if N != 2 else [1]
 
-    with open(filename, "a") as f:
-        f.write(",".join(map(str, [repetitions, N, *player_names, t, s])) + "\n")
+    for i in starting_pop:
+        player_names = [p.__repr__() for p in players]
+        t = theoretic.fixation(player_names, N, i, utilities=utilities)
+        s = simulated_fixation(players,  N, i, repetitions=repetitions)
+
+        with open(filename, "a") as f:
+            f.write(",".join(map(str,
+                           [repetitions, N, i, *player_names, t, s])) + "\n")
 
 
 if __name__ == "__main__":
@@ -62,7 +65,7 @@ if __name__ == "__main__":
     outcomes_file = "../data/outcomes.csv"
     output_file = "../data/fixation_validation.csv"
     with open(output_file, "w") as f:
-        f.write("Repetitions,N,Player 1,Player 2,Theoretic,Simulated\n")
+        f.write("Repetitions,N,i,Player 1,Player 2,Theoretic,Simulated\n")
 
     player_pairs = [(axl.ALLCorALLD(), axl.Cooperator()),
                     (axl.ALLCorALLD(), axl.Defector()),
@@ -83,8 +86,8 @@ if __name__ == "__main__":
                     (axl.Random(), axl.TitForTat()),
                     (axl.WinStayLoseShift(), axl.TitForTat())]
 
-    max_N = 20
-    repetitions = 1000
+    max_N = 8
+    repetitions = 40
 
     df = pd.read_csv(outcomes_file, header=None,
                      names=["Player 1", "Player 2",
@@ -98,7 +101,6 @@ if __name__ == "__main__":
     func = functools.partial(theoretic_vs_simulated, repetitions,
                              utilities, output_file)
     p = multiprocessing.Pool(processes)
-
 
     args = ((N, *players)
             for N, players in itertools.product(range(2, max_N + 1, 2),

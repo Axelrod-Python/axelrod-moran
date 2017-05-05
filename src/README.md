@@ -44,14 +44,14 @@ dictionaries of match outcomes.
 The file `moran.py` is used to generate data files for the Moran process.
 
 ```
-$ python moran.py 4 2 ../data/outcomes.csv ../data/sims_4.csv
+$ python moran.py 4 2 ../data/outcomes.csv ../data/sims_n_over_2/ sims_4.csv
 ```
 
 This will run the Moran process for all pairs of players in a population of size
 4 and 2 players of the first type. A cached outcome of match results if read
 from `../data/outcomes.csv` and the output is `..data/sims_4.csv`.
 
-## Clean the data
+## Preprocessing of the raw data
 
 The file `clean_raw_moran.py` is used to clean all the data generated from
 `moran.py`. Creates one data file `..data/sims_summary.csv` of the form:
@@ -60,5 +60,22 @@ The file `clean_raw_moran.py` is used to clean all the data generated from
 Noise, P1, P2, N, repetitions, P1_fixation, P2_fixation
 ```
 
+The file `write_fitness.py` is used to write the fixation probabilities and
+relative fitness for each strategy pair to `..data/main.csv`:
 
+```
+player, opponent, N, noise, p_1, r_1, p_{N/2}, r_{N/2}, p_{N-1}, r_{N-1}
+```
 
+Where:
+
+- `r_1`: is relative fitness of 1 player with N - 1 opponents
+- `r_{N/2}`: is relative fitness of N/2 players with N/2 opponents
+- `r_{N-1}`: is relative fitness of N-1 players with 1 opponent.
+- `p_1`: is relative fitness of 1 player with N - 1 opponents
+- `p_{N/2}`: is relative fitness of N/2 players with N/2 opponents
+- `p_{N-1}`: is relative fitness of N-1 players with 1 opponent.
+
+**Fitness is automatically re written when running `clean_raw_moran.py`**.
+
+`main.csv` is the main file used for all the analysis.
