@@ -15,9 +15,9 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, shapes, patterns}
 
-% \usepackage[backend=biber, firstinits=false, backref=false, url=true,
-%             isbn=true, style=numeric]{biblatex}
-% \addbibresource{./tex/bibliography.bib}
+\usepackage[backend=biber, firstinits=false, backref=false, url=true,
+            isbn=true, style=numeric]{biblatex}
+\addbibresource{./tex/bibliography.bib}
 
 % Title
 \title{An Empirical Study of Invasion and Resistance for Iterated Prisoner's Dilemma Strategies}
@@ -41,15 +41,15 @@
 
 \section{Introduction}\label{sec:introduction}
 
-The Prisoner's Dilemma (PD)~\cite{Flood1958} is a fundamental two player game 
+The Prisoner's Dilemma (PD)~\cite{Flood1958} is a fundamental two player game
 used to model a large variety of strategic interactions. Each player can choose
 between cooperation (C) or defection (D). The decisions are made simultaneously
 and independently. The payoffs of
 the game are defined by the matrix $\begin{pmatrix} R & S \\ T & P
-\end{pmatrix}$, where $T > R > P > S$ and $2R > T + S$. The PD is a one 
-round game, but is commonly studied in a manner where the prior outcomes 
-matter. This extended form is called the Iterated Prisoner's 
-Dilemma (IPD). 
+\end{pmatrix}$, where $T > R > P > S$ and $2R > T + S$. The PD is a one
+round game, but is commonly studied in a manner where the prior outcomes
+matter. This extended form is called the Iterated Prisoner's
+Dilemma (IPD).
 
 The Moran Process \cite{Moran1957} is a model of
 evolutionary population dynamics that has been used to gain insights about the
@@ -58,18 +58,18 @@ Similarly since the first Iterated Prisoner's Dilemma (IPD) tournament described
 \cite{Axelrod1980a}, the Prisoner's dilemma has been used to understand the
 evolution of cooperative behaviour in complex systems. Several earlier
 works have studied iterated games in the context of the prisoner's dilemma
-\cite{Nowak} \cite{Stewart2012}.
+\cite{Nowak, Stewart2012}.
 
-This manuscript provides a detailed numerical analysis of \textbf{164}
-complex and adaptive strategies for the IPD\@. This is made possible
-by the Axelrod library \cite{axelrodproject}, an effort to provide
-software for reproducible research for the IPD. The library now contains over 150
-parameterized strategies including classics like TitForTat and WinStayLoseShift,
-as well as recent variants such as OmegaTFT, zero determinant and other memory one strategies,
-strategies based on finite state machines, lookup tables, neural networks,
-and other machine learning based strategies, and a collection of novel strategies.
-The library can conduct matches, tournaments and population dynamics
-with variations including noise and spatial structure.
+This manuscript provides a detailed numerical analysis of \textbf{164} complex
+and adaptive strategies for the IPD\@. This is made possible by the Axelrod
+library \cite{axelrodproject}, an effort to provide software for reproducible
+research for the IPD\@. The library now contains over 150 parameterized
+strategies including classics like TitForTat and WinStayLoseShift, as well as
+recent variants such as OmegaTFT, zero determinant and other memory one
+strategies, strategies based on finite state machines, lookup tables, neural
+networks, and other machine learning based strategies, and a collection of novel
+strategies. The library can conduct matches, tournaments and population
+dynamics with variations including noise and spatial structure.
 
 We present fixation probabilities for all pairs of
 strategies in the library, identifying those are effective invaders and
@@ -87,7 +87,8 @@ While our results agree with some of the published literature, we find that:
 
 \begin{enumerate}
  \item Zero determinant strategies are not particularly effective for $N > 2$
- \item Long memory strategies are generally more effective than short memory strategies
+ \item Long memory strategies are generally more effective than short
+       memory strategies
  \item Complex strategies can be effective
 \end{enumerate}
 
@@ -117,22 +118,22 @@ The Moran process was initially introduced in \cite{Moran1957}. It has since bee
 used in a variety of settings including the
 understanding of the spread of cooperative and non-cooperative behaviour
 such as cancer \cite{West2016} and the emergence of cooperative behaviour
-in spatial topologies \cite{Nowak2017}. However these works 
+in spatial topologies \cite{Nowak2017}. However these works
 mainly consider non-sophisticated strategies. Some work has looked at
 evolutionary stability of strategies within the Prisoner's Dilemma \cite{Li2014}
 but this is not done in the more widely-used setting of the Moran process, rather in
 terms of infinite population stability. In \cite{Baek2016} Moran processes are
-studied in a theoretical framework for a small subset of strategies. 
-The subset included memory one strategies, strategies that recall the events 
+studied in a theoretical framework for a small subset of strategies.
+The subset included memory one strategies, strategies that recall the events
 of the previous round only.
 
 Of particular interest are the zero determinant strategies introduced in \cite{Press2012}
-and highly-praised \cite{Stewart26062012} it was argued that 
+and highly-praised \cite{Stewart2012} it was argued that
 generous ZD strategies are robust against invading strategies. However,
 in \cite{Lee2015} a strategy using machine learning techniques was
-capable of resisting invasion and also able to invade any memory one strategy. 
-Recent work \cite{Hilbe2017} has investigated the effect of memory length on 
-strategy performance and the emergence of cooperation but this is not done in 
+capable of resisting invasion and also able to invade any memory one strategy.
+Recent work \cite{Hilbe2017} has investigated the effect of memory length on
+strategy performance and the emergence of cooperation but this is not done in
 Moran process context and only considers specific cases of memory 2 strategies.
 In \cite{Adami2013} it was recognized that many zero determinant strategies do
 not fare well against themselves. This is a disadvantage for the Moran process
@@ -1133,7 +1134,7 @@ A variety of software libraries have been used in this work:
         \cite{mckinney2010data, walt2011numpy}.
 \end{itemize}
 
-% \printbibliography
+\printbibliography
 
 \appendix
 
