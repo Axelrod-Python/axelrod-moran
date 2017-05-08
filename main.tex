@@ -114,35 +114,38 @@ is given in Section~\ref{sec:validation}.
     \label{fig:moran_process}
 \end{figure}
 
-The Moran process was initially introduced in \cite{Moran1957}. It has since been
-used in a variety of settings including the
-understanding of the spread of cooperative and non-cooperative behaviour
-such as cancer \cite{West2016} and the emergence of cooperative behaviour
-in spatial topologies \cite{Nowak2017}. However these works
-mainly consider non-sophisticated strategies. Some work has looked at
-evolutionary stability of strategies within the Prisoner's Dilemma \cite{Li2014}
-but this is not done in the more widely-used setting of the Moran process, rather in
-terms of infinite population stability. In \cite{Baek2016} Moran processes are
-studied in a theoretical framework for a small subset of strategies.
-The subset included memory one strategies, strategies that recall the events
-of the previous round only.
+The Moran process was initially introduced in \cite{Moran1957}. It has since
+been used in a variety of settings including the understanding of the spread of
+cooperative and non-cooperative behaviour such as cancer \cite{West2016} and the
+emergence of cooperative behaviour in spatial topologies \cite{Nowak2017}.
+However these works mainly consider non-sophisticated strategies. Some work has
+looked at evolutionary stability of strategies within the Prisoner's Dilemma
+\cite{Li2014} but this is not done in the more widely-used setting of the Moran
+process, rather in terms of infinite population stability. In \cite{Baek2016}
+Moran processes are studied in a theoretical framework for a small subset of
+strategies.  The subset included memory one strategies, strategies that recall
+the events of the previous round only.
 
-Of particular interest are the zero determinant strategies introduced in \cite{Press2012}
-and highly-praised \cite{Stewart2012} it was argued that
-generous ZD strategies are robust against invading strategies. However,
-in \cite{Lee2015} a strategy using machine learning techniques was
-capable of resisting invasion and also able to invade any memory one strategy.
-Recent work \cite{Hilbe2017} has investigated the effect of memory length on
-strategy performance and the emergence of cooperation but this is not done in
-Moran process context and only considers specific cases of memory 2 strategies.
-In \cite{Adami2013} it was recognized that many zero determinant strategies do
-not fare well against themselves. This is a disadvantage for the Moran process
-where the best strategies cooperate well with other players using the same strategy.
+Of particular interest are the zero determinant strategies introduced in
+\cite{Press2012} and highly-praised \cite{Stewart2012} it was argued that
+generous ZD strategies are robust against invading strategies. However, in
+\cite{Lee2015} a strategy using machine learning techniques was capable of
+resisting invasion and also able to invade any memory one strategy.  Recent work
+\cite{Hilbe2017} has investigated the effect of memory length on strategy
+performance and the emergence of cooperation but this is not done in Moran
+process context and only considers specific cases of memory 2 strategies.  In
+\cite{Adami2013} it was recognized that many zero determinant strategies do not
+fare well against themselves. This is a disadvantage for the Moran process where
+the best strategies cooperate well with other players using the same strategy.
 
-% TODO Add discussion about ZD strategies and discuss how this corresponds to
-% case of N = 2. Include pointing at \cite{Adami2013} which discusses how ZD
-% strategies are not fantastic in population dynamics.
-% Add \cite{Li2014}
+The contribution of this work is a detailed and extensive analysis of absorption
+probabilities for 164 strategies. These strategies and the numerical simulations
+are from~\cite{axelrodproject} which is an open source research library written
+for the study of the IPD\@. The strategies and simulation frameworks are
+automatically tested to an extraordinarily high degree of coverage in accordance
+with best research software practices. The large
+number of strategies are available thanks to the open source nature of the
+project with over 40 contributions made by different programmers and researchers.
 
 Section~\ref{sec:methodology} will explain the methodological approach used,
 Section~\ref{sec:validation} will validate the methodology by comparing
@@ -153,17 +156,6 @@ Section~\ref{sec:conclusion} will conclude and offer future avenues for the work
 presented here.
 
 \section{Methodology}\label{sec:methodology}
-
-\subsection{The Axelrod Library}
-
-The contribution of this work is a detailed and extensive analysis of absorption
-probabilities for 164 strategies. These strategies and the numerical simulations
-are from~\cite{axelrodproject} which is an open source research library written
-for the study of the IPD\@. The strategies and simulation frameworks are
-automatically tested to an extraordinarily high degree of coverage in accordance
-with best research software practices. The large
-number of strategies are available thanks to the open source nature of the
-project with over 40 contributions made by different programmers and researchers.
 
 To carry out this large numerical experiment, 164 strategies are used from
 \cite{axelrodproject}. These include 161 default strategies in the library at
@@ -471,20 +463,21 @@ all fixation probabilities for the strategies considered. This is summarised
 in Table~\ref{tbl:summary_top_2}.
 
 \begin{enumerate}
-    \item The top strategy is an extortionate Zero determinant
-        strategy~\cite{Press2012} with parameters \(l=1\) and \(s=1/4\).
-    \item The Collective strategy has a simple handshake mechanism (a
-        cooperation followed by a defection on the first move). As long as the
-        opponent plays the same handshake and does not defect in the future it
-        cooperates. Otherwise it defects for all rounds~\cite{Li2009}.  This
-        strategy was specifically designed for evolutionary processes.
+    \item The top strategy is the Collective Strategy (CS) which has a simple
+        handshake mechanism (a cooperation followed by a defection on the first
+        move). As long as the opponent plays the same handshake and does not
+        defect in the future it cooperates. Otherwise it defects for all
+        rounds~\cite{Li2009}. This strategy was specifically designed for
+        evolutionary processes.
     \item The finite state machine strategy % TODO Perhaps refer to earlier
         % discussion in the methodology section about these FSM strategies
-    \item The Feld strategy is the corresponding strategy submitted to Axelrod's
-        first tournament~\cite{Axelrod1980a}: it punishes defections but
-        otherwise defects with a random probability that decays over time.
-    \item The final strategy in the top five is another extortionate Zero
-        determinant strategy~\cite{Press2012} with parameters \(l=p\).
+    \item The Defector: it always defects. As it has little potential
+        interaction with itself, recall that \(N=2\) is considered, its
+        aggressiveness is rewarded.
+    \item The Aggravater strategy which plays like Grudger (responding to any
+        defections with unconditional defections throughout) however starts by
+        playing 3 defections.
+    \item Predator, a finite state machine described in~\cite{Ashlock2006}.
 \end{enumerate}
 
 
@@ -502,11 +495,11 @@ in Table~\ref{tbl:summary_top_2}.
     \label{tbl:summary_top_2}
 \end{table}
 
-As will be demonstrated in Section~\ref{sec:population_size} the results for \(N=2\)
-differ from those of larger $N$. Hence our results do not concur with the literature
-which suggests that Zero Determinant strategies should be effective for larger population
-sizes, but we note that those analysis run each match to stationarity, while
-our matches run for a fixed number of rounds.
+As will be demonstrated in Section~\ref{sec:population_size} the results for
+\(N=2\) differ from those of larger $N$. Hence our results do not concur with
+the literature which suggests that Zero Determinant strategies should be
+effective for larger population sizes, but we note that those analysis run each
+match to stationarity, while our matches run for a fixed number of rounds.
 
 In the next sections we pay close attention to
 strategies who are strong invaders/resistors.
@@ -514,71 +507,36 @@ strategies who are strong invaders/resistors.
 \subsection{Strong invaders}\label{sec:strong_invaders}
 
 In this section we focus on the ability of a mutant strategy to invade: the
-probability of 1 individual of a given type successfully becoming fixated in
-a population of \(N - 1\) other individuals, denoted by \(x_i\).
-Figures~\ref{fig:fixation_heatmap_invade} shows these values for
-the players along the vertical axis when matched against the players on the
-horizontal axis. For population size $N$, a neutral mutant has fixation
-probability $x_1 = 1 / N$. This information is summarised in Figure~\ref{fig:fixation_boxplot_invade}
-showing the median fixation as well as the neutral fixation for each given
-scenario.
+probability of 1 individual of a given type successfully becoming fixated in a
+population of \(N - 1\) other individuals, denoted by \(x_i\). The fixation
+probabilities are shown in
+Figures~\ref{fig:boxplot_3_invade},~\ref{fig:boxplot_7_invade}
+and~\ref{fig:boxplot_14_invade} for \(N\in\{3, 7, 14\}\) showing the mean
+fixation as well as the neutral fixation for each given scenario.
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{./img/fixation_heatmap_3_invade.pdf}
-        \caption{\(N=3\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{./img/fixation_heatmap_7_invade.pdf}
-        \caption{\(N=7\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{./img/fixation_heatmap_12_invade.pdf}
-        \caption{\(N=12\)}
-
-    %TODO Replace N=12 with N=14
-    \end{subfigure}%
-    %TODO Remove these? I don't feel they are effective
-
-    \caption{Pairwise fixation probability \(x_{1}\) of all strategies}
-    \label{fig:fixation_heatmap_invade}
+    \includegraphics[height=.8\textheight]{./img/boxplot_3_invade.pdf}
+    \caption{The fixation probability \(x_1\) for \(N=3\)}
+    \label{fig:boxplot_3_invade}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/boxplot_3_invade.pdf}
-        \caption{\(N=3\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/boxplot_7_invade.pdf}
-        \caption{\(N=7\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/boxplot_12_invade.pdf}
-        \caption{\(N=12\)}
-    \end{subfigure}%
-
-    % TODO Replace N=12 with N=14 (when we have more data).
-    \caption{Median probabilities \(x_{1}\) of all strategies as well as the
-    neutral fixation probability}
-    \label{fig:fixation_boxplot_invade}
+    \includegraphics[height=.8\textheight]{./img/boxplot_7_invade.pdf}
+    \caption{The fixation probability \(x_1\) for \(N=7\)}
+    \label{fig:boxplot_7_invade}
 \end{figure}
 
-For \(N\in\{3, 7, 12\}\) the top five strategies are given in
-% TODO Change N=12 to N=14
-Tables~\ref{tbl:top_five_invade}.
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.8\textheight]{./img/boxplot_14_invade.pdf}
+    \caption{The fixation probability \(x_1\) for \(N=14\)}
+    \label{fig:boxplot_14_invade}
+\end{figure}
+
+
+The top five strategies are given in Tables~\ref{tbl:top_five_invade}.
 
 \begin{table}[!hbtp]
     \begin{subfigure}[t]{\textwidth}
@@ -593,37 +551,44 @@ Tables~\ref{tbl:top_five_invade}.
     \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \input{./tex/summary_top_12_invade.tex}
-        \caption{\(N=12\)}
+        \input{./tex/summary_top_14_invade.tex}
+        \caption{\(N=14\)}
     \end{subfigure}
-    %TODO Change N=12 to N=14
     \caption{Properties of top five invaders}
     \label{tbl:top_five_invade}
 \end{table}
 
-It can be seen that apart from the Collective Strategy, none of the strategies
-of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 12\}\). The new
-% TODO Change N=12 to N=14
+It can be seen that apart from CS, none of the strategies
+of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 14\}\). The new
 high performing strategies are:
 
 \begin{itemize}
-    \item Predator, a finite state machine described in~\cite{Ashlock2006}.
     \item Prober 4, complex strategy with an initial 20 move sequence of
         cooperations and defections~\cite{prison}. This initial sequence serves
         as approximate handshake.
-    \item Remorseful Prober, a strategy that will not immediately retaliate when
-        it recognises that the opponent is retaliating to a random
-        defection~\cite{Li2011}.
-    \item  Worse and Worse 2: plays Tit For Tat for 20 moves and then defects
-        with with growing probability~\cite{prison}.
-    \item Tester: a strategy submitted to the second of Axelrod's tournaments
-        \cite{Axelrod1980b}.
-        % TODO Check if this list is still correct for N=14
+    \item Grudger (which only performs well for \(N=3\)), starts by cooperating
+        but will defect if at any point the opponent has defected.
+    \item MEM2, an infinite memory strategy that switches between TfT, Tf2T, and
+        Defector~\cite{Li2014}.
+    \item Fool Me Once, forgives one defection but defects forever once a second
+        defection takes place.
+    \item  PSO Gambler and Evolved Lookerup 2 2 2: are strategies that make use
+        of a lookup table mapping the first 2 moves of the opponent as well as
+        the last 2 moves of both players to an action. The PSO gambler is a
+        stochastic version which maps those states to probabilities of
+        cooperating. The lookerup was described in \cite{Knight2016}.
+	\item The evolved ANN strategies are neural networks that map a number of
+		attributes (first move, number of cooperations, last move etc\dots) to
+		an action. Both of these have been trained using an evolutionary
+		algorithm and the ANN 5 was trained to perform well in a noisy
+		tournament.
+	\item The Evolved FSM 16, is a 16 state finite machine strategy that has
+		been trained using an evolutionary algorithm.
 \end{itemize}
 
 As well as noting that the memory length and complexity of these strategies are
 much greater than one, it is interesting to note that none of them are akin to
-memory one strategies. Most are not stochastic.
+memory one strategies. Only one is stochastic.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
 
@@ -632,100 +597,37 @@ resistant to invasion by other strategies by examining the distribution
 of $x_{N-1}$ for each strategy. Note that this is equivalent to
 looking at $x_1$ for all opponents.
 
-Figures~\ref{fig:fixation_heatmap_resist} show \(x_{N-1}\)
-the players along the vertical axis when matched against the players on the
-horizontal axis. This information is summarised in Figure~\ref{fig:fixation_boxplot_resist}
-showing the median fixation as well as the neutral fixation for each given
-scenario.
+The fixation
+probabilities are shown in
+Figures~\ref{fig:boxplot_3_resist},~\ref{fig:boxplot_7_invade}
+and~\ref{fig:boxplot_14_resist} for \(N\in\{3, 7, 14\}\) showing the mean
+fixation as well as the neutral fixation for each given scenario.
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{./img/fixation_heatmap_3_resist.pdf}
-        \caption{\(N=3\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{./img/fixation_heatmap_7_resist.pdf}
-        \caption{\(N=7\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=.8\textwidth]{./img/fixation_heatmap_12_resist.pdf}
-        \caption{\(N=12\)}
-
-    %TODO Replace N=12 with N=14
-    \end{subfigure}%
-    %TODO Remove these? I don't feel they are effective
-
-    \caption{Pairwise fixation probability \(x_{N-1}\) of all strategies}
-    \label{fig:fixation_heatmap_resist}
+    \includegraphics[height=.8\textheight]{./img/boxplot_3_resist.pdf}
+    \caption{The fixation probability \(x_{N-1}\) for \(N=3\)}
+    \label{fig:boxplot_3_resist}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/boxplot_3_resist.pdf}
-        \caption{\(N=2\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/boxplot_7_resist.pdf}
-        \caption{\(N=7\)}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/boxplot_12_resist.pdf}
-        \caption{\(N=12\)}
-    \end{subfigure}%
+    \includegraphics[height=.8\textheight]{./img/boxplot_7_resist.pdf}
+    \caption{The fixation probability \(x_{N-1}\) for \(N=7\)}
+    \label{fig:boxplot_6_resist}
+\end{figure}
 
-    % TODO Replace N=12 with N=14 (when we have more data).
-    \caption{Median probabilities \(x_{N-1}\) of all strategies as well as the
-    neutral fixation probability}
-    \label{fig:fixation_boxplot_resist}
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.8\textheight]{./img/boxplot_14_resist.pdf}
+    \caption{The fixation probability \(x_{N-1}\) for \(N=14\)}
+    \label{fig:boxplot_14_resist}
 \end{figure}
 
 Table~\ref{tbl:top_five_resist} shows the top five strategies when ranked
-according to \(x_{N-1}\) for \(N\in\{3, 7, 12\}\).
-% TODO Change 12 to 14
+according to \(x_{N-1}\) for \(N\in\{3, 7, 14\}\).
 Once again none of the short memory strategies from
 Section~\ref{sec:two_individuals} perform well for high \(N\).
-
-Three strategies have both high \(x_1\) and high \(x_{N-1}\):
-
-\begin{itemize}
-    \item Collective
-    \item Predator
-    \item Prober 4
-\end{itemize}
-
-However, Remorseful Prober, Worse and Worse 2 and Tester no longer do as well.
-There are two strategies that are only top performers in \(x_{N-1}\):
-
-\begin{itemize}
-    \item Handshake: a slightly less aggressive version of the Collective
-        strategy \cite{robson1989}. As long as the initial sequence is played
-        then it cooperates. Thus it will do well in a population consisting of
-        many members of itself: just as the Collective strategy does. However it
-        is not aggressive enough to invade other populations.
-    \item Winner 21: a strategy that makes its decision deterministically based
-        on 1 round of its own strategy and 2 of the opponent's strategy
-        \cite{Mathieu2015}.
-\end{itemize}
-% TODO Revise this if need be for N=14
-
-Interestingly none of these strategies are stochastic: this is explained by
-the need of strategies to have a steady hand when interacting with their own
-kind. In essence: acting stochastically increase the chance of friendly fire.
-However we note that it is possible to design a strategy with a ``stochastic
-handshake'' \cite{Lee2015}.
-
 
 \begin{table}[!hbtp]
     \begin{subfigure}[t]{\textwidth}
@@ -740,13 +642,32 @@ handshake'' \cite{Lee2015}.
     \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
         \centering
-        \input{./tex/summary_top_12_resist.tex}
-        \caption{\(N=12\)}
+        \input{./tex/summary_top_14_resist.tex}
+        \caption{\(N=14\)}
     \end{subfigure}
-    %TODO Change N=12 to N=14
     \caption{Properties of top five resistors}
     \label{tbl:top_five_resist}
 \end{table}
+
+There are 3 strategies that are only top performers in \(x_{N-1}\):
+
+\begin{itemize}
+    \item Handshake: a slightly less aggressive version of the Collective
+        strategy \cite{robson1989}. As long as the initial sequence is played
+        then it cooperates. Thus it will do well in a population consisting of
+        many members of itself: just as the Collective strategy does. However it
+        is not aggressive enough to invade other populations.
+    \item Winner 21: a strategy that makes its decision deterministically based
+        on 1 round of its own strategy and 2 of the opponent's strategy
+        \cite{Mathieu2015}.
+	\item Predator: a finite state machine described in~\cite{Ashlock2006}
+\end{itemize}
+
+Interestingly none of these strategies are stochastic: this is explained by
+the need of strategies to have a steady hand when interacting with their own
+kind. In essence: acting stochastically increase the chance of friendly fire.
+However we note that it is possible to design a strategy with a ``stochastic
+handshake'' \cite{Lee2015}.
 
 It is evident through
 Sections~\ref{sec:two_individuals},~\ref{sec:strong_invaders}
@@ -766,8 +687,7 @@ discussed in previous sections.
 
 Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
 and~\ref{tbl:ranks_v_size_coexist} show the same information for the strategies
-that rated high for \(N=2\) and \(N=12\).
-% TODO Change to N=14?
+that rated high for \(N=2\) and \(N=14\).
 
 \begin{figure}[!hbtp]
     \centering
@@ -822,14 +742,13 @@ that rated high for \(N=2\) and \(N=12\).
 
 Tables~\ref{tbl:correlation_coeficients_invade},~\ref{tbl:correlation_coeficients_resist}
 and~\ref{tbl:correlation_coeficients_coexist} show the correlation coefficients
-of the ranks in of strategies in differing population size. This is shown
+of the ranks of strategies in differing population size. This is shown
 graphically in Figure~\ref{fig:correlation_coefficients}. It is immediate to
 note that how well a strategy performs in any Moran process for \(N>2\) has
 little to do with the performance for \(N=2\). This illustrates why the strong
 performance of zero determinant strategies predicted in \cite{Press2012} does
 not extend to larger populations. This was discussed theoretically in
 \cite{Adami2013} however not observed empirically at the scale presented here.
-
 
 \begin{table}[!hbtp]
     \centering
@@ -1056,11 +975,14 @@ Sections~\ref{sec:strong_invaders} and~\ref{sec:strong_resistors} but also by
 considering the correlation of the ranks in different population sizes in
 Section~\ref{sec:population_size}.
 
-For \(N=2\), memory one strategies perform well, in particular as predicted by
-\cite{Press2012} zero determinant strategies rank highly. However, there are no
-memory one strategies in the top 5 performing strategies for \(N>3\). This is
-due to their lack of sophistication which allows them to recognise and adjust to
-their opponent.
+Memory one strategies do not perform well, as predicted by \cite{Press2012}.
+However, there are no memory one strategies in the top 5 performing strategies
+for \(N>3\). This is due to their lack of sophistication which allows them to
+recognise and adjust to their opponent. Some very sophisticated strategies
+proves to be high performers for invasion: these are infinite memory strategies
+which have been trained using a number of reinforcement learning algorithms.
+Interestingly they have been trained to perform well in tournaments and not
+Moran processes which highlights the potentially for improvement.
 
 It is felt that these findings are important for the ongoing understanding of
 population dynamics and offer evidence for some of the shortcomings of short
