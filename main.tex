@@ -273,9 +273,9 @@ The transitions within the birth death process that underpins the Moran process
 are then given by:
 
 \begin{align}
-	p_{i, i+1}&= \frac{if_i}{if_i+(N-i)g_i}\frac{N-i}{N}\label{equ:p_up}\\
-	p_{i, i-1}&= \frac{(N-i)g_i}{if_i+(N-i)g_i}\frac{i}{N}\label{equ:p_down}\\
-	p_{ii} &= 1 - p_{i, i+1} - p_{i, i-1}\label{equ:p_stay}
+    p_{i, i+1}&= \frac{if_i}{if_i+(N-i)g_i}\frac{N-i}{N}\label{equ:p_up}\\
+    p_{i, i-1}&= \frac{(N-i)g_i}{if_i+(N-i)g_i}\frac{i}{N}\label{equ:p_down}\\
+    p_{ii} &= 1 - p_{i, i+1} - p_{i, i-1}\label{equ:p_stay}
 \end{align}
 
 Using this it is a known result that the fixation probability of the first
@@ -437,8 +437,6 @@ detailed analysis of the 164 strategies considered, using direct Moran processes
 will be shown in the next Section.
 
 
-
-
 \section{Empirical results}\label{sec:empirical_results}
 
 % TODO Archive all data (Zenodo) and include details/reference here.
@@ -468,10 +466,9 @@ that scores higher than the other more often will fixate more often.
 
 Overall the main fixation probabilities of interest are \(x_1\) and \(x_{N-1}\), these
 reflect a strategy's ability to invade or resist invasion; for \(N=2\) these two cases
-coincide. Figure~\ref{fig:fixation_heatmap_2} shows
-all pairwise fixation probabilities for strategies on the vertical column when
-being matched against probabilities on the horizontal column. This is summarised
-in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
+coincide. Figure~\ref{fig:boxplot_2} shows
+all fixation probabilities for the strategies considered. This is summarised
+in Table~\ref{tbl:summary_top_2}.
 
 \begin{enumerate}
     \item The top strategy is an extortionate Zero determinant
@@ -492,20 +489,10 @@ in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
 
 
 \begin{figure}[!hbtp]
-    \begin{subfigure}[t]{.4\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./img/fixation_heatmap_2_invade.pdf}
-        % TODO Remove this: I don't feel it is effective.
-        \caption{The pairwise fixation probabilities for \(N=2\)}
-        \label{fig:fixation_heatmap_2}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.6\textwidth}
-        \centering
-        \includegraphics[height=.8\textheight]{./img/boxplot_2_invade.pdf}
-        \caption{The median fixation probabilities for \(N=2\)}
-        \label{fig:boxplot_2}
-    \end{subfigure}
+    \centering
+    \includegraphics[height=.8\textheight]{./img/boxplot_2_invade.pdf}
+    \caption{The fixation probabilities for \(N=2\)}
+    \label{fig:boxplot_2}
 \end{figure}
 
 \begin{table}[!hbtp]
@@ -522,17 +509,7 @@ sizes, but we note that those analysis run each match to stationarity, while
 our matches run for a fixed number of rounds.
 
 In the next sections we pay close attention to
-strategies who are strong invaders/resistors and shown diagrammatically in
-Figure~\ref{fig:invasion_resistance}.
-
-\begin{figure}[!hbtp]
-    \centering
-    \input{./tex/invasion_resistance.tex}
-    \caption{A single individual will successfully invade the population with
-    probability \(x_1\). The group of Individuals will successfully resist with
-    probability \(x_{N-1}\)}
-    \label{fig:invasion_resistance}
-\end{figure}
+strategies who are strong invaders/resistors.
 
 \subsection{Strong invaders}\label{sec:strong_invaders}
 
@@ -880,22 +857,22 @@ not extend to larger populations. This was discussed theoretically in
 \end{table}
 
 \begin{figure}[!htbp]
-	\centering
-	\begin{subfigure}[t]{.3\textwidth}
-		\centering
-		\includegraphics[width=.9\textwidth]{./img/correlation_heatmap_invade.pdf}
-		\caption{Rank based on \(x_1\)}
+    \centering
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{./img/correlation_heatmap_invade.pdf}
+        \caption{Rank based on \(x_1\)}
     \end{subfigure}
     ~
-	\begin{subfigure}[t]{.3\textwidth}
-		\centering
-		\includegraphics[width=.9\textwidth]{./img/correlation_heatmap_resist.pdf}
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{./img/correlation_heatmap_resist.pdf}
         \caption{Rank based on \(x_{N - 1}\)}
     \end{subfigure}
     ~
-	\begin{subfigure}[t]{.3\textwidth}
-		\centering
-		\includegraphics[width=.9\textwidth]{./img/correlation_heatmap_coexist.pdf}
+    \begin{subfigure}[t]{.3\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{./img/correlation_heatmap_coexist.pdf}
         \caption{Rank based on \(x_{N/2}\)}
     \end{subfigure}
     \caption{Heatmap of correlation coefficients of rankings by population size}
@@ -958,13 +935,13 @@ gives the calculated \(x_i(r)\) between two strategies for a given \(N, i\).
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Alternator_v_Tit_For_Tat_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Alternator_v_TfT_fitness.pdf}
         \caption{Alternator and Tit For Tat}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Cooperator_v_Tit_For_Tat_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Cooperator_v_TfT_fitness.pdf}
         \caption{Cooperator and Tit For Tat}
     \end{subfigure}%
     ~
@@ -976,25 +953,25 @@ gives the calculated \(x_i(r)\) between two strategies for a given \(N, i\).
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Defector_v_Tit_For_Tat_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Defector_v_TfT_fitness.pdf}
         \caption{Defector and Tit For Tat}
     \end{subfigure}%
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Win-Stay_Lose-Shift_v_Tit_For_Tat_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/WSLS_v_TfT_fitness.pdf}
         \caption{Win Stay Lose Shift and Tit For Tat}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Alternator_v_Win-Stay_Lose-Shift_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Alternator_v_TfT_fitness.pdf}
         \caption{Alternator and Win Stay Lose Shift}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Defector_v_Win-Stay_Lose-Shift_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Defector_v_WSLS_fitness.pdf}
         \caption{Defector and Win Stay Lose Shift}
     \end{subfigure}%
     \caption{Estimated relative fitness
@@ -1018,7 +995,7 @@ gives the calculated \(x_i(r)\) between two strategies for a given \(N, i\).
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Random_v_Tit_For_Tat_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Random_v_TfT_fitness.pdf}
         \caption{Random and Tit For Tat}
     \end{subfigure}%
 
@@ -1054,7 +1031,7 @@ gives the calculated \(x_i(r)\) between two strategies for a given \(N, i\).
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/ALLCorALLD_v_Tit_For_Tat_fitness.pdf}
+        \includegraphics[width=.8\textwidth]{./img/ALLCorALLD_v_TfT_fitness.pdf}
         \caption{All C or all D and Tit For Tat}
     \end{subfigure}%
     \caption{Estimated relative fitness
