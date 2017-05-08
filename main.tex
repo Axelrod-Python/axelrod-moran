@@ -144,6 +144,16 @@ where the best strategies cooperate well with other players using the same strat
 % strategies are not fantastic in population dynamics.
 % Add \cite{Li2014}
 
+Section~\ref{sec:methodology} will explain the methodological approach used,
+Section~\ref{sec:validation} will validate the methodology by comparing
+simulated results to analytical results in some cases. The main results of this
+manuscript are presented in Section~\ref{sec:empirical_results} which will
+present a detailed analysis of all the data generated. Finally,
+Section~\ref{sec:conclusion} will conclude and offer future avenues for the work
+presented here.
+
+\section{Methodology}\label{sec:methodology}
+
 \subsection{The Axelrod Library}
 
 The contribution of this work is a detailed and extensive analysis of absorption
@@ -154,15 +164,6 @@ automatically tested to an extraordinarily high degree of coverage in accordance
 with best research software practices. The large
 number of strategies are available thanks to the open source nature of the
 project with over 40 contributions made by different programmers and researchers.
-
-Section~\ref{sec:methodology} will explain the methodological approach used,
-Section~\ref{sec:validation} will validate the methodology by comparing
-simulated results to analytical results in some cases. The main results of this manuscript are
-presented in Section~\ref{sec:empirical_results} which will present a detailed
-analysis of all the data generated. Finally, Section~\ref{sec:conclusion} will
-conclude and offer future avenues for the work presented here.
-
-\section{Methodology}\label{sec:methodology}
 
 To carry out this large numerical experiment, 164 strategies are used from
 \cite{axelrodproject}. These include 161 default strategies in the library at
@@ -208,11 +209,10 @@ calculations to a high degree of accuracy in specific cases.
 
 Figure~\ref{fig:number_of_stochastic_match_outcomes} shows the distribution of
 the number of outcomes between all strategy pairs.
-Tables~\ref{tbl:number_of_stochastic_match_outcomes} shows that 95\% of the
-stochastic matches have less than 788 unique outcomes whilst the maximum number
-is 971. This ensures that using a set of cached results from 1000 precomputed
-matches is sufficient for the analysis taking place here.
 % TODO is this true? the distribution also matters, not just the number of outcomes
+% TODO Good point, we could (if we wanted to) go down the line of checking
+% specific distributions etc or perhaps we just remove and point at the good
+% fits in the Validation section as a justification.
 
 
 \begin{figure}[!hbtp]
@@ -232,25 +232,6 @@ matches is sufficient for the analysis taking place here.
     cached results}
     \label{fig:number_of_stochastic_match_outcomes}
 \end{figure}
-
-
-\begin{table}[!hbtp]
-    \centering
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \input{./tex/number_of_match_outcomes.tex}
-        \caption{All matches}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \input{./tex/number_of_stochastic_match_outcomes.tex}
-        \caption{Stochastic matches}
-    \end{subfigure}%
-    \caption{Summary statistics for the number of different match outcomes used
-    as the cached results}
-    \label{tbl:number_of_stochastic_match_outcomes}
-\end{table}
 
 Section~\ref{sec:validation} will validate the methodology used here against
 known theoretic results.
