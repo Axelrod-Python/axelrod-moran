@@ -15,13 +15,12 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, shapes, patterns}
 
-\usepackage[backend=biber, firstinits=false, backref=false, url=true,
-            isbn=true, style=numeric]{biblatex}
-\addbibresource{./tex/bibliography.bib}
+% \usepackage[backend=biber, firstinits=false, backref=false, url=true,
+%             isbn=true, style=numeric]{biblatex}
+% \addbibresource{./tex/bibliography.bib}
 
 % Title
-\title{An empirical study of fixation for strategies in the
-       Iterated Prisoner's Dilemma}
+\title{An Empirical Study of Invasion and Resistance for Iterated Prisoner's Dilemma Strategies}
 \author{Marc Harper \and Vincent Knight \and Nikoleta E. Glynatsi} % TODO Authors?
 \date{}
 
@@ -33,71 +32,77 @@
 \begin{abstract}
     The Iterated Prisoner's Dilemma is a well established framework for
     the study of emergent behaviour. In this paper an extensive numerical
-    study of the evolutionary dynamics of this framework are presented.
-
-    Fixation probabilities for Moran processes are obtained for 164
-    different strategies.
-
-    To the authors knowledge this is the largest
-    such study. It allows for insights about the behaviour and
-    performance of strategies with regard to their survival in an
-    evolutionary setting.
-
-    Evidence is presented that shows that classical analysis of evolutionary
-    dynamics with 2 individuals is misleading. Furthermore, it is shown that
-    players with long memories and sophisticated behaviours outperform many
-    strategies that perform well in a 2 individual setting (such as zero
-    determinant strategies).
-
+    study of the evolutionary dynamics of this framework are presented. Fixation
+    probabilities for Moran processes are obtained for 164
+    different strategies. We find that players with long memories and
+    sophisticated behaviours outperform many strategies that perform well
+    in a two player setting.
 \end{abstract}
 
 \section{Introduction}\label{sec:introduction}
 
-The Prisoner's Dilemma (PD)~\cite{Flood1958} is a fundamental two person game 
-in Game theory. Each player can choose between cooperation (C) or defection 
-(D). The decisions are made simultaneously and independently. The payoffs of
+The Prisoner's Dilemma (PD)~\cite{Flood1958} is a fundamental two player game 
+used to model a large variety of strategic interactions. Each player can choose
+between cooperation (C) or defection (D). The decisions are made simultaneously
+and independently. The payoffs of
 the game are defined by the matrix $\begin{pmatrix} R & S \\ T & P
-\end{pmatrix}$, where $T > R > P> S$ and $2R > T + S$. The PD is a one 
+\end{pmatrix}$, where $T > R > P > S$ and $2R > T + S$. The PD is a one 
 round game, but is commonly studied in a manner where the prior outcomes 
-matter, the game then extends to its `iterated'\ form, the Iterated Prisoner's 
+matter. This extended form is called the Iterated Prisoner's 
 Dilemma (IPD). 
 
-Since the formulation of the Moran Process in \cite{Moran1957}, this model of
-evolutionary population dynamics has been used to gain insights about the
-evolutionary stability of strategies in a number of settings. Similarly since
-the first Iterated Prisoner's Dilemma (IPD) tournament described in
-\cite{Axelrod1980a} the Prisoner's dilemma has been used to understand the
-evolution of cooperative behaviour in complex systems.
+The Moran Process \cite{Moran1957} is a model of
+evolutionary population dynamics that has been used to gain insights about the
+evolutionary stability and fixation of strategies in a number of settings.
+Similarly since the first Iterated Prisoner's Dilemma (IPD) tournament described in
+\cite{Axelrod1980a}, the Prisoner's dilemma has been used to understand the
+evolution of cooperative behaviour in complex systems. Several earlier
+works have studied iterated games in the context of the prisoner's dilemma
+\cite{Nowak} \cite{Stewart2012}.
 
-The analytical models of a Moran process are based on the relative fitness
-between two strategies and take this to be a fixed value \(r\) \cite{Nowak}.
-This is a valid model for simple strategies of the Prisoner's Dilemma such as to
-\textit{always cooperate} or \textit{always defect}. This manuscript provides a
-detailed numerical analysis of \textbf{164} complex and adaptive strategies for
-the IPD\@. In this case the relative fitness of a strategy is dependent on the
-population distribution.
+This manuscript provides a detailed numerical analysis of \textbf{164}
+complex and adaptive strategies for the IPD\@. This is made possible
+by the Axelrod library \cite{axelrodproject}, an effort to provide
+software for reproducible research for the IPD. The library now contains over 150
+parameterized strategies including classics like TitForTat and WinStayLoseShift,
+as well as recent variants such as OmegaTFT, zero determinant and other memory one strategies,
+strategies based on finite state machines, lookup tables, neural networks,
+and other machine learning based strategies, and a collection of novel strategies.
+The library can conduct matches, tournaments and population dynamics
+with variations including noise and spatial structure.
 
-Further deviations from the analytical model occur when interactions between
-players are subject to uncertainty. This is referred to as noise and has been
-considered in the IPD setting in \cite{Bendor1993, Nowak1993, Wu1995}.
+We present fixation probabilities for all pairs of
+strategies in the library, identifying those are effective invaders and
+those resistant to invasion, for population sizes $N=2$ to $N=14$.
 
-This work provides answers to the following questions:
-
+In particular we address the following questions:
 \begin{enumerate}
     \item What strategies are good invaders?
     \item What strategies are good at resisting invasion?
     \item How does the population size affect these findings?
 \end{enumerate}
 
+
+While our results agree with some of the published literature, we find that:
+
+\begin{enumerate}
+ \item Zero determinant strategies are not particularly effective for $N > 2$
+ \item Long memory strategies are generally more effective than short memory strategies
+ \item Complex strategies can be effective
+\end{enumerate}
+
+
+\subsection{The Moran Process}
+
 Figure~\ref{fig:moran_process} shows a diagrammatic representation of the Moran
-process. This process is a stochastic birth death process on a finite population
+process, a stochastic birth death process on a finite population
 in which the population size stays constant over time. Individuals are
-\textbf{selected} according to a given fitness landscape. Once selected, a given
+\textbf{selected} according to a given fitness landscape. Once selected, the
 individual is reproduced and similarly another individual is chosen to be
 removed from the population. In some settings mutation is also considered but
 without mutation (the case considered in this work) this process will arrive at
-an absorbing state where the population is entirely made up of a single
-individual. The probability with which a given strategy is the survivor is
+an absorbing state where the population is entirely made up of players of
+one strategy. The probability with which a given strategy is the survivor is
 called the fixation probability. A more detailed analytic description of this
 is given in Section~\ref{sec:validation}.
 
@@ -108,53 +113,57 @@ is given in Section~\ref{sec:validation}.
     \label{fig:moran_process}
 \end{figure}
 
-The Moran process was initially introduced in \cite{Moran1957} in a genetic
-setting. It has since been used in a variety of settings including the
-understanding of the spread of cooperative behaviour. For instance, cancer 
-cells \cite{West2016}. Emergence of cooperative behaviour, also includes 
-studies in spatial topologies \cite{Nowak2017}. However, as stated before, 
-these mainly consider non sophisticated strategies. Some work has looked at
+The Moran process was initially introduced in \cite{Moran1957}. It has since been
+used in a variety of settings including the
+understanding of the spread of cooperative and non-cooperative behaviour
+such as cancer \cite{West2016} and the emergence of cooperative behaviour
+in spatial topologies \cite{Nowak2017}. However these works 
+mainly consider non-sophisticated strategies. Some work has looked at
 evolutionary stability of strategies within the Prisoner's Dilemma \cite{Li2014}
-but this is not done in the more widely used setting of the Moran process but in
+but this is not done in the more widely-used setting of the Moran process, rather in
 terms of infinite population stability. In \cite{Baek2016} Moran processes are
-looked at in a theoretic framework for a small subset of strategies. 
+studied in a theoretical framework for a small subset of strategies. 
 The subset included memory one strategies, strategies that recall the events 
-of the previous round only. In \cite{Press2012}, a set of memory one 
-strategies, the zero determinant strategies, were introduced. The ZD\@,
-strategies are highly praised and in \cite{Stewart26062012} argued that 
+of the previous round only.
+
+Of particular interest are the zero determinant strategies introduced in \cite{Press2012}
+and highly-praised \cite{Stewart26062012} it was argued that 
 generous ZD strategies are robust against invading strategies. However,
-in \cite{Lee2015} machine learning techniques are used to train a strategy 
+in \cite{Lee2015} a strategy using machine learning techniques was
 capable of resisting invasion and also able to invade any memory one strategy. 
 Recent work \cite{Hilbe2017} has investigated the effect of memory length on 
 strategy performance and the emergence of cooperation but this is not done in 
 Moran process context and only considers specific cases of memory 2 strategies.
+In \cite{Adami2013} it was recognized that many zero determinant strategies do
+not fare well against themselves. This is a disadvantage for the Moran process
+where the best strategies cooperate well with other players using the same strategy.
+
 % TODO Add discussion about ZD strategies and discuss how this corresponds to
 % case of N = 2. Include pointing at \cite{Adami2013} which discusses how ZD
 % strategies are not fantastic in population dynamics.
 % Add \cite{Li2014}
 
+\subsection{The Axelrod Library}
+
 The contribution of this work is a detailed and extensive analysis of absorption
 probabilities for 164 strategies. These strategies and the numerical simulations
 are from~\cite{axelrodproject} which is an open source research library written
 for the study of the IPD\@. The strategies and simulation frameworks are
-automatically tested in accordance to best research software practice. The large
+automatically tested to an extraordinarily high degree of coverage in accordance
+with best research software practices. The large
 number of strategies are available thanks to the open source nature of the
-project with over 40 contributions made by different programmers. Thus by
-considering Moran processes with population size greater than 2 we are taking in
-to account the effect of complex population dynamics. By considering
-sophisticated strategies we are taking in to effect the reputation of a strategy
-during each interaction.
+project with over 40 contributions made by different programmers and researchers.
 
 Section~\ref{sec:methodology} will explain the methodological approach used,
 Section~\ref{sec:validation} will validate the methodology by comparing
-simulated results to analytical results. The main results of this manuscript are
+simulated results to analytical results in some cases. The main results of this manuscript are
 presented in Section~\ref{sec:empirical_results} which will present a detailed
 analysis of all the data generated. Finally, Section~\ref{sec:conclusion} will
 conclude and offer future avenues for the work presented here.
 
 \section{Methodology}\label{sec:methodology}
 
-To carry out this large numerical experiment 164 strategies are used from
+To carry out this large numerical experiment, 164 strategies are used from
 \cite{axelrodproject}. These include 161 default strategies in the library at
 the time (excluding strategies classified as having a long run time and those
 that make use of the length of the game) as well as
@@ -162,12 +171,18 @@ the following 3 finite state machine machine strategies \cite{Ashlock2006}:
 
 % TODO Include details about the 3 extra FSM strategies.
 % Possibly draw pictorial representations?
+% Remove the FSM strategies if they don't perform well.
 
 Appendix~\ref{app:list_of_players} shows all the players in question. More
 information about each player can be obtained in the documentation for
 \cite{axelrodproject}. There are \input{./tex/num_stochastic.tex}stochastic and
 \input{./tex/num_deterministic.tex}deterministic strategies. Their memory
-depth is shown in Table~\ref{tbl:memory_depth_count}.
+depth, defined by the number of rounds of history used by the strategy each round,
+is shown in Table~\ref{tbl:memory_depth_count}. The memory depth is infinite if
+the strategy uses the entire history of play (whatever its length). For example,
+a strategy that utilizes a handshaking mechanism where the opponents actions
+on the first few rounds of play determines the strategies subsequent behavior
+would have infinite memory depth.
 
 \begin{table}[!hbtp]
     \centering
@@ -176,18 +191,18 @@ depth is shown in Table~\ref{tbl:memory_depth_count}.
         \label{tbl:memory_depth_count}
 \end{table}
 
-All strategies are paired and these pairs are used in 1000 repetitions of a
-Moran process assuming a starting population distribution of \(1, N-1 \),
-\((N/2, N/2)\) and \(N-1 , 1\). This is repeated for \(N\) between 2 and 14. The
+Each strategy pair is run for 1000 runs of the Moran process to fixation
+with starting population distributions of $(1, N-1)$,
+$(N/2, N/2)$ and $(N-1 , 1)$, for \(N\) from 2 through 14. The
 % TODO Change 14 to 12 if we do not use the 14 case.
-fixation probability is then estimated for each value of \(N\).
+fixation probability is then empirically computed for each combination of
+starting distribution and value of \(N\).
 
-Note that due to the high computational cost of these experiments, for any given
-interaction between two players within the Moran process the outcome is sampled
-from a pre computed cache of 1000 match outcomes. This is carried out using
-software written for the purpose of this work. This has been
-implemented in~\cite{axelrodproject} ensuring that it can be used to either
-reproduce the work or carry out further work.
+Our software can carry out exact simulations of the Moran process. Since some of
+the strategies have a high computational cost or are stochastic, we sample
+from a large number of match outcomes for the pairs of players for use in computing
+fitnesses in the Moran process. This approach was verified to agree with unsampled
+calculations to a high degree of accuracy in specific cases.
 % TODO Perhaps write some pseudo code for this?
 
 Figure~\ref{fig:number_of_stochastic_match_outcomes} shows the distribution of
@@ -196,6 +211,8 @@ Tables~\ref{tbl:number_of_stochastic_match_outcomes} shows that 95\% of the
 stochastic matches have less than 788 unique outcomes whilst the maximum number
 is 971. This ensures that using a set of cached results from 1000 precomputed
 matches is sufficient for the analysis taking place here.
+% TODO is this true? the distribution also matters, not just the number of outcomes
+
 
 \begin{figure}[!hbtp]
     \centering
@@ -294,9 +311,19 @@ where:
 \gamma_j = \frac{p_{j, j-1}}{p_{j, j+1}}
 \]
 
-Using this comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
+A neutral strategy will have fixation probability $x_i = i/N$. Alternatively,
+we can frame the outcomes in terms of relative fitness. For a strategy
+of relative fitness $r$ the fixation probability is well-known to be
+
+\[ x_i = \frac{1 - r^{-i}}{1 - r^{-N}} \]
+
+We can use this formula to compute a value $r_i$ that produces the observed
+value $x_i$, noting that for arbitrary strategies the value of this
+effective relative fitness is dependent on $i$ and $N$.
+
+Comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
 Figure~\ref{fig:comparison_deterministic}. The points represent the simulated
-values and the line shows the theoretic value. Note that these are all
+values and the line shows the theoretical value. Note that these are all
 deterministic strategies and show a perfect match up between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
 strategies pairs.
@@ -427,35 +454,39 @@ weakness of the analytical formulae that relies on the average payoffs. A
 detailed analysis of the 164 strategies considered, using direct Moran processes
 will be shown in the next Section.
 
+
+
+
 \section{Empirical results}\label{sec:empirical_results}
 
 % TODO Archive all data (Zenodo) and include details/reference here.
 
-This section will outline the data analysis carried out:
+This section outlines the data analysis carried out:
 
 \begin{itemize}
-    \item Section~\ref{sec:two_individuals} will consider the specific case of
+    \item Section~\ref{sec:two_individuals} considers the specific case of
         \(N=2\).
-    \item Section~\ref{sec:strong_invaders} will investigate the effect of
+    \item Section~\ref{sec:strong_invaders} investigates the effect of
         population size on the ability of a strategy to invade another
         population. This will highlight how complex strategies with long
         memories outperform simpler strategies.
-    \item Section~\ref{sec:strong_resistors} will similarly investigate the
+    \item Section~\ref{sec:strong_resistors} similarly investigates the
         ability to defend against an invasion.
-    \item Section~\ref{sec:population_size} will investigate the relationship
-        between performance for differing population sizes. This highlights the
-        importance of considering population dynamics over large populations.
-    \item Section~\ref{sec:relative_fitness} will calculate the relative fitness of all
+    \item Section~\ref{sec:population_size} investigates the relationship
+        between performance for differing population sizes.
+    \item Section~\ref{sec:relative_fitness} calculates the relative fitness of all
         strategies.
 \end{itemize}
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
 
-The main fixation probabilities of interest are \(x_1\) and \(x_{N-1}\), these
-reflect a strategy's ability to invade or resist invasion.
-% TODO Perhaps mention that a lot of the research in to training fixation of
-% strategies assumes N=2? Is this true?
-For \(N=2\) these two cases coincide. Figure~\ref{fig:fixation_heatmap_2} shows
+When $N=2$ the Moran process is effectively a measure of the relative
+mean payoffs over all possible matches between two players. The strategy
+that scores higher than the other more often will fixate more often.
+
+Overall the main fixation probabilities of interest are \(x_1\) and \(x_{N-1}\), these
+reflect a strategy's ability to invade or resist invasion; for \(N=2\) these two cases
+coincide. Figure~\ref{fig:fixation_heatmap_2} shows
 all pairwise fixation probabilities for strategies on the vertical column when
 being matched against probabilities on the horizontal column. This is summarised
 in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
@@ -467,8 +498,7 @@ in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
         cooperation followed by a defection on the first move). As long as the
         opponent plays the same handshake and does not defect in the future it
         cooperates. Otherwise it defects for all rounds~\cite{Li2009}.  This
-        strategy was specifically designed for Evolutionary processes so it is
-        perhaps also not surprising that it does well here.
+        strategy was specifically designed for evolutionary processes.
     \item The finite state machine strategy % TODO Perhaps refer to earlier
         % discussion in the methodology section about these FSM strategies
     \item The Feld strategy is the corresponding strategy submitted to Axelrod's
@@ -503,8 +533,13 @@ in Figure~\ref{fig:boxplot_2} and Table~\ref{tbl:summary_top_2}.
     \label{tbl:summary_top_2}
 \end{table}
 
-As will be demonstrated in Section~\ref{sec:population_size} \(N=2\)
-is a particular case. In the next sections we will pay close attention to
+As will be demonstrated in Section~\ref{sec:population_size} the results for \(N=2\)
+differ from those of larger $N$. Hence our results do not concur with the literature
+which suggests that Zero Determinant strategies should be effective for larger population
+sizes, but we note that those analysis run each match to stationarity, while
+our matches run for a fixed number of rounds.
+
+In the next sections we pay close attention to
 strategies who are strong invaders/resistors and shown diagrammatically in
 Figure~\ref{fig:invasion_resistance}.
 
@@ -519,14 +554,13 @@ Figure~\ref{fig:invasion_resistance}.
 
 \subsection{Strong invaders}\label{sec:strong_invaders}
 
-In this section \(x_i\) will be investigated: the probability of 1 individual of
-a given type successfully becoming fixated in a population of \(N - 1\) other
-individuals. Figures~\ref{fig:fixation_heatmap_invade} shows these values for
+In this section we focus on the ability of a mutant strategy to invade: the
+probability of 1 individual of a given type successfully becoming fixated in
+a population of \(N - 1\) other individuals, denoted by \(x_i\).
+Figures~\ref{fig:fixation_heatmap_invade} shows these values for
 the players along the vertical axis when matched against the players on the
-horizontal axis. It can be seen that invasion is in general more challenging for
-\(N=7\) and \(N=12\) in comparison to \(N=3\).
-%TODO Change this to N=14
-This information is summarised in Figure~\ref{fig:fixation_boxplot_invade}
+horizontal axis. For population size $N$, a neutral mutant has fixation
+probability $x_1 = 1 / N$. This information is summarised in Figure~\ref{fig:fixation_boxplot_invade}
 showing the median fixation as well as the neutral fixation for each given
 scenario.
 
@@ -608,7 +642,7 @@ Tables~\ref{tbl:top_five_invade}.
     \label{tbl:top_five_invade}
 \end{table}
 
-It can be seen that apart from the Collective strategy, none of the strategies
+It can be seen that apart from the Collective Strategy, none of the strategies
 of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 12\}\). The new
 % TODO Change N=12 to N=14
 high performing strategies are:
@@ -617,11 +651,11 @@ high performing strategies are:
     \item Predator, a finite state machine described in~\cite{Ashlock2006}.
     \item Prober 4, complex strategy with an initial 20 move sequence of
         cooperations and defections~\cite{prison}. This initial sequence serves
-        as some kind of handshake.
+        as approximate handshake.
     \item Remorseful Prober, a strategy that will not immediately retaliate when
-        it recognises that the opponent is itself retaliating to a random
+        it recognises that the opponent is retaliating to a random
         defection~\cite{Li2011}.
-    \item  Worse and worse 2: plays tit for tat for 20 moves and then defects
+    \item  Worse and Worse 2: plays Tit For Tat for 20 moves and then defects
         with with growing probability~\cite{prison}.
     \item Tester: a strategy submitted to the second of Axelrod's tournaments
         \cite{Axelrod1980b}.
@@ -629,19 +663,19 @@ high performing strategies are:
 \end{itemize}
 
 As well as noting that the memory length and complexity of these strategies are
-quite complex it is interesting to note that none of them are akin to memory one
-strategies. Most are not stochastic.
-
-In the next section the performance in terms of \(x_{N-1}\) will be described:
-what strategies are particularly good at resisting an invasion.
+much greater than one, it is interesting to note that none of them are akin to
+memory one strategies. Most are not stochastic.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
 
+In addition to identifying good invaders, we also identify strategies
+resistant to invasion by other strategies by examining the distribution
+of $x_{N-1}$ for each strategy. Note that this is equivalent to
+looking at $x_1$ for all opponents.
+
 Figures~\ref{fig:fixation_heatmap_resist} show \(x_{N-1}\)
 the players along the vertical axis when matched against the players on the
-horizontal axis. It can be seen that as the population size \(N\) increases the
-probability of resistance increases.
-This information is summarised in Figure~\ref{fig:fixation_boxplot_resist}
+horizontal axis. This information is summarised in Figure~\ref{fig:fixation_boxplot_resist}
 showing the median fixation as well as the neutral fixation for each given
 scenario.
 
@@ -707,8 +741,8 @@ Section~\ref{sec:two_individuals} perform well for high \(N\).
 Three strategies have both high \(x_1\) and high \(x_{N-1}\):
 
 \begin{itemize}
-    \item Collective;
-    \item Predator;
+    \item Collective
+    \item Predator
     \item Prober 4
 \end{itemize}
 
@@ -721,15 +755,17 @@ There are two strategies that are only top performers in \(x_{N-1}\):
         then it cooperates. Thus it will do well in a population consisting of
         many members of itself: just as the Collective strategy does. However it
         is not aggressive enough to invade other populations.
-    \item Winner 21: a strategy that makes it's decision deterministically based
-        on 1 round of it's own strategy and 2 of the opponents strategy
+    \item Winner 21: a strategy that makes its decision deterministically based
+        on 1 round of its own strategy and 2 of the opponent's strategy
         \cite{Mathieu2015}.
 \end{itemize}
 % TODO Revise this if need be for N=14
 
-Interestingly none of these strategies are deterministic: this is explained by
+Interestingly none of these strategies are stochastic: this is explained by
 the need of strategies to have a steady hand when interacting with their own
 kind. In essence: acting stochastically increase the chance of friendly fire.
+However we note that it is possible to design a strategy with a ``stochastic
+handshake'' \cite{Lee2015}.
 
 
 \begin{table}[!hbtp]
@@ -1097,7 +1133,7 @@ A variety of software libraries have been used in this work:
         \cite{mckinney2010data, walt2011numpy}.
 \end{itemize}
 
-\printbibliography
+% \printbibliography
 
 \appendix
 
