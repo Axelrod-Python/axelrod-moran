@@ -67,27 +67,19 @@ if __name__ == "__main__":
     with open(output_file, "w") as f:
         f.write("Repetitions,N,i,Player 1,Player 2,Theoretic,Simulated\n")
 
-    player_pairs = [(axl.ALLCorALLD(), axl.Cooperator()),
-                    (axl.ALLCorALLD(), axl.Defector()),
-                    (axl.ALLCorALLD(), axl.TitForTat()),
-                    (axl.Alternator(), axl.Cooperator()),
-                    (axl.Alternator(), axl.Defector()),
-                    (axl.Alternator(), axl.TitForTat()),
-                    (axl.Alternator(), axl.WinStayLoseShift()),
-                    (axl.Defector(), axl.WinStayLoseShift()),
-                    (axl.Calculator(), axl.ALLCorALLD()),
-                    (axl.Calculator(), axl.ArrogantQLearner()),
-                    (axl.Calculator(), axl.Random()),
-                    (axl.Cooperator(), axl.TitForTat()),
+    player_pairs = [(axl.Defector(), axl.Defector()),
+                    (axl.Defector(), axl.Alternator()),
                     (axl.Defector(), axl.Cooperator()),
                     (axl.Defector(), axl.TitForTat()),
-                    (axl.Random(), axl.Cooperator()),
-                    (axl.Random(), axl.Defector()),
-                    (axl.Random(), axl.TitForTat()),
-                    (axl.WinStayLoseShift(), axl.TitForTat())]
+                    (axl.Defector(), axl.WinStayLoseShift()),
+                    (axl.Random(), axl.Random()),
+                    (axl.Random(), axl.ZDExtort2()),
+                    (axl.Random(), axl.GTFT()),
+                    (axl.Random(), axl.WorseAndWorse2()),
+                    (axl.Random(), axl.PSOGambler2_2_2())]
 
-    max_N = 8
-    repetitions = 40
+    max_N = 20
+    repetitions = 1000
 
     df = pd.read_csv(outcomes_file, header=None,
                      names=["Player 1", "Player 2",
