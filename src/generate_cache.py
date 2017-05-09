@@ -5,7 +5,6 @@ import multiprocessing
 import os
 
 import axelrod as axl
-#from approximate_moran import *
 
 def write_csv(outcomes, filename="outcomes.csv", append=False):
     s = 'w'
@@ -38,7 +37,9 @@ def generate_matchups_indices(num_players):
     # Want the triangular product
     for i in range(num_players):
         for j in range(i, num_players):
-            yield i, j
+            # Add code to rerun last 3 players
+            if j in [num_players - i for i in range(3)]:
+                yield i, j
 
 def sample_match_outcomes(players, turns, repetitions, noise=0):
     """
@@ -68,7 +69,7 @@ def sample_match_outcomes(players, turns, repetitions, noise=0):
 
 def write_winner(filename, turns, repetitions, noise, i, j, seed=None):
     """
-    Write the winner of a Moran process to file
+    Write the scores of a match between two players to file
     """
     if seed:
         axl.seed(seed)  # Seed the process
@@ -121,18 +122,14 @@ if __name__ == "__main__":
     print(len(list(map(str, players))))
 
     try:
-        os.remove("../data/outcomes.csv")
-        os.remove("../data/outcomes_noise.csv")
+        os.remove("../data/missing_fsm_outcomes.csv")
     except FileNotFoundError:
         pass
 
     repetitions = 1000
     turns = 200
 
+    cpu_count = multiprocessing.cpu_count()
     sample_match_outcomes_parallel(turns=turns, repetitions=repetitions,
-                                   filename="../data/outcomes.csv", noise=0,
-                                   processes=4)
-
-    sample_match_outcomes_parallel(turns=turns, repetitions=repetitions,
-                                   filename="../data/outcomes_noise.csv", noise=0.05,
-                                   processes=4)
+                                   filename="../data/missing_fsm_outcomes.csv", noise=0,
+                                   processes=cpu_count)
