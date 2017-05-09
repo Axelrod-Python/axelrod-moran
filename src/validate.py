@@ -75,8 +75,18 @@ if __name__ == "__main__":
                     (axl.Random(), axl.Random()),
                     (axl.Random(), axl.ZDExtort2()),
                     (axl.Random(), axl.GTFT()),
-                    (axl.Random(), axl.WorseAndWorse2()),
-                    (axl.Random(), axl.PSOGambler2_2_2())]
+                    (axl.Random(), axl.ALLCorALLD()),
+                    (axl.Random(), axl.PSOGambler2_2_2()),
+                    (axl.Cooperator(), axl.Random()),
+                    (axl.Cooperator(), axl.ZDExtort2()),
+                    (axl.Cooperator(), axl.GTFT()),
+                    (axl.Cooperator(), axl.ALLCorALLD()),
+                    (axl.Cooperator(), axl.PSOGambler2_2_2()),
+                    (axl.Alternator(), axl.Random()),
+                    (axl.Alternator(), axl.ZDExtort2()),
+                    (axl.Alternator(), axl.GTFT()),
+                    (axl.Alternator(), axl.ALLCorALLD()),
+                    (axl.Alternator(), axl.PSOGambler2_2_2())]
 
     max_N = 20
     repetitions = 1000
