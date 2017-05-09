@@ -37,9 +37,7 @@ def generate_matchups_indices(num_players):
     # Want the triangular product
     for i in range(num_players):
         for j in range(i, num_players):
-            # Add code to rerun last 3 players
-            if j in [num_players - i for i in range(3)]:
-                yield i, j
+            yield i, j
 
 def sample_match_outcomes(players, turns, repetitions, noise=0):
     """
