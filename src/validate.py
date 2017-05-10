@@ -87,7 +87,26 @@ if __name__ == "__main__":
                     (axl.Alternator(), axl.ZDExtort2()),
                     (axl.Alternator(), axl.GTFT()),
                     (axl.Alternator(), axl.ALLCorALLD()),
-                    (axl.Alternator(), axl.PSOGambler2_2_2())]
+                    (axl.Alternator(), axl.PSOGambler2_2_2()),
+                    (axl.ALLCorALLD(), axl.Cooperator()),
+                    (axl.ALLCorALLD(), axl.Defector()),
+                    (axl.ALLCorALLD(), axl.TitForTat()),
+                    (axl.Alternator(), axl.Cooperator()),
+                    (axl.Alternator(), axl.Defector()),
+                    (axl.Alternator(), axl.TitForTat()),
+                    (axl.Alternator(), axl.WinStayLoseShift()),
+                    (axl.Defector(), axl.WinStayLoseShift()),
+                    (axl.Calculator(), axl.ALLCorALLD()),
+                    (axl.Calculator(), axl.ArrogantQLearner()),
+                    (axl.Calculator(), axl.Random()),
+                    (axl.Cooperator(), axl.TitForTat()),
+                    (axl.Defector(), axl.Cooperator()),
+                    (axl.Defector(), axl.TitForTat()),
+                    (axl.Random(), axl.Cooperator()),
+                    (axl.Random(), axl.Defector()),
+                    (axl.Random(), axl.TitForTat()),
+                    (axl.WinStayLoseShift(), axl.TitForTat())]
+
 
     max_N = 20
     repetitions = 1000
