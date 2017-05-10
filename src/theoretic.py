@@ -97,40 +97,6 @@ def fixation(strategy_pair, N, i, utilities,
         return (1 + s[i - 2]) / (1 + s[-1])
     return 1 / (1 + s[-1])
 
-
-def phi(N, i, r):
-    """
-    The fixation probability in a population with constant fitness r
-    """
-    return (1 - 1/(r ** i)) / (1 - 1/(r ** N))
-
-def phi_prime(N, i, r):
-    """
-    The derivative of `phi` (used for numerical root)
-    """
-    numerator = r ** (N - i - 1) * (-N * r ** i + N + i * r ** N - i)
-    denominator =(r ** (2 * N) - 2 * r ** N + 1)
-    return numerator / denominator
-
-def phi_prime2(N, i, r):
-    """
-    The second derivative of `phi` (used for numerical root)
-    """
-    numerator = r ** (N - i - 2) * (2 * N ** 2 * (r ** i - 1) + N * (r ** N - 1) * (N * (r ** i - 1) - 2 * i + r ** i - 1) - i * (i + 1) * (r ** N - 1) ** 2)
-    denominator = (r**N - 1)**3
-    return numerator / denominator
-
-@functools.lru_cache()
-def find_relative_fitness(N, i, p, initial_r=1.2):
-    """
-    Obtain constant fitness rate that corresponds to a given fixation
-    probability p.
-    """
-    f = lambda r: phi(N, i, r) - p
-    fprime = lambda r:phi_prime(N, i, r)
-    fprime2 = lambda r:phi_prime2(N, i, r)
-    return newton(f, x0=initial_r, fprime=fprime, fprime2=fprime2)
-
 #########
 # Tests #
 #########
