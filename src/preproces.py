@@ -1,8 +1,5 @@
 """
-A script to write the relative fitness to file
-
-TODO: Get rid of the intermediate step in `clean_raw_moran.py` and do it all in
-one go.
+A script to write the final format of the data
 """
 import pandas as pd
 import tempfile
