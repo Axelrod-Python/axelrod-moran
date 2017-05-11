@@ -157,18 +157,12 @@ presented here.
 
 \section{Methodology}\label{sec:methodology}
 
-To carry out this large numerical experiment, 164 strategies are used from
-\cite{axelrodproject}. These include 161 default strategies in the library at
-the time (excluding strategies classified as having a long run time and those
-that make use of the length of the game) as well as
-the following 6 finite state machine machine strategies \cite{Ashlock2006}:
+To carry out this large numerical experiment, 164 strategies are used from the
+axelrod library: \cite{axelrodproject}.
 
-% TODO Include details about the 3/6 extra FSM strategies.
-% Possibly draw pictorial representations?
-% Remove the FSM strategies if they don't perform well.
-% TODO Decide if we include all 6 (so the same original 3 with the wrong initial
-% state) in the entire analysis.
-
+The axelrod library contains many machine learning based strategies trained
+with reinforcement learning algorithms. This work includes three additional
+strategies trained specifically to excel at the Moran process.
 Appendix~\ref{app:list_of_players} shows all the players in question. More
 information about each player can be obtained in the documentation for
 \cite{axelrodproject}. There are \input{./tex/num_stochastic.tex}stochastic and
@@ -179,6 +173,101 @@ the strategy uses the entire history of play (whatever its length). For example,
 a strategy that utilizes a handshaking mechanism where the opponents actions
 on the first few rounds of play determines the strategies subsequent behavior
 would have infinite memory depth.
+
+All of the
+strategies are trained with an evolutionary algorithm that perturbs strategy
+% TODO Add a generic text book reference
+parameters and optimizes an objective function, such as the mean total score
+against all other opponents or the mean fixation probability over a large
+number of Moran processes. The objective functions can include standard
+variations such as noisy matches, varying the number of rounds of play, and the
+other typical parameters used for the IPD. Variation is introduced via mutation
+and crossover of parameters, and the best performing strategies are carried to
+the next generation along with new variants. Similar methods appear in the
+literature \cite{Ashlock2006}.
+
+All of our training code is available in the
+Axelrod repository with documentation to train new strategies easily. Training
+% TODO Include link etc
+typically takes less than 200 iterations and can be completed within several
+hours on commodity hardware.  The three strategies trained specifically for
+this study are Trained FSM 1, 2, and 3 (TF1 - TF3), based on finite state
+machines of 16, 16, and 8 states respectively (see Figures \ref{}).
+% TODO Include images of FSMs
+These strategies were trained with the objective function of mean fixation
+probabilities for Moran processes starting at initial population states
+consisting of \(N/2\) individuals of the training candidates and \(N/2\)
+individuals of an opponent strategy, for all of the short run time strategies
+in the library (approximately 150 opponents at the time of training):
+
+\begin{itemize}
+	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per match
+	\item TF2 \(N=10\), 0\% noise, 10000 repetitions per match
+	\item TF3 \(N=8\), 1\% noise, 100 repetitions per match
+\end{itemize}
+
+Each matchup of players was run to fixation for the specified number of
+repetitions to estimate the absorption probabilities. The trained algorithms
+were run for less than 50 generations.
+
+TF1 has an initial handshake of CCD and cooperates if the opponent matches.
+However if the opponent later defects, TF1 will respond in kind, so the
+handshake is not permanent. Only one player (Prober 4 \cite{prison}) manages to
+achieve cooperation with TF1 after about 20 rounds of play.
+
+TF2 always starts
+with CD and will defect against opponents that start with DD. It plays CDD
+against itself and then cooperates thereafter. There is a longer complex
+handshake which eventually results in mutual cooperation with Firm but Fair,
+Fortress3, Fortress4, and Grofman (always) and Evolved HMM 5 and GTFT
+(depending on the random seed).
+
+TF3 cooperates and defects with
+various cycles depending on the opponent's actions. TF3 will mutually
+cooperate with any strategy and only tolerates a few defections before
+defecting for the rest of match. It is similar to but not exactly the same as
+Fool Me Once, a strategy that cooperates until the opponent has defected twice
+(not necessarily consecutively), and defects indefinitely thereafter. Though a
+product of training with a Moran objective, it was selected for inclusion
+because of the lack of an apparent handshake.
+
+For both TF1 and TF2 a handshake
+mechanism naturally emerges from the structure of the underlying finite state
+machine. This behavior is an outcome of the evolutionary process and is in no
+way hard-coded or included via an additional mechanism. Some of the existing
+strategies in the library were trained on earlier versions of the library
+(smaller total opponents used in training) based on neural networks, lookup
+tables and stochastic variants trained with a particle swarm algorithm, finite
+state machines and a stochastic variant mimicking hidden Markov models, and
+neural networks. These strategies were trained to win IPD tournaments using an
+objective function that computes the mean match payoffs against a collection of
+opponents. Detailed descriptions and the performance of these strategies in IPD
+tournaments will be described in another manuscript.
+% TODO Think of how to reference this upcoming manuscript
+% TODO Move the section below to the discussion for particular
+% cases and/or conclusion
+These strategies trained with the mean score
+objective are among the best invaders in the library but are not as resistant
+to invasion as the strategies trained using a Moran objective function (see
+Tables \ref{}). These strategies include trained finite state machine
+strategies, but they do not appear to have handshaking mechanisms. Therefore it
+is reasonable to conclude that the objective function is the cause of the
+emergence of handshaking mechanisms.
+The payoff maximizing strategies
+typically will not defect before the opponent's first defection, possibly
+because the training strategy collection contains a significant portion of
+strategies such as Grudger and Fool Me Once that retaliate harshly by defecting
+for the remainder of the match if the opponent has more than a small number of
+cumulative defections. Paradoxically it is necessary to defect in order to
+achieve mutual cooperation with opponents using the same strategy but not with
+other opponents. A handshake requires at least one defection and there is
+selective pressure to defect as few times as possible to achieve the
+self-recognition mechanism. It is also unwise to defect on the first move as
+some strategies additionally retaliate first round defections. So the
+handshakes used by TF1 and TF2, and CS, are in some sense optimal.  These
+discoveries may have significant ramifications regarding the evolution of
+cooperation and forgiveness in biological organisms and social interactions
+between humans.
 
 \begin{table}[!hbtp]
     \centering
