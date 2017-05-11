@@ -19,5 +19,6 @@ TF3
 
 Trained by MH with
 python fsm_evolve.py --generations 500 --states 8 --processes 4 --output "--fsm_moran_8.csv" --noise 0.01 --objective moran --nmoran 8
+output file was renamed to fsm_moran_8_01n.csv
 
 (default repetitions = 100)
