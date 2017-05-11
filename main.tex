@@ -192,7 +192,7 @@ Axelrod repository with documentation to train new strategies easily. Training
 typically takes less than 200 iterations and can be completed within several
 hours on commodity hardware.  The three strategies trained specifically for
 this study are Trained FSM 1, 2, and 3 (TF1 - TF3), based on finite state
-machines of 16, 16, and 8 states respectively (see Figures \ref{}).
+machines of 8, 16, and 16 states respectively (see Figures \ref{}).
 % TODO Include images of FSMs
 These strategies were trained with the objective function of mean fixation
 probabilities for Moran processes starting at initial population states
@@ -201,19 +201,23 @@ individuals of an opponent strategy, for all of the short run time strategies
 in the library (approximately 150 opponents at the time of training):
 
 \begin{itemize}
-	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per match
+	\item TF1 \(N=8\), 1\% noise, 100 repetitions per match
 	\item TF2 \(N=10\), 0\% noise, 10000 repetitions per match
-	\item TF3 \(N=8\), 1\% noise, 100 repetitions per match
+	\item TF3 \(N=12\), 0\% noise, 10000 repetitions per match
 \end{itemize}
 
 Each matchup of players was run to fixation for the specified number of
 repetitions to estimate the absorption probabilities. The trained algorithms
 were run for less than 50 generations.
 
-TF1 has an initial handshake of CCD and cooperates if the opponent matches.
-However if the opponent later defects, TF1 will respond in kind, so the
-handshake is not permanent. Only one player (Prober 4 \cite{prison}) manages to
-achieve cooperation with TF1 after about 20 rounds of play.
+TF1 cooperates and defects with
+various cycles depending on the opponent's actions. TF1 will mutually
+cooperate with any strategy and only tolerates a few defections before
+defecting for the rest of match. It is similar to but not exactly the same as
+Fool Me Once, a strategy that cooperates until the opponent has defected twice
+(not necessarily consecutively), and defects indefinitely thereafter. Though a
+product of training with a Moran objective, it was selected for inclusion
+because of the lack of an apparent handshake.
 
 TF2 always starts
 with CD and will defect against opponents that start with DD. It plays CDD
@@ -222,16 +226,13 @@ handshake which eventually results in mutual cooperation with Firm but Fair,
 Fortress3, Fortress4, and Grofman (always) and Evolved HMM 5 and GTFT
 (depending on the random seed).
 
-TF3 cooperates and defects with
-various cycles depending on the opponent's actions. TF3 will mutually
-cooperate with any strategy and only tolerates a few defections before
-defecting for the rest of match. It is similar to but not exactly the same as
-Fool Me Once, a strategy that cooperates until the opponent has defected twice
-(not necessarily consecutively), and defects indefinitely thereafter. Though a
-product of training with a Moran objective, it was selected for inclusion
-because of the lack of an apparent handshake.
+TF3 has an initial handshake of CCD and cooperates if the opponent matches.
+However if the opponent later defects, TF3 will respond in kind, so the
+handshake is not permanent. Only one player (Prober 4 \cite{prison}) manages to
+achieve cooperation with TF3 after about 20 rounds of play.
 
-For both TF1 and TF2 a handshake
+
+For both TF2 and TF3 a handshake
 mechanism naturally emerges from the structure of the underlying finite state
 machine. This behavior is an outcome of the evolutionary process and is in no
 way hard-coded or included via an additional mechanism. Some of the existing
@@ -244,30 +245,6 @@ objective function that computes the mean match payoffs against a collection of
 opponents. Detailed descriptions and the performance of these strategies in IPD
 tournaments will be described in another manuscript.
 % TODO Think of how to reference this upcoming manuscript
-% TODO Move the section below to the discussion for particular
-% cases and/or conclusion
-These strategies trained with the mean score
-objective are among the best invaders in the library but are not as resistant
-to invasion as the strategies trained using a Moran objective function (see
-Tables \ref{}). These strategies include trained finite state machine
-strategies, but they do not appear to have handshaking mechanisms. Therefore it
-is reasonable to conclude that the objective function is the cause of the
-emergence of handshaking mechanisms.
-The payoff maximizing strategies
-typically will not defect before the opponent's first defection, possibly
-because the training strategy collection contains a significant portion of
-strategies such as Grudger and Fool Me Once that retaliate harshly by defecting
-for the remainder of the match if the opponent has more than a small number of
-cumulative defections. Paradoxically it is necessary to defect in order to
-achieve mutual cooperation with opponents using the same strategy but not with
-other opponents. A handshake requires at least one defection and there is
-selective pressure to defect as few times as possible to achieve the
-self-recognition mechanism. It is also unwise to defect on the first move as
-some strategies additionally retaliate first round defections. So the
-handshakes used by TF1 and TF2, and CS, are in some sense optimal.  These
-discoveries may have significant ramifications regarding the evolution of
-cooperation and forgiveness in biological organisms and social interactions
-between humans.
 
 \begin{table}[!hbtp]
     \centering
@@ -279,24 +256,18 @@ between humans.
 Each strategy pair is run for 1000 runs of the Moran process to fixation
 with starting population distributions of $(1, N-1)$,
 $(N/2, N/2)$ and $(N-1 , 1)$, for \(N\) from 2 through 14. The
-% TODO Change 14 to 12 if we do not use the 14 case.
 fixation probability is then empirically computed for each combination of
 starting distribution and value of \(N\).
 
 Our software can carry out exact simulations of the Moran process. Since some of
-the strategies have a high computational cost or are stochastic, we sample
-from a large number of match outcomes for the pairs of players for use in computing
-fitnesses in the Moran process. This approach was verified to agree with unsampled
-calculations to a high degree of accuracy in specific cases.
+the strategies have a high computational cost or are stochastic, we sample from
+a large number of match outcomes for the pairs of players for use in computing
+fitnesses in the Moran process. This approach was verified to agree with
+unsampled calculations to a high degree of accuracy in specific cases.
 % TODO Perhaps write some pseudo code for this?
 
 Figure~\ref{fig:number_of_stochastic_match_outcomes} shows the distribution of
 the number of outcomes between all strategy pairs.
-% TODO is this true? the distribution also matters, not just the number of outcomes
-% TODO Good point, we could (if we wanted to) go down the line of checking
-% specific distributions etc or perhaps we just remove and point at the good
-% fits in the Validation section as a justification.
-
 
 \begin{figure}[!hbtp]
     \centering
@@ -537,8 +508,6 @@ This section outlines the data analysis carried out:
         ability to defend against an invasion.
     \item Section~\ref{sec:population_size} investigates the relationship
         between performance for differing population sizes.
-    \item Section~\ref{sec:relative_fitness} calculates the relative fitness of all
-        strategies.
 \end{itemize}
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
@@ -547,11 +516,11 @@ When $N=2$ the Moran process is effectively a measure of the relative
 mean payoffs over all possible matches between two players. The strategy
 that scores higher than the other more often will fixate more often.
 
-Overall the main fixation probabilities of interest are \(x_1\) and \(x_{N-1}\), these
-reflect a strategy's ability to invade or resist invasion; for \(N=2\) these two cases
-coincide. Figure~\ref{fig:boxplot_2} shows
-all fixation probabilities for the strategies considered. This is summarised
-in Table~\ref{tbl:summary_top_2}.
+Overall the main fixation probabilities of interest are \(x_1\) and \(x_{N-1}\),
+these reflect a strategy's ability to invade or resist invasion; for \(N=2\)
+these two cases coincide. Figure~\ref{fig:boxplot_2} shows all fixation
+probabilities for the strategies considered. This is summarised in
+Table~\ref{tbl:summary_top_2}.
 
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
@@ -560,8 +529,6 @@ in Table~\ref{tbl:summary_top_2}.
         defect in the future it cooperates. Otherwise it defects for all
         rounds~\cite{Li2009}. This strategy was specifically designed for
         evolutionary processes.
-    \item The finite state machine strategy % TODO Perhaps refer to earlier
-        % discussion in the methodology section about these FSM strategies
     \item The Defector: it always defects. As it has little potential
         interaction with itself, recall that \(N=2\) is considered, its
         aggressiveness is rewarded.
@@ -569,6 +536,11 @@ in Table~\ref{tbl:summary_top_2}.
         defections with unconditional defections throughout) however starts by
         playing 3 defections.
     \item Predator, a finite state machine described in~\cite{Ashlock2006}.
+    \item Handshake: a slightly less aggressive version of the Collective
+        strategy \cite{robson1989}. As long as the initial sequence is played
+        then it cooperates. Thus it will do well in a population consisting of
+        many members of itself: just as the Collective strategy does. However it
+        is not aggressive enough to invade other populations.
 \end{enumerate}
 
 
@@ -654,15 +626,15 @@ of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 14\}\). The new
 high performing strategies are:
 
 \begin{itemize}
-    \item Prober 4, complex strategy with an initial 20 move sequence of
-        cooperations and defections~\cite{prison}. This initial sequence serves
-        as approximate handshake.
     \item Grudger (which only performs well for \(N=3\)), starts by cooperating
         but will defect if at any point the opponent has defected.
     \item MEM2, an infinite memory strategy that switches between TfT, Tf2T, and
         Defector~\cite{Li2014}.
-    \item Fool Me Once, forgives one defection but defects forever once a second
-        defection takes place.
+    \item TF1, the finite state machine trained specifically for Moran processes
+        described in Section~\cite{sec:introduction}.
+    \item Prober 4, complex strategy with an initial 20 move sequence of
+        cooperations and defections~\cite{prison}. This initial sequence serves
+        as approximate handshake.
     \item  PSO Gambler and Evolved Lookerup 2 2 2: are strategies that make use
         of a lookup table mapping the first 2 moves of the opponent as well as
         the last 2 moves of both players to an action. The PSO gambler is a
@@ -673,13 +645,32 @@ high performing strategies are:
 		an action. Both of these have been trained using an evolutionary
 		algorithm and the ANN 5 was trained to perform well in a noisy
 		tournament.
-	\item The Evolved FSM 16, is a 16 state finite machine strategy that has
-		been trained using an evolutionary algorithm.
+    \item The Evolved FSM 16 is a 16 state finite state machine trained to
+        perform well in tournaments.
 \end{itemize}
 
 As well as noting that the memory length and complexity of these strategies are
 much greater than one, it is interesting to note that none of them are akin to
-memory one strategies. Only one is stochastic.
+memory one strategies. Only one is stochastic. The finite state machines trained
+specifically for Moran processes do not appear in the top 5: whereas strategies
+trained for tournament do. This is due to the nature of invasion: most of the
+opponents will initially be different strategies.
+
+The strategies trained with the mean score
+objective are among the best invaders in the library but are not as resistant
+to invasion as the strategies trained using a Moran objective function. These strategies include trained finite state machine
+strategies, but they do not appear to have handshaking mechanisms. Therefore it
+is reasonable to conclude that the objective function is the cause of the
+emergence of handshaking mechanisms.
+The payoff maximizing strategies
+typically will not defect before the opponent's first defection, possibly
+because the training strategy collection contains a significant portion of
+strategies such as Grudger and Fool Me Once that retaliate harshly by defecting
+for the remainder of the match if the opponent has more than a small number of
+cumulative defections. Paradoxically it is necessary to defect in order to
+achieve mutual cooperation with opponents using the same strategy but not with
+other opponents. The importance of these handshakes will become apparent in the
+next Section.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
 
@@ -740,25 +731,29 @@ Section~\ref{sec:two_individuals} perform well for high \(N\).
     \label{tbl:top_five_resist}
 \end{table}
 
-There are 3 strategies that are only top performers in \(x_{N-1}\):
-
-\begin{itemize}
-    \item Handshake: a slightly less aggressive version of the Collective
-        strategy \cite{robson1989}. As long as the initial sequence is played
-        then it cooperates. Thus it will do well in a population consisting of
-        many members of itself: just as the Collective strategy does. However it
-        is not aggressive enough to invade other populations.
-    \item Winner 21: a strategy that makes its decision deterministically based
-        on 1 round of its own strategy and 2 of the opponent's strategy
-        \cite{Mathieu2015}.
-	\item Predator: a finite state machine described in~\cite{Ashlock2006}
-\end{itemize}
+There are are only two new strategies that appear in the top ranks for
+\(x_{N-1}\): TF2 and TF3. These two strategies are with from CS the strongest
+resistors. They all have handshakes, and whilst the handshake that CS has was
+programmed, the handshakes of TF2 and TF3 evolved through an evolutionary
+process. It is also worth noting that none of the highly trained strategies of
+Section~\ref{sec:strong_invaders} perform as well as resistors. This indicates
+the subtlety needed to recognise true opponents.
 
 Interestingly none of these strategies are stochastic: this is explained by
 the need of strategies to have a steady hand when interacting with their own
 kind. In essence: acting stochastically increase the chance of friendly fire.
-However we note that it is possible to design a strategy with a ``stochastic
+However it is possible to design a strategy with a ``stochastic
 handshake'' \cite{Lee2015}.
+
+A handshake requires at least one defection and there is
+selective pressure to defect as few times as possible to achieve the
+self-recognition mechanism. It is also unwise to defect on the first move as
+some strategies additionally retaliate first round defections. So the
+handshakes used by TF2 and TF3, and CS, are in some sense optimal.  These
+discoveries may have significant ramifications regarding the evolution of
+cooperation and forgiveness in biological organisms such as antibacterial
+resistant bacteria and social interactions
+between humans.
 
 It is evident through
 Sections~\ref{sec:two_individuals},~\ref{sec:strong_invaders}
@@ -947,6 +942,8 @@ Moran processes which highlights the potentially for improvement.
 It is felt that these findings are important for the ongoing understanding of
 population dynamics and offer evidence for some of the shortcomings of short
 memory which has started to be recognised by the community~\cite{Hilbe2017}.
+
+% Discuss handshakes again. I think this is an important point.
 
 All source code for this work has been written in a sustainable manner: it is
 open source, under version control and tested which ensures that all results can
