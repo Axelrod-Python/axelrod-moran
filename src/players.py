@@ -49,6 +49,10 @@ fsm_players = [axl.FSMPlayer(transitions=transitions)
 fsm_players += [axl.FSMPlayer(transitions=transitions, initial_state=0, initial_action=C)
                for transitions in fsm_transitions]
 
+fsm_players[0].classifier["memory_depth"] = float('inf')
+fsm_players[1].classifier["memory_depth"] = float('inf')
+fsm_players[2].classifier["memory_depth"] = 16
+
 def selected_players(extra_players=fsm_players):
     """
     Return a list of all players used in this paper
