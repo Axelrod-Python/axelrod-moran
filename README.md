@@ -28,3 +28,12 @@ The following compiles the article using `Latexmk` version 4.41:
 ```
 $ latexmk --xelatex main.tex
 ```
+
+# Contributions
+
+- Conceived of the study: MH VK
+- Conducted experiments and trained strategies: VK MH NG
+- Analyzed the data and analytical methods: VK MH
+- Wrote the paper: VK MH NG
+- Created software: MH VK
+- Axelrod Library Core Team: VK OC MH
