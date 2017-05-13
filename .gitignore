@@ -23,5 +23,5 @@ data
 *pyc
 
 # Standalone tex img files
-img/moran_process.pd
+img/moran_process.pdf
 tex/*.pdf
