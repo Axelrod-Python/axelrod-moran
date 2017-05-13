@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{standalone}
 \usepackage{fancyvrb}
+\usepackage{algorithm,algorithmic}
 
 \usepackage{tikz}
 \usetikzlibrary{calc, shapes, patterns}
@@ -114,7 +115,6 @@ While the results agree with some of the published literature, it is found that:
      resistant bacteria \cite{Davies2010}.
 \end{enumerate}
 
-
 \subsection{The Moran Process}\label{sec:the_moran_process}
 
 Figure~\ref{fig:moran_process} shows a diagrammatic representation of the Moran
@@ -205,9 +205,34 @@ typically takes less than 200 iterations and can be completed within several
 hours on commodity hardware.
 
 There are three further strategies trained specifically for this study; Trained
-FSM 1, 2, and 3 (TF1 - TF3). These are based on finite state machines of 8, 16,
-and 16 states respectively (see Figures \ref{}).
-% TODO Include images of FSMs
+FSM 1, 2, and 3 (TF1 - TF3). These are based on finite state machines of 16, 16,
+and 8 states respectively (see Figures~\ref{fig:tf1},~\ref{fig:tf2}
+and~\ref{fig:tf3}).
+
+
+\begin{figure}[!hbtp]
+    \centering
+    \input{./tex/fsm_one.tex}
+    \caption{TF1: a 16 state finite state machine.}
+    \label{fig:tf1}
+\end{figure}
+
+
+\begin{figure}[!hbtp]
+    \centering
+    \input{./tex/fsm_two.tex}
+    \caption{TF2: a 16 state finite state machine.}
+    \label{fig:tf2}
+\end{figure}
+
+
+\begin{figure}[!hbtp]
+    \centering
+    \input{./tex/fsm_three.tex}
+    \caption{TF3: an 8 state finite state machine.}
+    \label{fig:tf3}
+\end{figure}
+
 As opposed to the previously described strategies, these strategies were trained
 with the objective function of \textbf{mean fixation probabilities for Moran
 processes} starting at initial population states consisting of \(N/2\)
@@ -215,9 +240,9 @@ individuals of the training candidates and \(N/2\) individuals of an opponent
 strategy, taken from a selection of 150 opponents from the axelrod library:
 
 \begin{itemize}
-	\item TF1 \(N=8\), 1\% noise, 100 repetitions per match
+	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per match
 	\item TF2 \(N=10\), 0\% noise, 10000 repetitions per match
-	\item TF3 \(N=12\), 0\% noise, 10000 repetitions per match
+	\item TF3 \(N=8\), 1\% noise, 100 repetitions per match
 \end{itemize}
 
 Each matchup of players was run to fixation for the specified number of
@@ -225,8 +250,8 @@ repetitions to estimate the absorption probabilities. The trained algorithms
 were run for less than 50 generations. Training data for this is available at
 \cite{data}.
 
-TF1 cooperates and defects with
-various cycles depending on the opponent's actions. TF1 will mutually
+TF3 cooperates and defects with
+various cycles depending on the opponent's actions. TF3 will mutually
 cooperate with any strategy and only tolerates a few defections before
 defecting for the rest of match. It is similar to but not exactly the same as
 Fool Me Once, a strategy that cooperates until the opponent has defected twice
@@ -241,12 +266,12 @@ longer complex handshake which eventually results in mutual cooperation with
 Firm but Fair, Fortress3, Fortress4, and Grofman (always) and Evolved HMM 5 and
 GTFT (depending on the random seed).
 
-TF3 has an initial handshake of CCD and cooperates if the opponent matches.
-However if the opponent later defects, TF3 will respond in kind, so the
+TF1 has an initial handshake of CCD and cooperates if the opponent matches.
+However if the opponent later defects, TF1 will respond in kind, so the
 handshake is not permanent. Only one player (Prober 4 \cite{prison}) manages to
-achieve cooperation with TF3 after about 20 rounds of play.
+achieve cooperation with TF1 after about 20 rounds of play.
 
-For both TF2 and TF3 a handshake
+For both TF1 and TF2 a handshake
 mechanism naturally emerges from the structure of the underlying finite state
 machine. This behavior is an outcome of the evolutionary process and is in no
 way hard-coded or included via an additional mechanism.
@@ -270,8 +295,20 @@ taken
 from a large number of match outcomes for the pairs of players for use in
 computing fitnesses in the Moran process. This approach was verified to agree
 with unsampled calculations to a high degree of accuracy in specific cases.
-This is described in Figure~\ref{alg:psuedocode}.
-% TODO Include pseudo code
+This is described in Algorithms~\ref{alg:data_collection}
+and~\ref{alg:moran_process}..
+
+\begin{algorithm}[!hbtp]
+        \caption{Data Collection}
+        \label{alg:data_collection}
+        \input{./tex/data_collection.tex}
+\end{algorithm}
+
+\begin{algorithm}[!hbtp]
+        \caption{Moran process}
+        \label{alg:moran_process}
+        \input{./tex/moran_process_simulation.tex}
+\end{algorithm}
 
 Section~\ref{sec:validation} will further validate the methodology by comparing
 simulated results to analytical results in some cases. The main results of this
@@ -622,7 +659,7 @@ high performing strategies are:
         but will defect if at any point the opponent has defected.
     \item MEM2, an infinite memory strategy that switches between TfT, Tf2T, and
         Defector \cite{Li2014}.
-    \item TF1, the finite state machine trained specifically for Moran processes
+    \item TF3, the finite state machine trained specifically for Moran processes
         described in Section~\ref{sec:introduction}.
     \item Prober 4, complex strategy with an initial 20 move sequence of
         cooperations and defections \cite{prison}. This initial sequence serves
@@ -645,7 +682,7 @@ As well as noting that the memory length and complexity of these strategies are
 much greater than one, it is interesting to note that none of them are akin to
 memory one strategies. Only one is stochastic although close inspection of the
 source code of PSO Gambler shows that it makes stochastic decisions with extreme
-probabilities: almost always acting as expected. Apart from TF1 in \(N=3\), the
+probabilities: almost always acting as expected. Apart from TF3 in \(N=3\), the
 finite state machines trained specifically for Moran processes do not appear in
 the top 5: whereas strategies trained for tournament do. This is due to the
 nature of invasion: most of the opponents will initially be different
@@ -717,10 +754,10 @@ However it is possible to design a strategy with a ``stochastic
 handshake'' \cite{Lee2015}.
 
 There are are only two new strategies that appear in the top ranks for
-\(x_{N-1}\): TF2 and TF3. These two strategies are with CS the strongest
+\(x_{N-1}\): TF1 and TF2. These two strategies are with CS the strongest
 resistors. They all have handshakes, and whilst the handshake that CS and
 Handshake (which ranks highly for the smaller values of \(N\)) have was
-programmed, the handshakes of TF2 and TF3 evolved through an evolutionary
+programmed, the handshakes of TF1 and TF2 evolved through an evolutionary
 process.
 
 As described in Section~\ref{sec:strong_invaders} the strategies trained with
@@ -743,7 +780,7 @@ A handshake requires at least one defection and there is
 selective pressure to defect as few times as possible to achieve the
 self-recognition mechanism. It is also unwise to defect on the first move as
 some strategies additionally retaliate first round defections. So the
-handshakes used by TF2 and TF3, and CS, are in some sense optimal. These
+handshakes used by TF1 and TF2, and CS, are in some sense optimal. These
 discoveries may have significant ramifications regarding the evolution of
 cooperation and forgiveness in biological organisms such as antibacterial
 resistant bacteria and social interactions
@@ -894,7 +931,7 @@ Moran processes which highlights the potentially for improvement.
 One of the major findings discussed in Section~\ref{sec:strong_resistors}, is
 the ability of strategies with a handshake mechanism to resist invasion. This
 was not only identify for CS (an intelligently designed strategy) but also for
-two FSM strategies (TF2 and TF3) specifically trained through an evolutionary
+two FSM strategies (TF1 and TF2) specifically trained through an evolutionary
 process. In these two cases, the handshake mechanism was a product of the
 evolutionary process. This has the potential to help with the understanding of
 organisms with a strong resistance to invasion such as anti antibacterial
