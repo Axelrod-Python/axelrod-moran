@@ -24,3 +24,4 @@ data
 
 # Standalone tex img files
 img/moran_process.pdf
+tex/*.pdf
