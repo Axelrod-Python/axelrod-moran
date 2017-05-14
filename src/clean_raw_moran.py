@@ -2,7 +2,7 @@
 A script to clean the raw data
 """
 import csv
-import write_fitness
+import preproces
 import pandas as pd
 
 
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     print("Writing summary data")
     write(full_data)
 
-    print("Calculating fitness values")
-    fitness_df = write_fitness.read()
+    print("Finalising data")
+    fitness_df = preproces.read()
     print("Writing main data")
-    write_fitness.write(fitness_df)
+    preproces.write(fitness_df)

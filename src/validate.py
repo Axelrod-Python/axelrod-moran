@@ -4,6 +4,7 @@ A script to draw the validation plots.
 import pandas as pd
 import axelrod as axl
 import matplotlib.pyplot as plt
+import csv
 
 import generate_cache
 import theoretic
@@ -51,13 +52,13 @@ def theoretic_vs_simulated(repetitions, utilities, filename,
     starting_pop = [1, N // 2, N - 1] if N != 2 else [1]
 
     for i in starting_pop:
-        player_names = [p.__repr__() for p in players]
+        player_names = [str(p) for p in players]
         t = theoretic.fixation(player_names, N, i, utilities=utilities)
         s = simulated_fixation(players,  N, i, repetitions=repetitions)
 
         with open(filename, "a") as f:
-            f.write(",".join(map(str,
-                           [repetitions, N, i, *player_names, t, s])) + "\n")
+            writer = csv.writer(f)
+            writer.writerow([repetitions, N, i, *player_names, t, s])
 
 
 if __name__ == "__main__":
@@ -86,7 +87,26 @@ if __name__ == "__main__":
                     (axl.Alternator(), axl.ZDExtort2()),
                     (axl.Alternator(), axl.GTFT()),
                     (axl.Alternator(), axl.ALLCorALLD()),
-                    (axl.Alternator(), axl.PSOGambler2_2_2())]
+                    (axl.Alternator(), axl.PSOGambler2_2_2()),
+                    (axl.ALLCorALLD(), axl.Cooperator()),
+                    (axl.ALLCorALLD(), axl.Defector()),
+                    (axl.ALLCorALLD(), axl.TitForTat()),
+                    (axl.Alternator(), axl.Cooperator()),
+                    (axl.Alternator(), axl.Defector()),
+                    (axl.Alternator(), axl.TitForTat()),
+                    (axl.Alternator(), axl.WinStayLoseShift()),
+                    (axl.Defector(), axl.WinStayLoseShift()),
+                    (axl.Calculator(), axl.ALLCorALLD()),
+                    (axl.Calculator(), axl.ArrogantQLearner()),
+                    (axl.Calculator(), axl.Random()),
+                    (axl.Cooperator(), axl.TitForTat()),
+                    (axl.Defector(), axl.Cooperator()),
+                    (axl.Defector(), axl.TitForTat()),
+                    (axl.Random(), axl.Cooperator()),
+                    (axl.Random(), axl.Defector()),
+                    (axl.Random(), axl.TitForTat()),
+                    (axl.WinStayLoseShift(), axl.TitForTat())]
+
 
     max_N = 20
     repetitions = 1000
