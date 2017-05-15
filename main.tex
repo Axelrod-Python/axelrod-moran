@@ -700,7 +700,7 @@ As well as noting that the memory length and complexity of these strategies are
 much greater than one, it is interesting to note that none of them are akin to
 memory one strategies. Only one is stochastic although close inspection of the
 source code of PSO Gambler shows that it makes stochastic decisions rarely, and
-is functionally very similar to its deterministic cousin EvolvedLookerUp. Apart
+is functionally very similar to its deterministic cousin Evolved Looker Up. Apart
 from TF3 in \(N=3\), the finite state machines trained specifically for Moran
 processes do not appear in the top 5: whereas strategies trained for tournaments do.
 This is due to the nature of invasion: most of the opponents will initially be different
@@ -941,7 +941,8 @@ this suggests that while maximizing individual payoff can lead to the evolution
 of cooperation, these strategies are not the most evolutionarily stable
 in the long run. A strategy with a handshaking mechanism is still capable of
 invading and is more resistant to subsequent invasions. Moreover, the
-best resistor of the payoff maximally trained strategies (EvolvedLookerUp1_1_1),
+best resistor of the payoff maximally trained strategies (Evolved Looker Up
+1\_1\_1),
 which always defects if the opponent defects in the first round, is effectively
 employing a one-shot handshake of C. These insights also suggest that a strategy
 aware of the population distribution could choose to become a handshaker at
@@ -953,7 +954,7 @@ invasion and resistance better than training at a starting population of
 $(N/2, N/2)$. Nevertheless our results suggest that there is not much room for
 improvement. Any handshake more sophisticated than C necessarily involves
 a defection. (A handshake consisting of a longer sequence of cooperations is
-effectively a grudger.) For TF3 or EvolvedLookerUp1_1_1 to become better resistors
+effectively a grudger.) For TF3 or EvolvedLookerUp1\_1\_1 to become better resistors
 they need a longer or more strict handshake. But if this handshake involves
 a defection then likely the invasion ability is diminished for $N > 2$: the top
 invaders for larger $N$ are nice strategies that do not defect before their
