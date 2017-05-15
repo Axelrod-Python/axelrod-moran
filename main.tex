@@ -23,6 +23,7 @@
 % Title
 \title{An Empirical Study of Invasion and Resistance
        for Iterated Prisoner's Dilemma Strategies}
+\title{Evolving Invaders and Resistors for the Iterated Prisoner's Dilemma}
 \author{Vincent Knight \and
         Marc Harper \and
         Nikoleta E. Glynatsi \and
@@ -41,7 +42,9 @@
     probabilities for Moran processes are obtained for 164
     different strategies. It is found that players with long memories and
     sophisticated behaviours outperform many strategies that perform well
-    in a two player setting.
+    in a two player setting. Moreover we introduce several strategies
+    trained with evolutionary algorithms to excel at the Moran process.
+    These strategies are excellent invaders and resistors of invasion.
 \end{abstract}
 
 \section{Introduction}\label{sec:introduction}
@@ -57,7 +60,7 @@ matter. This extended form is called the Iterated Prisoner's
 Dilemma (IPD). As described in \cite{Axelrod1980a, Knight2016, Press2012} a
 number of strategies have been developed to take advantage of the history of
 play. Recently, some strategies referred to as Zero Determinant strategies
-\cite{Press2012} even manipulate players through extortion.
+\cite{Press2012} can manipulate some players through extortionate mechanisms.
 
 The Moran Process \cite{Moran1957} is a model of
 evolutionary population dynamics that has been used to gain insights about the
@@ -67,7 +70,8 @@ Several earlier
 works have studied iterated games in the context of the prisoner's dilemma
 \cite{Nowak, Stewart2012}, however these often make simplifying assumptions
 and/or do not consider sophisticated behaviour: only considering strategies that
-either cooperate or defect.
+either cooperate or defect, or are limited to classes of strategies
+such as memory-one strategies that only use the previous round of play.
 
 This manuscript provides a detailed numerical analysis of
 \textbf{\input{./tex/num_strategies.tex}}complex and adaptive strategies for the
@@ -78,15 +82,17 @@ strategies including classics like TitForTat and WinStayLoseShift, as well as
 recent variants such as OmegaTFT, Zero determinant and other memory one
 strategies, strategies based on finite state machines, lookup tables, neural
 networks, and other machine learning based strategies, and a collection of novel
-strategies. Not all strategies have been considered for this study: same use
-knowledge of the game such as the number of turns and others have a high
+strategies. Not all strategies have been considered for this study: excluded
+are those that make use of knowledge of the game such as the number of turns
+and others that have a high
 computational run time. The large number of strategies are available thanks to
 the open source nature of the project with over 40 contributions made by
 different programmers and researchers \cite{Knight2016}. Three of the considered
 strategies are finite state machines trained specifically for Moran processes
 (described further in Section~\ref{sec:strategies}.
 
-The library can conduct matches, tournaments and population
+In addition to providing a large collection of strategies, the Axelrod library
+can conduct matches, tournaments and population
 dynamics with variations including noise and spatial structure.
 The strategies and simulation frameworks are
 automatically tested to an extraordinarily high degree of coverage in accordance
@@ -108,12 +114,12 @@ While the results agree with some of the published literature, it is found that:
 \begin{enumerate}
  \item Zero determinant strategies are not particularly effective for $N > 2$
  \item Complex strategies can be effective, and in fact can naturally evolve
-     through evolutionary processes to outperform intelligently designed
-     strategies.
- \item Strong resistors specifically evolve or have a handshake mechanism. This
-     has the potential to offer insight in to organisms such as antibacterial
-     resistant bacteria \cite{Davies2010}.
+     through evolutionary processes to outperform designed strategies.
+ \item Strong resistors specifically evolve or have a handshake mechanism.
 \end{enumerate}
+
+These finding have the potential to offer insight in to organisms such as antibacterial
+resistant bacteria \cite{Davies2010} and human social behaviors.
 
 \subsection{The Moran Process}\label{sec:the_moran_process}
 
@@ -127,7 +133,8 @@ population. In some settings mutation is also considered but without mutation
 state where the population is entirely made up of players of one strategy. The
 probability with which a given strategy is the survivor is called the
 \textit{fixation probability}. A more detailed analytic description of this is
-given in Section~\ref{sec:validation}.
+given in Section~\ref{sec:validation}. In our simulations offspring do not
+inherit any knowledge or history from parent replicants.
 
 \begin{figure}[!hbtp]
     \centering
@@ -184,24 +191,24 @@ algorithms.
 \end{itemize}
 
 A part from the PSO Gambler strategy, which was trained using a particle swarm
-optimisation algorithm, all these strategies are trained with an evolutionary
+optimisation algorithm, these strategies are trained with an evolutionary
 algorithm that perturbs strategy parameters and optimizes the mean total score
-against all other opponents \cite{affenzeller2009genetic}. Variation is
+against all other opponents \cite{affenzeller2009genetic}. They were not
+trained specifically for the Moran process or to cooperate well with themselves
+(though they all do). Variation is
 introduced via mutation and crossover of parameters, and the best performing
 strategies are carried to the next generation along with new variants. Similar
 methods appear in the literature \cite{Ashlock2006}.
 
-More
-information about each player can be obtained in the documentation for
+More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
- of these strategies in IPD
-tournaments will be described in upcoming manuscript.
+ of these strategies in IPD tournaments will be described in upcoming manuscript(s).
 % TODO Think of how to reference this upcoming manuscript
 
 All of the training code is available in the
 Axelrod repository with documentation to train new strategies easily. Training
 % TODO Include link etc
-typically takes less than 200 iterations and can be completed within several
+typically takes less than 100 generations and can be completed within several
 hours on commodity hardware.
 
 There are three further strategies trained specifically for this study; Trained
@@ -242,9 +249,9 @@ individuals of the training candidates and \(N/2\) individuals of an opponent
 strategy, taken from a selection of 150 opponents from the axelrod library:
 
 \begin{itemize}
-	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per match
-	\item TF2 \(N=10\), 0\% noise, 10000 repetitions per match
-	\item TF3 \(N=8\), 1\% noise, 100 repetitions per match
+	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per matchup
+	\item TF2 \(N=10\), 0\% noise, 10000 repetitions per matchup
+	\item TF3 \(N=8\), 1\% noise, 100 repetitions per matchup
 \end{itemize}
 
 Each matchup of players was run to fixation for the specified number of
@@ -258,9 +265,8 @@ cooperate with any strategy and only tolerates a few defections before
 defecting for the rest of match. It is similar to but not exactly the same as
 Fool Me Once, a strategy that cooperates until the opponent has defected twice
 (not necessarily consecutively), and defects indefinitely thereafter. Though a
-product of training with a Moran objective. Interestingly it has no handshake
-mechanism, this could be due to the fact that it is trained in a noisy
-environment.
+product of training with a Moran objective. It differs from TF1 and TF2 
+by lacking a handshake mechanism.
 
 TF2 always starts with CD and will defect against opponents that start with
 DD\@. It plays CDD against itself and then cooperates thereafter. There is a
@@ -271,7 +277,11 @@ GTFT (depending on the random seed).
 TF1 has an initial handshake of CCD and cooperates if the opponent matches.
 However if the opponent later defects, TF1 will respond in kind, so the
 handshake is not permanent. Only one player (Prober 4 \cite{prison}) manages to
-achieve cooperation with TF1 after about 20 rounds of play.
+achieve cooperation with TF1 after about 20 rounds of play. TF1 is functionally
+very similar to a strategy known as ``Collective Strategy'', which has a
+handshake of CD and cooperates with opponents that matched the handshake
+until they defect, defecting thereafter if the opponent ever defects \cite{Li2009}.
+This strategy was specifically designed for evolutionary processes.
 
 For both TF1 and TF2 a handshake
 mechanism naturally emerges from the structure of the underlying finite state
@@ -293,12 +303,11 @@ with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
 computed for each combination of starting distribution and value of \(N\).  The
 axelrod library can carry out exact simulations of the Moran process. Since some
 of the strategies have a high computational cost or are stochastic, samples are
-taken
-from a large number of match outcomes for the pairs of players for use in
+taken from a large number of match outcomes for the pairs of players for use in
 computing fitnesses in the Moran process. This approach was verified to agree
 with unsampled calculations to a high degree of accuracy in specific cases.
 This is described in Algorithms~\ref{alg:data_collection}
-and~\ref{alg:moran_process}..
+and~\ref{alg:moran_process}.
 
 \begin{algorithm}[!hbtp]
         \caption{Data Collection}
@@ -335,23 +344,23 @@ The expected payoffs of \(i\) players of the first type in a population with \(N
 - i\) players of the second type are given by:
 
 \begin{equation}\label{equ:expected_payoff_one}
-    F_i = \frac{a(i - 1) + b(N - i)}{N - 1}
+    f_i = \frac{a(i - 1) + b(N - i)}{N - 1}
 \end{equation}
 
 \begin{equation}\label{equ:expected_payoff_two}
-    G_i = \frac{ci + d(N - i - 1)}{N - 1}
+    g_i = \frac{ci + d(N - i - 1)}{N - 1}
 \end{equation}
 
-With an intensity of selection \(\omega\) the fitness of both strategies is
-given by:
-
-\begin{equation}\label{equ:expected_payoff_one}
-    f_i = 1 - \omega + \omega F_i
-\end{equation}
-
-\begin{equation}\label{equ:expected_payoff_two}
-    g_i = 1 - \omega + \omega G_i
-\end{equation}
+% With an intensity of selection \(\omega\) the fitness of both strategies is
+% given by:
+% 
+% \begin{equation}\label{equ:expected_payoff_one}
+%     f_i = 1 - \omega + \omega F_i
+% \end{equation}
+% 
+% \begin{equation}\label{equ:expected_payoff_two}
+%     g_i = 1 - \omega + \omega G_i
+% \end{equation}
 
 The transitions within the birth death process that underpins the Moran process
 are then given by:
@@ -384,7 +393,12 @@ Figure~\ref{fig:comparison_deterministic}. The points represent the simulated
 values and the line shows the theoretical value. Note that these are all
 deterministic strategies and show a perfect match up between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
-strategies pairs.
+strategies pairs. Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
+stochastic strategies. These are no longer a good match which highlights the
+weakness of the analytical formulae that relies on the average payoffs
+(\ref{equ:payoff_matrix}). Estimating all the transitions may give better agreement
+but is not necessary for our purposes. All data generated for this validation exercise can be found
+at \cite{data}.
 
 \begin{figure}[!hbtp]
     \centering
@@ -506,18 +520,6 @@ strategies pairs.
     \label{fig:comparison_stochastic}
 \end{figure}
 
-Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
-stochastic strategies. These are no longer a good match which highlights the
-weakness of the analytical formulae that relies on the average payoffs
-(\ref{equ:payoff_matrix}).
-
-All data generated for this validation exercise can be found
-at \cite{data}.
-
-A detailed analysis of the 164 strategies considered,
-using direct Moran processes will be shown in the next Section.
-
-
 \section{Empirical results}\label{sec:empirical_results}
 
 This section outlines the data analysis carried out:
@@ -538,7 +540,7 @@ This section outlines the data analysis carried out:
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
 
-When $N=2$ the Moran process is effectively a measure of the relative
+When $N=2$ the Moran process is effectively a measure of the distribution of relative
 mean payoffs over all possible matches between two players. The strategy
 that scores higher than the other more often will fixate more often.
 
@@ -550,11 +552,7 @@ Table~\ref{tbl:summary_top_2}.
 
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
-        handshake mechanism (a cooperation followed by a defection on the first
-        move). As long as the opponent plays the same handshake and does not
-        defect in the future it cooperates. Otherwise it defects for all
-        rounds. This strategy was specifically designed for
-        evolutionary processes \cite{Li2009}.
+        handshake mechanism described above.
     \item The Defector: it always defects. As it has little potential
         interaction with itself (recall that \(N=2\)), its
         aggressiveness is rewarded.
@@ -581,7 +579,7 @@ Table~\ref{tbl:summary_top_2}.
 \begin{table}[!hbtp]
     \centering
     \input{./tex/summary_top_2_invade.tex}
-    \caption{Summary of top five strategies for \(N=2\)}
+    \caption{Summary of top five strategies for \(N=2\) (neutral fixation is $p=0.5$.}
     \label{tbl:summary_top_2}
 \end{table}
 
@@ -594,15 +592,15 @@ stationarity assumptions allows for the analysis to take place leading to the
 conclusions about zero determinant strategies however it is dependent on a
 specific structure of strategies. The analysis carried out here makes no
 assumptions about the structure of the strategies by using actual simulation
-interactions.
+interactions. \cite{Stewart...}
 
-In the next sections close attention to
-strategies who are strong invaders/resistors is given.
+% In the next sections close attention to
+% strategies who are strong invaders/resistors is given.
 
 \subsection{Strong invaders}\label{sec:strong_invaders}
 
 In this section the focus is on the ability of a mutant strategy to invade: the
-probability of 1 individual of a given type successfully becoming fixated in a
+probability of one individual of a given type successfully fixating in a
 population of \(N - 1\) other individuals, denoted by \(x_1\). The fixation
 probabilities are shown in
 Figures~\ref{fig:boxplot_3_invade},~\ref{fig:boxplot_7_invade}
@@ -683,11 +681,11 @@ high performing strategies are:
 As well as noting that the memory length and complexity of these strategies are
 much greater than one, it is interesting to note that none of them are akin to
 memory one strategies. Only one is stochastic although close inspection of the
-source code of PSO Gambler shows that it makes stochastic decisions with extreme
-probabilities: almost always acting as expected. Apart from TF3 in \(N=3\), the
-finite state machines trained specifically for Moran processes do not appear in
-the top 5: whereas strategies trained for tournament do. This is due to the
-nature of invasion: most of the opponents will initially be different
+source code of PSO Gambler shows that it makes stochastic decisions rarely, and
+is functionally very similar to its deterministic cousing EvolvedLookerUp. Apart
+from TF3 in \(N=3\), the finite state machines trained specifically for Moran
+processes do not appear in the top 5: whereas strategies trained for tournament do.
+This is due to the nature of invasion: most of the opponents will initially be different
 strategies. The next section will consider the converse situation.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
@@ -697,8 +695,7 @@ other strategies are identified by examining the distribution of $x_{N-1}$ for
 each strategy. Note that this is equivalent to looking at $x_1$ for all
 opponents.
 
-The fixation
-probabilities are shown in
+The fixation probabilities are shown in
 Figures~\ref{fig:boxplot_3_resist},~\ref{fig:boxplot_7_invade}
 and~\ref{fig:boxplot_14_resist} for \(N\in\{3, 7, 14\}\) showing the mean
 fixation as well as the neutral fixation for each given scenario.
@@ -751,16 +748,16 @@ Section~\ref{sec:two_individuals} perform well for high \(N\).
 
 Interestingly none of these strategies are stochastic: this is explained by
 the need of strategies to have a steady hand when interacting with their own
-kind. In essence: acting stochastically increase the chance of friendly fire.
-However it is possible to design a strategy with a ``stochastic
-handshake'' \cite{Lee2015}.
+kind. In essence: acting stochastically increases the chance of friendly fire.
+However it is possible to design a strategy with a stochastic or error-correcting
+handshake that is an excellent resistor even in noisy environments \cite{Lee2015}.
 
 There are are only two new strategies that appear in the top ranks for
 \(x_{N-1}\): TF1 and TF2. These two strategies are with CS the strongest
-resistors. They all have handshakes, and whilst the handshake that CS and
-Handshake (which ranks highly for the smaller values of \(N\)) have was
+resistors. They all have handshakes, and whilst the handshakes of CS and
+Handshake (which ranks highly for the smaller values of \(N\)) were
 programmed, the handshakes of TF1 and TF2 evolved through an evolutionary
-process.
+process without any priming.
 
 As described in Section~\ref{sec:strong_invaders} the strategies trained with
 the payoff maximizing objective are among the best invaders in the library
@@ -771,22 +768,24 @@ is reasonable to conclude that the objective function is the cause of the
 emergence of handshaking mechanisms.
 
 The payoff maximizing strategies typically will not defect before the opponent's
-first defection, possibly because the training strategy collection contains a
-significant portion of strategies such as Grudger and Fool Me Once that
-retaliate harshly by defecting for the remainder of the match if the opponent
-has more than a small number of cumulative defections. Paradoxically it is
-necessary to defect (as a signal) in order to achieve mutual cooperation with
-opponents using the same strategy but not with other opponents.
+first defection, possibly because the training strategy collection contains some
+strategies such as Grudger and Fool Me Once that retaliate harshly by defecting
+for the remainder of the match if the opponent has more than a small number of
+cumulative defections. Paradoxically it is advantageous to defect (as a signal)
+in order to achieve mutual cooperation with opponents using the same strategy
+but not with other opponents. Nevertheless an evolutionary process is able to
+tunnel through the costs and risks associated to early defections to find more
+optimal solutions, so it is not surprising in hindsight that handshaking
+strategies emerge from the evolutionary training process.
 
 A handshake requires at least one defection and there is
 selective pressure to defect as few times as possible to achieve the
 self-recognition mechanism. It is also unwise to defect on the first move as
 some strategies additionally retaliate first round defections. So the
-handshakes used by TF1 and TF2, and CS, are in some sense optimal. These
+handshakes used by TF1, TF2, and CS are in some sense optimal. These
 discoveries may have significant ramifications regarding the evolution of
 cooperation and forgiveness in biological organisms such as antibacterial
-resistant bacteria and social interactions
-between humans.
+resistant bacteria and social interactions between humans.
 
 It is evident through
 Sections~\ref{sec:two_individuals},~\ref{sec:strong_invaders}
@@ -818,8 +817,8 @@ This highlights that there is little that can be inferred about the evolutionary
 performance of a strategy in a large population from its performance in a small
 population.
 
-This is confirmed by the performance of the Zero determinant strategies, whilst
-some do rank relatively highly for \(N=2\) (ZD-extort-4 has tank 16) this rank
+This is confirmed by the performance of the zero determinant strategies. While
+some do rank relatively highly for \(N=2\) (ZD-extort-4 has rank 16) this rank
 does not translate to larger populations.
 
 \begin{figure}[!hbtp]
@@ -905,6 +904,58 @@ not extend to larger populations. This was discussed theoretically in
     \label{fig:correlation_coefficients}
 \end{figure}
 
+\section{Discussion}
+
+Training strategies to excel
+at the Moran process led to the evolution of cooperation, but only with like
+individuals in the case of TF1 and TF2. This may have significant implications
+for human social interactions such as the evolution of ingroup/outgroup mechanisms
+and other sometimes costly rituals that reinforce group behavior.
+
+While TF1 and TF2 are competent invaders, the best invaders
+in the study do not appear to employ strict handshakes, and are generally
+cooperative strategies. TF3, which does not use a handshake, is a better invader
+than TF1 and TF2 but not as good of a resistor. Nevertheless it was the result
+of the same kind of training procceses and is a better combined invader-resistor
+than the invaders that were trained previously to maximize payout.
+
+The strategies trained to maximize payoff in head-to-head matches are generally
+cooperative and are effective invaders.
+Combined with the fact that handshaking strategies are stronger resisters,
+this suggests that while maximizing individual payoff can lead to the evolution
+of cooperation (through fixation), it is not necessarily evolutionarily stable
+in the long run. A strategy with a handshaking mechanism is still capable of
+invading and is more resistant to subsequent invasions. Moreover, the
+best resistor of the payoff maximally trained strategies is EvolvedLookerUp1_1_1,
+which always defects if the opponent defects in the first round, is effectively
+employing a one-shot handshake of C. These insights also suggest that a strategy
+aware of the population distribution could choose to become a handshaker at
+a critical threshold and use a different strategy for invasion when in the
+minority. However this information was not available to our strategies.
+
+We did not attempt other objective functions that may serve to select for both
+invasion and resistance better than training at a starting population of
+$(N/2, N/2)$. Nevertheless our results suggest that there is not much room for
+improvement. Any handshake more sophisticated than C necessarily involves
+a defection. (A handshake consisting of a longer sequence of cooperations is
+effectively a grudger.) For TF3 or EvolvedLookerUp1_1_1 to become better resistors
+they need a longer, more strict handshake. But if this handshake involves
+a defection then likely the invasion ability is diminished for $N > 2$: the top
+invaders for larger $N$ are nice strategies that do not defect before their
+opponents. This is because good invaders still need to cooperate with themselves,
+and so in the absense of a handshake mechanism or knowledge of the population
+distribution, a strategy must be generally cooperative. Aggressive strategies
+are only effective invaders for the smallest $N$, dropping down dramatically
+as the population size increases.
+
+We did, however, attempt to evolve CS using FSM and lookup table based players,
+which resulted in some very similar strategies. In particular we evolved a
+lookup strategy that had a handshake of DC and played TFT with other players
+after a correct handshake and defecting otherwise, which is quite close in
+function to CS (full grudging is not possible with a lookup table).
+
+Finally we note that it may be possible to achieve similar results with smaller
+capacity finite state machine players.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -914,25 +965,25 @@ ordered pairs of strategies have been placed in a Moran process with different
 starting values allowing the each strategy to attempt to invade the other.
 This is the largest such experiment carried out and has lead to many insights.
 
-When studying evolutionary processes it is vital to consider \(N>2\) as the
-special case for \(N=2\) cannot be used to extrapolate performance in bigger
+When studying evolutionary processes it is vital to consider \(N>2\) since
+results for \(N=2\) cannot be used to extrapolate performance in larger
 populations. This was shown both observationally in
 Sections~\ref{sec:strong_invaders} and~\ref{sec:strong_resistors} but also by
 considering the correlation of the ranks in different population sizes in
 Section~\ref{sec:population_size}.
 
-Memory one strategies do not perform well, as predicted by \cite{Press2012}.
-There are no memory one strategies in the top 5 performing strategies
-for \(N>3\). This is due to their lack of sophistication which allows them to
-recognise and adjust to their opponent. Some very sophisticated strategies
-proves to be high performers for invasion: these are infinite memory strategies
+Memory one strategies do not perform well in general in this study. There are
+no memory one strategies in the top 5 performing strategies
+for \(N>3\). This is due at least partly to their lack of ability to
+recognise their opponents. More sophisticated strategies
+prove to be high performers for invasion: these are infinite memory strategies
 which have been trained using a number of reinforcement learning algorithms.
 Interestingly they have been trained to perform well in tournaments and not
 Moran processes which highlights the potentially for improvement.
 
 One of the major findings discussed in Section~\ref{sec:strong_resistors}, is
 the ability of strategies with a handshake mechanism to resist invasion. This
-was not only identify for CS (an intelligently designed strategy) but also for
+was not only revealed for CS (a human designed strategy) but also for
 two FSM strategies (TF1 and TF2) specifically trained through an evolutionary
 process. In these two cases, the handshake mechanism was a product of the
 evolutionary process. This has the potential to help with the understanding of
@@ -940,8 +991,8 @@ organisms with a strong resistance to invasion such as anti antibacterial
 resistant bacteria \cite{Davies2010}. With the knowledge that a handshake being
 likely to exist, perhaps it can be mimicked.
 
-It is felt that these findings are important for the ongoing understanding of
-population dynamics and offer evidence for some of the shortcomings of short
+These findings are important for the ongoing understanding of
+population dynamics and offer evidence for some of the shortcomings of low
 memory which has started to be recognised by the community \cite{Hilbe2017}.
 
 All source code for this work has been written in a sustainable manner: it is
@@ -951,11 +1002,11 @@ be reproduced \cite{Prlic2012, Sandve2013, Wilson2014}. The raw data as well as
 the processed data has also been properly archived and can be fond
 at \cite{data}.
 
-There are various areas for further work to build on this. Firstly, an analysis
-of the effect of noise would offer insights about the stability of the findings.
-It would also be possible to consider three or more types of strategy in the
-population and finally mutation would also offer an interesting dimension to
-explore.
+% There are various areas for further work to build on this. Firstly, an analysis
+% of the effect of noise would offer insights about the stability of the findings.
+% It would also be possible to consider three or more types of strategy in the
+% population and finally mutation would also offer an interesting dimension to
+% explore.
 
 \section*{Acknowledgements}
 
