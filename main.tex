@@ -170,8 +170,8 @@ strategies cooperate well with other players using the same strategy.
 \subsection{Strategies considered}\label{sec:strategies}
 
 To carry out this large numerical experiment, \input{./tex/num_strategies}
-strategies, listed in Appendix~\ref{app:list_of_players} are used library. There
-are \input{./tex/num_stochastic.tex}stochastic and
+strategies, listed (with their properties) in Appendix~\ref{app:list_of_players}
+are used library. There are \input{./tex/num_stochastic.tex}stochastic and
 \input{./tex/num_deterministic.tex}deterministic strategies. Their memory depth,
 defined by the number of rounds of history used by the strategy each round, is
 shown in Table~\ref{tbl:memory_depth_count}. The memory depth is infinite if the
@@ -265,7 +265,7 @@ cooperate with any strategy and only tolerates a few defections before
 defecting for the rest of match. It is similar to but not exactly the same as
 Fool Me Once, a strategy that cooperates until the opponent has defected twice
 (not necessarily consecutively), and defects indefinitely thereafter. Though a
-product of training with a Moran objective. It differs from TF1 and TF2 
+product of training with a Moran objective. It differs from TF1 and TF2
 by lacking a handshake mechanism.
 
 TF2 always starts with CD and will defect against opponents that start with
@@ -353,11 +353,11 @@ The expected payoffs of \(i\) players of the first type in a population with \(N
 
 % With an intensity of selection \(\omega\) the fitness of both strategies is
 % given by:
-% 
+%
 % \begin{equation}\label{equ:expected_payoff_one}
 %     f_i = 1 - \omega + \omega F_i
 % \end{equation}
-% 
+%
 % \begin{equation}\label{equ:expected_payoff_two}
 %     g_i = 1 - \omega + \omega G_i
 % \end{equation}
@@ -440,19 +440,19 @@ at \cite{data}.
 
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/WStLSh_v_TfT.pdf}
+        \includegraphics[width=.8\textwidth]{./img/WSLS_v_TfT.pdf}
         \caption{Win Stay Lose Shift and Tit For Tat}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Alternator_v_WStLSh.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Alternator_v_WSLS.pdf}
         \caption{Alternator and Win Stay Lose Shift}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.3\textwidth}
         \centering
-        \includegraphics[width=.8\textwidth]{./img/Defector_v_WStLSh.pdf}
+        \includegraphics[width=.8\textwidth]{./img/Defector_v_WSLS.pdf}
         \caption{Defector and Win Stay Lose Shift}
     \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process fixation
@@ -545,8 +545,8 @@ mean payoffs over all possible matches between two players. The strategy
 that scores higher than the other more often will fixate more often.
 
 For \(N=2\) the two cases of \(x_1\) and \(x_{N-1}\) coincide, but will be
-considered separately for larger \(N\) in sections~\ref{sec:strong_invaders} and
-~\ref{sec:strong_resistors}.  Figure~\ref{fig:boxplot_2} shows all fixation
+considered separately for larger \(N\) in sections~\ref{sec:strong_invaders}
+and~\ref{sec:strong_resistors}. Figure~\ref{fig:boxplot_2} shows all fixation
 probabilities for the strategies considered. This is summarised in
 Table~\ref{tbl:summary_top_2}.
 
@@ -577,9 +577,10 @@ Table~\ref{tbl:summary_top_2}.
 \end{figure}
 
 \begin{table}[!hbtp]
+    \scriptsize
     \centering
     \input{./tex/summary_top_2_invade.tex}
-    \caption{Summary of top five strategies for \(N=2\) (neutral fixation is $p=0.5$.}
+    \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\).}
     \label{tbl:summary_top_2}
 \end{table}
 
@@ -601,13 +602,26 @@ interactions. \cite{Stewart...}
 
 In this section the focus is on the ability of a mutant strategy to invade: the
 probability of one individual of a given type successfully fixating in a
-population of \(N - 1\) other individuals, denoted by \(x_1\). The fixation
+population of \(N - 1\) other individuals, denoted by \(x_1\).
+The ranks of each strategy for all considered values of \(N\) according to mean
+\(x_1\) are shown in Figures~\ref{fig_ranks_v_size_invade}.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_invade.pdf}
+    \caption{Ranks of all strategies according to \(x_1\) for different
+    population sizes}
+    \label{fig:ranks_v_size_invade}
+\end{figure}
+
+The fixation
 probabilities are shown in
 Figures~\ref{fig:boxplot_3_invade},~\ref{fig:boxplot_7_invade}
 and~\ref{fig:boxplot_14_invade} for \(N\in\{3, 7, 14\}\) showing the mean
 fixation as well as the neutral fixation for each given scenario.
 
 \begin{figure}[!hbtp]
+    \scriptsize
     \centering
     \includegraphics[height=.9\textheight]{./img/boxplot_3_invade.pdf}
     \caption{The fixation probabilities \(x_1\) for \(N=3\)}
@@ -628,25 +642,29 @@ fixation as well as the neutral fixation for each given scenario.
     \label{fig:boxplot_14_invade}
 \end{figure}
 
-The top five strategies are given in Tables~\ref{tbl:top_five_invade}.
+The top strategies are given in Tables~\ref{tbl:top_five_invade}.
 
 \begin{table}[!hbtp]
-    \begin{subfigure}[t]{\textwidth}
+    \centering
+    \scriptsize
+    \begin{subfigure}[t]{.5\textwidth}
         \centering
         \input{./tex/summary_top_3_invade.tex}
         \caption{\(N=3\)}
-    \end{subfigure}
-    \begin{subfigure}[t]{\textwidth}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.5\textwidth}
         \centering
         \input{./tex/summary_top_7_invade.tex}
         \caption{\(N=7\)}
     \end{subfigure}
-    \begin{subfigure}[t]{\textwidth}
+
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
         \input{./tex/summary_top_14_invade.tex}
         \caption{\(N=14\)}
     \end{subfigure}
-    \caption{Properties of top five invaders}
+    \caption{Top invaders for \(N\in\{3, 7, 14\}\)}
     \label{tbl:top_five_invade}
 \end{table}
 
@@ -682,9 +700,9 @@ As well as noting that the memory length and complexity of these strategies are
 much greater than one, it is interesting to note that none of them are akin to
 memory one strategies. Only one is stochastic although close inspection of the
 source code of PSO Gambler shows that it makes stochastic decisions rarely, and
-is functionally very similar to its deterministic cousing EvolvedLookerUp. Apart
+is functionally very similar to its deterministic cousin Evolved Looker Up. Apart
 from TF3 in \(N=3\), the finite state machines trained specifically for Moran
-processes do not appear in the top 5: whereas strategies trained for tournament do.
+processes do not appear in the top 5: whereas strategies trained for tournaments do.
 This is due to the nature of invasion: most of the opponents will initially be different
 strategies. The next section will consider the converse situation.
 
@@ -692,8 +710,17 @@ strategies. The next section will consider the converse situation.
 
 In addition to identifying good invaders, strategies resistant to invasion by
 other strategies are identified by examining the distribution of $x_{N-1}$ for
-each strategy. Note that this is equivalent to looking at $x_1$ for all
-opponents.
+each strategy. The ranks of each strategy for all considered values of \(N\)
+according to mean \(x_{N-1}\) are shown in
+Figures~\ref{fig_ranks_v_size_resist}.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_resist.pdf}
+    \caption{Ranks of all strategies according to \(x_{N-1}\) for different
+    population sizes}
+    \label{fig:ranks_v_size_resist}
+\end{figure}
 
 The fixation probabilities are shown in
 Figures~\ref{fig:boxplot_3_resist},~\ref{fig:boxplot_7_invade}
@@ -721,28 +748,32 @@ fixation as well as the neutral fixation for each given scenario.
     \label{fig:boxplot_14_resist}
 \end{figure}
 
-Table~\ref{tbl:top_five_resist} shows the top five strategies when ranked
+Table~\ref{tbl:top_five_resist} shows the top strategies when ranked
 according to \(x_{N-1}\) for \(N\in\{3, 7, 14\}\).
 Once again none of the short memory strategies from
 Section~\ref{sec:two_individuals} perform well for high \(N\).
 
 \begin{table}[!hbtp]
-    \begin{subfigure}[t]{\textwidth}
+    \scriptsize
+    \centering
+    \begin{subfigure}[t]{.5\textwidth}
         \centering
         \input{./tex/summary_top_3_resist.tex}
         \caption{\(N=3\)}
-    \end{subfigure}
-    \begin{subfigure}[t]{\textwidth}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{.5\textwidth}
         \centering
         \input{./tex/summary_top_7_resist.tex}
         \caption{\(N=7\)}
     \end{subfigure}
-    \begin{subfigure}[t]{\textwidth}
+
+    \begin{subfigure}[t]{.3\textwidth}
         \centering
         \input{./tex/summary_top_14_resist.tex}
         \caption{\(N=14\)}
     \end{subfigure}
-    \caption{Properties of top five resistors}
+    \caption{Top resistors for \(N\in\{3, 7, 14\}\)}
     \label{tbl:top_five_resist}
 \end{table}
 
@@ -797,9 +828,9 @@ the next section, looking not only at \(x_1\) and \(x_{N-1}\) but also consider
 
 \subsection{The effect of population size}\label{sec:population_size}
 
-Figures~\ref{fig:ranks_v_size_invade},~\ref{fig:ranks_v_size_resist}
-and~\ref{fig:ranks_v_size_coexist} show the rank of each strategy based on mean
-fixation probabilities against population size.
+To complement Figures~\ref{fig:ranks_v_size_invade}
+and~\ref{fig:ranks_v_size_resist} Figure~\ref{fig:ranks_v_size_coexist} shows
+the rank of each strategy based on \(x_{N/2}\).
 Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
 and~\ref{tbl:ranks_v_size_coexist} show the same information for a selection of
 strategies:
@@ -821,14 +852,6 @@ This is confirmed by the performance of the zero determinant strategies. While
 some do rank relatively highly for \(N=2\) (ZD-extort-4 has rank 16) this rank
 does not translate to larger populations.
 
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_invade.pdf}
-    \caption{Ranks of all strategies according to \(x_1\) for different
-    population sizes}
-    \label{fig:ranks_v_size_invade}
-\end{figure}
-
 \begin{table}[!hbtp]
     \centering
     \scriptsize
@@ -837,14 +860,6 @@ does not translate to larger populations.
     population sizes}
     \label{tbl:ranks_v_size_invade}
 \end{table}
-
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_resist.pdf}
-    \caption{Ranks of all strategies according to \(x_{N-1}\) for different
-    population sizes}
-    \label{fig:ranks_v_size_resist}
-\end{figure}
 
 \begin{table}[!hbtp]
     \centering
@@ -926,7 +941,8 @@ this suggests that while maximizing individual payoff can lead to the evolution
 of cooperation, these strategies are not the most evolutionarily stable
 in the long run. A strategy with a handshaking mechanism is still capable of
 invading and is more resistant to subsequent invasions. Moreover, the
-best resistor of the payoff maximally trained strategies (EvolvedLookerUp1_1_1),
+best resistor of the payoff maximally trained strategies (Evolved Looker Up
+1\_1\_1),
 which always defects if the opponent defects in the first round, is effectively
 employing a one-shot handshake of C. These insights also suggest that a strategy
 aware of the population distribution could choose to become a handshaker at
@@ -938,7 +954,7 @@ invasion and resistance better than training at a starting population of
 $(N/2, N/2)$. Nevertheless our results suggest that there is not much room for
 improvement. Any handshake more sophisticated than C necessarily involves
 a defection. (A handshake consisting of a longer sequence of cooperations is
-effectively a grudger.) For TF3 or EvolvedLookerUp1_1_1 to become better resistors
+effectively a grudger.) For TF3 or EvolvedLookerUp1\_1\_1 to become better resistors
 they need a longer or more strict handshake. But if this handshake involves
 a defection then likely the invasion ability is diminished for $N > 2$: the top
 invaders for larger $N$ are nice strategies that do not defect before their
@@ -999,7 +1015,7 @@ All source code for this work has been written in a sustainable manner: it is
 open source, under version control and tested which ensures that all results can
 be reproduced \cite{Prlic2012, Sandve2013, Wilson2014}. The raw data as well as
 % TODO Add reference to source code
-the processed data has also been properly archived and can be fond
+the processed data has also been properly archived and can be found
 at \cite{data}.
 
 % There are various areas for further work to build on this. Firstly, an analysis
@@ -1029,7 +1045,7 @@ A variety of software libraries have been used in this work:
 
 \section{List of players}\label{app:list_of_players}
 
-\begin{multicols}{3}
+\begin{multicols}{2}
 	\begin{enumerate}
 		\input{./tex/list_of_players.tex}
 	\end{enumerate}
