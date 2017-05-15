@@ -265,7 +265,7 @@ cooperate with any strategy and only tolerates a few defections before
 defecting for the rest of match. It is similar to but not exactly the same as
 Fool Me Once, a strategy that cooperates until the opponent has defected twice
 (not necessarily consecutively), and defects indefinitely thereafter. Though a
-product of training with a Moran objective. It differs from TF1 and TF2 
+product of training with a Moran objective. It differs from TF1 and TF2
 by lacking a handshake mechanism.
 
 TF2 always starts with CD and will defect against opponents that start with
@@ -353,11 +353,11 @@ The expected payoffs of \(i\) players of the first type in a population with \(N
 
 % With an intensity of selection \(\omega\) the fitness of both strategies is
 % given by:
-% 
+%
 % \begin{equation}\label{equ:expected_payoff_one}
 %     f_i = 1 - \omega + \omega F_i
 % \end{equation}
-% 
+%
 % \begin{equation}\label{equ:expected_payoff_two}
 %     g_i = 1 - \omega + \omega G_i
 % \end{equation}
@@ -601,7 +601,19 @@ interactions. \cite{Stewart...}
 
 In this section the focus is on the ability of a mutant strategy to invade: the
 probability of one individual of a given type successfully fixating in a
-population of \(N - 1\) other individuals, denoted by \(x_1\). The fixation
+population of \(N - 1\) other individuals, denoted by \(x_1\).
+The ranks of each strategy for all considered values of \(N\) according to mean
+\(x_1\) are shown in Figures~\ref{fig_ranks_v_size_invade}.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_invade.pdf}
+    \caption{Ranks of all strategies according to \(x_1\) for different
+    population sizes}
+    \label{fig:ranks_v_size_invade}
+\end{figure}
+
+The fixation
 probabilities are shown in
 Figures~\ref{fig:boxplot_3_invade},~\ref{fig:boxplot_7_invade}
 and~\ref{fig:boxplot_14_invade} for \(N\in\{3, 7, 14\}\) showing the mean
@@ -692,8 +704,17 @@ strategies. The next section will consider the converse situation.
 
 In addition to identifying good invaders, strategies resistant to invasion by
 other strategies are identified by examining the distribution of $x_{N-1}$ for
-each strategy. Note that this is equivalent to looking at $x_1$ for all
-opponents.
+each strategy. The ranks of each strategy for all considered values of \(N\)
+according to mean \(x_{N-1}\) are shown in
+Figures~\ref{fig_ranks_v_size_resist}.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_resist.pdf}
+    \caption{Ranks of all strategies according to \(x_{N-1}\) for different
+    population sizes}
+    \label{fig:ranks_v_size_resist}
+\end{figure}
 
 The fixation probabilities are shown in
 Figures~\ref{fig:boxplot_3_resist},~\ref{fig:boxplot_7_invade}
@@ -797,9 +818,9 @@ the next section, looking not only at \(x_1\) and \(x_{N-1}\) but also consider
 
 \subsection{The effect of population size}\label{sec:population_size}
 
-Figures~\ref{fig:ranks_v_size_invade},~\ref{fig:ranks_v_size_resist}
-and~\ref{fig:ranks_v_size_coexist} show the rank of each strategy based on mean
-fixation probabilities against population size.
+To complement Figures~\ref{fig:ranks_v_size_invade}
+and~\ref{fig:ranks_v_size_resist} Figure~\ref{fig:ranks_v_size_coexist} shows
+the rank of each strategy based on \(x_{N/2}\).
 Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
 and~\ref{tbl:ranks_v_size_coexist} show the same information for a selection of
 strategies:
@@ -821,14 +842,6 @@ This is confirmed by the performance of the zero determinant strategies. While
 some do rank relatively highly for \(N=2\) (ZD-extort-4 has rank 16) this rank
 does not translate to larger populations.
 
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_invade.pdf}
-    \caption{Ranks of all strategies according to \(x_1\) for different
-    population sizes}
-    \label{fig:ranks_v_size_invade}
-\end{figure}
-
 \begin{table}[!hbtp]
     \centering
     \scriptsize
@@ -837,14 +850,6 @@ does not translate to larger populations.
     population sizes}
     \label{tbl:ranks_v_size_invade}
 \end{table}
-
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_resist.pdf}
-    \caption{Ranks of all strategies according to \(x_{N-1}\) for different
-    population sizes}
-    \label{fig:ranks_v_size_resist}
-\end{figure}
 
 \begin{table}[!hbtp]
     \centering
