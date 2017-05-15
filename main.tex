@@ -907,7 +907,7 @@ not extend to larger populations. This was discussed theoretically in
 \section{Discussion}
 
 Training strategies to excel
-at the Moran process led to the evolution of cooperation, but only with like
+at the Moran process leads to the evolution of cooperation, but only with like
 individuals in the case of TF1 and TF2. This may have significant implications
 for human social interactions such as the evolution of ingroup/outgroup mechanisms
 and other sometimes costly rituals that reinforce group behavior.
@@ -923,10 +923,10 @@ The strategies trained to maximize payoff in head-to-head matches are generally
 cooperative and are effective invaders.
 Combined with the fact that handshaking strategies are stronger resisters,
 this suggests that while maximizing individual payoff can lead to the evolution
-of cooperation (through fixation), it is not necessarily evolutionarily stable
+of cooperation, these strategies are not the most evolutionarily stable
 in the long run. A strategy with a handshaking mechanism is still capable of
 invading and is more resistant to subsequent invasions. Moreover, the
-best resistor of the payoff maximally trained strategies is EvolvedLookerUp1_1_1,
+best resistor of the payoff maximally trained strategies (EvolvedLookerUp1_1_1),
 which always defects if the opponent defects in the first round, is effectively
 employing a one-shot handshake of C. These insights also suggest that a strategy
 aware of the population distribution could choose to become a handshaker at
@@ -939,7 +939,7 @@ $(N/2, N/2)$. Nevertheless our results suggest that there is not much room for
 improvement. Any handshake more sophisticated than C necessarily involves
 a defection. (A handshake consisting of a longer sequence of cooperations is
 effectively a grudger.) For TF3 or EvolvedLookerUp1_1_1 to become better resistors
-they need a longer, more strict handshake. But if this handshake involves
+they need a longer or more strict handshake. But if this handshake involves
 a defection then likely the invasion ability is diminished for $N > 2$: the top
 invaders for larger $N$ are nice strategies that do not defect before their
 opponents. This is because good invaders still need to cooperate with themselves,
@@ -951,7 +951,7 @@ as the population size increases.
 We did, however, attempt to evolve CS using FSM and lookup table based players,
 which resulted in some very similar strategies. In particular we evolved a
 lookup strategy that had a handshake of DC and played TFT with other players
-after a correct handshake and defecting otherwise, which is quite close in
+after a correct handshake while defecting otherwise, which is quite close in
 function to CS (full grudging is not possible with a lookup table).
 
 Finally we note that it may be possible to achieve similar results with smaller
