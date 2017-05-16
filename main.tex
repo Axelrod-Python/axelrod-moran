@@ -375,17 +375,6 @@ The expected payoffs of \(i\) players of the first type in a population with \(N
     g_i = \frac{ci + d(N - i - 1)}{N - 1}
 \end{equation}
 
-% With an intensity of selection \(\omega\) the fitness of both strategies is
-% given by:
-%
-% \begin{equation}\label{equ:expected_payoff_one}
-%     f_i = 1 - \omega + \omega F_i
-% \end{equation}
-%
-% \begin{equation}\label{equ:expected_payoff_two}
-%     g_i = 1 - \omega + \omega G_i
-% \end{equation}
-
 The transitions within the birth death process that underpins the Moran process
 are then given by:
 
@@ -419,9 +408,15 @@ deterministic strategies and show a perfect match up between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
 strategies pairs. Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
 stochastic strategies. These are no longer a good match which highlights the
-weakness of the analytical formulae that relies on the average payoffs
-(\ref{equ:payoff_matrix}). Estimating all the transitions may give better agreement
-but is not necessary for our purposes. All data generated for this validation exercise can be found
+weakness of assuming a given interaction between two IPD strategies can be
+summarised with a set of utilities as shown in
+(\ref{equ:payoff_matrix}). For any given pair of strategies it is possible to
+obtain \(p_{i,i-1}, p_{i,i+1}, p_{ii}\) exactly (as opposed to the
+approximations offered by (\ref{equ:p_up}), (\ref{equ:p_down}) and
+(\ref{equ:p_stay}). Obtaining these requires particular analysis for a given
+pair and can be quite a complex endeavour for stochastic strategies with long
+memory: this is not necessary for the purposes of this work.
+All data generated for this validation exercise can be found
 at \cite{data}.
 
 \begin{figure}[!hbtp]
@@ -628,7 +623,7 @@ In this section the focus is on the ability of a mutant strategy to invade: the
 probability of one individual of a given type successfully fixating in a
 population of \(N - 1\) other individuals, denoted by \(x_1\).
 The ranks of each strategy for all considered values of \(N\) according to mean
-\(x_1\) are shown in Figures~\ref{fig_ranks_v_size_invade}.
+\(x_1\) are shown in Figure~\ref{fig:ranks_v_size_invade}.
 
 \begin{figure}[!hbtp]
     \centering
@@ -738,7 +733,7 @@ In addition to identifying good invaders, strategies resistant to invasion by
 other strategies are identified by examining the distribution of $x_{N-1}$ for
 each strategy. The ranks of each strategy for all considered values of \(N\)
 according to mean \(x_{N-1}\) are shown in
-Figures~\ref{fig_ranks_v_size_resist}.
+Figures~\ref{fig:ranks_v_size_resist}.
 
 \begin{figure}[!hbtp]
     \centering
