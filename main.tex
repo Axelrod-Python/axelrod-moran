@@ -565,8 +565,9 @@ that scores higher than the other more often will fixate more often. For \(N=2\)
 the two cases of \(x_1\) and \(x_{N-1}\) coincide, but will be
 considered separately for larger \(N\) in sections~\ref{sec:strong_invaders}
 and~\ref{sec:strong_resistors}. Figure~\ref{fig:boxplot_2} shows all fixation
-probabilities for the strategies considered. This is summarised in
-Table~\ref{tbl:summary_top_2}.
+probabilities for the strategies considered. The top 16 (10\%) strategies are
+shown in
+Table~\ref{tbl:summary_top_2}. The top five ranking strategies are:
 
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
@@ -586,6 +587,10 @@ Table~\ref{tbl:summary_top_2}.
         defects while handshake will not.
 \end{enumerate}
 
+It is also noted that TF1, TF2 and TF3 all perform well. This is also the \(N\)
+for which a zero determinant strategy does appear in the top 10\% ranking
+strategies: ZD-extort-4. The performance of zero determinant strategies will be
+examined more closely in Section~\ref{sec:population_size}.
 
 \begin{figure}[!hbtp]
     \begin{subfigure}{.5\textwidth}
@@ -664,7 +669,7 @@ fixation as well as the neutral fixation for each given scenario.
     \caption{The fixation probabilities \(x_1\)}
 \end{figure}
 
-The top strategies are given in Tables~\ref{tbl:top_invade}.
+The top 16 strategies are given in Tables~\ref{tbl:top_invade}.
 
 \begin{table}[!hbtp]
     \centering
@@ -692,7 +697,7 @@ The top strategies are given in Tables~\ref{tbl:top_invade}.
 
 It can be seen that apart from CS, none of the strategies
 of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 14\}\). The new
-high performing strategies are:
+top performing strategies are:
 
 \begin{itemize}
     \item Grudger (which only performs well for \(N=3\)), starts by cooperating
@@ -717,15 +722,16 @@ high performing strategies are:
         perform well in tournaments.
 \end{itemize}
 
-As well as noting that the memory length and complexity of these strategies are
-much greater than one, it is interesting to note that none of them are akin to
-memory one strategies. Only one is stochastic although close inspection of the
+Only one of the above strategies is stochastic although close inspection of the
 source code of PSO Gambler shows that it makes stochastic decisions rarely, and
-is functionally very similar to its deterministic cousin Evolved Looker Up. Apart
-from TF3 in \(N=3\), the finite state machines trained specifically for Moran
-processes do not appear in the top 5 while strategies trained for tournaments do.
-This is due to the nature of invasion: most of the opponents will initially be of
-different types. The next section will consider the converse situation.
+is functionally very similar to its deterministic cousin Evolved Looker Up.
+The PSO Gambler Mem1 strategy is a memory one strategy that has been trained to
+maximise its utility and does perform well.
+Apart from TF3, the finite state machines trained specifically for
+Moran processes do not appear in the top 5, while strategies trained for
+tournaments do. This is due to the nature of invasion: most of the opponents
+will initially be different strategies. The next section will consider the
+converse situation.
 
 \subsection{Strong resistors}\label{sec:strong_resistors}
 
