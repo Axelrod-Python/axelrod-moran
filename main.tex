@@ -570,19 +570,22 @@ Table~\ref{tbl:summary_top_2}.
 
 
 \begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_2_invade.pdf}
-    \caption{The fixation probabilities for \(N=2\)}
-    \label{fig:boxplot_2}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[height=.7\textheight]{./img/boxplot_2_invade.pdf}
+        \caption{The fixation probabilities for \(N=2\)}
+        \label{fig:boxplot_2}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{.5\textwidth}
+        \scriptsize
+        \centering
+        \input{./tex/summary_top_2_invade.tex}
+        \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\).}
+        \label{tbl:summary_top_2}
+    \end{subfigure}
+    \caption{Performance of strategies for \(N=2\)}
 \end{figure}
-
-\begin{table}[!hbtp]
-    \scriptsize
-    \centering
-    \input{./tex/summary_top_2_invade.tex}
-    \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\).}
-    \label{tbl:summary_top_2}
-\end{table}
 
 As will be demonstrated in Section~\ref{sec:population_size} the results for
 \(N=2\) differ from those of larger $N$. Hence these results do not concur with
@@ -621,28 +624,31 @@ and~\ref{fig:boxplot_14_invade} for \(N\in\{3, 7, 14\}\) showing the mean
 fixation as well as the neutral fixation for each given scenario.
 
 \begin{figure}[!hbtp]
-    \scriptsize
     \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_3_invade.pdf}
-    \caption{The fixation probabilities \(x_1\) for \(N=3\)}
-    \label{fig:boxplot_3_invade}
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[height=.9\textheight]{./img/boxplot_3_invade.pdf}
+        \caption{\(N=3\)}
+        \label{fig:boxplot_3_invade}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[height=.9\textheight]{./img/boxplot_7_invade.pdf}
+        \caption{\(N=7\)}
+        \label{fig:boxplot_7_invade}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[height=.9\textheight]{./img/boxplot_14_invade.pdf}
+        \caption{\(N=14\)}
+        \label{fig:boxplot_14_invade}
+    \end{subfigure}
+    \caption{The fixation probabilities \(x_1\)}
 \end{figure}
 
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_7_invade.pdf}
-    \caption{The fixation probabilities \(x_1\) for \(N=7\)}
-    \label{fig:boxplot_7_invade}
-\end{figure}
-
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_14_invade.pdf}
-    \caption{The fixation probabilities \(x_1\) for \(N=14\)}
-    \label{fig:boxplot_14_invade}
-\end{figure}
-
-The top strategies are given in Tables~\ref{tbl:top_five_invade}.
+The top strategies are given in Tables~\ref{tbl:top_invade}.
 
 \begin{table}[!hbtp]
     \centering
@@ -665,7 +671,7 @@ The top strategies are given in Tables~\ref{tbl:top_five_invade}.
         \caption{\(N=14\)}
     \end{subfigure}
     \caption{Top invaders for \(N\in\{3, 7, 14\}\)}
-    \label{tbl:top_five_invade}
+    \label{tbl:top_invade}
 \end{table}
 
 It can be seen that apart from CS, none of the strategies
@@ -727,28 +733,33 @@ Figures~\ref{fig:boxplot_3_resist},~\ref{fig:boxplot_7_invade}
 and~\ref{fig:boxplot_14_resist} for \(N\in\{3, 7, 14\}\) showing the mean
 fixation as well as the neutral fixation for each given scenario.
 
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_3_resist.pdf}
-    \caption{The fixation probability \(x_{N-1}\) for \(N=3\)}
-    \label{fig:boxplot_3_resist}
-\end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_7_resist.pdf}
-    \caption{The fixation probability \(x_{N-1}\) for \(N=7\)}
-    \label{fig:boxplot_6_resist}
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[height=.9\textheight]{./img/boxplot_3_resist.pdf}
+        \caption{\(N=3\)}
+        \label{fig:boxplot_3_resist}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[height=.9\textheight]{./img/boxplot_7_resist.pdf}
+        \caption{\(N=7\)}
+        \label{fig:boxplot_7_resist}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[height=.9\textheight]{./img/boxplot_14_resist.pdf}
+        \caption{\(N=14\)}
+        \label{fig:boxplot_14_resist}
+    \end{subfigure}
+    \caption{The fixation probabilities \(x_{N-1}\)}
 \end{figure}
 
-\begin{figure}[!hbtp]
-    \centering
-    \includegraphics[height=.9\textheight]{./img/boxplot_14_resist.pdf}
-    \caption{The fixation probability \(x_{N-1}\) for \(N=14\)}
-    \label{fig:boxplot_14_resist}
-\end{figure}
-
-Table~\ref{tbl:top_five_resist} shows the top strategies when ranked
+Table~\ref{tbl:top_resist} shows the top strategies when ranked
 according to \(x_{N-1}\) for \(N\in\{3, 7, 14\}\).
 Once again none of the short memory strategies from
 Section~\ref{sec:two_individuals} perform well for high \(N\).
@@ -774,7 +785,7 @@ Section~\ref{sec:two_individuals} perform well for high \(N\).
         \caption{\(N=14\)}
     \end{subfigure}
     \caption{Top resistors for \(N\in\{3, 7, 14\}\)}
-    \label{tbl:top_five_resist}
+    \label{tbl:top_resist}
 \end{table}
 
 Interestingly none of these strategies are stochastic: this is explained by
