@@ -587,11 +587,10 @@ Table~\ref{tbl:summary_top_2}. The top five ranking strategies are:
         defects while handshake will not.
 \end{enumerate}
 
-It is also noted that TF1, TF2 and TF3 all perform well, other finite state
-machines include Prober 3 and Prober 4 which are described in \cite{prison}.
-This is also the \(N\) for which a zero determinant strategy does appear in the
-top 10\% ranking strategies: ZD-extort-4. The performance of zero determinant
-strategies will be examined more closely in Section~\ref{sec:population_size}.
+It is also noted that TF1, TF2 and TF3 all perform well. This is also the \(N\)
+for which a zero determinant strategy does appear in the top 10\% ranking
+strategies: ZD-extort-4. The performance of zero determinant strategies will be
+examined more closely in Section~\ref{sec:population_size}.
 
 \begin{figure}[!hbtp]
     \begin{subfigure}{.5\textwidth}
@@ -727,9 +726,9 @@ Only one of the above strategies is stochastic although close inspection of the
 source code of PSO Gambler shows that it makes stochastic decisions rarely, and
 is functionally very similar to its deterministic cousin Evolved Looker Up.
 The PSO Gambler Mem1 strategy is a memory one strategy that has been trained to
-maximise it's utility and does perform well.
+maximise its utility and does perform well.
 Apart from TF3, the finite state machines trained specifically for
-Moran processes do not appear in the top 5: whereas strategies trained for
+Moran processes do not appear in the top 5, while strategies trained for
 tournaments do. This is due to the nature of invasion: most of the opponents
 will initially be different strategies. The next section will consider the
 converse situation.
