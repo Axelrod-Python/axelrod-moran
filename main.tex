@@ -90,7 +90,7 @@ recent variants such as OmegaTFT, zero determinant and other memory one
 strategies, strategies based on finite state machines, lookup tables, neural
 networks, and other machine learning based strategies, and a collection of novel
 strategies. Not all strategies have been considered for this study: excluded
-are those that make use of knowledge of the game such as the number of turns
+are those that make use of knowledge of the number of turns in a match
 and others that have a high
 computational run time. The large number of strategies are available thanks to
 the open source nature of the project with over 40 contributors from around the
@@ -192,7 +192,7 @@ strategies cooperate well with other players using the same strategy.
 
 To carry out this large numerical experiment, \input{./tex/num_strategies}
 strategies, listed (with their properties) in Appendix~\ref{app:list_of_players}
-are used from the Axelrod library. There are 
+are used from the Axelrod library. There are
 \input{./tex/num_stochastic.tex}stochastic and
 \input{./tex/num_deterministic.tex}deterministic strategies. Their memory depth,
 defined by the number of rounds of history used by the strategy each round, is
@@ -610,7 +610,7 @@ As will be demonstrated in Section~\ref{sec:population_size} the results for
 the literature which suggests that zero Determinant strategies should be
 effective for larger population sizes, but these analysis consider stationary
 behaviour, while this work runs for a fixed number of rounds. \cite{stewart2013extortion}
-The stationarity assumption allows for a deterministic payoff matrix 
+The stationarity assumption allows for a deterministic payoff matrix
 leading to the conclusions about zero determinant strategies in the space
 of memory-one strategies that do not generalize to this context.
 
