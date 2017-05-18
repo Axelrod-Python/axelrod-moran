@@ -5,12 +5,17 @@ This directory contains scripts and libraries for the generation of data.
 ## Players used in this work
 
 ```
-$ python moran.py  # Lists the number of players used
-172
+$ python players.py  # Lists the number of players for which data was generated
+175
 ```
 
 Also contains a function `generate_players` which returns a list of `axelrod`
 player instances.
+
+## Abbreviations
+
+The `abbreviations.py` file contains a dictionary with some abbreviations for
+player names.
 
 ## Theoretic results
 
@@ -60,22 +65,19 @@ The file `clean_raw_moran.py` is used to clean all the data generated from
 Noise, P1, P2, N, repetitions, P1_fixation, P2_fixation
 ```
 
-The file `write_fitness.py` is used to write the fixation probabilities and
+The file `preproces.py` is used to write the fixation probabilities and
 relative fitness for each strategy pair to `..data/main.csv`:
 
 ```
-player, opponent, N, noise, p_1, r_1, p_{N/2}, r_{N/2}, p_{N-1}, r_{N-1}
+player, opponent, N, noise, p_1, p_{N/2}, p_{N-1}
 ```
 
 Where:
 
-- `r_1`: is relative fitness of 1 player with N - 1 opponents
-- `r_{N/2}`: is relative fitness of N/2 players with N/2 opponents
-- `r_{N-1}`: is relative fitness of N-1 players with 1 opponent.
 - `p_1`: is relative fitness of 1 player with N - 1 opponents
 - `p_{N/2}`: is relative fitness of N/2 players with N/2 opponents
 - `p_{N-1}`: is relative fitness of N-1 players with 1 opponent.
 
-**Fitness is automatically re written when running `clean_raw_moran.py`**.
+**This is automatically re written when running `clean_raw_moran.py`**.
 
 `main.csv` is the main file used for all the analysis.
