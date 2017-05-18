@@ -29,6 +29,14 @@ The following compiles the article using `Latexmk` version 4.41:
 $ latexmk --xelatex main.tex
 ```
 
+The bibliography is being built using `biblatex` which requires `biber`, that
+comes bundled with some installs of `latex` but if you are having problems you
+might need to run (on ubuntu, similarly for other systems):
+
+```
+$ sudo apt-get install biber
+```
+
 # Contributions
 
 - Conceived of the study: MH VK
