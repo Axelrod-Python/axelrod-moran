@@ -47,7 +47,7 @@
     excel at the Moran process. These strategies are excellent invaders
     and resistors of invasion and in some cases naturally evolve handshaking
     mechanisms to resist invasion. The best invaders were those trained
-    to maximize total payoff while the best resistors invoke handshake machanisms.
+    to maximize total payoff while the best resistors invoke handshake mechanisms.
     This suggests that while maximizing individual payoff
     can lead to the evolution of cooperation through invasion, the relatively
     weak invasion resistance of payoff maximizing strategies are not as
@@ -66,7 +66,7 @@ round game, but is commonly studied in a manner where the prior outcomes
 matter. This extended form is called the Iterated Prisoner's
 Dilemma (IPD). As described in \cite{Axelrod1980a, Knight2016, Press2012} a
 number of strategies have been developed to take advantage of the history of
-play. Recently, some strategies referred to as zero Determinant strategies
+play. Recently, some strategies referred to as zero determinant (ZD) strategies
 \cite{Press2012} can manipulate some players through extortionate mechanisms.
 
 The Moran Process \cite{Moran1957} is a model of
@@ -96,7 +96,7 @@ computational run time. The large number of strategies are available thanks to
 the open source nature of the project with over 40 contributors from around the
 world, made by programmers and researchers \cite{Knight2016}. Three of the considered
 strategies are finite state machines trained specifically for Moran processes
-(described further in Section~\ref{sec:strategies}.
+(described further in Section~\ref{sec:strategies}).
 
 In addition to providing a large collection of strategies, the Axelrod library
 can conduct matches, tournaments and population
@@ -157,7 +157,7 @@ inherit any knowledge or history from parent replicants.
 \begin{figure}[!hbtp]
     \centering
     \input{./tex/moran_process.tex}
-    \caption{A diagrammatic representation of a Moran process}
+    \caption{A diagrammatic representation of a Moran process.}
     \label{fig:moran_process}
 \end{figure}
 
@@ -173,7 +173,7 @@ Moran processes are studied in a theoretical framework for a small subset of
 strategies. The subset included memory one strategies: strategies that recall
 the events of the previous round only.
 
-Of particular interest are the Zero determinant strategies introduced in
+Of particular interest are the zero determinant strategies introduced in
 \cite{Press2012}. It was argued in \cite{stewart2013extortion} that generous
 ZD strategies are robust against invading strategies. However, in \cite{Lee2015},
 a strategy using machine learning techniques was capable of resisting invasion
@@ -265,7 +265,7 @@ As opposed to the previously described strategies, these strategies were trained
 with the objective function of \textbf{mean fixation probabilities for Moran
 processes} starting at initial population states consisting of \(N/2\)
 individuals of the training candidates and \(N/2\) individuals of an opponent
-strategy, taken from a selection of 150 opponents from the axelrod library:
+strategy, taken from a selection of 150 opponents from the Axelrod library:
 
 \begin{itemize}
 	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per matchup
@@ -322,7 +322,7 @@ Each strategy pair is run for 1000 repetitions of the Moran process to fixation
 with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
 1)$, for \(N\) from 2 through 14. The fixation probability is then empirically
 computed for each combination of starting distribution and value of \(N\).  The
-axelrod library can carry out exact simulations of the Moran process. Since some
+Axelrod library can carry out exact simulations of the Moran process. Since some
 of the strategies have a high computational cost or are stochastic, samples are
 taken from a large number of match outcomes for the pairs of players for use in
 computing fitnesses in the Moran process. This approach was verified to agree
@@ -383,7 +383,7 @@ are then given by:
 
 Using this it is a known result \cite{Nowak2017} that the fixation probability
 of the first strategy in a population of \(i\) individuals of the first type
-(and \(N-i\) individuals of the second::
+and \(N-i\) individuals of the second:
 
 \begin{equation}\label{equ:fixation_probability}
 x_i = \frac{1 + \sum_{j=1}^{i-1}\prod_{k=1}^{j}\gamma_j}{1 + \sum_{j=1}^{N-1}
@@ -410,7 +410,7 @@ summarised with a set of utilities as shown in
 (\ref{equ:payoff_matrix}). For any given pair of strategies it is possible to
 obtain \(p_{i,i-1}, p_{i,i+1}, p_{ii}\) exactly (as opposed to the
 approximations offered by (\ref{equ:p_up}), (\ref{equ:p_down}) and
-(\ref{equ:p_stay}). Obtaining these requires particular analysis for a given
+(\ref{equ:p_stay})). Obtaining these requires particular analysis for a given
 pair and can be quite a complex endeavour for stochastic strategies with long
 memory: this is not necessary for the purposes of this work.
 All data generated for this validation exercise can be found
@@ -472,7 +472,7 @@ at \cite{data}.
         \caption{Defector and Win Stay Lose Shift}
     \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process fixation
-             probabilities for \textbf{deterministic} strategies}
+             probabilities for \textbf{deterministic} strategies.}
     \label{fig:comparison_deterministic}
 \end{figure}
 
@@ -532,7 +532,7 @@ at \cite{data}.
         \caption{All C or all D and Tit For Tat}
     \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process
-             fixation probabilities for \textbf{stochastic} strategies}
+             fixation probabilities for \textbf{stochastic} strategies.}
     \label{fig:comparison_stochastic}
 \end{figure}
 
@@ -551,7 +551,7 @@ This section outlines the data analysis carried out:
         ability to defend against an invasion.
     \item Section~\ref{sec:population_size} investigates the relationship
         between performance for differing population sizes as well as
-        taking a close look at Zero determinant strategies \cite{Press2012}.
+        taking a close look at zero determinant strategies \cite{Press2012}.
 \end{itemize}
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
@@ -601,15 +601,15 @@ examined more closely in Section~\ref{sec:population_size}.
         \scriptsize
         \centering
         \input{./tex/summary_top_2_invade.tex}
-        \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\)).}
+        \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\))}
         \label{tbl:summary_top_2}
     \end{subfigure}
-    \caption{Performance of strategies for \(N=2\)}
+    \caption{Performance of strategies for \(N=2\).}
 \end{figure}
 
 As will be demonstrated in Section~\ref{sec:population_size} the results for
 \(N=2\) differ from those of larger $N$. Hence these results do not concur with
-the literature which suggests that zero Determinant strategies should be
+the literature which suggests that zero determinant strategies should be
 effective for larger population sizes, but these analyses consider stationary
 behaviour, while this work runs for a fixed number of rounds. \cite{stewart2013extortion}
 The stationarity assumption allows for a deterministic payoff matrix
@@ -631,7 +631,7 @@ The ranks of each strategy for all considered values of \(N\) according to mean
     \centering
     \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_invade.pdf}
     \caption{Ranks of all strategies according to \(x_1\) for different
-    population sizes}
+    population sizes.}
     \label{fig:ranks_v_size_invade}
 \end{figure}
 
@@ -663,7 +663,7 @@ fixation as well as the neutral fixation for each given scenario.
         \caption{\(N=14\)}
         \label{fig:boxplot_14_invade}
     \end{subfigure}
-    \caption{The fixation probabilities \(x_1\)}
+    \caption{The fixation probabilities \(x_1\).}
 \end{figure}
 
 The top 16 strategies are given in Tables~\ref{tbl:top_invade}.
@@ -709,8 +709,7 @@ top performing strategies are:
     \item  PSO Gambler and Evolved Lookerup 2 2 2: are strategies that make use
         of a lookup table mapping the first 2 moves of the opponent as well as
         the last 2 moves of both players to an action. The PSO gambler is a
-        stochastic version which maps those states to probabilities of
-        cooperating. The lookerup was described in \cite{Knight2016}.
+        stochastic version of the Lookerup which maps those states to probabilities of cooperating. The Lookerup was described in \cite{Knight2016}.
     \item The Evolved ANN strategies are neural networks that map a number of
 	    attributes (first move, number of cooperations, last move, etc.) to
 	    an action. Both of these have been trained using an evolutionary
@@ -742,7 +741,7 @@ Figures~\ref{fig:ranks_v_size_resist}.
     \centering
     \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_resist.pdf}
     \caption{Ranks of all strategies according to \(x_{N-1}\) for different
-    population sizes}
+    population sizes.}
     \label{fig:ranks_v_size_resist}
 \end{figure}
 
@@ -774,7 +773,7 @@ fixation as well as the neutral fixation for each given scenario.
         \caption{\(N=14\)}
         \label{fig:boxplot_14_resist}
     \end{subfigure}
-    \caption{The fixation probabilities \(x_{N-1}\)}
+    \caption{The fixation probabilities \(x_{N-1}\).}
 \end{figure}
 
 Table~\ref{tbl:top_resist} shows the top strategies when ranked
@@ -854,9 +853,7 @@ the next section, looking not only at \(x_1\) and \(x_{N-1}\) but also consider
 
 \subsection{The effect of population size}\label{sec:population_size}
 
-To complement Figures~\ref{fig:ranks_v_size_invade}
-and~\ref{fig:ranks_v_size_resist} Figure~\ref{fig:ranks_v_size_coexist} shows
-the rank of each strategy based on \(x_{N/2}\).
+To complement Figures~\ref{fig:ranks_v_size_invade} and~\ref{fig:ranks_v_size_resist}, Figure~\ref{fig:ranks_v_size_coexists} shows the rank of each strategy based on \(x_{N/2}\).
 Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
 and~\ref{tbl:ranks_v_size_coexist} show the same information for a selection of
 strategies:
@@ -900,7 +897,7 @@ does not translate to larger populations.
     \centering
     \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_coexist.pdf}
     \caption{Fixation ranks of all strategies according to \(x_{N/2}\) for different
-    population sizes}
+    population sizes.}
     \label{fig:ranks_v_size_coexist}
 \end{figure}
 
@@ -941,7 +938,7 @@ not extend to larger populations. This was discussed theoretically in
         \includegraphics[width=.9\textwidth]{./img/correlation_heatmap_coexist.pdf}
         \caption{Rank based on \(x_{N/2}\)}
     \end{subfigure}
-    \caption{Heatmap of correlation coefficients of rankings by population size}
+    \caption{Heatmap of correlation coefficients of rankings by population size.}
     \label{fig:correlation_coefficients}
 \end{figure}
 
@@ -1057,7 +1054,7 @@ Research Computing @ Cardiff (ARCCA) Division, Cardiff University.
 A variety of software libraries have been used in this work:
 
 \begin{itemize}
-    \item The axelrod library (IPD strategies and Moran processes)
+    \item The Axelrod library (IPD strategies and Moran processes)
         \cite{axelrodproject}.
     \item The matplotlib library (visualisation) \cite{hunter2007matplotlib}.
     \item The pandas and numpy libraries (data manipulation)
