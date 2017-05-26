@@ -853,7 +853,9 @@ the next section, looking not only at \(x_1\) and \(x_{N-1}\) but also consider
 
 \subsection{The effect of population size}\label{sec:population_size}
 
-To complement Figures~\ref{fig:ranks_v_size_invade} and~\ref{fig:ranks_v_size_resist}, Figure~\ref{fig:ranks_v_size_coexists} shows the rank of each strategy based on \(x_{N/2}\).
+To complement Figures~\ref{fig:ranks_v_size_invade}
+and~\ref{fig:ranks_v_size_resist}, Figure~\ref{fig:ranks_v_size_coexist} shows
+the rank of each strategy based on \(x_{N/2}\).
 Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
 and~\ref{tbl:ranks_v_size_coexist} show the same information for a selection of
 strategies:
@@ -863,6 +865,11 @@ strategies:
     \item The strategies that ranked highly for \(N=14\);
     \item The zero determinant strategies.
 \end{itemize}
+
+The results for \(x_{N/2}\) show similarities to the results for \(x_{N-1}\) and
+in particular TF1, TF2 and TF3 ranked one, three and eight. This is to be
+expected since, as described in Section~\ref{sec:strategies} these strategies
+were trained in an initial population of \((N/2, N/2)\) individuals.
 
 For all starting populations
 \(i\in\{1, N/2, N-1\}\) the ranks of strategies are relatively stable across the
