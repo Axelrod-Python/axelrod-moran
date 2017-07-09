@@ -12,7 +12,9 @@ import csv
 
 from abbreviations import abbreviations
 from players import selected_players
-players = selected_players()
+players = [p for p in selected_players()
+			if ("length" not in p.classifier["makes_use_of"]) and
+                           ("Incorrect" not in abbreviations[str(p)])]
 
 def obtain_cooperation_matrix(filename, number_of_turns=200):
     data = []
