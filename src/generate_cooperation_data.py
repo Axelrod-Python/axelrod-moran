@@ -10,6 +10,7 @@ import multiprocessing
 import os
 import csv
 
+from abbreviations import abbreviations
 from players import selected_players
 players = selected_players()
 
@@ -35,7 +36,7 @@ def main(index, players=players, processes=None, seed=1, turns=200, repetitions=
         processes = multiprocessing.cpu_count()
 
     prefix = "{}_{}_{}_{}".format(seed, int(100 * noise), repetitions,
-                                  index)
+                                  abbreviations[str(players[index])])
     interactions_filename = "../data/cooperation_{}_interactions.csv".format(prefix)
     output_filename = "../data/cooperation_{}_array.gz".format(prefix)
 
