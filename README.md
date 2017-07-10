@@ -1,4 +1,4 @@
-# A numerical study of fixation probabilities for strategies in the Iterated Prisoner's Dilemma
+# Evolution Reinforces Cooperation with the Emergence of Self-Recognition Mechanisms: an empirical study of the Moran process for the iterated Prisoner's dilemma using reinforcement learning
 
 This is a paper giving an extensive numerical analysis of fixation probabilities
 of the Moran processes where the fitness landscape is determined by the Iterated
