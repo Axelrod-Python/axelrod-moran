@@ -57,13 +57,13 @@
 \section{Introduction}\label{sec:introduction}
 
 The Prisoner's Dilemma (PD) \cite{Flood1958} is a fundamental two player game
-used to model a large variety of strategic interactions. Each player can choose
-between cooperation (C) or defection (D). The decisions are made simultaneously
-and independently. The payoffs of
+used to model a variety of strategic interactions. Each player chooses
+simultaneously and independently
+between cooperation (C) or defection (D). The payoffs of
 the game are defined by the matrix $\begin{pmatrix} R & S \\ T & P
 \end{pmatrix}$, where $T > R > P > S$ and $2R > T + S$. The PD is a one
 round game, but is commonly studied in a manner where the prior outcomes
-matter. This extended form is called the Iterated Prisoner's
+matter. This repeated form is called the Iterated Prisoner's
 Dilemma (IPD). As described in \cite{Axelrod1980a, Knight2016, Press2012} a
 number of strategies have been developed to take advantage of the history of
 play. Recently, some strategies referred to as zero determinant (ZD) strategies
@@ -76,8 +76,7 @@ Section~\ref{sec:the_moran_process}).
 Several earlier
 works have studied iterated games in the context of the prisoner's dilemma
 \cite{Nowak, stewart2013extortion}, however these often make simplifying assumptions
-and/or do not consider sophisticated behaviour: only considering strategies that
-either cooperate or defect, or are limited to classes of strategies
+or are limited to classes of strategies
 such as memory-one strategies that only use the previous round of play.
 
 This manuscript provides a detailed numerical analysis of agent-based simulations
@@ -93,7 +92,7 @@ strategies. Not all strategies have been considered for this study: excluded
 are those that make use of knowledge of the number of turns in a match
 and others that have a high
 computational run time. The large number of strategies are available thanks to
-the open source nature of the project with over 40 contributors from around the
+the open source nature of the project with over 50 contributors from around the
 world, made by programmers and researchers \cite{Knight2016}. Three of the considered
 strategies are finite state machines trained specifically for Moran processes
 (described further in Section~\ref{sec:strategies}).
@@ -111,7 +110,7 @@ those that are effective invaders and those resistant to invasion, for
 population sizes $N=2$ to $N=14$. Moreover we present a number of strategies
 that were created via reinforcement algorithms (evolutionary and particle
 swarm algorithms) that are among the best invaders and resistors of invasion
-known to date, and show that handshaking mechanims naturally arise from these
+known to date, and show that handshaking mechanisms naturally arise from these
 processes as an invasion-resistance mechanism.
 
 Recent work has argued that agent-based
@@ -132,7 +131,7 @@ While the results agree with some of the published literature, it is found that:
  \item Zero determinant strategies are not particularly effective for $N > 2$
  \item Complex strategies can be effective, and in fact can naturally evolve
      through evolutionary processes to outperform designed strategies.
- \item Strong resistors specifically evolve or have a handshake mechanism.
+ \item The strongest resistors specifically evolve or have a handshake mechanism.
  \item Strong invaders are generally cooperative strategies that do not defect
  first but retaliate to varying degrees of intensity against strategies that defect.
  \item Strategies evolved to maximize their total payoff can be strong invaders
@@ -165,8 +164,8 @@ The Moran process was initially introduced in \cite{Moran1957}. It has since
 been used in a variety of settings including the understanding of the spread of
 cooperative and non-cooperative behaviour such as cancer \cite{West2016} and the
 emergence of cooperative behaviour in spatial topologies \cite{Nowak2017}.
-However these works mainly consider non-sophisticated strategies. Some work has
-looked at evolutionary stability of strategies within the Prisoner's Dilemma
+However these works mainly consider relatively simple strategies. Some work has
+looked at evolutionary stability of agent-based strategies within the Prisoner's Dilemma
 \cite{Li2014} but this is not done in the more widely used setting of the Moran
 process, rather in terms of infinite population stability. In \cite{Baek2016}
 Moran processes are studied in a theoretical framework for a small subset of
@@ -187,7 +186,7 @@ strategies cooperate well with other players using the same strategy.
 
 \subsection{Strategies considered}\label{sec:strategies}
 
-To carry out this large numerical experiment, \input{./tex/num_strategies}
+To carry out this numerical experiment, \input{./tex/num_strategies}
 strategies, listed (with their properties) in Appendix~\ref{app:list_of_players},
 are used from the Axelrod library. There are
 \input{./tex/num_stochastic.tex}stochastic and
@@ -285,18 +284,19 @@ defecting for the rest of match. It is similar to but not exactly the same as
 Fool Me Once, a strategy that cooperates until the opponent has defected twice
 (not necessarily consecutively), and defects indefinitely thereafter. Though a
 product of training with a Moran objective, it differs from TF1 and TF2
-in that it lacks a handshake mechanism.
+in that it lacks a handshake mechanism. Figure~\ref{fig:tf3} shows
+all 8 states of the strategy produced by the training process (states 3 and 8
+are not reachable).
 
 TF2 always starts with CD and will defect against opponents that start with
-DD\@. It plays CDD against itself and then cooperates thereafter. Cooperation
+DD\@. It plays CDD against itself and then cooperates thereafter; Fortress3 and
+Fortress4 also use a similar handshake and cooperate with TF2. Cooperation
 can be rescued after a failed handshake by a complex sequence of plays
-which eventually results in mutual cooperation with Firm but Fair, Fortress3,
-Fortress4, and Grofman (always) and Evolved HMM 5 and GTFT (depending on the
-random seed). TF2 defects against all other players in the study, barring
+which sometimes results in mutual cooperation with Firm but Fair, Grofman, and
+GTFT, and a few others with low probability. TF2 defects against all other
+players in the study, barring
 unusual cases arising from particular randomizations. Figure~\ref{fig:tf2} shows
-all 16 states of the strategy used for training although it is evident that
-states 6 and 7 are not reachable. They are nonetheless presented as they are
-outputs of the training algorithm.
+all 16 states of the strategy (states 6 and 7 are not reachable).
 
 TF1 has an initial handshake of CCD and cooperates if the opponent matches.
 However if the opponent later defects, TF1 will respond in kind, so the
@@ -320,6 +320,8 @@ way hard-coded or included via an additional mechanism.
 \end{table}
 
 \subsection{Data collection}\label{sec:data_collection}
+
+% Todo: verify 1000 repetitions
 
 Each strategy pair is run for 1000 repetitions of the Moran process to fixation
 with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
@@ -572,15 +574,14 @@ Table~\ref{tbl:summary_top_2}. The top five ranking strategies are:
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
         handshake mechanism described above.
-    \item Defector: it always defects. As it has little potential
-        interaction with itself (recall that \(N=2\)), its
-        aggressiveness is rewarded.
+    \item Defector: it always defects. Since it has no interactions with other
+        defectors (recall that \(N=2\)), its aggressiveness is rewarded.
     \item Aggravater, which plays like Grudger (responding to any
         defections with unconditional defections throughout) however starts by
         playing 3 defections.
     \item Predator, a finite state machine described in \cite{Ashlock2006}.
     \item Handshake, a slightly less aggressive version of the Collective
-        strategy \cite{robson1989}. As long as the initial sequence is played
+        Strategy \cite{robson1989}. As long as the initial sequence is played
         then it cooperates. Thus it will do well in a population consisting of
         many members of itself just as the Collective Strategy does. The
         difference is that CS will defect after the handshake if the opponent
@@ -633,7 +634,7 @@ The ranks of each strategy for all considered values of \(N\) according to mean
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_invade.pdf}
-    \caption{Ranks of all strategies according to \(x_1\) for different
+    \caption{\textbf{Invasion}: Ranks of all strategies according to \(x_1\) for different
     population sizes.}
     \label{fig:ranks_v_size_invade}
 \end{figure}
@@ -743,7 +744,7 @@ Figures~\ref{fig:ranks_v_size_resist}.
 \begin{figure}[!hbtp]
     \centering
     \includegraphics[height=.9\textheight]{./img/average_rank_vs_population_size_resist.pdf}
-    \caption{Ranks of all strategies according to \(x_{N-1}\) for different
+    \caption{\textbf{Resistance}: Ranks of all strategies according to \(x_{N-1}\) for different
     population sizes.}
     \label{fig:ranks_v_size_resist}
 \end{figure}
@@ -827,7 +828,12 @@ however they are not as resistant to invasion as the strategies trained using a
 Moran objective function. These strategies include trained finite state machine
 strategies, but they do not appear to have handshaking mechanisms. Therefore it
 is reasonable to conclude that the objective function is the cause of the
-emergence of handshaking mechanisms.
+emergence of handshaking mechanisms. More specifically, TF1 and TF2 evolved
+handshakes for high invasion resistance. TF3 is a better total payoff maximizer
+which makes it a better invader along with the strategies
+trained to maximize total payoff since successful fitness proportionate selection
+is necessary for invasion. Training with an objective with initial population
+mix other than $(N/2, N/2)$ may favor invasion or resistance.
 
 The payoff maximizing strategies typically will not defect before the opponent's
 first defection, possibly because the training strategy collection contains some
@@ -879,9 +885,7 @@ For all starting populations
 different values of \(N>2\) however for \(N=2\) there is a distinct difference.
 This highlights that there is little that can be inferred about the evolutionary
 performance of a strategy in a large population from its performance in a small
-population.
-
-This is confirmed by the performance of the zero determinant strategies. While
+population. This is confirmed by the performance of the zero determinant strategies: while
 some do rank relatively highly for \(N=2\) (ZD-extort-4 has rank 16) this rank
 does not translate to larger populations.
 
@@ -986,15 +990,17 @@ to our strategies.
 We did not attempt other objective functions that may serve to select for both
 invasion and resistance better than training at a starting population of
 $(N/2, N/2)$. Nevertheless our results suggest that there is not much room for
-improvement. Any handshake more sophisticated than C necessarily involves
-a defection. (A handshake consisting of a longer sequence of cooperations is
+improvement. Any handshake more sophisticated than always cooperate necessarily involves
+a defection. (A handshake consisting of a long sequence of cooperations is
 effectively a grudger.) For TF3 or EvolvedLookerUp1\_1\_1 to become better resistors
 they need a longer or more strict handshake. But if this handshake involves
 a defection then likely the invasion ability is diminished for $N > 2$: the top
 invaders for larger $N$ are nice strategies that do not defect before their
-opponents. This is because good invaders still need to cooperate with themselves,
-and so in the absense of a handshake mechanism or knowledge of the population
-distribution, a strategy must be generally cooperative. Aggressive strategies
+opponents. This is because good invaders need to maximize match payoff to benefit
+from fitness proportionate selection,
+and so in the absence of a handshake mechanism, knowledge of the population
+distribution, or some identifying label on the opponent,
+a strategy must be generally cooperative. Aggressive strategies
 are only effective invaders for the smallest $N$, dropping dramatically
 as the population size increases.
 
@@ -1038,7 +1044,7 @@ two FSM strategies (TF1 and TF2) specifically trained through an evolutionary
 process. In these two cases, the handshake mechanism was a product of the
 evolutionary process. Figure~\ref{fig:cooperation_rates} shows the cooperation
 rate of TF1, TF2, TF3 and CS
-for each round of a match against all the opponents in this study. Whilst TF3
+for each round of a match against all the opponents in this study. While TF3
 does not have a strict handshake mechanism it is clear that all these strategies
 start a match by cooperating. It is then evident that TF3 cooperates more than
 the other strategies thus explaining the difference in performance. It is also
