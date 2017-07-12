@@ -1,5 +1,7 @@
 import axelrod as axl
 
+axl.Grudger.classifier["memory_depth"] = 1
+
 C, D = axl.Actions.C, axl.Actions.D
 
 fsm_transitions = [
