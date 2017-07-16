@@ -982,17 +982,26 @@ invading and is more resistant to subsequent invasions. Moreover, the
 best resistor of the payoff maximally trained strategies (Evolved Looker Up
 1\_1\_1),
 which always defects if the opponent defects in the first round, is effectively
-employing a one-shot handshake of C. These insights also suggest that a strategy
+employing a one-shot handshake of C. Similarly, Grudger (also known as Grim),
+which emerged from training memory one strategies for the Moran process,
+also effectively employs a handshake of always cooperating, as it defects
+for the remainder of the match if the opponent ever defects.
+
+The insights that payoff maximizers are better invaders and that handshakers
+are better resistors suggests that a strategy
 aware of the population distribution could choose to become a handshaker at
-a critical threshold and use a different strategy for invasion when in the
+a critical threshold and use a strategy better for invasion when in the
 minority. Information about the population distribution was not available
-to our strategies.
+to our strategies. Previous work has showed that strategies able to retain
+memory across matches can infer the population distribution and act in such
+a manner, resulting in a strategy effective at invasion and resistance
+\cite{Lee2015}.
 
 We did not attempt other objective functions that may serve to select for both
 invasion and resistance better than training at a starting population of
 $(N/2, N/2)$. Nevertheless our results suggest that there is not much room for
 improvement. Any handshake more sophisticated than always cooperate necessarily involves
-a defection. (A handshake consisting of a long sequence of cooperations is
+a defection. (A strategy with a handshake consisting of a long sequence of cooperations is
 effectively a grudger.) For TF3 or EvolvedLookerUp1\_1\_1 to become better resistors
 they need a longer or more strict handshake. But if this handshake involves
 a defection then likely the invasion ability is diminished for $N > 2$: the top
@@ -1002,14 +1011,16 @@ from fitness proportionate selection,
 and so in the absence of a handshake mechanism, knowledge of the population
 distribution, or some identifying label on the opponent,
 a strategy must be generally cooperative. Aggressive strategies
-are only effective invaders for the smallest $N$, dropping dramatically
+are only effective invaders for the smallest $N$, dropping dramatically in rank
 as the population size increases.
 
-We did, however, attempt to evolve CS using FSM and lookup table based players,
+We did, however, attempt to evolve CS using finite state machines and lookup table
+based players,
 which resulted in some very similar strategies. In particular we evolved a
 lookup strategy that had a handshake of DC and played TFT with other players
 after a correct handshake while defecting otherwise, which is quite close in
-function to CS (full grudging is not possible with a lookup table).
+function to CS (full grudging is not possible with a lookup table of limited
+depth).
 
 Finally we note that it may be possible to achieve similar results with smaller
 capacity finite state machine players.
@@ -1020,7 +1031,7 @@ A detailed empirical analysis of 164 strategies of the IPD within a pairwise
 Moran process has been carried out. All \(\binom{164}{2}=13,366\) possible
 ordered pairs of strategies have been placed in a Moran process with different
 starting values allowing the each strategy to attempt to invade the other.
-This is the largest such experiment carried out and has lead to many insights.
+This is the largest such experiment carried out and has led to many insights.
 
 When studying evolutionary processes it is vital to consider \(N>2\) since
 results for \(N=2\) cannot be used to extrapolate performance in larger
@@ -1029,14 +1040,24 @@ Sections~\ref{sec:strong_invaders} and~\ref{sec:strong_resistors} but also by
 considering the correlation of the ranks in different population sizes in
 Section~\ref{sec:population_size}.
 
-Memory one strategies do not perform well in general in this study. There are
-no memory one strategies in the top 5 performing strategies
-for \(N>3\). This is due at least partly to their lack of ability to
-recognise their opponents. More sophisticated strategies
-prove to be high performers for invasion: these are infinite memory strategies
-which have been trained using a number of reinforcement learning algorithms.
-Interestingly they have been trained to perform well in tournaments and not
-Moran processes which highlights the potential for improvement.
+Memory one strategies do not perform as well as longer memory strategies in general
+in this study. Several longer memory strategies were high performers for invasion,
+particularly the strategies which have been trained using a number of reinforcement
+learning algorithms. Interestingly they have been trained to perform well in
+tournaments and not Moran processes specifically. In some cases these strategies
+utilize all the history of play (the neural network strategies and the lookup
+table strategies, the latter using the first round and some number of trailing rounds).
+
+There are no memory one strategies in the top 5 performing strategies
+for \(N>3\). Training memory-one strategies specifically for the Moran process
+typically led to Grudger / Grim, a memory-one strategy with
+four-vector (1, 0, 0, 0). It appears to be the best resistor of the memory-one strategies.
+The highest performing memory-one strategy for invasion is PSO Gambler Mem 1,
+training to maximize total payout, which has four-vector $(1, 0.52173487, 0, 0.12050939)$.
+For comparison, training for maximum score difference between the player and the
+opponent resulted in a strategy nearly the same as Grudger, with four-vector
+$(0.9459, 0, 0, 0)$ (not included in the study).
+
 
 One of the major findings discussed in Section~\ref{sec:strong_resistors}, is
 the ability of strategies with a handshake mechanism to resist invasion. This
