@@ -12,22 +12,26 @@
 \usepackage{standalone}
 \usepackage{fancyvrb}
 \usepackage{algorithm,algorithmic}
+\usepackage{authblk}
 
 \usepackage{tikz}
 \usetikzlibrary{calc, shapes, patterns}
 
-\usepackage[backend=biber, firstinits=false, backref=false, url=true,
-            isbn=true, style=numeric]{biblatex}
-\addbibresource{./tex/bibliography.bib}
 
 % Title
 \title{Evolution Reinforces Cooperation with the Emergence of Self-Recognition
        Mechanisms: an empirical study of the Moran process for the iterated
        Prisoner's dilemma}
-\author{Vincent Knight \and
-        Marc Harper \and
-        Nikoleta E. Glynatsi \and
-        Owen Campbell} % TODO Authors?
+\author[1]{Vincent Knight}
+\author[2]{Marc Harper}
+\author[1]{Nikoleta E. Glynatsi}
+\author[3]{Owen Campbell}
+
+
+\affil[1]{Cardiff University, School of Mathematics, UK}
+\affil[2]{Google Inc., Mountain View, CA, USA}
+\affil[3]{Not affiliated}
+
 \date{}
 
 
@@ -220,8 +224,7 @@ methods appear in the literature \cite{Ashlock2006}.
 
 More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
- of these strategies in IPD tournaments will be described in upcoming manuscript(s).
-% TODO Think of how to reference this upcoming manuscript
+of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
 All of the training code is archived at \cite{marc_harper_2017_824264}. This
 software is (similarly to the Axelrod library) available on github
@@ -321,8 +324,6 @@ way hard-coded or included via an additional mechanism.
 \end{table}
 
 \subsection{Data collection}\label{sec:data_collection}
-
-% Todo: verify 1000 repetitions
 
 Each strategy pair is run for 1000 repetitions of the Moran process to fixation
 with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
@@ -544,7 +545,8 @@ at \cite{data}.
 
 \section{Empirical results}\label{sec:empirical_results}
 
-This section outlines the data analysis carried out:
+This section outlines the data analysis carried out, all data for this study is
+available at~\cite{data}:
 
 \begin{itemize}
     \item Section~\ref{sec:two_individuals} considers the specific case of
@@ -1135,7 +1137,8 @@ A variety of software libraries have been used in this work:
         \cite{mckinney2010data, walt2011numpy}.
 \end{itemize}
 
-\printbibliography
+\bibliographystyle{plain}
+\bibliography{./tex/bibliography.bib}
 
 \appendix
 
