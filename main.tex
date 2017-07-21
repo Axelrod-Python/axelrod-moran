@@ -17,9 +17,6 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, shapes, patterns}
 
-\usepackage[backend=biber, firstinits=false, backref=false, url=true,
-            isbn=true, style=numeric]{biblatex}
-\addbibresource{./tex/bibliography.bib}
 
 % Title
 \title{Evolution Reinforces Cooperation with the Emergence of Self-Recognition
@@ -227,8 +224,7 @@ methods appear in the literature \cite{Ashlock2006}.
 
 More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
- of these strategies in IPD tournaments will be described in upcoming manuscript(s).
-% TODO Reference ml paper on arxiv.
+of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
 All of the training code is archived at \cite{marc_harper_2017_824264}. This
 software is (similarly to the Axelrod library) available on github
@@ -1141,7 +1137,8 @@ A variety of software libraries have been used in this work:
         \cite{mckinney2010data, walt2011numpy}.
 \end{itemize}
 
-\printbibliography
+\bibliographystyle{plain}
+\bibliography{./tex/bibliography.bib}
 
 \appendix
 
