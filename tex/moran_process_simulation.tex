@@ -7,7 +7,7 @@
   \STATE initial population $\gets$ (pair, starting distribution) \
   \STATE population $\gets$ initial population
 
-    \WHILE {repetitions $\leq$ max repetitions}
+    \WHILE {population not uniform}
       \FOR{player in population}
       \FOR{opponent in (population - player)}
         \STATE match $\gets$ (player, opponent)
