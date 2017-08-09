@@ -271,13 +271,13 @@ individuals of the training candidates and \(N/2\) individuals of an opponent
 strategy, taken from a selection of 150 opponents from the Axelrod library:
 
 \begin{itemize}
-	\item TF1 \(N=12\), 0\% noise, 10000 repetitions per matchup
-	\item TF2 \(N=10\), 0\% noise, 10000 repetitions per matchup
-	\item TF3 \(N=8\), 1\% noise, 100 repetitions per matchup
+	\item TF1 \(N=12\), 0\% noise.
+	\item TF2 \(N=10\), 0\% noise.
+	\item TF3 \(N=8\), 1\% noise.
 \end{itemize}
 
-Each matchup of players was run to fixation for the specified number of
-repetitions to estimate the absorption probabilities. The trained algorithms
+Each matchup of players was run to fixation to estimate the absorption
+probabilities. The trained algorithms
 were run for fewer than 50 generations. Training data for this is available at
 \cite{data}.
 
@@ -325,7 +325,7 @@ way hard-coded or included via an additional mechanism.
 
 \subsection{Data collection}\label{sec:data_collection}
 
-Each strategy pair is run for 1000 repetitions of the Moran process to fixation
+Each strategy pair is run
 with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
 1)$, for \(N\) from 2 through 14. The fixation probability is then empirically
 computed for each combination of starting distribution and value of \(N\).  The
