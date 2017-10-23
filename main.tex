@@ -20,8 +20,9 @@
 
 % Title
 \title{Evolution Reinforces Cooperation with the Emergence of Self-Recognition
-       Mechanisms: an empirical study of the Moran process for the iterated
-       Prisoner's dilemma}
+       Mechanisms: an Empirical Study of the Moran process for the Iterated
+       Prisoner's Dilemma}
+       % TODO Possibly change
 \author[1]{Vincent Knight}
 \author[2]{Marc Harper}
 \author[1]{Nikoleta E. Glynatsi}
@@ -70,7 +71,7 @@ round game, but is commonly studied in a manner where the prior outcomes
 matter. This repeated form is called the Iterated Prisoner's
 Dilemma (IPD). As described in \cite{Axelrod1980a, Knight2016, Press2012} a
 number of strategies have been developed to take advantage of the history of
-play. Recently, some strategies referred to as zero determinant (ZD) strategies
+play. Recently, strategies referred to as zero determinant (ZD) strategies
 \cite{Press2012} can manipulate some players through extortionate mechanisms.
 
 The Moran Process \cite{Moran1957} is a model of
@@ -135,7 +136,7 @@ While the results agree with some of the published literature, it is found that:
  \item Zero determinant strategies are not particularly effective for $N > 2$
  \item Complex strategies can be effective, and in fact can naturally evolve
      through evolutionary processes to outperform designed strategies.
- \item The strongest resistors specifically evolve or have a handshake mechanism.
+ \item The strongest resistors specifically evolve or possess a handshake mechanism.
  \item Strong invaders are generally cooperative strategies that do not defect
  first but retaliate to varying degrees of intensity against strategies that defect.
  \item Strategies evolved to maximize their total payoff can be strong invaders
@@ -168,7 +169,7 @@ The Moran process was initially introduced in \cite{Moran1957}. It has since
 been used in a variety of settings including the understanding of the spread of
 cooperative and non-cooperative behaviour such as cancer \cite{West2016} and the
 emergence of cooperative behaviour in spatial topologies \cite{Nowak2017}.
-However these works mainly consider relatively simple strategies. Some work has
+However these works mainly consider relatively simple strategies. A few works 
 looked at evolutionary stability of agent-based strategies within the Prisoner's Dilemma
 \cite{Li2014} but this is not done in the more widely used setting of the Moran
 process, rather in terms of infinite population stability. In \cite{Baek2016}
@@ -227,8 +228,9 @@ More information about each player can be obtained in the documentation for
 of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
 All of the training code is archived at \cite{marc_harper_2017_824264}. This
-software is (similarly to the Axelrod library) available on github
-\url{https://github.com/Axelrod-Python/axelrod-dojo} with documentation to
+software is (similarly to the Axelrod library) available on 
+github\footnote{\url{https://github.com/Axelrod-Python/axelrod-dojo}} 
+with documentation to
 train new strategies easily. Training
 typically takes less than 100 generations and can be completed within several
 hours on commodity hardware.
@@ -356,7 +358,8 @@ and~\ref{alg:moran_process}.
 \end{algorithm}
 
 Section~\ref{sec:validation} will further validate the methodology by comparing
-simulated results to analytical results in some cases. The main results of this
+simulated results to analytical results in a few selected cases. The main 
+results of this
 manuscript are presented in Section~\ref{sec:empirical_results} which will
 present a detailed analysis of all the data generated. Finally,
 Section~\ref{sec:conclusion} will conclude and offer future avenues for the work
@@ -394,9 +397,9 @@ are then given by:
     p_{ii} &= 1 - p_{i, i+1} - p_{i, i-1}\label{equ:p_stay}
 \end{align}
 
-Using this it is a known result \cite{Nowak2017} that the fixation probability
+Using this the fixation probability
 of the first strategy in a population of \(i\) individuals of the first type
-and \(N-i\) individuals of the second:
+and \(N-i\) individuals of the second, is given by \cite{Nowak2017}:
 
 \begin{equation}\label{equ:fixation_probability}
 x_i = \frac{1 + \sum_{j=1}^{i-1}\prod_{k=1}^{j}\gamma_j}{1 + \sum_{j=1}^{N-1}
@@ -419,6 +422,7 @@ deterministic strategies and show a perfect match between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
 strategy pairs. Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
 stochastic strategies. These are no longer a good match which highlights the
+% TODO Rephrase this sentence: possibly when doing the statistical test
 weakness of assuming a given interaction between two IPD strategies can be
 summarised with a set of utilities as shown in
 (\ref{equ:payoff_matrix}). For any given pair of strategies it is possible to
@@ -598,7 +602,7 @@ Table~\ref{tbl:summary_top_2}. The top five ranking strategies are:
         then it cooperates. Thus it will do well in a population consisting of
         many members of itself just as the Collective Strategy does. The
         difference is that CS will defect after the handshake if the opponent
-        defects while handshake will not.
+        defects while Handshake will not.
 \end{enumerate}
 
 It is also noted that TF1, TF2 and TF3 all perform well. This is also the \(N\)
@@ -688,7 +692,7 @@ fixation as well as the neutral fixation for each given scenario.
     % TODO Move to online appendix
 \end{figure}
 
-The top 16 strategies are given in Tables~\ref{tbl:top_invade}.
+The top 16 strategies are given in Table~\ref{tbl:top_invade}.
 
 \begin{table}[!hbtp]
     \centering
@@ -834,7 +838,7 @@ kind. Acting stochastically increases the chance of friendly fire.
 However it is possible to design a strategy with a stochastic or error-correcting
 handshake that is an excellent resistor even in noisy environments \cite{Lee2015}.
 
-There are are only two new strategies that appear in the top ranks for
+There are only two new strategies that appear in the top ranks for
 \(x_{N-1}\): TF1 and TF2. These two strategies are with CS the strongest
 resistors. They all have handshakes, and whilst the handshakes of CS and
 Handshake (which ranks highly for the smaller values of \(N\)) were
@@ -876,7 +880,8 @@ Sections~\ref{sec:two_individuals},~\ref{sec:strong_invaders}
 and~\ref{sec:strong_resistors} that performance of strategies not only depends
 on the initial population distribution but also that there seems to be a
 difference depending on whether or not \(N>2\). This will be explored further in
-the next section, looking not only at \(x_1\) and \(x_{N-1}\) but also consider
+the next section, looking not only at \(x_1\) and \(x_{N-1}\) but also
+considering
 \(x_{N/2}\).
 
 \subsection{The effect of population size}\label{sec:population_size}
@@ -912,7 +917,7 @@ does not translate to larger populations.
     \centering
     \scriptsize
     \scalebox{0.7}{\input{tex/change_of_rank_invade.tex}}
-    \caption{Invasion: Fixation ranks of some strategies according to \(x_1\) for different
+    \caption{Invasion: Fixation ranks of a few selected strategies according to \(x_1\) for different
     population sizes}
     \label{tbl:ranks_v_size_invade}
 \end{table}
@@ -921,7 +926,7 @@ does not translate to larger populations.
     \centering
     \scriptsize
     \scalebox{0.7}{\input{tex/change_of_rank_resist.tex}}
-    \caption{Resistance: Fixation ranks of some strategies according to \(x_{N-1}\) for different
+    \caption{Resistance: Fixation ranks of a few selected strategies according to \(x_{N-1}\) for different
     population sizes}
     \label{tbl:ranks_v_size_resist}
 \end{table}
@@ -939,13 +944,13 @@ does not translate to larger populations.
     \centering
     \scriptsize
     \input{tex/change_of_rank_coexist.tex}
-    \caption{Ranks of some strategies according to \(x_{N/2}\) for different
+    \caption{Ranks of a few selected strategies according to \(x_{N/2}\) for different
     population sizes}
     \label{tbl:ranks_v_size_coexist}
 \end{table}
 
 
-Figure~\ref{fig:correlation_coefficients} show the correlation coefficients
+Figure~\ref{fig:correlation_coefficients} shows the correlation coefficients
 of the ranks of strategies in differing population size. How well a strategy
 performs in any Moran process for \(N>2\) has
 little to do with the performance for \(N=2\). This illustrates why the strong
@@ -989,7 +994,7 @@ While TF1 and TF2 are competent invaders, the best invaders
 in the study do not appear to employ strict handshakes, and are generally
 cooperative strategies. TF3, which does not use a handshake, is a better invader
 than TF1 and TF2 but not as good a resistor. Nevertheless it was the result
-of the same kind of training procceses and is a better combined invader-resistor
+of the same kind of training processes and is a better combined invader-resistor
 than the invaders that were trained previously to maximize payout.
 
 The strategies trained to maximize payoff in head-to-head matches are generally
@@ -1050,7 +1055,7 @@ capacity finite state machine players.
 A detailed empirical analysis of 164 strategies of the IPD within a pairwise
 Moran process has been carried out. All \(\binom{164}{2}=13,366\) possible
 ordered pairs of strategies have been placed in a Moran process with different
-starting values allowing the each strategy to attempt to invade the other.
+starting values allowing each strategy to attempt to invade the other.
 This is the largest such experiment carried out and has led to many insights.
 
 When studying evolutionary processes it is vital to consider \(N>2\) since
