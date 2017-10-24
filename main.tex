@@ -22,7 +22,6 @@
 \title{Evolution Reinforces Cooperation with the Emergence of Self-Recognition
        Mechanisms: an Empirical Study of the Moran process for the Iterated
        Prisoner's Dilemma}
-       % TODO Possibly change
 \author[1]{Vincent Knight}
 \author[2]{Marc Harper}
 \author[1]{Nikoleta E. Glynatsi}
@@ -415,8 +414,12 @@ where:
 A neutral strategy will have fixation probability $x_i = i/N$.
 
 Comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
-Figure~\ref{fig:comparison_deterministic}. The points represent the simulated
-% TODO Add description of lines shown.
+Figure~\ref{fig:comparison_deterministic}. 
+The top most line on all figures (in red and using a circle) corresponds to
+\(x_{N-1}\), the middle line (in green and using a cross) corresponds to
+\(x_{N/2}\) and the bottom line (in blue and using an x) corresponds to
+\(X_{1}\).
+The points represent the simulated
 values and the line shows the theoretical value. Note that these are all
 deterministic strategies and show a perfect match between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
@@ -433,62 +436,32 @@ pair and can be quite a complex endeavour for stochastic strategies with long
 memory: this is not necessary for the purposes of this work.
 All data generated for this validation exercise can be found
 at \cite{data}.
-% TODO Include a statistical test (Bonferroni)
+% TODO Include a statistical test (1 sided t test)
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/Alternator_v_Cooperator.pdf}
+        \includegraphics[width=.95\columnwidth]{img/Alternator_v_Cooperator.pdf}
         \caption{Alternator and Cooperator}
     \end{subfigure}%
     ~
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/Defector_v_Alternator.pdf}
-        \caption{Defector and Alternator}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Alternator_v_TfT.pdf}
+        \includegraphics[width=.95\columnwidth]{img/Alternator_v_TfT.pdf}
         \caption{Alternator and Tit For Tat}
     \end{subfigure}%
 
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/Cooperator_v_TfT.pdf}
-        \caption{Cooperator and Tit For Tat}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Defector_v_Cooperator.pdf}
-        \caption{Defector and Cooperator}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Defector_v_TfT.pdf}
-        \caption{Defector and Tit For Tat}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/WSLS_v_TfT.pdf}
+        \includegraphics[width=.95\columnwidth]{img/WSLS_v_TfT.pdf}
         \caption{Win Stay Lose Shift and Tit For Tat}
     \end{subfigure}%
     ~
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/Alternator_v_WSLS.pdf}
+        \includegraphics[width=.95\columnwidth]{img/Alternator_v_WSLS.pdf}
         \caption{Alternator and Win Stay Lose Shift}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Defector_v_WSLS.pdf}
-        \caption{Defector and Win Stay Lose Shift}
     \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process fixation
              probabilities for \textbf{deterministic} strategies.}
@@ -498,57 +471,28 @@ at \cite{data}.
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Random_v_Cooperator.pdf}
-        \caption{Random and Cooperator}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Random_v_Defector.pdf}
-        \caption{Random and Defector}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Random_v_TfT.pdf}
-        \caption{Random and Tit For Tat}
-    \end{subfigure}%
 
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/ALLCorALLD_v_Cooperator.pdf}
+        \includegraphics[width=.95\columnwidth]{img/ALLCorALLD_v_Cooperator.pdf}
         \caption{All C or all D and Cooperator}
     \end{subfigure}%
     ~
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/ALLCorALLD_v_Defector.pdf}
-        \caption{All C or all D and Defector}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Calculator_v_Random.pdf}
-        \caption{Calculator and Random}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[width=.8\columnwidth]{img/Calculator_v_ALLCorALLD.pdf}
+        \includegraphics[width=.95\columnwidth]{img/Calculator_v_ALLCorALLD.pdf}
         \caption{Calculator and All C or all D}
     \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
+    
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/Calculator_v_Arrogant_QLearner.pdf}
+        \includegraphics[width=.95\columnwidth]{img/Calculator_v_Arrogant_QLearner.pdf}
         \caption{Calculator and Arrogant Q learner}
     \end{subfigure}%
     ~
-    \begin{subfigure}[t]{.3\columnwidth}
+    \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=.8\columnwidth]{img/ALLCorALLD_v_TfT.pdf}
+        \includegraphics[width=.95\columnwidth]{img/ALLCorALLD_v_TfT.pdf}
         \caption{All C or all D and Tit For Tat}
     \end{subfigure}%
     \caption{Comparison of theoretic and actual Moran Process
