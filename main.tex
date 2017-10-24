@@ -498,7 +498,6 @@ at \cite{data}.
     \caption{Comparison of theoretic and actual Moran Process
              fixation probabilities for \textbf{stochastic} strategies.}
     \label{fig:comparison_stochastic}
-    % TODO DEEMED Unreadable: reduce number of images.
 \end{figure}
 
 \section{Empirical results}\label{sec:empirical_results}
@@ -529,6 +528,7 @@ the two cases of \(x_1\) and \(x_{N-1}\) coincide, but will be
 considered separately for larger \(N\) in sections~\ref{sec:strong_invaders}
 and~\ref{sec:strong_resistors}. Figure~\ref{fig:boxplot_2} shows all fixation
 probabilities for the strategies considered. The top 16 (10\%) strategies are
+% TODO Fix (have removed plot)
 shown in
 Table~\ref{tbl:summary_top_2}. The top five ranking strategies are:
 
@@ -554,26 +554,14 @@ for which a zero determinant strategy does appear in the top 10\% ranking
 strategies: ZD-extort-4. The performance of zero determinant strategies will be
 examined more closely in Section~\ref{sec:population_size}.
 
-\begin{figure}[!hbtp]
-    \begin{subfigure}{.5\columnwidth}
-        \centering
-        \includegraphics[width=\columnwidth]{img/boxplot_2_invade.pdf}
-        \caption{The fixation probabilities for \(N=2\)}
-        \label{fig:boxplot_2}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}{.5\columnwidth}
-        \scriptsize
-        \centering
-        \scalebox{0.95}{\input{tex/summary_top_2_invade.tex}}
-        \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\))}
-        % TODO Add more summary statistics to this measure
-        \label{tbl:summary_top_2}
-    \end{subfigure}
-    \caption{Performance of strategies for \(N=2\).}
-    % TODO Move the plot
+\begin{table}[!hbtp]
+    \tiny
+    \centering
+    \scalebox{0.95}{\input{tex/summary_top_2_invade.tex}}
+    \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\))}
+    \label{tbl:summary_top_2}
     % TODO Explain this more (see comment about error bars)
-\end{figure}
+\end{table}
 
 As will be demonstrated in Section~\ref{sec:population_size} the results for
 \(N=2\) differ from those of larger $N$. Hence these results do not concur with
@@ -640,7 +628,7 @@ The top 16 strategies are given in Table~\ref{tbl:top_invade}.
 
 \begin{table}[!hbtp]
     \centering
-    \scriptsize
+    \tiny
     \begin{subfigure}[t]{\columnwidth}
         \centering
         \input{tex/summary_top_3_invade.tex}
@@ -753,7 +741,7 @@ Once again none of the short memory strategies from
 Section~\ref{sec:two_individuals} perform well for high \(N\).
 
 \begin{table}[!hbtp]
-    \scriptsize
+    \tiny
     \centering
     \begin{subfigure}[t]{\columnwidth}
         \centering
