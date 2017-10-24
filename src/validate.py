@@ -13,6 +13,8 @@ import functools
 import multiprocessing
 import itertools
 
+from scipy import stats
+
 
 def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
                        cachefile=None):
@@ -31,15 +33,13 @@ def simulated_fixation(strategy_pair, N, i=1, repetitions=10,
         players.append(strategy_pair[1])
     mp = axl.ApproximateMoranProcess(players, cached_outcomes=cache)
 
-    win_count = 0
+    wins = []
     for seed in range(repetitions):
         axl.seed(seed)
         mp.reset()
         mp.play()
-        if mp.winning_strategy_name == str(players[0]):
-            win_count += 1
-
-    return win_count / repetitions
+        wins.append(int(mp.winning_strategy_name == str(players[0])))
+    return wins
 
 
 def theoretic_vs_simulated(repetitions, utilities, filename,
@@ -54,11 +54,15 @@ def theoretic_vs_simulated(repetitions, utilities, filename,
     for i in starting_pop:
         player_names = [str(p) for p in players]
         t = theoretic.fixation(player_names, N, i, utilities=utilities)
-        s = simulated_fixation(players,  N, i, repetitions=repetitions)
+        simulated_wins = simulated_fixation(players,  N, i, repetitions=repetitions)
+        s = sum(simulated_wins) / repetitions
+
+        test = stats.ttest_1samp(simulated_wins, t)
+        p = test.pvalue
 
         with open(filename, "a") as f:
             writer = csv.writer(f)
-            writer.writerow([repetitions, N, i, *player_names, t, s])
+            writer.writerow([repetitions, N, i, *player_names, t, s, p])
 
 
 if __name__ == "__main__":
@@ -66,7 +70,7 @@ if __name__ == "__main__":
     outcomes_file = "../data/outcomes.csv"
     output_file = "../data/fixation_validation.csv"
     with open(output_file, "w") as f:
-        f.write("Repetitions,N,i,Player 1,Player 2,Theoretic,Simulated\n")
+        f.write("Repetitions,N,i,Player 1,Player 2,Theoretic,Simulated,p Value\n")
 
     player_pairs = [(axl.Defector(), axl.Defector()),
                     (axl.Defector(), axl.Alternator()),
