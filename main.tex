@@ -119,7 +119,7 @@ processes as an invasion-resistance mechanism.
 
 Recent work has argued that agent-based
 simulations can provide insights in evolutionary game theory not available
-via direct mathematical analysis \cite{adami2016evolutionary}. The results
+via direct mathematical analysis~\cite{adami2016evolutionary}. The results
 and insights contained in this paper would be difficult to derive analytically.
 
 In particular the following questions are addressed:
@@ -149,7 +149,8 @@ process, a stochastic birth death process on a finite population in which the
 population size stays constant over time. Individuals are \textbf{selected}
 according to a given fitness landscape. Once selected, the individual is
 reproduced and similarly another individual is chosen to be removed from the
-population. In some settings mutation is also considered but without mutation
+population (a uniform random selection is used). In some settings mutation is 
+also considered but without mutation
 (the case considered in this work) this process will arrive at an absorbing
 state where the population is entirely made up of players of one strategy. The
 probability with which a given strategy takes over a population is called the
@@ -221,14 +222,19 @@ of opponents. Variation is
 introduced via mutation and crossover of parameters, and the best performing
 strategies are carried to the next generation along with new variants. Similar
 methods appear in the literature \cite{Ashlock2006}.
+There has also been some work on strategies using an evolutionary in real time: 
+in~\cite{Gaudesi2016}
+an evolutionary algorithm is used to build a model of the opponent and attempt
+to exploit any potential weakness. This sort of work is not considered here:
+strategies are instead pre trained.
 
 More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
 of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
 All of the training code is archived at \cite{marc_harper_2017_824264}. This
-software is (similarly to the Axelrod library) available on 
-github\footnote{\url{https://github.com/Axelrod-Python/axelrod-dojo}} 
+software is (similarly to the Axelrod library) available on
+github\footnote{\url{https://github.com/Axelrod-Python/axelrod-dojo}}
 with documentation to
 train new strategies easily. Training
 typically takes less than 100 generations and can be completed within several
@@ -236,14 +242,15 @@ hours on commodity hardware.
 
 There are three further strategies trained specifically for this study; Trained
 FSM 1, 2, and 3 (TF1 - TF3). These are based on finite state machines of 16, 16,
-and 8 states respectively (see Figures~\ref{fig:tf1},~\ref{fig:tf2}
-and~\ref{fig:tf3}).
-% TODO Describe what the diagram shows
+and 8 states respectively. These are shown in Figures~\ref{fig:tf1},~\ref{fig:tf2}
+and~\ref{fig:tf3}), using the notation common in the literature where
+\(A_1/A_2\) is the action of the opponent \(A_1\) and the response of the player
+\(A_2\) as well as arrows corresponding to changes of state.
 
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.5}{\input{tex/fsm_one.tex}}
+    \scalebox{.7}{\input{tex/fsm_one.tex}}
     \caption{TF1: a 16 state finite state machine with a handshake leading to
     mutual cooperation at state 4.}
     \label{fig:tf1}
@@ -252,7 +259,7 @@ and~\ref{fig:tf3}).
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.5}{\input{tex/fsm_two.tex}}
+    \scalebox{.7}{\input{tex/fsm_two.tex}}
     \caption{TF2: a 16 state finite state machine with a handshake leading to
     mutual cooperation at state 16.}
     \label{fig:tf2}
@@ -333,15 +340,11 @@ with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
 computed for each combination of starting distribution and value of \(N\).  The
 Axelrod library can carry out exact simulations of the Moran process. Since some
 of the strategies have a high computational cost or are stochastic, samples are
-% TODO Add a bit more clarity that the cache is indeed stochastic (although not
-% when using deterministic strategies.
-taken from a large number of match outcomes for the pairs of players for use in
-computing fitnesses in the Moran process. This approach was verified to agree
-with unsampled calculations to a high degree of accuracy in specific cases.
-This is described in Algorithms~\ref{alg:data_collection}
-and~\ref{alg:moran_process}.
-% TODO Are we clear about selection procedure?
-% TODO Specify that kill off is uniformly random.
+taken from a large number of 200 turn match outcomes for the pairs of players
+for use in computing fitnesses in the Moran process (i.e. a stochastic cache of
+matches is used). This approach was verified to agree with unsampled
+calculations to a high degree of accuracy in specific cases.  This is described
+in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
 
 \begin{algorithm}[!hbtp]
         \caption{Data Collection}
@@ -353,7 +356,6 @@ and~\ref{alg:moran_process}.
         \caption{Moran process}
         \label{alg:moran_process}
         \input{tex/moran_process_simulation.tex}
-        % TODO Add description of number of turns in the IPD
 \end{algorithm}
 
 Section~\ref{sec:validation} will further validate the methodology by comparing
