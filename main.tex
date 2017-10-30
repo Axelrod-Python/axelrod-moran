@@ -414,90 +414,69 @@ where:
 A neutral strategy will have fixation probability $x_i = i/N$.
 
 Comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
-Figure~\ref{fig:comparison_deterministic}. 
+Figure~\ref{fig:comparison_deterministic} for Alternator and WSLS.
 The top most line on all figures (in red and using a circle) corresponds to
 \(x_{N-1}\), the middle line (in green and using a cross) corresponds to
 \(x_{N/2}\) and the bottom line (in blue and using an x) corresponds to
 \(X_{1}\).
 The points represent the simulated
-values and the line shows the theoretical value. Note that these are all
-deterministic strategies and show a perfect match between the expected value
+values and the line shows the theoretical value. Note that these are 
+deterministic strategies and show a good match between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
-strategy pairs. Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
-stochastic strategies. These are no longer a good match which highlights the
-% TODO Rephrase this sentence: possibly when doing the statistical test
-weakness of assuming a given interaction between two IPD strategies can be
-summarised with a set of utilities as shown in
-(\ref{equ:payoff_matrix}). For any given pair of strategies it is possible to
-obtain \(p_{i,i-1}, p_{i,i+1}, p_{ii}\) exactly (as opposed to the
-approximations offered by (\ref{equ:p_up}), (\ref{equ:p_down}) and
-(\ref{equ:p_stay})). Obtaining these requires particular analysis for a given
-pair and can be quite a complex endeavour for stochastic strategies with long
-memory: this is not necessary for the purposes of this work.
-All data generated for this validation exercise can be found
-at \cite{data}.
-% TODO Include a statistical test (1 sided t test)
+strategy pairs. These means have been compared using a \(t\)-test and the \(p\)
+values are shown in Table~\ref{tab:comparison_deterministic} which confirms the
+fact that the theoretic and simulated values are a good match.
+
+Figure~\ref{fig:comparison_stochastic} shows the fixation probabilities for
+stochastic strategies: Calculator and arrogant Q Learner. These are no longer a
+good match (confirmed with a \(t\)-test in
+Table~\ref{tab:comparison_stochastic}) which highlights the weakness of assuming
+a given interaction between two IPD strategies can be summarised with a set of
+utilities as shown in (\ref{equ:payoff_matrix}). For any given pair of
+strategies it is possible to obtain \(p_{i,i-1}, p_{i,i+1}, p_{ii}\) exactly (as
+opposed to the approximations offered by (\ref{equ:p_up}), (\ref{equ:p_down})
+and (\ref{equ:p_stay})). Obtaining these requires particular analysis for a
+given pair and can be quite a complex endeavour for stochastic strategies with
+long memory: this is not necessary for the purposes of this work.  All data
+generated for this validation exercise can be found at~\cite{data}.
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/Alternator_v_Cooperator.pdf}
-        \caption{Alternator and Cooperator}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/Alternator_v_TfT.pdf}
-        \caption{Alternator and Tit For Tat}
-    \end{subfigure}%
-
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/WSLS_v_TfT.pdf}
-        \caption{Win Stay Lose Shift and Tit For Tat}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/Alternator_v_WSLS.pdf}
-        \caption{Alternator and Win Stay Lose Shift}
-    \end{subfigure}%
+    \includegraphics[width=.95\columnwidth]{img/Alternator_v_WSLS.pdf}
     \caption{Comparison of theoretic and actual Moran Process fixation
-             probabilities for \textbf{deterministic} strategies.}
+             probabilities for \textbf{deterministic} strategies: Alternator and
+             Cooperator.}
     \label{fig:comparison_deterministic}
 \end{figure}
 
+\begin{table}[!hbtp]
+    \centering
+    \input{tex/t_test_results_alternator_v_wsls.tex}
+    \caption{\(p\) values resulting from a $t$ test comparing the theoretic
+        value with the simulated value of the Moran Process fixation
+        probabilities for \textbf{deterministic} strategies: Alternator and
+    Cooperator.}
+    \label{tab:comparison_deterministic}
+\end{table}
+
 \begin{figure}[!hbtp]
     \centering
-
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/ALLCorALLD_v_Cooperator.pdf}
-        \caption{All C or all D and Cooperator}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/Calculator_v_ALLCorALLD.pdf}
-        \caption{Calculator and All C or all D}
-    \end{subfigure}%
-    
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/Calculator_v_Arrogant_QLearner.pdf}
-        \caption{Calculator and Arrogant Q learner}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[width=.95\columnwidth]{img/ALLCorALLD_v_TfT.pdf}
-        \caption{All C or all D and Tit For Tat}
-    \end{subfigure}%
+    \includegraphics[width=.95\columnwidth]{img/Calculator_v_Arrogant_QLearner.pdf}
     \caption{Comparison of theoretic and actual Moran Process
-             fixation probabilities for \textbf{stochastic} strategies.}
+             fixation probabilities for \textbf{stochastic} strategies:
+             Calculator and Arrogant Q Learner.}
     \label{fig:comparison_stochastic}
 \end{figure}
+
+\begin{table}[!hbtp]
+    \centering
+    \input{tex/t_test_results_calculator_v_arrogant_q_learner.tex}
+    \caption{\(p\) values resulting from a \(t\) test comparing the theoretic
+        value with the simulated value of the Moran Process fixation
+        probabilities for \textbf{stochastic} strategies: Calculator and
+    Arrogant Q Learner.}
+    \label{tab:comparison_stochastic}
+\end{table}
 
 \section{Empirical results}\label{sec:empirical_results}
 
