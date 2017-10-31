@@ -10,8 +10,8 @@
     \WHILE {population not uniform}
       \FOR{player in population}
       \FOR{opponent in (population - player)}
-        \STATE match $\gets$ (player, opponent)
-        \STATE results $\gets$ cache (match)
+        \STATE match $\gets$ (player, opponent) 
+        \STATE results $\gets$ stochastic cache (200 round match)
         \ENDFOR
       \ENDFOR
       \STATE population $\gets$ sorted(results)
