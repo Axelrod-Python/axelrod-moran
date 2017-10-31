@@ -505,16 +505,17 @@ available at~\cite{data}:
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
 
-When $N=2$ the Moran process is effectively a measure of the distribution of relative
+When $N=2$ the Moran process is effectively a measure of the distribution of 
+relative
 mean payoffs over all possible matches between two players. The strategy
 that scores higher than the other more often will fixate more often. For \(N=2\)
 the two cases of \(x_1\) and \(x_{N-1}\) coincide, but will be
 considered separately for larger \(N\) in sections~\ref{sec:strong_invaders}
-and~\ref{sec:strong_resistors}. Figure~\ref{fig:boxplot_2} shows all fixation
-probabilities for the strategies considered. The top 16 (10\%) strategies are
-% TODO Fix (have removed plot)
+and~\ref{sec:strong_resistors}. The top 16 (10\%) strategies are
 shown in
-Table~\ref{tbl:summary_top_2}. The top five ranking strategies are:
+Table~\ref{tbl:summary_top_2} and figures showing the performance of all
+strategies are available in the supplementary materials. 
+The top five ranking strategies are:
 
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
@@ -544,7 +545,6 @@ examined more closely in Section~\ref{sec:population_size}.
     \scalebox{0.95}{\input{tex/summary_top_2_invade.tex}}
     \caption{Top strategies for \(N=2\) (neutral fixation is \(p=0.5\))}
     \label{tbl:summary_top_2}
-    % TODO Explain this more (see comment about error bars)
 \end{table}
 
 As will be demonstrated in Section~\ref{sec:population_size} the results for
@@ -564,18 +564,10 @@ of memory-one strategies that do not generalize to this context.
 In this section the focus is on the ability of a mutant strategy to invade: the
 probability of one individual of a given type successfully fixating in a
 population of \(N - 1\) other individuals, denoted by \(x_1\).
-The ranks of each strategy for all considered values of \(N\) according to mean
-\(x_1\) are shown in Figure~\ref{fig:ranks_v_size_invade}.
 
-
-The fixation
-probabilities are shown in
-Figures~\ref{fig:boxplot_3_invade},~\ref{fig:boxplot_7_invade}
-and~\ref{fig:boxplot_14_invade} for \(N\in\{3, 7, 14\}\) showing the mean
-fixation as well as the neutral fixation for each given scenario.
-
-
-The top 16 strategies are given in Table~\ref{tbl:top_invade}.
+The top 16 strategies are given in Table~\ref{tbl:top_invade}. A variety of
+figures showing the performance of all strategies is available in the
+supplementary materials.
 
 \begin{table}[!hbtp]
     \centering
@@ -642,19 +634,11 @@ converse situation.
 
 In addition to identifying good invaders, strategies resistant to invasion by
 other strategies are identified by examining the distribution of $x_{N-1}$ for
-each strategy. The ranks of each strategy for all considered values of \(N\)
-according to mean \(x_{N-1}\) are shown in
-Figures~\ref{fig:ranks_v_size_resist}.
-
-The fixation probabilities are shown in
-Figures~\ref{fig:boxplot_3_resist},~\ref{fig:boxplot_7_invade}
-and~\ref{fig:boxplot_14_resist} for \(N\in\{3, 7, 14\}\) showing the mean
-fixation as well as the neutral fixation for each given scenario.
-
-
+each strategy.
 
 Table~\ref{tbl:top_resist} shows the top strategies when ranked
-according to \(x_{N-1}\) for \(N\in\{3, 7, 14\}\).
+according to \(x_{N-1}\) for \(N\in\{3, 7, 14\}\) and figures showing results
+for all strategies are available in the supplementary materials.
 Once again none of the short memory strategies from
 Section~\ref{sec:two_individuals} perform well for high \(N\).
 
@@ -736,11 +720,8 @@ considering
 
 \subsection{The effect of population size}\label{sec:population_size}
 
-To complement Figures~\ref{fig:ranks_v_size_invade}
-and~\ref{fig:ranks_v_size_resist}, Figure~\ref{fig:ranks_v_size_coexist} shows
-the rank of each strategy based on \(x_{N/2}\).
 Tables~\ref{tbl:ranks_v_size_invade},~\ref{tbl:ranks_v_size_resist}
-and~\ref{tbl:ranks_v_size_coexist} show the same information for a selection of
+and~\ref{tbl:ranks_v_size_coexist} show the ranks for a selection of
 strategies:
 
 \begin{itemize}
@@ -839,7 +820,7 @@ than the invaders that were trained previously to maximize payout.
 
 The strategies trained to maximize payoff in head-to-head matches are generally
 cooperative and are effective invaders.
-Combined with the fact that handshaking strategies are stronger resisters,
+Combined with the fact that handshaking strategies are stronger resistors,
 this suggests that while maximizing individual payoff can lead to the evolution
 of cooperation, these strategies are not the most evolutionarily stable
 in the long run. A strategy with a handshaking mechanism is still capable of
@@ -971,7 +952,6 @@ strategy.
     \caption{Cooperation rate per round (over 10000 repetitions). Rows
         correspond to all the strategies considered in this work (ordered
     alphabetically by name).}
-    % TODO Add better explanation of repetitions.
     \label{fig:cooperation_rates}
 \end{figure}
 
@@ -982,7 +962,6 @@ memory which has started to be recognised by the community \cite{Hilbe2017}.
 All source code for this work has been written in a sustainable manner: it is
 open source, under version control and tested which ensures that all results can
 be reproduced \cite{Prlic2012, Sandve2013, Wilson2014}. The raw data as well as
-% TODO Add reference to source code
 the processed data has also been properly archived and can be found
 at \cite{data}.
 
@@ -1011,7 +990,6 @@ A variety of software libraries have been used in this work:
 \newpage
 \bibliographystyle{plain}
 \bibliography{tex/bibliography.bib}
-% TODO Fix repeated item.
 
 \appendix
 
