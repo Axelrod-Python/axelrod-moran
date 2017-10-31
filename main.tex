@@ -416,7 +416,9 @@ where:
 A neutral strategy will have fixation probability $x_i = i/N$.
 
 Comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
-Figure~\ref{fig:comparison_deterministic} for Alternator and WSLS.
+Figure~\ref{fig:comparison_deterministic} for Alternator and WSLS (a 5\%
+confidence interval computed using an asymptotic normal approximation is also
+included \cite{brown2001interval}).
 The top most line on all figures (in red and using a circle) corresponds to
 \(x_{N-1}\), the middle line (in green and using a cross) corresponds to
 \(x_{N/2}\) and the bottom line (in blue and using an x) corresponds to
@@ -447,7 +449,8 @@ generated for this validation exercise can be found at~\cite{data}.
     \includegraphics[width=.95\columnwidth]{img/Alternator_v_WSLS.pdf}
     \caption{Comparison of theoretic and actual Moran Process fixation
              probabilities for \textbf{deterministic} strategies: Alternator and
-             Cooperator.}
+         Cooperator. 5\% confidence intervals calculated using an asymptotic
+     normal approximation.}
     \label{fig:comparison_deterministic}
 \end{figure}
 
@@ -466,7 +469,8 @@ generated for this validation exercise can be found at~\cite{data}.
     \includegraphics[width=.95\columnwidth]{img/Calculator_v_Arrogant_QLearner.pdf}
     \caption{Comparison of theoretic and actual Moran Process
              fixation probabilities for \textbf{stochastic} strategies:
-             Calculator and Arrogant Q Learner.}
+             Calculator and Arrogant Q Learner. 5\% confidence intervals calculated using an asymptotic
+     normal approximation.}
     \label{fig:comparison_stochastic}
 \end{figure}
 
@@ -959,8 +963,9 @@ strategy.
         \includegraphics[width=\columnwidth]{img/cooperation_0_0_10000_CS_array.pdf}
         \caption{CS}
     \end{subfigure}
-    \caption{Cooperation rate per round (over 10000 repetitions).}
-    % TODO Make less bad. Perhaps remove names altogether.
+    \caption{Cooperation rate per round (over 10000 repetitions). Rows
+        correspond to all the strategies considered in this work (ordered
+    alphabetically by name).}
     % TODO Add better explanation of repetitions.
     \label{fig:cooperation_rates}
 \end{figure}
