@@ -8,7 +8,7 @@
         \STATE pair $\gets$ (player one, player two)
         \FOR{starting population distributions \textbf{in} [$(1, N-1), (\frac{N}{2}, \frac{N}{2}), (N-1, 1)]$}
         \WHILE {repetitions $\leq 1000$}
-        \STATE \textbf{simulate} moran process*(pair, starting distribution)
+        \STATE \textbf{simulate} moran process (pair, starting distribution)
         \ENDWHILE
         \RETURN fixation probabilities
         \ENDFOR
