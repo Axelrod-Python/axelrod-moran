@@ -289,16 +289,14 @@ The trained algorithms
 were run for fewer than 50 generations. Training data for this is available at
 \cite{data}.
 
-TF3 cooperates and defects with
-various cycles depending on the opponent's actions. TF3 will mutually
-cooperate with any strategy and only tolerates a few defections before
-defecting for the rest of match. It is similar to but not exactly the same as
-Fool Me Once, a strategy that cooperates until the opponent has defected twice
-(not necessarily consecutively), and defects indefinitely thereafter. Though a
-product of training with a Moran objective, it differs from TF1 and TF2
-in that it lacks a handshake mechanism. Figure~\ref{fig:tf3} shows
-all 8 states of the strategy produced by the training process (states 3 and 8
-are not reachable).
+TF1 has an initial handshake of CCD and cooperates if the opponent matches.
+However if the opponent later defects, TF1 will respond in kind, so the
+handshake is not permanent. Only one player (Prober 4 \cite{Prison1998}) manages to
+achieve cooperation with TF1 after about 20 rounds of play. TF1 is functionally
+very similar to a strategy known as ``Collective Strategy'', which has a
+handshake of CD and cooperates with opponents that matched the handshake
+until they defect, defecting thereafter if the opponent ever defects \cite{Li2009}.
+Collective Strategy was specifically designed for evolutionary processes.
 
 TF2 always starts with CD and will defect against opponents that start with
 DD\@. It plays CDD against itself and then cooperates thereafter; Fortress3 and
@@ -310,14 +308,16 @@ players in the study, barring
 unusual cases arising from particular randomizations. Figure~\ref{fig:tf2} shows
 all 16 states of the strategy (states 6 and 7 are not reachable).
 
-TF1 has an initial handshake of CCD and cooperates if the opponent matches.
-However if the opponent later defects, TF1 will respond in kind, so the
-handshake is not permanent. Only one player (Prober 4 \cite{Prison1998}) manages to
-achieve cooperation with TF1 after about 20 rounds of play. TF1 is functionally
-very similar to a strategy known as ``Collective Strategy'', which has a
-handshake of CD and cooperates with opponents that matched the handshake
-until they defect, defecting thereafter if the opponent ever defects \cite{Li2009}.
-Collective Strategy was specifically designed for evolutionary processes.
+TF3 cooperates and defects with
+various cycles depending on the opponent's actions. TF3 will mutually
+cooperate with any strategy and only tolerates a few defections before
+defecting for the rest of match. It is similar to but not exactly the same as
+Fool Me Once, a strategy that cooperates until the opponent has defected twice
+(not necessarily consecutively), and defects indefinitely thereafter. Though a
+product of training with a Moran objective, it differs from TF1 and TF2
+in that it lacks a handshake mechanism. Figure~\ref{fig:tf3} shows
+all 8 states of the strategy produced by the training process (states 3 and 8
+are not reachable).
 
 For both TF1 and TF2 a handshake
 mechanism naturally emerges from the structure of the underlying finite state
