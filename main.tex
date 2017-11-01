@@ -222,11 +222,11 @@ of opponents. Variation is
 introduced via mutation and crossover of parameters, and the best performing
 strategies are carried to the next generation along with new variants. Similar
 methods appear in the literature \cite{Ashlock2006}.
-There has also been some work on strategies using an evolutionary in real time: 
+There has also been some work on strategies using an evolutionary algorithm in real time: 
 in~\cite{Gaudesi2016}
 an evolutionary algorithm is used to build a model of the opponent and attempt
-to exploit any potential weakness. This sort of work is not considered here:
-strategies are instead pre trained.
+to exploit any potential weakness. In this work all strategies resulting from
+evolutionary algorithms are pre-trained.
 
 More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
@@ -318,7 +318,7 @@ achieve cooperation with TF1 after about 20 rounds of play. TF1 is functionally
 very similar to a strategy known as ``Collective Strategy'', which has a
 handshake of CD and cooperates with opponents that matched the handshake
 until they defect, defecting thereafter if the opponent ever defects \cite{Li2009}.
-This strategy was specifically designed for evolutionary processes.
+Collective Strategy was specifically designed for evolutionary processes.
 
 For both TF1 and TF2 a handshake
 mechanism naturally emerges from the structure of the underlying finite state
@@ -328,7 +328,7 @@ way hard-coded or included via an additional mechanism.
 \begin{table}[!hbtp]
     \centering
         \scalebox{0.7}{\input{tex/memory_depth_count.tex}}
-        \caption{Memory depth}
+        \caption{Memory depths}
         \label{tbl:memory_depth_count}
 \end{table}
 
@@ -481,7 +481,7 @@ The top most line on all figures (in red and using a circle) corresponds to
 \begin{table}[!hbtp]
     \centering
     \input{tex/t_test_results_calculator_v_arrogant_q_learner.tex}
-    \caption{\(p\) values resulting from a \(t\) test comparing the theoretic
+    \caption{\(p-\text{values}\) resulting from a \(t-\text{ test}\) comparing the theoretic
         value with the simulated value of the Moran Process fixation
         probabilities for \textbf{stochastic} strategies: Calculator and
     Arrogant Q Learner.}
@@ -509,8 +509,8 @@ available at~\cite{data}:
 
 \subsection{The special case of \(N=2\)}\label{sec:two_individuals}
 
-When $N=2$ the Moran process is effectively a measure of the distribution of 
-relative
+When $N=2$ the fixation probabilities of the Moran process are effectively measures
+of the distribution of  relative
 mean payoffs over all possible matches between two players. The strategy
 that scores higher than the other more often will fixate more often. For \(N=2\)
 the two cases of \(x_1\) and \(x_{N-1}\) coincide, but will be
@@ -597,7 +597,7 @@ supplementary materials.
     \label{tbl:top_invade}
 \end{table}
 
-It can be seen that apart from CS, none of the strategies
+It can be seen that apart from CS, none of the strategies for \(N=2\)
 of Table~\ref{tbl:summary_top_2} perform well for \(N\in\{3, 7, 14\}\). The new
 top performing strategies are:
 
@@ -611,22 +611,23 @@ top performing strategies are:
     \item Prober 4, a strategy which starts with a specific 20 move sequence of
         cooperations and defections \cite{Prison1998}. This initial sequence serves
         as approximate handshake.
-    \item  PSO Gambler and Evolved Lookerup 2 2 2: are strategies that make use
+    \item  PSO Gambler and Evolved Lookerup 2 2 2: strategies that make use
         of a lookup table mapping the first 2 moves of the opponent as well as
-        the last 2 moves of both players to an action. The PSO gambler is a
-        stochastic version of the Lookerup which maps those states to probabilities of cooperating. The Lookerup was described in \cite{Knight2016}.
+        the last 2 moves of both players to an action.  PSO gambler is a
+        stochastic version of  Lookerup which maps those states to probabilities
+       of cooperating. Lookerup was described in \cite{Knight2016}.
     \item The Evolved ANN strategies are neural networks that map a number of
 	    attributes (first move, number of cooperations, last move, etc.) to
 	    an action. Both of these have been trained using an evolutionary
 	    algorithm.
-    \item The Evolved FSM 16 is a 16 state finite state machine trained to
+    \item Evolved FSM 16 is a 16 state finite state machine trained to
         perform well in tournaments.
 \end{itemize}
 
 Only one of the above strategies is stochastic although close inspection of the
 source code of PSO Gambler shows that it makes stochastic decisions rarely, and
 is functionally very similar to its deterministic cousin Evolved Looker Up.
-The PSO Gambler Mem1 strategy is a memory one strategy that has been trained to
+PSO Gambler Mem1 is a stochastic memory one strategy that has been trained to
 maximise its utility and does perform well.
 Apart from TF3, the finite state machines trained specifically for
 Moran processes do not appear in the top 5, while strategies trained for
@@ -700,7 +701,8 @@ The payoff maximizing strategies typically will not defect before the opponent's
 first defection, possibly because the training strategy collection contains some
 strategies such as Grudger and Fool Me Once that retaliate harshly by defecting
 for the remainder of the match if the opponent has more than a small number of
-cumulative defections. Paradoxically it is advantageous to defect (as a signal)
+cumulative defections. Paradoxically for handshaking strategies
+it is advantageous to defect (as a signal)
 in order to achieve mutual cooperation with opponents using the same strategy
 but not with other opponents. Nevertheless an evolutionary process is able to
 tunnel through the costs and risks associated with early defections to find more
@@ -710,7 +712,7 @@ strategies emerge from the evolutionary training process.
 A handshake requires at least one defection and there is
 selective pressure to defect as few times as possible to achieve the
 self-recognition mechanism. It is also unwise to defect on the first move as
-some strategies additionally retaliate first round defections. So the
+some strategies additionally retaliate in response to first round defections. So the
 handshakes used by TF1, TF2, and CS are in some sense optimal.
 
 It is evident through
@@ -745,7 +747,7 @@ different values of \(N>2\) however for \(N=2\) there is a distinct difference.
 This highlights that there is little that can be inferred about the evolutionary
 performance of a strategy in a large population from its performance in a small
 population. This is confirmed by the performance of the zero determinant strategies: while
-some do rank relatively highly for \(N=2\) (ZD-extort-4 has rank 16) this rank
+some do rank relatively highly for \(N=2\) (ZD-Extort-4 has rank 16) this rank
 does not translate to larger populations.
 
 \begin{table}[!hbtp]
@@ -812,7 +814,8 @@ not extend to larger populations. This was discussed theoretically in
 Training strategies to excel
 at the Moran process leads to the evolution of cooperation, but only with like
 individuals in the case of TF1 and TF2. This may have significant implications
-for human social interactions such as the evolution of ingroup/outgroup mechanisms
+for various biological and social phenomena such as
+human social interactions, particularly the evolution of ingroup/outgroup mechanisms
 and other sometimes costly rituals that reinforce group behavior.
 
 While TF1 and TF2 are competent invaders, the best invaders
@@ -977,7 +980,7 @@ There are many other variations to explore including populations with more
 than one type, spatial structure, and mutation.
 
 One final point to recognise: the large set of strategies used here does not in
-itself constitute an authoritative set. Whilst it is not only large but very
+itself constitute an authoritative set. Whilst it is not only large but also very
 diverse, the results (and rankings) presented might change given a different set
 of strategies. A further piece of work could look at subgroups of strategies and
 how they fair against other subgroups. Note that because of the open nature of
