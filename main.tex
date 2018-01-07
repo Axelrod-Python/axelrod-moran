@@ -20,8 +20,8 @@
 
 % Title
 \title{Evolution Reinforces Cooperation with the Emergence of Self-Recognition
-       Mechanisms: an Empirical Study of the Moran process for the Iterated
-       Prisoner's Dilemma}
+       Mechanisms: Empirical Study of strategies in the Moran process for the
+       Iterated Prisoner's}
 \author[1]{Vincent Knight}
 \author[2]{Marc Harper}
 \author[1]{Nikoleta E. Glynatsi}
@@ -70,7 +70,7 @@ round game, but is commonly studied in a manner where the prior outcomes
 matter. This repeated form is called the Iterated Prisoner's
 Dilemma (IPD). As described in \cite{Axelrod1980a, Knight2016, Press2012} a
 number of strategies have been developed to take advantage of the history of
-play. Recently, strategies referred to as zero determinant (ZD) strategies
+play. Strategies referred to as zero determinant (ZD) strategies
 \cite{Press2012} can manipulate some players through extortionate mechanisms.
 
 The Moran Process \cite{Moran1957} is a model of
@@ -108,16 +108,17 @@ The strategies and simulation frameworks are
 automatically tested to an extraordinarily high degree of coverage in accordance
 with best research software practices.
 
-Using the Axelrod library and the many strategies it contains, we obtain
-fixation probabilities for all pairs of strategies, identifying
-those that are effective invaders and those resistant to invasion, for
-population sizes $N=2$ to $N=14$. Moreover we present a number of strategies
-that were created via reinforcement algorithms (evolutionary and particle
-swarm algorithms) that are among the best invaders and resistors of invasion
-known to date, and show that handshaking mechanisms naturally arise from these
-processes as an invasion-resistance mechanism.
+Using the Axelrod library and the many strategies it contains, we obtain the
+probability with which a given strategy takes over a population (referred to as
+fixation probability) for all pairs of strategies, identifying those that are
+effective invaders and those resistant to invasion, for population sizes $N=2$
+to $N=14$. Moreover we present a number (16) of strategies that were created via
+reinforcement algorithms (evolutionary and particle swarm algorithms) that are
+among the best invaders and resistors of invasion known to date, and show that
+handshaking mechanisms naturally arise from these processes as an
+invasion-resistance mechanism.
 
-Recent work has argued that agent-based
+In 2016, work has argued that agent-based
 simulations can provide insights in evolutionary game theory not available
 via direct mathematical analysis~\cite{adami2016evolutionary}. The results
 and insights contained in this paper would be difficult to derive analytically.
@@ -132,7 +133,7 @@ In particular the following questions are addressed:
 While the results agree with some of the published literature, it is found that:
 
 \begin{enumerate}
- \item Zero determinant strategies are not particularly effective for $N > 2$
+ \item Zero determinant strategies are not effective invaders or defenders for $N > 2$
  \item Complex strategies can be effective, and in fact can naturally evolve
      through evolutionary processes to outperform designed strategies.
  \item The strongest resistors specifically evolve or possess a handshake mechanism.
@@ -144,19 +145,20 @@ While the results agree with some of the published literature, it is found that:
 
 \subsection{The Moran Process}\label{sec:the_moran_process}
 
-Figure~\ref{fig:moran_process} shows a diagrammatic representation of the Moran
-process, a stochastic birth death process on a finite population in which the
-population size stays constant over time. Individuals are \textbf{selected}
-according to a given fitness landscape. Once selected, the individual is
-reproduced and similarly another individual is chosen to be removed from the
-population (a uniform random selection is used). In some settings mutation is
-also considered but without mutation
-(the case considered in this work) this process will arrive at an absorbing
-state where the population is entirely made up of players of one strategy. The
-probability with which a given strategy takes over a population is called the
-\textit{fixation probability}. A more detailed analytic description of this is
-given in Section~\ref{sec:validation}. In our simulations offspring do not
-inherit any knowledge or history from parent replicants.
+A Moran process is a stochastic birth death process on a finite population in which the
+population size stays constant over time. Individuals are \textit{selected}
+according to a given fitness landscape, in this work it is their total utility
+against all other individuals in the population. Once selected, the individual
+is reproduced and similarly another individual is chosen to be removed from the
+population (a uniform random selection is used). This is shown diagrammatically
+in Figure~\ref{fig:moran_process}. In some settings mutation is
+also considered but without mutation (the case considered in this work) this
+process will arrive at an absorbing state where the population is entirely made
+up of players of one strategy. The probability with which a given strategy takes
+over a population is called the \textit{fixation probability}. A more detailed
+analytic description of this is given in Section~\ref{sec:validation}. In our
+simulations offspring do not inherit any knowledge or history from parent
+replicants.
 
 \begin{figure}[!hbtp]
     \centering
@@ -169,7 +171,7 @@ The Moran process was initially introduced in \cite{Moran1957}. It has since
 been used in a variety of settings including the understanding of the spread of
 cooperative and non-cooperative behaviour such as cancer \cite{West2016} and the
 emergence of cooperative behaviour in spatial topologies \cite{Nowak2017}.
-However these works mainly consider relatively simple strategies. A few works 
+However these works mainly consider relatively simple strategies. A few works
 looked at evolutionary stability of agent-based strategies within the Prisoner's Dilemma
 \cite{Li2014} but this is not done in the more widely used setting of the Moran
 process, rather in terms of infinite population stability. In \cite{Baek2016}
@@ -181,13 +183,17 @@ Of particular interest are the zero determinant strategies introduced in
 \cite{Press2012}. It was argued in \cite{stewart2013extortion} that generous
 ZD strategies are robust against invading strategies. However, in \cite{Lee2015},
 a strategy using machine learning techniques was capable of resisting invasion
-and also able to invade any memory one strategy. Recent work \cite{Hilbe2017}
+and also able to invade any memory one strategy. In 2017, \cite{Hilbe2017}
 has investigated the effect of memory length on strategy performance and the
 emergence of cooperation but this is not done in a Moran process context and only
 considers specific cases of memory 2 strategies. In \cite{Adami2013} it was
 recognised that many zero determinant strategies do not fare well against
 themselves. This is a disadvantage for the Moran process where the best
 strategies cooperate well with other players using the same strategy.
+
+This work uses pair wise Moran processes in a similar way to matches in the many
+IPD tournaments published since Axelrod's original work~\cite{Axelrod1980a}.
+This is a more robust tournament from an evolutionary point of view.
 
 \subsection{Strategies considered}\label{sec:strategies}
 
@@ -222,7 +228,7 @@ of opponents. Variation is
 introduced via mutation and crossover of parameters, and the best performing
 strategies are carried to the next generation along with new variants. Similar
 methods appear in the literature \cite{Ashlock2006}.
-There has also been some work on strategies using an evolutionary algorithm in real time: 
+There has also been some work on strategies using an evolutionary algorithm in real time:
 in~\cite{Gaudesi2016}
 an evolutionary algorithm is used to build a model of the opponent and attempt
 to exploit any potential weakness. In this work all strategies resulting from
@@ -274,7 +280,7 @@ and~\ref{fig:tf3}), using the notation common in the literature where
 \end{figure}
 
 As opposed to the previously described strategies, these strategies were trained
-with the objective function of \textbf{mean fixation probabilities for Moran
+with the objective function of \textit{mean fixation probabilities for Moran
 processes} starting at initial population states consisting of \(N/2\)
 individuals of the training candidates and \(N/2\) individuals of an opponent
 strategy, taken from a selection of 150 opponents from the Axelrod library:
@@ -358,7 +364,7 @@ in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
 \end{algorithm}
 
 Section~\ref{sec:validation} will further validate the methodology by comparing
-simulated results to analytical results in a few selected cases. The main 
+simulated results to analytical results in a few selected cases. The main
 results of this
 manuscript are presented in Section~\ref{sec:empirical_results} which will
 present a detailed analysis of all the data generated. Finally,
@@ -419,7 +425,7 @@ Figure~\ref{fig:comparison_deterministic} for Alternator and WSLS (a 5\%
 confidence interval computed using an asymptotic normal approximation is also
 included \cite{brown2001interval}).
 The points represent the simulated
-values and the line shows the theoretical value. Note that these are 
+values and the line shows the theoretical value. Note that these are
 deterministic strategies and show a good match between the expected value
 of (\ref{equ:fixation_probability}) and the actual Moran process for all
 strategy pairs. These means have been compared using a \(t\)-test and the \(p\)
@@ -443,7 +449,7 @@ generated for this validation exercise can be found at~\cite{data}.
     \centering
     \includegraphics[width=.95\columnwidth]{img/Alternator_v_WSLS.pdf}
     \caption{Comparison of theoretic and actual Moran Process fixation
-             probabilities for \textbf{deterministic} strategies: Alternator and
+             probabilities for \textit{deterministic} strategies: Alternator and
          Cooperator. 5\% confidence intervals calculated using an asymptotic
      normal approximation.
 The top most line on all figures (in red and using a circle) corresponds to
@@ -458,7 +464,7 @@ The top most line on all figures (in red and using a circle) corresponds to
     \input{tex/t_test_results_alternator_v_wsls.tex}
     \caption{\(p\) values resulting from a $t$ test comparing the theoretic
         value with the simulated value of the Moran Process fixation
-        probabilities for \textbf{deterministic} strategies: Alternator and
+        probabilities for \textit{deterministic} strategies: Alternator and
     Cooperator.}
     \label{tab:comparison_deterministic}
 \end{table}
@@ -467,7 +473,7 @@ The top most line on all figures (in red and using a circle) corresponds to
     \centering
     \includegraphics[width=.95\columnwidth]{img/Calculator_v_Arrogant_QLearner.pdf}
     \caption{Comparison of theoretic and actual Moran Process
-             fixation probabilities for \textbf{stochastic} strategies:
+             fixation probabilities for \textit{stochastic} strategies:
              Calculator and Arrogant Q Learner. 5\% confidence intervals calculated using an asymptotic
      normal approximation.
 The top most line on all figures (in red and using a circle) corresponds to
@@ -482,7 +488,7 @@ The top most line on all figures (in red and using a circle) corresponds to
     \input{tex/t_test_results_calculator_v_arrogant_q_learner.tex}
     \caption{\(p-\text{values}\) resulting from a \(t-\text{ test}\) comparing the theoretic
         value with the simulated value of the Moran Process fixation
-        probabilities for \textbf{stochastic} strategies: Calculator and
+        probabilities for \textit{stochastic} strategies: Calculator and
     Arrogant Q Learner.}
     \label{tab:comparison_stochastic}
 \end{table}
@@ -517,7 +523,7 @@ considered separately for larger \(N\) in sections~\ref{sec:strong_invaders}
 and~\ref{sec:strong_resistors}. The top 16 (10\%) strategies are
 shown in
 Table~\ref{tbl:summary_top_2} and figures showing the performance of all
-strategies are available in the supplementary materials. 
+strategies are available in the supplementary materials.
 The top five ranking strategies are:
 
 \begin{enumerate}
@@ -671,8 +677,8 @@ Section~\ref{sec:two_individuals} perform well for high \(N\).
 \end{table}
 
 Interestingly none of these strategies is stochastic: this is explained by
-the need of strategies to have a steady hand when interacting with their own
-kind. Acting stochastically increases the chance of friendly fire.
+the need of strategies to act rationally interacting with their own
+kind. Acting stochastically increases the chance of reducing the score of individuals of the same type in a Moran process.
 However it is possible to design a strategy with a stochastic or error-correcting
 handshake that is an excellent resistor even in noisy environments \cite{Lee2015}.
 
@@ -918,7 +924,7 @@ two FSM strategies (TF1 and TF2) specifically trained through an evolutionary
 process. In these two cases, the handshake mechanism was a product of the
 evolutionary process. Figure~\ref{fig:cooperation_rates} shows the cooperation
 rate of TF1, TF2, TF3 and CS
-for each round of a match against all the opponents in this study. 
+for each round of a match against all the opponents in this study.
 This corresponds to the fraction of cooperation played by that strategy observed
 in a given round (out of the first 15) where each matchup is repeated 10000 times to
 obtain the mean.
