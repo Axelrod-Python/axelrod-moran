@@ -29,12 +29,12 @@ noteworthy and worth publishing}.
 Regarding the relevance of the work, comments from each reviewer were:
 
 \begin{itemize}
-    \item 
+    \item
 \begin{verbatim}
 The paper is well written, the results seem solid and overall very interesting.
 The main issues with this work, in my opinion, lie in the presentation:
 \end{verbatim}
-    \item 
+    \item
 
 \begin{verbatim}
 The analysis in the paper is well designed and clearly explained. It does an
@@ -44,7 +44,7 @@ good model of how to make all code and data available, making the results easily
 reproducible and expandable to other researchers curious about the behaviour of
 additional strategies.
 \end{verbatim}
-    \item 
+    \item
 
 \begin{verbatim}
 The reported experiments fill an important hole in the understanding of IPD
@@ -71,16 +71,20 @@ requests of the second type, from the two new reviewers who are perhaps not
 experts in the IPD, we have made some modifications to the manuscript but our
 main responses are to answer the questions posed by the reviewers.
 
-Specifically we describe how the Moran process is a well studied model of
+Specifically we describe how the Moran process is a well-studied model of
 evolutionary processes and that this paper is a major contribution to the
 literature. It can be thought of as a tournament on Moran processes equivalent
 to the seminal work by Robert Axelrod in the 1980s.
 
-Robert Axelrod's work on the Prisoner's Dilemma tournaments (described in
-the literature review) which has been cited more than 34,000 times considered
-pair wise matches between strategies. Our work here provides a much more robust
-type of tournament where strategies are pitted against one another in an actual
-evolutionary process (as opposed to a single one of interaction).
+Robert Axelrod's work on the Prisoner's Dilemma tournaments (described in the
+literature review) which has been cited more than 34,000 times considered
+pair-wise matches between strategies. Our work here is much more
+computationally-intensive and accesses deeper questions of evolutionary
+stability.
+
+Furthermore, Moran processes for the IPD have been frequently studied from a
+theoretical point of view and our results extend that to strategies that are
+difficult (or impossible) to study analytically.
 
 \section{Comments from first referee}
 
@@ -102,7 +106,9 @@ TF3 strategies is confusing. It has a frustrating level of detail. You should
 either have less detail or more detail. This is not a crucial point, however.
 \end{verbatim}
 
-The description of how we obtain the strategies is quite minimalistic.
+The description of how we obtain the strategies is quite minimalistic and all
+training code is documented and available online (archived according to best
+practice).
 The rest of the description in this section is specifically describing each
 strategy (accompanied by the corresponding diagram). This description is quite
 important as it highlights the handshake mechanism which is one of the main
@@ -122,7 +128,7 @@ other (randomly chosen) individual or against all N − 1 other individuals?
 Yes they play against all N - 1 other individuals. This is a standard Moran
 process of this type and is described in
 Algorithm 2. The mathematical equations (2) and (3) also ensures this to be the
-case. Nonetheless we have added a sentence clarifying this:
+case. We have added a sentence clarifying this:
 
 ``Individuals are \textbf{selected}
 according to a given fitness landscape, in this work it is their total utility
@@ -140,12 +146,21 @@ against all other individuals in the population.''
     paper?
 \end{verbatim}
 
-This is the purpose of section II. The analytical results hold for deterministic
-strategies however they do not for stochastic values where the average is just a
-summary measure that is never truly obtained. This was raised by one of the
-previous reviews which lead to the addition of Tables II and III to further show
-the difference between the analytic result (which in this case is an
-approximation) and the actual result.
+The purpose of this section (II) is to show that the simulations match the
+theory well in cases that are analytically accessible as a validation. This is
+in addition to the extensive test suite for the software which covers 100\% of
+the Axelrod library.
+
+As an example of a case where a theoretical result is more difficult to obtain,
+we note that when one or more of the strategies is stochastic then the utility
+function is also stochastic and would need to be analyzed statistically,
+assuming that the utility distribution could be analytically derived, which is
+unrealistic in many cases. Additionally long memory strategies are difficult to
+analyze theoretically, which is why they are often avoided in the literature,
+and why a number of misconceptions about them have persisted (including the
+strength of Zero determinant strategies, a point raised by the reviewers). 
+We approximate
+the utilities with a large number of simulations, a commonly used technique.
 
 After careful examination of how this section is written we do not see how it
 can be improved and feel it is clear. Specifically this sentence: `This
@@ -178,11 +193,13 @@ cess or something similar? (This issue is particularly important because the aut
 specifically trained some IPD strategies to excel at the Moran process.)
 \end{verbatim}
 
-We refer the reviewer to the many references included and the vast quantity of
-literature on the Moran process. This is not a new model but a well understood
-model of evolutionary processes with applications both to human and biological
-interactions. It seems like the review mainly questions the Moran process itself
-as opposed to our use of it.
+This is the standard Moran process and the reviewer is asking about one of
+the many extensions of the standard process, e.g. to multi-strategy populations
+or other dynamics (such as a best-reply dynamic) which may allow players to
+dynamically choose new strategies each round. The standard is an evolutionary
+game where players have a fixed strategy throughout their lives with the
+biological analogy of bacteria with different genetically coded traits and also
+cancer, the latter of which is referenced in the introduction.
 
 \begin{verbatim}
 Suppose the population is using either strategy A or strategy B. Mutation was
@@ -194,9 +211,20 @@ strategy C
 isn’t available?
 \end{verbatim}
 
-This is more useful than the already published (and heavily cited) works in this
-area that look at the score of A against B as opposed to the ability of A to
-invade/defend B.
+In biological situations it's often assumed that mutations are relatively rare
+so it makes sense to run a process to fixation rather than look at many
+variants at once in that context. In fact, the rate of mutation is typically
+set to 1 / N, a the population runs for O(N) iterations before converging to
+one of the absorbing states (and often far fewer), so there would typically be
+very few simultaneous mutations. There are other contexts where there would be
+more than two strategies at a time and they are interesting, but not the focus
+of this work.
+
+Additionally, if there is mutation then different techniques are needed. The
+Markov process no longer has absorbing states the stationary distribution has 
+to be studied instead. This is an interesting case but would be a
+work of similar length, and this work is the limiting case where mutation goes
+to zero.
 
 \begin{verbatim}
 How useful is it knowing that strategy A can or cannot resist invasion by
@@ -210,15 +238,15 @@ use.
 
 This feels like a question about the entirety of the research field on the IPD.
 
-We refer the referee to the vast quantity of literature in this field and in
+We refer the referee to the prior literature in this field and in
 particular highlight that one of the main goals of this area are to understand
 properties of environment and strategies that enable for emergence of a given
 type of behaviour. In the case of this work, we show that in evolutionary
-environments, handshake mechanisms can emerge which contribute to the emergence
+environments, handshake mechanisms can emerge which reinforces the emergence
 of cooperation.
 
 We have added a sentence to the paper further explaining how this work offers a
-more evolutionary robust version of Robert Axelrod's original tournament.
+population based perspective.
 
 \section{Comments from third reviewer}
 
@@ -249,7 +277,18 @@ cooperative behaviour may evolve. This has often been through large numerical
 analyses such as these. However, none of them (as discussed in the literature
 review) consider Moran processes on this scale. Furthermore, one of our main
 conclusions/findings is that handshake mechanisms can also appear through
-evolutionary processes and in particular that these can explain the emergence of
+evolutionary processes.
+
+This is directly analogous to "the best opening" in chess. Moreover, our
+numerical results call into question several common assumptions in the
+literature, e.g. that it's enough to only consider memory-one strategies (it's
+demonstrably not the case), that ZD strategies are the best yet they don't win
+here, etc. This work specifically identifies fruitful and valuable new
+directions for future work.
+
+Finally, we show that "collective strategies" directly emerge from evolutionary
+processes and are reinforced by standard evolutionary mechanisms, which is a
+major theme of the paper and very relevant to the study of the evolution of
 cooperation.
 
 \begin{verbatim}
@@ -284,8 +323,10 @@ We have modified this terminology.
     a week?
 \end{verbatim}
 
-There needs to be an upper bound, 14 was chosen as the highest number reasonable
-given the computational cost of running these models.
+There needs to be an upper bound, 14 was chosen as the highest number
+reasonable given the computational cost of running these models. Also, the
+lower values of N (greater than 2) are shown to already indicate the behaviour
+of higher values (see Figure 7).
 
 \begin{verbatim}
     *Moreover we present a number of strategies that were created via
@@ -306,7 +347,7 @@ We have clarified the first bullet point (both invaders and defenders). We
 disagree with the comment that this bullet point list is unintelligible (at
 present at least 4 reviewers have read this summary of the findings and no one
 has said that it is unintelligible). If this
-is a sticking point for the referee we refer to the editor to decide how and if
+is a sticking point for the referee we defer to the editor to decide how and if
 these short sentences should be rewritten.
 
 \begin{verbatim}

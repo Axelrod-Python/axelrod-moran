@@ -147,14 +147,16 @@ While the results agree with some of the published literature, it is found that:
 
 A Moran process is a stochastic birth death process on a finite population in which the
 population size stays constant over time. Individuals are \textit{selected}
-according to a given fitness landscape, in this work it is their total utility
-against all other individuals in the population. Once selected, the individual
+according to a given fitness landscape. The fitness landscape in this work is
+defined as the total utility against all other individuals in the population.
+Once selected, the individual
 is reproduced and similarly another individual is chosen to be removed from the
 population (a uniform random selection is used). This is shown diagrammatically
 in Figure~\ref{fig:moran_process}. In some settings mutation is
 also considered but without mutation (the case considered in this work) this
 process will arrive at an absorbing state where the population is entirely made
-up of players of one strategy. The probability with which a given strategy takes
+up of players of one strategy. The probability with which a given strategy,
+starting from a single individual takes
 over a population is called the \textit{fixation probability}. A more detailed
 analytic description of this is given in Section~\ref{sec:validation}. In our
 simulations offspring do not inherit any knowledge or history from parent
@@ -191,9 +193,11 @@ recognised that many zero determinant strategies do not fare well against
 themselves. This is a disadvantage for the Moran process where the best
 strategies cooperate well with other players using the same strategy.
 
-This work uses pair wise Moran processes in a similar way to matches in the many
+This work uses pair-wise Moran processes in a similar way to matches in the many
 IPD tournaments published since Axelrod's original work~\cite{Axelrod1980a}.
-This is a more robust tournament from an evolutionary point of view.
+This work offers a population-based perspective which adds additional
+evolutionary components to the IPD, namely the evolutionary dynamics of invasion
+and resistance
 
 \subsection{Strategies considered}\label{sec:strategies}
 
@@ -676,11 +680,13 @@ Section~\ref{sec:two_individuals} perform well for high \(N\).
     \label{tbl:top_resist}
 \end{table}
 
-Interestingly none of these strategies is stochastic: this is explained by
-the need of strategies to act rationally interacting with their own
-kind. Acting stochastically increases the chance of reducing the score of individuals of the same type in a Moran process.
-However it is possible to design a strategy with a stochastic or error-correcting
-handshake that is an excellent resistor even in noisy environments \cite{Lee2015}.
+Interestingly none of these strategies is stochastic: this is explained by the
+value of not provoking typically cooperative opponent strategies with
+speculative defections. This includes opponents using the same strategy.  Acting
+stochastically increases the chance of reducing the score of individuals of the
+same type in a Moran process.  However it is possible to design a strategy with
+a stochastic or error-correcting handshake that is an excellent resistor even in
+noisy environments \cite{Lee2015}.
 
 There are only two new strategies that appear in the top ranks for
 \(x_{N-1}\): TF1 and TF2. These two strategies are with CS the strongest
