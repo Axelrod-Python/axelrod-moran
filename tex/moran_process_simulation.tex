@@ -11,14 +11,14 @@
       \FOR{player in population}
       \FOR{opponent in (population - player)}
         \STATE match $\gets$ (player, opponent) 
-        \STATE results $\gets$ stochastic cache (200 round match)
+        \STATE results $\gets$ stochastic\_cache (200 round match)
         \ENDFOR
       \ENDFOR
       \STATE population $\gets$ sorted(results)
       \STATE parent $\gets$ selected randomly in proportion to its total match payoffs
-      \STATE child $\gets$ parent
+      \STATE offspring $\gets$ parent
       \STATE kill off $\gets$ uniformly random player from population
-      \STATE population $\gets$ child replaces kill off
+      \STATE population $\gets$ offspring replaces kill off
     \ENDWHILE
   \end{algorithmic}
 
