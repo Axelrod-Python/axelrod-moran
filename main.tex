@@ -280,7 +280,7 @@ such as memory-one strategies that only use the previous round of play.
 
 This manuscript provides a detailed numerical analysis of agent-based simulations
 of \textbf{164} complex and adaptive strategies for the
-IPD\@. This is made possible by the Axelrod library \cite{axelrodproject}, an
+IPD\@. This is made possible by the Axelrod library~\cite{axelrodproject}, an
 effort to provide software for reproducible research for the IPD\@. The library
 now contains over 186 parameterized
 strategies including classics like TitForTat and WinStayLoseShift, as well as
@@ -292,7 +292,7 @@ are those that make use of knowledge of the number of turns in a match
 and others that have a high
 computational run time. The large number of strategies are available thanks to
 the open source nature of the project with over 50 contributors from around the
-world, made by programmers and researchers \cite{Knight2016}. Three of the considered
+world, made by programmers and researchers~\cite{Knight2016}. Three of the considered
 strategies are finite state machines trained specifically for Moran processes
 (described further in the Methods section).
 
@@ -360,7 +360,7 @@ replicants.
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.7}{ 
+    \scalebox{.7}{
 
 \begin{tikzpicture}[scale=.9]
 	\node (A1) at (-1, -1) [circle, pattern=north west lines, pattern
@@ -540,8 +540,13 @@ strategy that utilizes a handshaking mechanism where the opponent's actions on
 the first few rounds of play determines the strategies subsequent behavior would
 have infinite memory depth.
 
-A number of these strategies have been trained with reinforcement learning
-algorithms prior to this study and not specifically for the Moran process.
+Using families of strategies that depend on given parameters it is possible to
+find specific parameters through a training process called reinforcement
+learning. A detailed description of the various types considered is given
+in~\cite{Harper2017}.
+
+A number of these strategies have been trained this way (see~\cite{Harper2017})
+prior to this study and not specifically for the Moran process.
 
 \begin{itemize}
     \item Evolved ANN: a neural network based strategy;
@@ -553,12 +558,12 @@ algorithms prior to this study and not specifically for the Moran process.
 Apart from the PSO Gambler strategy, which was trained using a particle swarm
 optimisation algorithm, these strategies are trained with an evolutionary
 algorithm that perturbs strategy parameters and optimizes the mean total score
-against all other opponents \cite{affenzeller2009genetic}. They were trained to
+against all other opponents~\cite{affenzeller2009genetic}. They were trained to
 win IPD tournaments by maximizing their mean total payoffs against a variety
 of opponents. Variation is
 introduced via mutation and crossover of parameters, and the best performing
 strategies are carried to the next generation along with new variants. Similar
-methods appear in the literature \cite{Ashlock2006}.
+methods appear in the literature~\cite{Ashlock2006}.
 There has also been some work on strategies using an evolutionary algorithm in real time:
 in~\cite{Gaudesi2016}
 an evolutionary algorithm is used to build a model of the opponent and attempt
@@ -569,7 +574,7 @@ More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
 of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
-All of the training code is archived at \cite{marc_harper_2017_824264}. This
+All of the training code is archived at~\cite{marc_harper_2017_824264}. This
 software is (similarly to the Axelrod library) available on
 GitHub\footnote{\url{https://github.com/Axelrod-Python/axelrod-dojo}}
 with documentation to
@@ -577,12 +582,20 @@ train new strategies easily. Training
 typically takes less than 100 generations and can be completed within several
 hours on commodity hardware.
 
-There are three further strategies trained specifically for this study; Trained
-FSM 1, 2, and 3 (TF1 - TF3). These are based on finite state machines of 16, 16,
-and 8 states respectively. These are shown in Fig~\ref{fig:tf1},~\ref{fig:tf2}
-and~\ref{fig:tf3}, using the notation common in the literature where
-\(A_1/A_2\) is the action of the opponent \(A_1\) and the response of the player
-\(A_2\) as well as arrows corresponding to changes of state.
+One particular family of strategies that has been studied in the literature are
+called finite state machines. These mathematical models consist of states and
+and responses to actions from one state to another. In the context of the IPD, a
+finite state machine, is a mapping from states and opponent actions to states
+and an action. For further details on this type of strategy, the reader is
+referred to~\cite{Ashlock2006, Harper2017}.
+
+There are three further strategies trained specifically for this
+study; Trained FSM 1, 2, and 3 (TF1 - TF3). These are finite state
+machines of 16, 16, and 8 states respectively.  These are shown in
+Fig~\ref{fig:tf1},~\ref{fig:tf2} and~\ref{fig:tf3}, using the notation common in
+the literature where \(A_1/A_2\) is the action of the opponent \(A_1\) and the
+response of the player \(A_2\) as well as arrows corresponding to changes of
+state.
 
 
 \begin{figure}[!hbtp]
@@ -596,7 +609,7 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 	\node[circle, draw=black, thick] (15) at (-2, -2) [state] {$16$};
 	\node[circle, draw=black, thick] (8) at ($(2)+(2,-2)$) [state] {$9$};
 	\node[circle, draw=black, thick] (10) at ($(15)+(4, 0)$) [state] {$11$};
-	
+
 	\node[circle, draw=black, thick] (7) at ($(5)+(-1,-4)$) [state] {$8$};
 	\node[circle, draw=black, thick] (11) at ($(7)+(2, 0)$) [state] {$12$};
 
@@ -623,7 +636,7 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 
     \draw (1) edge[out=45, in=-135, ->, thick] node [left] {$C/D$} (11);
     \draw (1) edge[out=45, in=-135, ->, thick] node [right] {$D/D$} (11);
-    
+
     \draw (2) edge[out=-45, in=135, ->, thick] node [above right] {$C/D$} (8);
     \draw (2) edge[out=-45, in=135, ->, thick] node [below left] {$D/C$} (8);
 
@@ -677,7 +690,7 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 \begin{figure}[!hbtp]
     \centering
     \scalebox{.7}{
-    
+
     \begin{tikzpicture}
 
     \tikzstyle{state}=[minimum width=0.8cm, font=\boldmath];
@@ -772,12 +785,12 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 
     \node[circle, draw=black, thick]  (0) at (0,0) [state] {$1$};
     \node[circle, draw=black, thick]  (1) at ($(0)+(0,2)$) [state] {$2$};
-    \node[circle, draw=black, thick]  (2) at ($(1)+(2,1.5)$) [state] {$3$}; 
+    \node[circle, draw=black, thick]  (2) at ($(1)+(2,1.5)$) [state] {$3$};
     \node[circle, draw=black, thick]  (3) at ($(2)+(3,0)$) [state] {$4$};
-    \node[circle, draw=black, thick]  (4) at ($(1)+(8,0)$) [state] {$5$};  
+    \node[circle, draw=black, thick]  (4) at ($(1)+(8,0)$) [state] {$5$};
     \node[circle, draw=black, thick]  (5) at ($(0)+(8,0)$) [state] {$6$};
     \node[circle, draw=black, thick]  (6) at ($(3)+(0,-4.5)$) [state] {$7$};
-    \node[circle, draw=black, thick]  (7) at ($(2)+(0,-4.5)$) [state] {$8$}; 
+    \node[circle, draw=black, thick]  (7) at ($(2)+(0,-4.5)$) [state] {$8$};
 
     \coordinate[left of=0] (s);
 
@@ -915,7 +928,7 @@ in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
             \WHILE {population not uniform}
               \FOR{player in population}
               \FOR{opponent in (population - player)}
-                \STATE match $\gets$ (player, opponent) 
+                \STATE match $\gets$ (player, opponent)
                 \STATE results $\gets$ stochastic\_cache (200 round match)
                 \ENDFOR
               \ENDFOR
