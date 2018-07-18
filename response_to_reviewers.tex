@@ -1,0 +1,117 @@
+\documentclass[a4]{article}
+
+\usepackage{hyperref}
+
+\title{Response to reviews}
+
+\begin{document}
+
+\maketitle
+
+\section{Comments from editor}
+
+Thank you for the review of our paper. We are delighted by the reviews: the
+second author feeling there are no modifications necessary and the second
+pointing out clarifications which have given us the opportunity to improve the
+manuscript.
+
+\begin{quote}
+	1. Please ensure that your manuscript meets PLOS ONE's style requirements,
+	including those for file naming. The PLOS ONE style templates can be found at
+	\url{http://www.journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf}
+	and
+	\url{http://www.journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf}
+\end{quote}
+
+\begin{quote}
+    2. Please remove your figures from within your manuscript file, leaving only
+    the individual TIFF/EPS image files, uploaded separately.  These will be
+    automatically included in the reviewers’ PDF.
+\end{quote}
+
+All files have been renamed as requested and otherwise, the document follows the
+given LaTeX style template.
+
+\section{Comments from first referee}
+
+\begin{quote}
+    1) The authors discussed about as many as 164 strategies, which were
+    trained/generated via different algorithms. Since understanding how the
+    strategies work plays an important role in understanding why some of them
+    succeed, I strongly suggest the authors to introduce the strategies in a more
+    detailed and clear way, especially those based on finite state machines as I
+    find no reference of them yet some of them perform well in the comparisons.
+\end{quote}
+
+This is a well made point by the referee: ensuring the reader can understand
+these is vital to the paper.
+We have clarified the description of the strategies:
+
+\begin{itemize}
+    \item Highlight that the appendix contains references for each strategy
+        including pointing to a recently published paper that goes in to details
+        about the structure of these strategies.
+    \item A more formal definition of a finite state machine explaining how they
+        fit in the framework of the IPD. We also have included another reference
+        which describes these.
+\end{itemize}
+
+\begin{quote}
+  2) During the training/screening process, strategies generated via different
+  algorithms were trained according to different criteria to determine whether a
+  strategy was well trained or not. As examples, some were trained to maximize
+  their payoff while others were trained with the objective function of mean
+  fixation probabilities of Moran processes. So I am curious about how different
+  criteria influence the features of the strategies? Will the conclusion of this
+  work change if some strategies are trained in terms of other criteria?
+\end{quote}
+
+The referee asks a good question here, indeed the conclusion would be different
+if strategies were trained in terms of other criteria. We have added a sentence
+to this effect at the conclusion section of the paper highlighting that training
+with evolutionary criteria seems to be fundamental to the appearance of a
+handshake mechanism.
+
+\begin{quote}
+  3) The concept `handshake mechanism' is essential to appreciate the results as
+  well as conclusion of this work but is not well defined, hence I suggest the
+  authors to explain this concept clearly.
+\end{quote}
+
+We have added a better description of the term handshake mechanism after it is
+first mentioned in the introduction. We have also included a reference to
+another paper that makes mention of this as well as briefly discussing the
+biological analogy of `kin recognition`.
+
+\begin{quote}
+  4) In line 241-242, it looks weird that there is a new paragraph starting in
+  the middle of the sentence `The top 16 (10\%) strategies are shown in Table 4
+  and figures...'
+\end{quote}
+
+Thank you to the referee for pointing this out: it was an error and has been
+fixed.
+
+\begin{quote}
+  5) There are not a few phrases and sentences that may make the readers
+  confusing. One example is `This is also the N for which...' in line 256.
+\end{quote}
+
+Thank you for pointing this out. That particular sentence has been clarified and
+a thorough edit of the paper has been undertaken identifying and modifying
+further confusing sentences.
+
+\section{Comments from second referee}
+
+
+\begin{quote}
+  Reviewer \#2: This manuscript provides a detailed numerical analysis of
+  agent-based simulations of 164 complex and adaptive strategies for the IPD,
+  using an online GitHub library. The authors presented a lot of insights and
+  empirical results. In my opinion, this paper is excellent, and worth publishing
+  in the present form.
+\end{quote}
+
+Thank you for the confidence in our work and for the time taken to review.
+
+\end{document}
