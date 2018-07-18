@@ -593,16 +593,16 @@ typically takes less than 100 generations and can be completed within several
 hours on commodity hardware.
 
 One particular family of strategies that has been studied in the literature are
-called finite state machines. These mathematical models consist of states and
-and responses to actions which indicate a next state given an action.  In the
+called finite state machines. These mathematical models consist of states
+and responses to actions which indicate a next state given an action. In the
 context of the IPD, a finite state machine, is a mapping from an arbitrary list
-of states and opponent actions (Cooperation or Defection) to states and an
-action (Cooperation or Defection). For further details,
+of states and opponent actions (cooperation or defection) to states and an
+action (cooperation or defection). For further details,
 the reader is referred to~\cite{Ashlock2006, Harper2017}.
 
 There are three further strategies trained specifically for this
 study; Trained FSM 1, 2, and 3 (TF1 \- TF3). These are finite state
-machines of 16, 16, and 8 states respectively.  These are shown in
+machines of 16, 16, and 8 states respectively. These are shown in
 Fig~\ref{fig:tf1},~\ref{fig:tf2} and~\ref{fig:tf3}, using the notation common in
 the literature where \(A_1/A_2\) is the action of the opponent \(A_1\) and the
 response of the player \(A_2\) as well as arrows corresponding to changes of
@@ -903,13 +903,13 @@ way hard-coded or included via an additional mechanism.
 Each strategy pair is run for 1000 repetitions of the Moran process to fixation
 with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
 1)$, for \(N\) from 2 through 14. The fixation probability is then empirically
-computed for each combination of starting distribution and value of \(N\).  The
+computed for each combination of starting distribution and value of \(N\). The
 Axelrod library can carry out exact simulations of the Moran process. Since some
 of the strategies have a high computational cost or are stochastic, samples are
 taken from a large number of 200 turn match outcomes for the pairs of players
 for use in computing fitnesses in the Moran process (i.e. a stochastic cache of
 matches is used). This approach was verified to agree with unsampled
-calculations to a high degree of accuracy in specific cases.  This is described
+calculations to a high degree of accuracy in specific cases. This is described
 in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
 
 \begin{algorithm}[!hbtp]
@@ -1033,7 +1033,7 @@ strategies it is possible to obtain \(p_{i,i-1}, p_{i,i+1}, p_{ii}\) exactly (as
 opposed to the approximations offered by (\ref{equ:p_up}), (\ref{equ:p_down})
 and (\ref{equ:p_stay})). Obtaining these requires particular analysis for a
 given pair and can be quite a complex endeavour for stochastic strategies with
-long memory: this is not necessary for the purposes of this work.  All data
+long memory: this is not necessary for the purposes of this work. All data
 generated for this validation exercise can be found at~\cite{data}.
 
 \begin{figure}[!hbtp]
@@ -1143,9 +1143,9 @@ measures of the distribution of  relative mean payoffs over all possible matches
 between two players. The strategy that scores higher than the other more often
 will fixate more often. For \(N=2\) the two cases of \(x_1\) and \(x_{N-1}\)
 coincide, but will be considered separately for larger \(N\) in the following
-sections.  The top 16 (10\%) strategies are shown in
+sections. The top 16 (10\%) strategies are shown in
 Table~\ref{tbl:summary_top_2} and figures showing the performance of all
-strategies are available in the appendix.  The top five ranking strategies are:
+strategies are available in the appendix. The top five ranking strategies are:
 
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
@@ -1331,7 +1331,7 @@ top performing strategies are:
         as approximate handshake.
     \item  PSO Gambler and Evolved Lookerup 2 2 2: strategies that make use
         of a lookup table mapping the first 2 moves of the opponent as well as
-        the last 2 moves of both players to an action.  PSO gambler is a
+        the last 2 moves of both players to an action. PSO gambler is a
         stochastic version of  Lookerup which maps those states to probabilities
        of cooperating. Lookerup was described in \cite{Knight2016}.
     \item The Evolved ANN strategies are neural networks that map a number of
@@ -1464,9 +1464,9 @@ for high \(N\).
 
 Interestingly none of these strategies are stochastic: this is explained by the
 value of not provoking typically cooperative opponent strategies with
-speculative defections. This includes opponents using the same strategy.  Acting
+speculative defections. This includes opponents using the same strategy. Acting
 stochastically increases the chance of reducing the score of individuals of the
-same type in a Moran process.  However it is possible to design a strategy with
+same type in a Moran process. However it is possible to design a strategy with
 a stochastic or error-correcting handshake that is an excellent resistor even in
 noisy environments~\cite{Lee2015}.
 
@@ -1541,7 +1541,7 @@ strategies:
 \end{itemize}
 
 The results for \(x_{N/2}\) show similarities to the results for \(x_{N-1}\) and
-in particular TF1, TF2 and TF3 ranked one, third and eighth. This is to be
+in particular TF1, TF2 and TF3 ranked first, third and eighth. This is to be
 expected since, as described previously these strategies
 were trained in an initial population of \((N/2, N/2)\) individuals.
 
