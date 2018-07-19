@@ -26,3 +26,4 @@ data.tgz
 # Standalone tex img files
 img/moran_process.pdf
 tex/*.pdf
+*-eps-converted-to.pdf

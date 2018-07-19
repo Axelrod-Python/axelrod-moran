@@ -152,7 +152,7 @@
 
 % Header and Footer with logo
 \usepackage{lastpage,fancyhdr}
-\usepackage{graphicx}
+\usepackage[draft]{graphicx}
 \usepackage{epstopdf}
 \pagestyle{myheadings}
 \pagestyle{fancy}
@@ -280,7 +280,7 @@ such as memory-one strategies that only use the previous round of play.
 
 This manuscript provides a detailed numerical analysis of agent-based simulations
 of \textbf{164} complex and adaptive strategies for the
-IPD\@. This is made possible by the Axelrod library \cite{axelrodproject}, an
+IPD\@. This is made possible by the Axelrod library~\cite{axelrodproject}, an
 effort to provide software for reproducible research for the IPD\@. The library
 now contains over 186 parameterized
 strategies including classics like TitForTat and WinStayLoseShift, as well as
@@ -292,7 +292,7 @@ are those that make use of knowledge of the number of turns in a match
 and others that have a high
 computational run time. The large number of strategies are available thanks to
 the open source nature of the project with over 50 contributors from around the
-world, made by programmers and researchers \cite{Knight2016}. Three of the considered
+world, made by programmers and researchers~\cite{Knight2016}. Three of the considered
 strategies are finite state machines trained specifically for Moran processes
 (described further in the Methods section).
 
@@ -331,12 +331,21 @@ While the results agree with some of the published literature, it is found that:
  \item Zero determinant strategies are not effective invaders or defenders for $N > 2$.
  \item Complex strategies can be effective, and in fact can naturally evolve
      through evolutionary processes to outperform designed strategies.
- \item The strongest resistors specifically evolve or possess a handshake mechanism.
+ \item The strongest resistors specifically evolve or possess a handshake
+     mechanism.
  \item Strong invaders are generally cooperative strategies that do not defect
  first but retaliate to varying degrees of intensity against strategies that defect.
  \item Strategies evolved to maximize their total payoff can be strong invaders
  and achieve mutual cooperation with many other strategies.
 \end{enumerate}
+
+The notion of a \textbf{handshake} has been described previously
+in~\cite{Robson1990} and corresponds to the idea that an individual exhibits
+behaviour that starts with a recognisable pattern. This in turn allows them to
+identify individuals of their own type (who would exhibit the same pattern).
+This is analogous to the biological notion of `kin recognition' where
+individuals have the ability to recognise the phenotype of their own
+kin~\cite{Mateo2003}.
 
 \section*{Materials and methods}
 \subsection*{The Moran Process}
@@ -360,7 +369,7 @@ replicants.
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.7}{ 
+    \scalebox{.7}{
 
 \begin{tikzpicture}[scale=.9]
 	\node (A1) at (-1, -1) [circle, pattern=north west lines, pattern
@@ -496,26 +505,26 @@ replicants.
     \label{fig:moran_process}
 \end{figure}
 
-The Moran process was initially introduced in \cite{Moran1957}. It has since
+The Moran process was initially introduced in~\cite{Moran1957}. It has since
 been used in a variety of settings including the understanding of the spread of
-cooperative and non-cooperative behaviour such as cancer \cite{West2016} and the
-emergence of cooperative behaviour in spatial topologies \cite{Nowak2017}.
+cooperative and non-cooperative behaviour such as cancer~\cite{West2016} and the
+emergence of cooperative behaviour in spatial topologies~\cite{Nowak2017}.
 However these works mainly consider relatively simple strategies. A few works
 looked at evolutionary stability of agent-based strategies within the Prisoner's Dilemma
 \cite{Li2014} but this is not done in the more widely used setting of the Moran
-process, rather in terms of infinite population stability. In \cite{Baek2016}
+process, rather in terms of infinite population stability. In~\cite{Baek2016}
 Moran processes are studied in a theoretical framework for a small subset of
 strategies. The subset included memory one strategies: strategies that recall
 the events of the previous round only.
 
 Of particular interest are the zero determinant strategies introduced in
-\cite{Press2012}. It was argued in \cite{stewart2013extortion} that generous
-ZD strategies are robust against invading strategies. However, in \cite{Lee2015},
+\cite{Press2012}. It was argued in~\cite{stewart2013extortion} that generous
+ZD strategies are robust against invading strategies. However, in~\cite{Lee2015},
 a strategy using machine learning techniques was capable of resisting invasion
-and also able to invade any memory one strategy. In 2017, \cite{Hilbe2017}
+and also able to invade any memory one strategy. In 2017,~\cite{Hilbe2017}
 has investigated the effect of memory length on strategy performance and the
 emergence of cooperation but this is not done in a Moran process context and only
-considers specific cases of memory 2 strategies. In \cite{Adami2013} it was
+considers specific cases of memory 2 strategies. In~\cite{Adami2013} it was
 recognised that many zero determinant strategies do not fare well against
 themselves. This is a disadvantage for the Moran process where the best
 strategies cooperate well with other players using the same strategy.
@@ -530,7 +539,8 @@ and resistance.
 
 To carry out this numerical experiment, 164
 strategies, listed (with their properties) in the Appendix,
-are used from the Axelrod library. There are
+are used from the Axelrod library. The appendix also includes citations to the
+original description of each strategy. There are
 43 stochastic and
 121 deterministic strategies. Their memory depth,
 defined by the number of rounds of history used by the strategy each round, is
@@ -540,8 +550,13 @@ strategy that utilizes a handshaking mechanism where the opponent's actions on
 the first few rounds of play determines the strategies subsequent behavior would
 have infinite memory depth.
 
-A number of these strategies have been trained with reinforcement learning
-algorithms prior to this study and not specifically for the Moran process.
+Using families of strategies that depend on given parameters it is possible to
+find specific parameters through a training process called reinforcement
+learning. A detailed description of the various types considered is given
+in~\cite{Harper2017}.
+
+A number of these strategies have been trained this way (see~\cite{Harper2017})
+prior to this study and not specifically for the Moran process. For example:
 
 \begin{itemize}
     \item Evolved ANN: a neural network based strategy;
@@ -553,12 +568,12 @@ algorithms prior to this study and not specifically for the Moran process.
 Apart from the PSO Gambler strategy, which was trained using a particle swarm
 optimisation algorithm, these strategies are trained with an evolutionary
 algorithm that perturbs strategy parameters and optimizes the mean total score
-against all other opponents \cite{affenzeller2009genetic}. They were trained to
+against all other opponents~\cite{affenzeller2009genetic}. They were trained to
 win IPD tournaments by maximizing their mean total payoffs against a variety
 of opponents. Variation is
 introduced via mutation and crossover of parameters, and the best performing
 strategies are carried to the next generation along with new variants. Similar
-methods appear in the literature \cite{Ashlock2006}.
+methods appear in the literature~\cite{Ashlock2006}.
 There has also been some work on strategies using an evolutionary algorithm in real time:
 in~\cite{Gaudesi2016}
 an evolutionary algorithm is used to build a model of the opponent and attempt
@@ -569,7 +584,7 @@ More information about each player can be obtained in the documentation for
 \cite{axelrodproject} and a detailed description of the performance
 of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
-All of the training code is archived at \cite{marc_harper_2017_824264}. This
+All of the training code is archived at~\cite{marc_harper_2017_824264}. This
 software is (similarly to the Axelrod library) available on
 GitHub\footnote{\url{https://github.com/Axelrod-Python/axelrod-dojo}}
 with documentation to
@@ -577,12 +592,21 @@ train new strategies easily. Training
 typically takes less than 100 generations and can be completed within several
 hours on commodity hardware.
 
-There are three further strategies trained specifically for this study; Trained
-FSM 1, 2, and 3 (TF1 - TF3). These are based on finite state machines of 16, 16,
-and 8 states respectively. These are shown in Fig~\ref{fig:tf1},~\ref{fig:tf2}
-and~\ref{fig:tf3}, using the notation common in the literature where
-\(A_1/A_2\) is the action of the opponent \(A_1\) and the response of the player
-\(A_2\) as well as arrows corresponding to changes of state.
+One particular family of strategies that has been studied in the literature are
+called finite state machines. These mathematical models consist of states
+and responses to actions which indicate a next state given an action. In the
+context of the IPD, a finite state machine, is a mapping from an arbitrary list
+of states and opponent actions (cooperation or defection) to states and an
+action (cooperation or defection). For further details,
+the reader is referred to~\cite{Ashlock2006, AshlockBook, Ashlock2007, Harper2017}.
+
+There are three further strategies trained specifically for this
+study; Trained FSM 1, 2, and 3 (TF1 \- TF3). These are finite state
+machines of 16, 16, and 8 states respectively. These are shown in
+Fig~\ref{fig:tf1},~\ref{fig:tf2} and~\ref{fig:tf3}, using the notation common in
+the literature where \(A_1/A_2\) is the action of the opponent \(A_1\) and the
+response of the player \(A_2\) as well as arrows corresponding to changes of
+state.
 
 
 \begin{figure}[!hbtp]
@@ -596,7 +620,7 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 	\node[circle, draw=black, thick] (15) at (-2, -2) [state] {$16$};
 	\node[circle, draw=black, thick] (8) at ($(2)+(2,-2)$) [state] {$9$};
 	\node[circle, draw=black, thick] (10) at ($(15)+(4, 0)$) [state] {$11$};
-	
+
 	\node[circle, draw=black, thick] (7) at ($(5)+(-1,-4)$) [state] {$8$};
 	\node[circle, draw=black, thick] (11) at ($(7)+(2, 0)$) [state] {$12$};
 
@@ -623,7 +647,7 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 
     \draw (1) edge[out=45, in=-135, ->, thick] node [left] {$C/D$} (11);
     \draw (1) edge[out=45, in=-135, ->, thick] node [right] {$D/D$} (11);
-    
+
     \draw (2) edge[out=-45, in=135, ->, thick] node [above right] {$C/D$} (8);
     \draw (2) edge[out=-45, in=135, ->, thick] node [below left] {$D/C$} (8);
 
@@ -677,7 +701,7 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 \begin{figure}[!hbtp]
     \centering
     \scalebox{.7}{
-    
+
     \begin{tikzpicture}
 
     \tikzstyle{state}=[minimum width=0.8cm, font=\boldmath];
@@ -772,12 +796,12 @@ and~\ref{fig:tf3}, using the notation common in the literature where
 
     \node[circle, draw=black, thick]  (0) at (0,0) [state] {$1$};
     \node[circle, draw=black, thick]  (1) at ($(0)+(0,2)$) [state] {$2$};
-    \node[circle, draw=black, thick]  (2) at ($(1)+(2,1.5)$) [state] {$3$}; 
+    \node[circle, draw=black, thick]  (2) at ($(1)+(2,1.5)$) [state] {$3$};
     \node[circle, draw=black, thick]  (3) at ($(2)+(3,0)$) [state] {$4$};
-    \node[circle, draw=black, thick]  (4) at ($(1)+(8,0)$) [state] {$5$};  
+    \node[circle, draw=black, thick]  (4) at ($(1)+(8,0)$) [state] {$5$};
     \node[circle, draw=black, thick]  (5) at ($(0)+(8,0)$) [state] {$6$};
     \node[circle, draw=black, thick]  (6) at ($(3)+(0,-4.5)$) [state] {$7$};
-    \node[circle, draw=black, thick]  (7) at ($(2)+(0,-4.5)$) [state] {$8$}; 
+    \node[circle, draw=black, thick]  (7) at ($(2)+(0,-4.5)$) [state] {$8$};
 
     \coordinate[left of=0] (s);
 
@@ -807,11 +831,12 @@ and~\ref{fig:tf3}, using the notation common in the literature where
     \label{fig:tf3}
 \end{figure}
 
-As opposed to the previously described strategies, these strategies were trained
-with the objective function of \textit{mean fixation probabilities for Moran
-processes} starting at initial population states consisting of \(N/2\)
-individuals of the training candidates and \(N/2\) individuals of an opponent
-strategy, taken from a selection of 150 opponents from the Axelrod library:
+As opposed to the previously described strategies~\cite{Harper2017}, these
+strategies were trained with the objective function of \textit{mean fixation
+probabilities for Moran processes} starting at initial population states
+consisting of \(N/2\) individuals of the training candidates and \(N/2\)
+individuals of an opponent strategy, taken from a selection of 150 opponents
+from the Axelrod library:
 
 \begin{itemize}
 	\item TF1 \(N=12\), 0\% noise.
@@ -878,13 +903,13 @@ way hard-coded or included via an additional mechanism.
 Each strategy pair is run for 1000 repetitions of the Moran process to fixation
 with starting population distributions of $(1, N-1)$, $(N/2, N/2)$ and $(N-1 ,
 1)$, for \(N\) from 2 through 14. The fixation probability is then empirically
-computed for each combination of starting distribution and value of \(N\).  The
+computed for each combination of starting distribution and value of \(N\). The
 Axelrod library can carry out exact simulations of the Moran process. Since some
 of the strategies have a high computational cost or are stochastic, samples are
 taken from a large number of 200 turn match outcomes for the pairs of players
 for use in computing fitnesses in the Moran process (i.e. a stochastic cache of
 matches is used). This approach was verified to agree with unsampled
-calculations to a high degree of accuracy in specific cases.  This is described
+calculations to a high degree of accuracy in specific cases. This is described
 in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
 
 \begin{algorithm}[!hbtp]
@@ -915,7 +940,7 @@ in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
             \WHILE {population not uniform}
               \FOR{player in population}
               \FOR{opponent in (population - player)}
-                \STATE match $\gets$ (player, opponent) 
+                \STATE match $\gets$ (player, opponent)
                 \STATE results $\gets$ stochastic\_cache (200 round match)
                 \ENDFOR
               \ENDFOR
@@ -931,7 +956,7 @@ in Algorithms~\ref{alg:data_collection} and~\ref{alg:moran_process}.
 The next section will further validate the methodology by comparing
 simulated results to analytical results in a few selected cases. The main
 results of this
-manuscript are presented in which will
+manuscript will
 present a detailed analysis of all the data generated. Finally,
 a discussion and conclusion will offer future avenues for the work
 presented here.
@@ -1008,12 +1033,12 @@ strategies it is possible to obtain \(p_{i,i-1}, p_{i,i+1}, p_{ii}\) exactly (as
 opposed to the approximations offered by (\ref{equ:p_up}), (\ref{equ:p_down})
 and (\ref{equ:p_stay})). Obtaining these requires particular analysis for a
 given pair and can be quite a complex endeavour for stochastic strategies with
-long memory: this is not necessary for the purposes of this work.  All data
+long memory: this is not necessary for the purposes of this work. All data
 generated for this validation exercise can be found at~\cite{data}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=.95\columnwidth]{./Alternator_v_WSLS.pdf}
+    \includegraphics[width=.95\columnwidth]{./Fig1.eps}
     \caption{Comparison of theoretic and actual Moran Process fixation
              probabilities for \textit{deterministic} strategies: Alternator and
          Cooperator. 5\% confidence intervals calculated using an asymptotic
@@ -1054,7 +1079,7 @@ The top most line on all figures (in red and using a circle) corresponds to
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=.95\columnwidth]{./Calculator_v_Arrogant_QLearner.pdf}
+    \includegraphics[width=.95\columnwidth]{./Fig2.eps}
     \caption{Comparison of theoretic and actual Moran Process
              fixation probabilities for \textit{stochastic} strategies:
              Calculator and Arrogant Q Learner. 5\% confidence intervals calculated using an asymptotic
@@ -1113,18 +1138,14 @@ available at~\cite{data}.
 
 \subsubsection*{The special case of \(N=2\)}
 
-When $N=2$ the fixation probabilities of the Moran process are effectively measures
-of the distribution of  relative
-mean payoffs over all possible matches between two players. The strategy
-that scores higher than the other more often will fixate more often. For \(N=2\)
-the two cases of \(x_1\) and \(x_{N-1}\) coincide, but will be
-considered separately for larger \(N\) in the following sections.
-The top 16 (10\%) strategies are
-shown in
-
+When $N=2$ the fixation probabilities of the Moran process are effectively
+measures of the distribution of  relative mean payoffs over all possible matches
+between two players. The strategy that scores higher than the other more often
+will fixate more often. For \(N=2\) the two cases of \(x_1\) and \(x_{N-1}\)
+coincide, but will be considered separately for larger \(N\) in the following
+sections. The top 16 (10\%) strategies are shown in
 Table~\ref{tbl:summary_top_2} and figures showing the performance of all
-strategies are available in the appendix.
-The top five ranking strategies are:
+strategies are available in the appendix. The top five ranking strategies are:
 
 \begin{enumerate}
     \item The top strategy is the Collective Strategy (CS) which has a simple
@@ -1143,10 +1164,10 @@ The top five ranking strategies are:
         defects while Handshake will not.
 \end{enumerate}
 
-It is also noted that TF1, TF2 and TF3 all perform well. This is also the \(N\)
-for which a zero determinant strategy does appear in the top 10\% ranking
-strategies: ZD-extort-4. The performance of zero determinant strategies will be
-examined more closely.
+It is also noted that TF1, TF2 and TF3 all perform well for this case of
+\(N=2\). This is also the value of \(N\) for which a zero determinant strategy
+does appear in the top 10\% ranking strategies: ZD-extort-4. The performance of
+zero determinant strategies will be examined more closely.
 
 \begin{table}[!hbtp]
     \tiny
@@ -1188,9 +1209,6 @@ The stationarity assumption allows for a deterministic payoff matrix
 leading to the conclusions about zero determinant strategies in the space
 of memory-one strategies that do not generalize to this context.
 
-% In the next sections close attention to
-% strategies who are strong invaders/resistors is given.
-
 \subsubsection*{Strong Invaders}
 
 In this section the focus is on the ability of a mutant strategy to invade: the
@@ -1201,7 +1219,7 @@ in Fig~\ref{fig:ranks_v_size_invade}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\columnwidth]{./average_rank_vs_population_size_invade.pdf}
+    \includegraphics[width=\columnwidth]{./Fig3.eps}
     \caption{\textbf{Invasion}: Ranks of all strategies according to \(x_1\) for different population sizes.}
     \label{fig:ranks_v_size_invade}
 \end{figure}
@@ -1313,7 +1331,7 @@ top performing strategies are:
         as approximate handshake.
     \item  PSO Gambler and Evolved Lookerup 2 2 2: strategies that make use
         of a lookup table mapping the first 2 moves of the opponent as well as
-        the last 2 moves of both players to an action.  PSO gambler is a
+        the last 2 moves of both players to an action. PSO gambler is a
         stochastic version of  Lookerup which maps those states to probabilities
        of cooperating. Lookerup was described in \cite{Knight2016}.
     \item The Evolved ANN strategies are neural networks that map a number of
@@ -1344,7 +1362,7 @@ according to mean \(x_{N-1}\) are shown in Fig~\ref{fig:ranks_v_size_resist}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\columnwidth]{./average_rank_vs_population_size_resist.pdf}
+    \includegraphics[width=\columnwidth]{./Fig4.eps}
     \caption{\textbf{Resistance}: Ranks of all strategies according to \(x_{N-1}\) for different
     population sizes.}
     \label{fig:ranks_v_size_resist}
@@ -1354,7 +1372,8 @@ according to mean \(x_{N-1}\) are shown in Fig~\ref{fig:ranks_v_size_resist}.
 Table~\ref{tbl:top_resist} shows the top strategies when ranked
 according to \(x_{N-1}\) for \(N\in\{3, 7, 14\}\) and figures showing results
 for all strategies are available in the supplementary materials.
-Once again none of the short memory strategies previously discussed perform well for high \(N\).
+Once again none of the short memory strategies previously discussed perform well
+for high \(N\).
 
 \begin{table}[!hbtp]
     \tiny
@@ -1445,18 +1464,17 @@ Once again none of the short memory strategies previously discussed perform well
 
 Interestingly none of these strategies are stochastic: this is explained by the
 value of not provoking typically cooperative opponent strategies with
-speculative defections. This includes opponents using the same strategy.  Acting
+speculative defections. This includes opponents using the same strategy. Acting
 stochastically increases the chance of reducing the score of individuals of the
-same type in a Moran process.  However it is possible to design a strategy with
+same type in a Moran process. However it is possible to design a strategy with
 a stochastic or error-correcting handshake that is an excellent resistor even in
-noisy environments \cite{Lee2015}.
+noisy environments~\cite{Lee2015}.
 
 There are only two new strategies that appear in the top ranks for
 \(x_{N-1}\): TF1 and TF2. These two strategies are with CS the strongest
 resistors. They all have handshakes, and whilst the handshakes of CS and
 Handshake (which ranks highly for the smaller values of \(N\)) were
-programmed, the handshakes of TF1 and TF2 evolved through an evolutionary
-process without any priming.
+programmed, the handshakes of TF1 and TF2 evolved without any priming.
 
 As described previously the strategies trained with
 the payoff maximizing objective are among the best invaders in the library
@@ -1506,7 +1524,7 @@ ranks of each strategy for all considered even values of \(N\) according to mean
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\columnwidth]{./average_rank_vs_population_size_coexist.pdf}
+    \includegraphics[width=\columnwidth]{./Fig5.eps}
     \caption{Fixation ranks of all strategies according to \(x_{N/2}\) for different
     population sizes.}
     \label{fig:ranks_v_size_coexist}
@@ -1523,7 +1541,7 @@ strategies:
 \end{itemize}
 
 The results for \(x_{N/2}\) show similarities to the results for \(x_{N-1}\) and
-in particular TF1, TF2 and TF3 ranked one, three and eight. This is to be
+in particular TF1, TF2 and TF3 ranked first, third and eighth. This is to be
 expected since, as described previously these strategies
 were trained in an initial population of \((N/2, N/2)\) individuals.
 
@@ -1644,8 +1662,8 @@ does not translate to larger populations.
 Fig~\ref{fig:correlation_coefficients} shows the correlation coefficients
 of the ranks of strategies in differing population size. How well a strategy
 performs in any Moran process for \(N>2\) has
-little to do with the performance for \(N=2\). This illustrates why the strong
-performance of zero determinant strategies predicted in \cite{Press2012} does
+low correlation with the performance for \(N=2\). This illustrates why the strong
+performance of zero determinant strategies predicted in~\cite{Press2012} does
 not extend to larger populations. This was discussed theoretically in
 \cite{Adami2013} and observed empirically in these simulations.
 
@@ -1653,19 +1671,19 @@ not extend to larger populations. This was discussed theoretically in
     \centering
     \begin{subfigure}[t]{.3\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./correlation_heatmap_invade.pdf}
+        \includegraphics[width=\columnwidth]{./Fig6.eps}
         \caption{Rank based on \(x_1\)}
     \end{subfigure}
     ~
     \begin{subfigure}[t]{.3\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./correlation_heatmap_resist.pdf}
+        \includegraphics[width=\columnwidth]{./Fig7.eps}
         \caption{Rank based on \(x_{N - 1}\)}
     \end{subfigure}
     ~
     \begin{subfigure}[t]{.3\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./correlation_heatmap_coexist.pdf}
+        \includegraphics[width=\columnwidth]{./Fig8.eps}
         \caption{Rank based on \(x_{N/2}\)}
     \end{subfigure}
     \caption{Heatmap of correlation coefficients of rankings by population size.}
@@ -1687,7 +1705,10 @@ in the study do not appear to employ strict handshakes, and are generally
 cooperative strategies. TF3, which does not use a handshake, is a better invader
 than TF1 and TF2 but not as good a resistor. Nevertheless it was the result
 of the same kind of training processes and is a better combined invader-resistor
-than the invaders that were trained previously to maximize payout.
+than the invaders that were trained previously to maximize payout. It is of
+interest to note that when trained in a payoff maximising criteria the finite
+state machines do not evolve to obtain a handshake, this highlights the
+importance of the evolutionary effect on this important mechanism.
 
 The strategies trained to maximize payoff in head-to-head matches are generally
 cooperative and are effective invaders.
@@ -1798,25 +1819,25 @@ strategy.
     \centering
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./cooperation_0_0_10000_TF1_array.pdf}
+        \includegraphics[width=\columnwidth]{./Fig9.eps}
         \caption{TF1}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./cooperation_0_0_10000_TF2_array.pdf}
+        \includegraphics[width=\columnwidth]{./Fig10.eps}
         \caption{TF2}
     \end{subfigure}
 
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./cooperation_0_0_10000_TF3_array.pdf}
+        \includegraphics[width=\columnwidth]{./Fig11.eps}
         \caption{TF3}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[width=\columnwidth]{./cooperation_0_0_10000_CS_array.pdf}
+        \includegraphics[width=\columnwidth]{./Fig12.eps}
         \caption{CS}
     \end{subfigure}
     \caption{Cooperation rate per round (over 10000 repetitions). Rows
@@ -1907,12 +1928,26 @@ Daniel Ashlock and Eun-Youn Kim.
 \newblock {\em IEEE Transactions on Evolutionary Computation}, 12(5):647--659,
   2008.
 
+\bibitem{Ashlock2007}
+Wendy Ashlock
+\newblock {Why some representations are more cooperative than others for
+prisoner's dilemma}
+\newblock {\em Foundations of Computational Intelligence, 2007. FOCI 2007. IEEE
+symposium on}, 314--321,
+  2007.
+
 \bibitem{Ashlock2006}
 Wendy Ashlock and Daniel Ashlock.
 \newblock {Changes in prisoner’s dilemma strategies over evolutionary time
   with different population sizes}.
 \newblock In {\em Evolutionary Computation, 2006. CEC 2006. IEEE Congress on},
   pages 297--304. IEEE, 2006.
+
+\bibitem{AshlockBook}
+Daniel Ashlock.
+\newblock{Evolutionary computation for modeling and optimization},
+\newblock{Springer Science \& Business Media}
+2006
 
 \bibitem{Ashlock2014}
 Wendy Ashlock, Jeffrey Tsang, and Daniel Ashlock.
@@ -1996,7 +2031,7 @@ Marc Harper, Vincent Knight, Martin Jones, Georgios Koutsovoulos, Nikoleta~E
   Glynatsi, and Owen Campbell.
 \newblock {Reinforcement Learning Produces Dominant Strategies for the Iterated
   Prisoner's Dilemma}.
-\newblock arXiv:1707.06307, 2017.
+\newblock {\em PLOS ONE}, 12(12): 12 2017.
 
 \bibitem{Hilbe2017}
 Christian Hilbe, Luis~A Martinez-Vaquero, Krishnendu Chatterjee, and Martin~A
@@ -2078,6 +2113,11 @@ Jiawei Li and Graham Kendall.
 LIFL.
 \newblock Prison.
 \newblock http://www.lifl.fr/IPD/ipd.frame.html, 2008.
+
+\bibitem{Mateo2003}
+Jill M. Mateo.
+\newblock {Kin recognition in ground squirrels and other rodents}.
+\newblock In {\em Journal of Mammalogy}, 84 (4), 1163--1181
 
 \bibitem{Mathieu2015}
 Philippe Mathieu and Jean-Paul Delahaye.
@@ -2395,74 +2435,74 @@ population sizes.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_3_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig13.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=3\)}
     \label{invasion-3}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_4_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig14.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=4\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_5_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig15.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=5\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_6_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig16.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=6\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_7_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig17.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=7\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_8_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig18.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=8\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_9_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig19.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=9\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_10_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig20.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=10\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_11_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig21.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=11\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_12_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig22.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=12\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_13_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig23.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=13\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_14_invade.pdf}
+    \includegraphics[width=\textwidth]{./Fig24.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=14\)}
     \label{invasion-14}
 \end{figure}
@@ -2470,74 +2510,74 @@ population sizes.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_3_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig25.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=3\)}
     \label{resistance-3}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_4_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig26.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=4\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_5_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig27.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=5\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_6_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig28.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=6\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_7_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig29.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=7\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_8_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig30.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=8\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_9_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig31.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=9\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_10_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig32.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=10\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_11_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig33.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=11\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_12_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig34.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=12\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_13_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig35.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=13\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=\textwidth]{./boxplot_14_resist.pdf}
+    \includegraphics[width=\textwidth]{./Fig36.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=14\)}
     \label{resistance-14}
 \end{figure}
