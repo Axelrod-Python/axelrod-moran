@@ -7,8 +7,7 @@ This paper presents a numerical study of the Moran process (a model of
 evolutionary processes) for the iterated
 Prisoner's dilemma.
 
-We feel that it is an excellent fit for IEEE Transactions on Evolutionary
-Computation. It exposes experimental results
+We feel that it is an excellent fit for PLOS One. It exposes experimental results
 carried out with the highest standard of reproducibility: all parameters and
 algorithms are not only well described but they are also all open source,
 archived and made available online.
