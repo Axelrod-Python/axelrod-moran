@@ -184,9 +184,9 @@
 \usepackage{pdflscape}
 \usepackage{standalone}
 \usepackage{subcaption}
-\usepackage{tikz}
 \usepackage{xstring}
 
+\usepackage{tikz}
 \usetikzlibrary{calc, shapes, patterns}
 
 \begin{document}
@@ -369,138 +369,7 @@ replicants.
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.7}{
-
-\begin{tikzpicture}[scale=.9]
-	\node (A1) at (-1, -1) [circle, pattern=north west lines, pattern
-        color=blue!70, draw=blue] {};
-	\node (A2) at (-1, 1) [circle, pattern=north west lines, pattern
-        color=blue!70, draw=blue] {};
-	\node (A3) at (0, .2) [circle, pattern=north west lines, pattern
-        color=blue!70, draw=blue] {};
-	\node (A4) at (.2, -.6) [circle, pattern=north west lines, pattern
-        color=blue!70, draw=blue] {};
-	\node (A5) at (.5, -0.1) [circle, pattern=north west lines, pattern
-        color=blue!70, draw=blue] {};
-	\node (B1) at (-1, -.2) [circle, pattern=north east lines, pattern
-        color=red!70, draw=red] {};
-	\node (B2) at (1, -.5) [circle, pattern=north east lines, pattern
-        color=red!70, draw=red] {};
-	\node (B3) at (.5, .8) [circle, pattern=north east lines, pattern
-        color=red!70, draw=red] {};
-	\node (B4) at (-.6, .2) [circle, pattern=north east lines, pattern
-        color=red!70, draw=red] {};
-	\node (B5) at (.6, -.8) [circle, pattern=north east lines, pattern
-        color=red!70, draw=red] {};
-
-	\draw [->] (1, 0) -- (3, 0) node [above, pos=0.5] {Selection};
-
-	\node (A1) at ($(A1) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A2) at ($(A2) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A3) at ($(A3) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A4) at ($(A4) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-    \node (A5) at ($(A5) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (B1) at ($(B1) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B2) at ($(B2) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B3) at ($(B3) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B4) at ($(B4) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B5) at ($(B5) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-
-	\draw [dotted, very thick] (B4) circle (.25cm);
-
-	\draw [->] (5.5, 0) -- (7.5, 0) node [above, pos=0.5] {Birth};
-
-	\node (A1) at ($(A1) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A2) at ($(A2) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A3) at ($(A3) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A4) at ($(A4) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-    \node (A5) at ($(A5) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (B1) at ($(B1) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B2) at ($(B2) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B3) at ($(B3) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B4) at ($(B4) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B5) at ($(B5) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-
-	\draw [dotted, very thick] (B4) circle (.25cm);
-	\node (B6) at ($(B4) + (0.5, 0.5)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\draw [->, dotted, very thick] (B4) [out=90, in=180] to (B6);
-
-	\draw [->] (10, 0) -- (12, 0) node [above, pos=0.5] {Selection};
-
-	\node (A1) at ($(A1) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A2) at ($(A2) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A3) at ($(A3) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A4) at ($(A4) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-    \node (A5) at ($(A5) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (B1) at ($(B1) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B2) at ($(B2) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B3) at ($(B3) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B4) at ($(B4) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B5) at ($(B5) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B6) at ($(B6) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-
-	\draw [dotted, very thick] (A3) circle (.25cm);
-
-	\draw [->] (14.5, 0) -- (16.5, 0) node [above, pos=0.5] {Death};
-
-	\node (A1) at ($(A1) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A2) at ($(A2) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (A3) at ($(A3) + (4.5, 0)$) {};
-	\node (A4) at ($(A4) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-    \node (A5) at ($(A5) + (4.5, 0)$) [circle, pattern=north west lines,
-        pattern color=blue!70, draw=blue] {};
-	\node (B1) at ($(B1) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B2) at ($(B2) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B3) at ($(B3) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B4) at ($(B4) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B5) at ($(B5) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-	\node (B6) at ($(B6) + (4.5, 0)$) [circle, pattern=north east lines,
-        pattern color=red!70, draw=red] {};
-
-	\draw [dotted, very thick] (A3) circle (.25cm);
-\end{tikzpicture}
-
-}
+    \includegraphics[draft, width=\textwidth]{Fig1.eps}
     \caption{A diagrammatic representation of a Moran process.}
     \label{fig:moran_process}
 \end{figure}
@@ -611,87 +480,7 @@ state.
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.7}{
-    \begin{tikzpicture}
-
-    \tikzstyle{state}=[minimum width=0.8cm, font=\boldmath];
-    \node[circle, draw=black, thick] (5) at (0, 0) [state] {$6$};
-	\node[circle, draw=black, thick] (2) at (4, 0) [state] {$3$};
-	\node[circle, draw=black, thick] (15) at (-2, -2) [state] {$16$};
-	\node[circle, draw=black, thick] (8) at ($(2)+(2,-2)$) [state] {$9$};
-	\node[circle, draw=black, thick] (10) at ($(15)+(4, 0)$) [state] {$11$};
-
-	\node[circle, draw=black, thick] (7) at ($(5)+(-1,-4)$) [state] {$8$};
-	\node[circle, draw=black, thick] (11) at ($(7)+(2, 0)$) [state] {$12$};
-
-
-
-	\node[circle, draw=black, thick] (9) at ($(10)+(0,-4)$) [state] {$10$};
-	\node[circle, draw=black, thick] (0) at ($(9)+(-5,0)$) [state] {$1$};
-	\node[circle, draw=black, thick] (14) at ($(9)+(5,0)$) [state] {$15$};
-
-	\node[circle, draw=black, thick] (1) at ($(0)+(0,-2)$) [state] {$2$};
-	\node[circle, draw=black, thick] (4) at ($(1)+(2,0)$) [state] {$5$};
-	\node[circle, draw=black, thick] (6) at ($(4)+(4,0)$) [state] {$7$};
-	\node[circle, draw=black, thick] (13) at ($(6)+(2,0)$) [state] {$14$};
-
-	\node[circle, draw=black, thick] (3) at ($(4)+(0,-2)$) [state] {$4$};
-	\node[circle, draw=black, thick] (12) at ($(6)+(0,-2)$) [state] {$13$};
-
-
-    \coordinate[left of=0] (s);
-
-    \draw (s) edge[out=0, in=180, ->, thick] node [above] {$C$} (0);
-    \draw (0) edge[out=90, in=135, ->, thick] node [above left] {$C/C$} (7);
-    \draw (0) edge[out=-90, in=90, ->, thick] node [left] {$D/C$} (1);
-
-    \draw (1) edge[out=45, in=-135, ->, thick] node [left] {$C/D$} (11);
-    \draw (1) edge[out=45, in=-135, ->, thick] node [right] {$D/D$} (11);
-
-    \draw (2) edge[out=-45, in=135, ->, thick] node [above right] {$C/D$} (8);
-    \draw (2) edge[out=-45, in=135, ->, thick] node [below left] {$D/C$} (8);
-
-    \draw (3) edge[out=180, in=135, ->, thick, loop] node [left] {$C/C$} (3);
-    \draw (3) edge[out=0, in=180, ->, thick] node [below] {$D/D$} (12);
-
-    \draw (4) edge[out=0, in=180, ->, thick] node [above] {$C/C$} (6);
-    \draw (4) edge[out=-90, in=90, ->, thick] node [left] {$D/C$} (3);
-
-    \draw (5) edge[out=0, in=180, ->, thick] node [below, yshift=-1cm, xshift=2cm] {$D/D$} (8);
-    \draw (5) edge[out=-45, in=90, ->, thick] node [left, yshift=-0.8cm, xshift=-0.3cm, rotate=90] {$C/C$} (11);
-
-    \draw (6) edge[out=0, in=180, ->, thick] node [below] {$C/D$} (13);
-    \draw (6) edge[out=45, in=180, ->, thick] node [above] {$D/C$} (14);
-
-    \draw (7) edge[out=-135, in=135, ->, thick] node [yshift=1.8cm] {$C/D$} (4);
-    \draw (7) edge[out=45, in=180, ->, thick] node [above, yshift=1.2cm, xshift=1.8cm] {$D/D$} (2);
-
-    \draw (8) edge[out=0, in=45, ->, thick, loop] node [above] {$D/D$} (8);
-    \draw (8) edge[out=-90, in=130, ->, thick] node [right] {$C/D$} (14);
-
-    \draw (9) edge[out=-135, in=-45, ->, thick] node [above] {$C/C$} (0);
-    \draw (9) edge[out=100, in=-100, ->, thick] node [above left, yshift=1.5cm, rotate=90] {$D/D$} (10);
-
-    \draw (10) edge[out=0, in=180, ->, thick] node [below left, xshift=-0.5cm] {$C/C$} (8);
-    \draw (10) edge[out=180, in=0, ->, thick] node [above left, xshift=-0.5cm] {$D/C$} (15);
-
-    \draw (11) edge[out=0, in=70, ->, thick] node [above right] {$C/D$} (6);
-    \draw (11) edge[out=155, in=-90, ->, thick] node [right, yshift=1cm] {$D/D$} (5);
-
-    \draw (12) edge[out=90, in=-90, ->, thick] node [above right] {$C/D$} (6);
-    \draw (12) edge[out=155, in=-90, ->, thick] node [left, yshift=-1cm] {$D/D$} (9);
-
-    \draw (13) edge[out=135, in=0, ->, thick] node [below left, xshift=-0.4cm, yshift=0.4cm] {$C/D$} (9);
-    \draw (13) edge[out=70, in=-135, ->, thick] node [right] {$D/D$} (8);
-
-    \draw (14) edge[out=70, in=-45, ->, thick] node [right] {$C/D$} (8);
-    \draw (14) edge[out=-90, in=0, ->, thick] node [right] {$D/D$} (13);
-
-    \draw (15) edge[out=-45, in=30, ->, thick] node [left, xshift=-1.8cm, yshift=2.5cm] {$C/C$} (4);
-    \draw (15) edge[out=90, in=180, ->, thick] node [above left] {$D/C$} (5);
-
-    \end{tikzpicture}
-    }
+    \includegraphics[draft, width=\textwidth]{Fig2.eps}
     \caption{TF1: a 16 state finite state machine with a handshake leading to
     mutual cooperation at state 4.}
     \label{fig:tf1}
@@ -700,88 +489,7 @@ state.
 
 \begin{figure}[!hbtp]
     \centering
-    \scalebox{.7}{
-
-    \begin{tikzpicture}
-
-    \tikzstyle{state}=[minimum width=0.8cm, font=\boldmath];
-    \node[circle, draw=black, thick] (1) at (0, 0) [state] {$2$};
-	\node[circle, draw=black, thick] (4) at (4, 0) [state] {$5$};
-
-	\node[circle, draw=black, thick] (5) at (-2, -1) [state] {$6$};
-    \node[circle, draw=black, thick] (6) at (2, -1) [state] {$7$};
-    \node[circle, draw=black, thick] (3) at ($(5)+(-1,-2)$) [state] {$4$};
-    \node[circle, draw=black, thick] (12) at ($(5)+(0,-4)$) [state] {$13$};
-    \node[circle, draw=black, thick] (8) at ($(12)+(0,-2)$) [state] {$9$};
-    \node[circle, draw=black, thick] (9) at ($(8)+(-2,0)$) [state] {$10$};
-    \node[circle, draw=black, thick] (0) at ($(8)+(0,-2)$) [state] {$1$};
-
-    \node[circle, draw=black, thick] (2) at ($(6)+(0,-2)$) [state] {$3$};
-    \node[circle, draw=black, thick] (14) at ($(2)+(2,0)$) [state] {$15$};
-    \node[circle, draw=black, thick] (7) at ($(2)+(0,-2)$) [state] {$8$};
-    \node[circle, draw=black, thick] (10) at ($(14)+(0,-2)$) [state] {$11$};
-    \node[circle, draw=black, thick] (13) at ($(7)+(0,-2)$) [state] {$14$};
-    \node[circle, draw=black, thick] (11) at ($(10)+(0,-2)$) [state] {$12$};
-    \node[circle, draw=black, thick] (15) at ($(11)+(0,-2)$) [state] {$16$};
-
-
-    \coordinate[below of=0] (s);
-
-    \draw (s) edge[out=90, in=-90, ->, thick] node [left] {$C$} (0);
-
-    \draw (0) edge[out=0, in=-90, ->, thick] node [below right] {$C/D$} (13);
-    \draw (0) edge[out=45, in=0, ->, thick] node [above, rotate=90] {$D/D$} (12);
-
-    \draw (1) edge[out=-90, in=0, ->, thick] node [above, yshift=1.3cm, xshift=0.3cm] {$C/D$} (3);
-    \draw (1) edge[out=0, in=180, ->, thick] node [above] {$D/D$} (4);
-
-    \draw (2) edge[out=-45, in=-135, ->, thick] node [above] {$C/D$} (14);
-    \draw (2) edge[out=180, in=90, ->, thick] node [above, yshift=0.8cm, xshift=3cm] {$D/D$} (9);
-
-    \draw (3) edge[out=180, in=-135, ->, thick] node [left, yshift=2cm, xshift=-0.1cm] {$C/C$} (0);
-    \draw (3) edge[out=135, in=180, ->, thick] node [above, yshift=0.2cm] {$D/D$} (1);
-
-    \draw (4) edge[out=90, in=90, ->, thick] node [above] {$C/D$} (1);
-    \draw (4) edge[out=-90, in=0, ->, thick] node [right] {$D/D$} (2);
-
-    \draw (5) edge[out=-90, in=90, ->, thick] node [right, yshift=1cm] {$C/C$} (12);
-    \draw (5) edge[out=0, in=180, ->, thick] node [below right] {$D/C$} (6);
-
-    \draw (6) edge[out=135, in=-45, ->, thick] node [right, xshift=1cm] {$C/C$} (1);
-    \draw (6) edge[out=-45, in=135, ->, thick] node [above left, yshift=-0.5cm] {$D/D$} (14);
-
-    \draw (7) edge[out=135, in=45, ->, thick] node [above] {$C/D$} (12);
-    \draw (7) edge[out=90, in=-90, ->, thick] node [left] {$D/D$} (2);
-
-    \draw (8) edge[out=90, in=-135, ->, thick] node [above right] {$C/D$} (7);
-    \draw (8) edge[out=180, in=0, ->, thick] node [above] {$D/D$} (9);
-
-    \draw (9) edge[out=-45, in=-135, ->, thick] node [below] {$C/D$} (8);
-    \draw (9) edge[out=-90, in=180, ->, thick] node [right] {$D/D$} (0);
-
-    \draw (10) edge[out=180, in=-60, ->, thick] node [below, yshift=-0.5cm, xshift=0.4cm] {$C/C$} (2);
-    \draw (10) edge[out=0, in=0, ->, thick] node [right] {$D/C$} (15);
-
-    \draw (11) edge[out=90, in=-45, ->, thick] node [below right, xshift=0.7cm] {$C/D$} (7);
-    \draw (11) edge[out=180, in=0, ->, thick] node [below] {$D/D$} (13);
-
-    \draw (12) edge[out=135, in=-45, ->, thick] node [above left] {$C/C$} (3);
-    \draw (12) edge[out=-90, in=135, ->, thick] node [left] {$D/D$} (8);
-
-    \draw (13) edge[out=90, in=-90, ->, thick] node [left] {$C/C$} (7);
-    \draw (13) edge[out=45, in=-135, ->, thick] node [below, yshift=-0.2cm, rotate=45] {$D/D$} (10);
-
-    \draw (14) edge[out=-90, in=90, ->, thick] node [right] {$C/D$} (10);
-    \draw (14) edge[out=-100, in=45, ->, thick] node [above] {$D/D$} (7);
-
-    \draw (15) edge[out=-135, in=180, ->, thick, loop] node [left] {$C/C$} (15);
-    \draw (15) edge[out=90, in=-90, ->, thick] node [left] {$D/D$} (11);
-
-
-
-
-    \end{tikzpicture}
-    }
+    \includegraphics[draft, width=\textwidth]{Fig3.eps}
     \caption{TF2: a 16 state finite state machine with a handshake leading to
     mutual cooperation at state 16.}
     \label{fig:tf2}
@@ -790,43 +498,7 @@ state.
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{tikzpicture}
-
-    \tikzstyle{state}=[minimum width=0.5cm, font=\boldmath];
-
-    \node[circle, draw=black, thick]  (0) at (0,0) [state] {$1$};
-    \node[circle, draw=black, thick]  (1) at ($(0)+(0,2)$) [state] {$2$};
-    \node[circle, draw=black, thick]  (2) at ($(1)+(2,1.5)$) [state] {$3$};
-    \node[circle, draw=black, thick]  (3) at ($(2)+(3,0)$) [state] {$4$};
-    \node[circle, draw=black, thick]  (4) at ($(1)+(8,0)$) [state] {$5$};
-    \node[circle, draw=black, thick]  (5) at ($(0)+(8,0)$) [state] {$6$};
-    \node[circle, draw=black, thick]  (6) at ($(3)+(0,-4.5)$) [state] {$7$};
-    \node[circle, draw=black, thick]  (7) at ($(2)+(0,-4.5)$) [state] {$8$};
-
-    \coordinate[left of=0] (s);
-
-    \draw (s) edge[out=0, in=180, ->, thick] node [above] {$C$} (0);
-
-    \draw (0) edge[out=-45, in=-100, loop, thick] node [below] {$C/C$} (0);
-    \draw (6) edge[out=-45, in=-100, loop, thick] node [below] {$C/D$} (6);
-    \draw (6) edge[out=190, in=135, loop, thick] node [below, yshift=-0.5cm] {$D/D$} (6);
-    \draw (7) edge[out=190, in=135, loop, thick] node [above, xshift=1cm] {$C/D$} (7);
-    \draw (2) edge[out=190, in=135, loop, thick] node [left] {$D/D$} (2);
-
-    \draw (2) edge[out=0,in=180,->,thick] node [above] {$C/C$} (3);
-    \draw (3) edge[out=-35,in=170,->,thick] node [above right] {$C/D$} (4);
-    \draw (5) edge[out=-135,in=0,->,thick] node [below] {$C/C$} (6);
-
-    \draw (0) edge[out=45,in=-135,->,thick] node [above, rotate=45, xshift=2cm, yshift=-0.5cm] {$D/C$} (3);
-
-    \draw (1) edge[out=-45,in=180,->,thick] node [below right, xshift=2cm] {$C/D$} (5);
-    \draw (1) edge[out=-135,in=135,->,thick] node [left] {$D/C$} (0);
-    \draw (3) edge[out=-90,in=90,->,thick] node [above, rotate=90] {$D/D$} (6);
-    \draw (4) edge[out=90,in=0,->,thick] node [above] {$C/C$} (3);
-    \draw (4) edge[out=180,in=0,->,thick] node [above left, xshift=-2.5cm] {$D/D$} (1);
-    \draw (5) edge[out=135,in=-45,->,thick] node [below, rotate=-45] {$D/D$} (3);
-    \draw (7) edge[out=-90,in=-90,->,thick] node [below] {$D/C$} (5);
-    \end{tikzpicture}
+    \includegraphics[draft, width=\textwidth]{Fig4.eps}
     \caption{TF3: an 8 state finite state machine.}
     \label{fig:tf3}
 \end{figure}
@@ -1038,7 +710,7 @@ generated for this validation exercise can be found at~\cite{data}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, draft, width=.95\columnwidth]{./Fig1.eps}
+    \includegraphics[draft, width=.95\columnwidth]{./Fig5.eps}
     \caption{Comparison of theoretic and actual Moran Process fixation
              probabilities for \textit{deterministic} strategies: Alternator and
          Cooperator. 5\% confidence intervals calculated using an asymptotic
@@ -1079,7 +751,7 @@ The top most line on all figures (in red and using a circle) corresponds to
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=.95\columnwidth]{./Fig2.eps}
+    \includegraphics[draft, width=.95\columnwidth]{./Fig6.eps}
     \caption{Comparison of theoretic and actual Moran Process
              fixation probabilities for \textit{stochastic} strategies:
              Calculator and Arrogant Q Learner. 5\% confidence intervals calculated using an asymptotic
@@ -1219,7 +891,7 @@ in Fig~\ref{fig:ranks_v_size_invade}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\columnwidth]{./Fig3.eps}
+    \includegraphics[draft, width=\columnwidth]{./Fig7.eps}
     \caption{\textbf{Invasion}: Ranks of all strategies according to \(x_1\) for different population sizes.}
     \label{fig:ranks_v_size_invade}
 \end{figure}
@@ -1362,7 +1034,7 @@ according to mean \(x_{N-1}\) are shown in Fig~\ref{fig:ranks_v_size_resist}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\columnwidth]{./Fig4.eps}
+    \includegraphics[draft, width=\columnwidth]{./Fig8.eps}
     \caption{\textbf{Resistance}: Ranks of all strategies according to \(x_{N-1}\) for different
     population sizes.}
     \label{fig:ranks_v_size_resist}
@@ -1524,7 +1196,7 @@ ranks of each strategy for all considered even values of \(N\) according to mean
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\columnwidth]{./Fig5.eps}
+    \includegraphics[draft, width=\columnwidth]{./Fig9.eps}
     \caption{Fixation ranks of all strategies according to \(x_{N/2}\) for different
     population sizes.}
     \label{fig:ranks_v_size_coexist}
@@ -1671,19 +1343,19 @@ not extend to larger populations. This was discussed theoretically in
     \centering
     \begin{subfigure}[t]{.3\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig6.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig10.eps}
         \caption{Rank based on \(x_1\)}
     \end{subfigure}
     ~
     \begin{subfigure}[t]{.3\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig7.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig11.eps}
         \caption{Rank based on \(x_{N - 1}\)}
     \end{subfigure}
     ~
     \begin{subfigure}[t]{.3\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig8.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig12.eps}
         \caption{Rank based on \(x_{N/2}\)}
     \end{subfigure}
     \caption{Heatmap of correlation coefficients of rankings by population size.}
@@ -1819,25 +1491,25 @@ strategy.
     \centering
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig9.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig13.eps}
         \caption{TF1}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig10.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig14.eps}
         \caption{TF2}
     \end{subfigure}
 
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig11.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig15.eps}
         \caption{TF3}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{.5\columnwidth}
         \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig12.eps}
+        \includegraphics[draft, width=\columnwidth]{./Fig16.eps}
         \caption{CS}
     \end{subfigure}
     \caption{Cooperation rate per round (over 10000 repetitions). Rows
@@ -2435,74 +2107,74 @@ population sizes.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig13.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig17.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=3\)}
     \label{invasion-3}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig14.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig18.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=4\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig15.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig19.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=5\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig16.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig20.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=6\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig17.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig21.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=7\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig18.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig22.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=8\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig19.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig23.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=9\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig20.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig24.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=10\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig21.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig25.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=11\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig22.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig26.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=12\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig23.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig27.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=13\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig24.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig28.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=14\)}
     \label{invasion-14}
 \end{figure}
@@ -2510,74 +2182,74 @@ population sizes.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig25.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig29.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=3\)}
     \label{resistance-3}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig26.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig30.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=4\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig27.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig31.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=5\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig28.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig32.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=6\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig29.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig33.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=7\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig30.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig34.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=8\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig31.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig35.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=9\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig32.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig36.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=10\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig33.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig37.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=11\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig34.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig38.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=12\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig35.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig39.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=13\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig36.eps}
+    \includegraphics[draft, width=\textwidth]{./Fig40.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=14\)}
     \label{resistance-14}
 \end{figure}
