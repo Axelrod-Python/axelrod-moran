@@ -369,7 +369,7 @@ replicants.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{Fig1.eps}
+    %\includegraphics[ width=\textwidth]{Fig1.eps}
     \caption{A diagrammatic representation of a Moran process.}
     \label{fig:moran_process}
 \end{figure}
@@ -455,7 +455,7 @@ of these strategies in IPD tournaments is described in~\cite{Harper2017}.
 
 All of the training code is archived at~\cite{marc_harper_2017_824264}. This
 software is (similarly to the Axelrod library) available on
-GitHub\footnote{\url{https://github.com/Axelrod-Python/axelrod-dojo}}
+GitHub~(\url{https://github.com/Axelrod-Python/axelrod-dojo})
 with documentation to
 train new strategies easily. Training
 typically takes less than 100 generations and can be completed within several
@@ -480,7 +480,7 @@ state.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{Fig2.eps}
+    %\includegraphics[ width=\textwidth]{Fig2.eps}
     \caption{TF1: a 16 state finite state machine with a handshake leading to
     mutual cooperation at state 4.}
     \label{fig:tf1}
@@ -489,7 +489,7 @@ state.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{Fig3.eps}
+    %\includegraphics[ width=\textwidth]{Fig3.eps}
     \caption{TF2: a 16 state finite state machine with a handshake leading to
     mutual cooperation at state 16.}
     \label{fig:tf2}
@@ -498,7 +498,7 @@ state.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{Fig4.eps}
+    %\includegraphics[ width=\textwidth]{Fig4.eps}
     \caption{TF3: an 8 state finite state machine.}
     \label{fig:tf3}
 \end{figure}
@@ -686,7 +686,7 @@ A neutral strategy will have fixation probability $x_i = i/N$.
 Comparisons of \(x_1, x_{N/2}, x_{N-1}\) are shown in
 Fig~\ref{fig:comparison_deterministic} for Alternator and WSLS (a 5\%
 confidence interval computed using an asymptotic normal approximation is also
-included \cite{brown2001interval}).
+included~\cite{brown2001interval}).
 The points represent the simulated
 values and the line shows the theoretical value. Note that these are
 deterministic strategies and show a good match between the expected value
@@ -710,7 +710,7 @@ generated for this validation exercise can be found at~\cite{data}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=.95\columnwidth]{./Fig5.eps}
+    %\includegraphics[ width=.95\columnwidth]{./Fig5.eps}
     \caption{Comparison of theoretic and actual Moran Process fixation
              probabilities for \textit{deterministic} strategies: Alternator and
          Cooperator. 5\% confidence intervals calculated using an asymptotic
@@ -751,7 +751,7 @@ The top most line on all figures (in red and using a circle) corresponds to
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=.95\columnwidth]{./Fig6.eps}
+    %\includegraphics[ width=.95\columnwidth]{./Fig6.eps}
     \caption{Comparison of theoretic and actual Moran Process
              fixation probabilities for \textit{stochastic} strategies:
              Calculator and Arrogant Q Learner. 5\% confidence intervals calculated using an asymptotic
@@ -891,7 +891,7 @@ in Fig~\ref{fig:ranks_v_size_invade}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\columnwidth]{./Fig7.eps}
+    %\includegraphics[ width=\columnwidth]{./Fig7.eps}
     \caption{\textbf{Invasion}: Ranks of all strategies according to \(x_1\) for different population sizes.}
     \label{fig:ranks_v_size_invade}
 \end{figure}
@@ -1034,7 +1034,7 @@ according to mean \(x_{N-1}\) are shown in Fig~\ref{fig:ranks_v_size_resist}.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\columnwidth]{./Fig8.eps}
+    %\includegraphics[ width=\columnwidth]{./Fig8.eps}
     \caption{\textbf{Resistance}: Ranks of all strategies according to \(x_{N-1}\) for different
     population sizes.}
     \label{fig:ranks_v_size_resist}
@@ -1196,7 +1196,7 @@ ranks of each strategy for all considered even values of \(N\) according to mean
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\columnwidth]{./Fig9.eps}
+    %\includegraphics[ width=\columnwidth]{./Fig9.eps}
     \caption{Fixation ranks of all strategies according to \(x_{N/2}\) for different
     population sizes.}
     \label{fig:ranks_v_size_coexist}
@@ -1341,23 +1341,7 @@ not extend to larger populations. This was discussed theoretically in
 
 \begin{figure}[!htbp]
     \centering
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig10.eps}
-        \caption{Rank based on \(x_1\)}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig11.eps}
-        \caption{Rank based on \(x_{N - 1}\)}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{.3\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig12.eps}
-        \caption{Rank based on \(x_{N/2}\)}
-    \end{subfigure}
+    %\includegraphics[ width=\columnwidth]{./Fig10.eps}
     \caption{Heatmap of correlation coefficients of rankings by population size.}
     \label{fig:correlation_coefficients}
 \end{figure}
@@ -1489,29 +1473,7 @@ strategy.
 
 \begin{figure}[!hbtp]
     \centering
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig13.eps}
-        \caption{TF1}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig14.eps}
-        \caption{TF2}
-    \end{subfigure}
-
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig15.eps}
-        \caption{TF3}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{.5\columnwidth}
-        \centering
-        \includegraphics[draft, width=\columnwidth]{./Fig16.eps}
-        \caption{CS}
-    \end{subfigure}
+    %\includegraphics[ width=\columnwidth]{./Fig11.eps}
     \caption{Cooperation rate per round (over 10000 repetitions). Rows
         correspond to all the strategies considered in this work (ordered
     alphabetically by name). Columns correspond to round of an IPD match.}
@@ -1563,357 +1525,354 @@ A variety of software libraries have been used in this work:
 
 \begin{thebibliography}{10}
 
-\bibitem{Adami2013}
-Christoph Adami and Arend Hintze.
-\newblock {Evolutionary instability of zero-determinant strategies demonstrates
-  that winning is not everything.}
-\newblock {\em Nature communications}, 4(1):2193, 2013.
-
-\bibitem{adami2016evolutionary}
-Christoph Adami, Jory Schossau, and Arend Hintze.
-\newblock {Evolutionary game theory using agent-based methods}.
-\newblock {\em Physics of Life Reviews}, 19(Supplement C):1 -- 26, 2016.
-
-\bibitem{affenzeller2009genetic}
-Michael Affenzeller, Stefan Wagner, Stephan Winkler, and Andreas Beham.
-\newblock {\em Genetic Algorithms and Genetic Programming: Modern Concepts and
-  Practical Applications}.
-\newblock Numerical Insights. CRC Press, 2009.
-
-\bibitem{Nowak2017}
-Benjamin Allen, Gabor Lippner, Yu-Ting Chen, Babak Fotouhi, Naghmeh Momeni,
-  Shing-Tung Yau, and Martin~A Nowak.
-\newblock {Evolutionary dynamics on any population structure}.
-\newblock 544:227--230, March 2017.
-
-\bibitem{Ashlock2015}
-Daniel Ashlock, Joseph~Alexander Brown, and Philip Hingston.
-\newblock {Multiple Opponent Optimization of Prisoner’s Dilemma Playing
-  Agents}.
-\newblock {\em IEEE Transactions on Computational Intelligence and AI in
-  Games}, 7(1):53--65, 2015.
-
-\bibitem{Ashlock2008}
-Daniel Ashlock and Eun-Youn Kim.
-\newblock {Fingerprinting: Visualization and automatic analysis of prisoner's
-  dilemma strategies}.
-\newblock {\em IEEE Transactions on Evolutionary Computation}, 12(5):647--659,
-  2008.
-
-\bibitem{Ashlock2007}
-Wendy Ashlock
-\newblock {Why some representations are more cooperative than others for
-prisoner's dilemma}
-\newblock {\em Foundations of Computational Intelligence, 2007. FOCI 2007. IEEE
-symposium on}, 314--321,
-  2007.
-
-\bibitem{Ashlock2006}
-Wendy Ashlock and Daniel Ashlock.
-\newblock {Changes in prisoner’s dilemma strategies over evolutionary time
-  with different population sizes}.
-\newblock In {\em Evolutionary Computation, 2006. CEC 2006. IEEE Congress on},
-  pages 297--304. IEEE, 2006.
-
-\bibitem{AshlockBook}
-Daniel Ashlock.
-\newblock{Evolutionary computation for modeling and optimization},
-\newblock{Springer Science \& Business Media}
-2006
-
-\bibitem{Ashlock2014}
-Wendy Ashlock, Jeffrey Tsang, and Daniel Ashlock.
-\newblock {The evolution of exploitation}.
-\newblock In {\em Foundations of Computational Intelligence (FOCI), 2014 IEEE
-  Symposium on}, pages 135--142. IEEE, 2014.
+\bibitem{Flood1958}
+Flood M.
+\newblock {Some Experimental Games}, 1958.
 
 \bibitem{Axelrod1980a}
-Robert Axelrod.
+Axelrod R.
 \newblock {Effective choice in the prisoner's dilemma}.
 \newblock {\em Journal of conflict resolution}, 24(1):3--25, 1980.
 
-\bibitem{Axelrod1980b}
-Robert Axelrod.
-\newblock {More Effective Choice in the Prisoner's Dilemma}.
-\newblock {\em Journal of Conflict Resolution}, 24(3):379--403, 1980.
-
-\bibitem{Axelrod1984}
-Robert Axelrod.
-\newblock {\em The Evolution of Cooperation}.
-\newblock Basic books. Basic Books, 1984.
-
-\bibitem{Baek2016}
-{Baek, Seung Ki and Jeong, Hyeong-chai and Hilbe, Christian and Nowak, Martin
-  A}.
-\newblock {Comparing reactive and memory- one strategies of direct
-  reciprocity}.
-\newblock {\em Nature Publishing Group}, pages 1--13, 2016.
-
-\bibitem{Banks1990}
-Jeffrey~S Banks and Rangarajan~K Sundaram.
-\newblock {Repeated games, finite automata, and complexity}.
-\newblock {\em Games and Economic Behavior}, 2(2):97--117, 1990.
-
-\bibitem{Beaufils1997}
-Bruno Beaufils, Jean-Paul Delahaye, and Philippe Mathieu.
-\newblock {Our meeting with gradual, a good strategy for the iterated
-  prisoner’s dilemma}.
-\newblock In {\em Proceedings of the Fifth International Workshop on the
-  Synthesis and Simulation of Living Systems}, pages 202--209, 1997.
-
-\bibitem{brown2001interval}
-Lawrence~D Brown, T~Tony Cai, and Anirban DasGupta.
-\newblock Interval estimation for a binomial proportion.
-\newblock {\em Statistical science}, pages 101--117, 2001.
-
-\bibitem{Andre2013}
-Andre~LC Carvalho, Honovan~P Rocha, Felipe~T Amaral, and Frederico~G Guimaraes.
-\newblock {Iterated Prisoner’s Dilemma-An extended analysis}.
-\newblock pages 1--6, 2013.
-
-\bibitem{Eckhart2015}
-Arnold Eckhart.
-\newblock Coopsim v0.9.9 beta 6.
-\newblock https://github.com/jecki/CoopSim/, 2015.
-
-\bibitem{Flood1958}
-Merrill~M Flood.
-\newblock {Some Experimental Games}, 1958.
-
-\bibitem{Frean1994}
-Marcus~R Frean.
-\newblock {The prisoner's dilemma without synchrony}.
-\newblock {\em Proceedings of the Royal Society of London B: Biological
-  Sciences}, 257(1348):75--79, 1994.
-
-\bibitem{Gaudesi2016}
-Marco Gaudesi, Elio Piccolo, Giovanni Squillero, and Alberto Tonda.
-\newblock {Exploiting evolutionary modeling to prevail in iterated prisoner’s
-  dilemma tournaments}.
-\newblock {\em IEEE Transactions on Computational Intelligence and AI in
-  Games}, 8(3):288--300, 2016.
-
-\bibitem{marc_harper_2017_824264}
-Marc Harper, Vince Knight, and Martin Jones.
-\newblock Axelrod-python/axelrod-dojo: v0.0.1.
-\newblock https://doi.org/10.5281/zenodo.824264, July 2017.
-
-\bibitem{Harper2017}
-Marc Harper, Vincent Knight, Martin Jones, Georgios Koutsovoulos, Nikoleta~E
-  Glynatsi, and Owen Campbell.
-\newblock {Reinforcement Learning Produces Dominant Strategies for the Iterated
-  Prisoner's Dilemma}.
-\newblock {\em PLOS ONE}, 12(12): 12 2017.
-
-\bibitem{Hilbe2017}
-Christian Hilbe, Luis~A Martinez-Vaquero, Krishnendu Chatterjee, and Martin~A
-  Nowak.
-\newblock {Memory-n strategies of direct reciprocity}.
-\newblock {\em Proceedings of the National Academy of Sciences}, page
-  201621239, 2017.
-
-\bibitem{Hilbe2013}
-Christian Hilbe, Martin~A Nowak, and Arne Traulsen.
-\newblock {Adaptive dynamics of extortion and compliance}.
-\newblock {\em PloS one}, 8(11):e77886, 2013.
-
-\bibitem{hunter2007matplotlib}
-John~D Hunter.
-\newblock {Matplotlib: A 2D graphics environment}.
-\newblock {\em Computing In Science \& Engineering}, 9(3):90--95, 2007.
-
-\bibitem{kendall2007iterated}
-Graham Kendall, Xin Yao, and Siang~Y Chong.
-\newblock {\em The Iterated Prisoners' Dilemma: 20 Years on}.
-\newblock Advances in natural computation. World Scientific, 2007.
-
 \bibitem{Knight2016}
-Vincent Knight, Owen Campbell, Marc Harper, Karol~M Langner, James Campbell,
-  Thomas Campbell, Alex Carney, Martin Chorley, Cameron Davidson-pilon,
-  Nikoleta Glynatsi, Tom{\'{a}}{\v{s}} Ehrlich, Martin Jones, Georgios
-  Koutsovoulos, Jochen Muller, Geraint Palmer, Piotr Petunov, Paul Slavin,
-  Timothy Standen, Luis Visintini, and Karl Molden.
+Knight V, Campbell O, Harper M, Langner K, Campbell J,
+  Campbell T, Carney A, Chorley M, Davidson-pilon C,
+  Glynatsi N, Ehrlich T, Jones M, Koutsovoulos G, Muller J, Palmer G, Petunov P, Slavin P,
+  Standen T, Visintini L, and Molden K.
 \newblock {An Open Framework for the Reproducible Study of the Iterated
   Prisoner ' s Dilemma}.
 \newblock 2016.
 
-\bibitem{data}
-Vincent Knight, Marc Harper, and Nikoleta~E Glynatsi.
-\newblock {Data for: Evolution Reinforces Cooperation with the Emergence of
-  Self-Recognition Mechanisms: an empirical study of the Moran process for the
-  iterated Prisoner's dilemma using reinforcement learning}.
-\newblock https://doi.org/10.5281/zenodo.1040129, July 2017.
-
-\bibitem{Kraines1989}
-David Kraines and Vivian Kraines.
-\newblock {Pavlov and the prisoner's dilemma}.
-\newblock {\em Theory and decision}, 26(1):47--79, 1989.
-
-\bibitem{Kuhn2017}
-Steven Kuhn.
-\newblock Prisoner's dilemma.
-\newblock In Edward~N. Zalta, editor, {\em The Stanford Encyclopedia of
-  Philosophy}. Metaphysics Research Lab, Stanford University, spring 2017
-  edition, 2017.
-
-\bibitem{Lee2015}
-Christopher Lee, Marc Harper, and Dashiell Fryer.
-\newblock {The Art of War: Beyond Memory-one Strategies in Population Games}.
-\newblock {\em Plos One}, 10(3):e0120625, 2015.
-
-\bibitem{Li2011}
-Jiawei Li, Philip Hingston, and Graham Kendall.
-\newblock {Engineering Design of Strategies for Winning Iterated Prisoner's
-  Dilemma Competitions}.
-\newblock {\em IEEE Transactions on Computational Intelligence and AI in
-  Games}, 3(4):348--360, 2011.
-
-\bibitem{Li2009}
-Jiawei Li and Graham Kendall.
-\newblock {A strategy with novel evolutionary features for the iterated
-  prisoner's dilemma.}
-\newblock {\em Evolutionary Computation}, 17(2):257--274, 2009.
-
-\bibitem{Li2014}
-Jiawei Li and Graham Kendall.
-\newblock {The effect of memory size on the evolutionary stability of
-  strategies in iterated prisoner's dilemma}.
-\newblock {\em IEEE Transactions on Evolutionary Computation}, 18(6):819--826,
-  2014.
-
-\bibitem{Prison1998}
-LIFL.
-\newblock Prison.
-\newblock http://www.lifl.fr/IPD/ipd.frame.html, 2008.
-
-\bibitem{Mateo2003}
-Jill M. Mateo.
-\newblock {Kin recognition in ground squirrels and other rodents}.
-\newblock In {\em Journal of Mammalogy}, 84 (4), 1163--1181
-
-\bibitem{Mathieu2015}
-Philippe Mathieu and Jean-Paul Delahaye.
-\newblock {New Winning Strategies for the Iterated Prisoner's Dilemma (Extended
-  Abstract)}.
-\newblock {\em 14th International Conference on Autonomous Agents and
-  Multiagent Systems (AAMAS 2015)}, pages 1665--1666, 2015.
-
-\bibitem{mckinney2010data}
-Wes McKinney et~al.
-\newblock Data structures for statistical computing in python.
-\newblock In {\em Proceedings of the 9th Python in Science Conference}, volume
-  445, pages 51--56. van der Voort S, Millman J, 2010.
-
-\bibitem{Mittal2009}
-Shashi Mittal and Kalyanmoy Deb.
-\newblock {Optimal strategies of the iterated prisoner's dilemma problem for
-  multiple conflicting objectives}.
-\newblock {\em IEEE Transactions on Evolutionary Computation}, 13(3):554--565,
-  2009.
-
-\bibitem{Moran1957}
-Patrick A~P Moran.
-\newblock {Random Processes in Genetics}.
-\newblock {\em Mathematical Proceedings of the Cambridge Philosophical
-  Society}, 54(1):60--71, 1957.
-
-\bibitem{Nachbar1992}
-John~H Nachbar.
-\newblock {Evolution in the finitely repeated prisoner's dilemma}.
-\newblock {\em Journal of Economic Behavior \& Organization}, 19(3):307--326,
-  1992.
-
-\bibitem{Nowak}
-Martin~A Nowak.
-\newblock {\em Evolutionary Dynamics: Exploring the Equations of Life}.
-\newblock Cambridge: Harvard University Press.
-
-\bibitem{Nowak1993}
-Martin~A Nowak and Karl Sigmund.
-\newblock {A strategy of win-stay, lose-shift that outperforms tit-for-tat in
-  the Prisoner's Dilemma game.}
-\newblock {\em Nature}, 364(6432):56--58, 1993.
-
 \bibitem{Press2012}
-William~H Press and Freeman~J Dyson.
+Press W and Dyson F.
 \newblock {Iterated Prisoner's Dilemma contains strategies that dominate any
   evolutionary opponent.}
 \newblock {\em Proceedings of the National Academy of Sciences of the United
   States of America}, 109(26):10409--13, 2012.
 
-\bibitem{Prlic2012}
-Andreas Prlić and James~B Procter.
-\newblock {Ten Simple Rules for the Open Development of Scientific Software}.
-\newblock {\em PLOS Computational Biology}, 8(12):1--3, 12 2012.
+\bibitem{Moran1957}
+Moran P.
+\newblock {Random Processes in Genetics}.
+\newblock {\em Mathematical Proceedings of the Cambridge Philosophical
+  Society}, 54(1):60--71, 1957.
+
+\bibitem{Nowak}
+Nowak M.
+\newblock {\em Evolutionary Dynamics: Exploring the Equations of Life}.
+\newblock Cambridge: Harvard University Press.
+
+\bibitem{stewart2013extortion}
+Stewart A and Plotkin J.
+\newblock {From extortion to generosity, evolution in the iterated prisoner’s
+  dilemma}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  110(38):15348--15353, 2013.
 
 \bibitem{axelrodproject}
 The~Axelrod project developers.
 \newblock Axelrod: v2.9.0.
 \newblock http://dx.doi.org/10.5281/zenodo.499122, April 2016.
 
+\bibitem{adami2016evolutionary}
+Adami C, Schossau J, and Hintze A.
+\newblock {Evolutionary game theory using agent-based methods}.
+\newblock {\em Physics of Life Reviews}, 19(Supplement C):1 -- 26, 2016.
+
 \bibitem{Robson1990}
-Arthur~J Robson.
+Robson A.
 \newblock {Efficiency in evolutionary games: Darwin, Nash and the secret
   handshake}.
 \newblock {\em Journal of theoretical Biology}, 144(3):379--396, 1990.
 
+\bibitem{Mateo2003}
+Mateo J.
+\newblock {Kin recognition in ground squirrels and other rodents}.
+\newblock In {\em Journal of Mammalogy}, 84 (4), 1163--1181
+
+\bibitem{West2016}
+West J, Hasnain Z, Mason J, and Newton P.
+\newblock {The prisoner’s dilemma as a cancer model}.
+\newblock {\em Convergent Science Physical Oncology}, 2(3):035002, 2016.
+
+\bibitem{Nowak2017}
+Allen B, Lippner G, Chen Y, Fotouhi B, Momeni N,
+  Shing-Tung Yau, and Martin~A Nowak.
+\newblock {Evolutionary dynamics on any population structure}.
+\newblock 544:227--230, March 2017.
+
+\bibitem{Li2014}
+Li J and Kendall G.
+\newblock {The effect of memory size on the evolutionary stability of
+  strategies in iterated prisoner's dilemma}.
+\newblock {\em IEEE Transactions on Evolutionary Computation}, 18(6):819--826,
+  2014.
+
+\bibitem{Baek2016}
+{Seung Ki B, Hyeong-chai J, Christian H and Martin N}.
+\newblock {Comparing reactive and memory- one strategies of direct
+  reciprocity}.
+\newblock {\em Nature Publishing Group}, pages 1--13, 2016.
+
+\bibitem{Lee2015}
+Lee C, Harper M, and Fryer D.
+\newblock {The Art of War: Beyond Memory-one Strategies in Population Games}.
+\newblock {\em Plos One}, 10(3):e0120625, 2015.
+
+\bibitem{Hilbe2017}
+Hilbe C, Martinez-Vaquero L, Chatterjee K, and Nowak M.
+\newblock {Memory-n strategies of direct reciprocity}.
+\newblock {\em Proceedings of the National Academy of Sciences}, page
+  201621239, 2017.
+
+\bibitem{Adami2013}
+Adami C and Hintze A.
+\newblock {Evolutionary instability of zero-determinant strategies demonstrates
+  that winning is not everything.}
+\newblock {\em Nature communications}, 4(1):2193, 2013.
+
+\bibitem{Harper2017}
+Harper M, Knight V, Jones M, Koutsovoulos G, Glynatsi N , and Campbell O.
+\newblock {Reinforcement Learning Produces Dominant Strategies for the Iterated
+  Prisoner's Dilemma}.
+\newblock {\em PLOS ONE}, 12(12): 12 2017.
+
+\bibitem{affenzeller2009genetic}
+Affenzeller M, Wagner S, Winkler S, and Beham A.
+\newblock {\em Genetic Algorithms and Genetic Programming: Modern Concepts and
+  Practical Applications}.
+\newblock Numerical Insights. CRC Press, 2009.
+
+\bibitem{Ashlock2006}
+Ashlock W and Ashlock D.
+\newblock {Changes in prisoner’s dilemma strategies over evolutionary time
+  with different population sizes}.
+\newblock In {\em Evolutionary Computation, 2006. CEC 2006. IEEE Congress on},
+  pages 297--304. IEEE, 2006.
+
+\bibitem{Gaudesi2016}
+Gaudesi M, Piccolo E, Squillero G, and Tonda A.
+\newblock {Exploiting evolutionary modeling to prevail in iterated prisoner’s
+  dilemma tournaments}.
+\newblock {\em IEEE Transactions on Computational Intelligence and AI in
+  Games}, 8(3):288--300, 2016.
+
+\bibitem{marc_harper_2017_824264}
+Harper M, Knight V, and Jones M.
+\newblock Axelrod-python/axelrod-dojo: v0.0.1.
+\newblock https://doi.org/10.5281/zenodo.824264, July 2017.
+
+\bibitem{AshlockBook}
+Ashlock D.
+\newblock{Evolutionary computation for modeling and optimization},
+\newblock{Springer Science \& Business Media}
+2006
+
+\bibitem{Ashlock2007}
+Ashlock W
+\newblock {Why some representations are more cooperative than others for
+prisoner's dilemma}
+\newblock {\em Foundations of Computational Intelligence, 2007. FOCI 2007. IEEE
+symposium on}, 314--321,
+  2007.
+
+\bibitem{data}
+Knight V, Harper M, and Glynatsi N.
+\newblock {Data for: Evolution Reinforces Cooperation with the Emergence of
+  Self-Recognition Mechanisms: an empirical study of the Moran process for the
+  iterated Prisoner's dilemma using reinforcement learning}.
+\newblock https://doi.org/10.5281/zenodo.1040129, July 2017.
+
+\bibitem{Prison1998}
+LIFL.
+\newblock Prison.
+\newblock http://www.lifl.fr/IPD/ipd.frame.html, 2008.
+
+\bibitem{Li2009}
+Li J and Kendall G.
+\newblock {A strategy with novel evolutionary features for the iterated
+  prisoner's dilemma.}
+\newblock {\em Evolutionary Computation}, 17(2):257--274, 2009.
+
+\bibitem{brown2001interval}
+Brown L, Cai T, and DasGupta A.
+\newblock Interval estimation for a binomial proportion.
+\newblock {\em Statistical science}, pages 101--117, 2001.
+
+\bibitem{Prlic2012}
+Prlić A and Procter J.
+\newblock {Ten Simple Rules for the Open Development of Scientific Software}.
+\newblock {\em PLOS Computational Biology}, 8(12):1--3, 12 2012.
+
 \bibitem{Sandve2013}
-Geir~Kjetil Sandve, Anton Nekrutenko, James Taylor, and Eivind Hovig.
+Sandve G, Nekrutenko A, Taylor J, and Hovig E.
 \newblock {Ten Simple Rules for Reproducible Computational Research}.
 \newblock {\em PLoS Computational Biology}, 9(10):1--4, 2013.
 
-\bibitem{Stewart2012}
-Alexander~J Stewart and Joshua~B Plotkin.
-\newblock {Extortion and cooperation in the Prisoner’s Dilemma}.
-\newblock {\em Proceedings of the National Academy of Sciences},
-  109(26):10134--10135, 2012.
+\bibitem{Wilson2014}
+Wilson G , Aruliah D, Brown T, Chue~Hong N, Davis M ,
+  Guy R , Haddock S , Huff K, Mitchell I , Plumbley M , 
+  Waugh B , White E , and Wilson P.
+\newblock {Best Practices for Scientific Computing}.
+\newblock {\em PLOS Biology}, 12(1):1--7, 01 2014.
 
-\bibitem{stewart2013extortion}
-Alexander~J Stewart and Joshua~B Plotkin.
-\newblock {From extortion to generosity, evolution in the iterated prisoner’s
-  dilemma}.
-\newblock {\em Proceedings of the National Academy of Sciences},
-  110(38):15348--15353, 2013.
+\bibitem{hunter2007matplotlib}
+Hunter J.
+\newblock {Matplotlib: A 2D graphics environment}.
+\newblock {\em Computing In Science \& Engineering}, 9(3):90--95, 2007.
+
+\bibitem{mckinney2010data}
+McKinney W et~al.
+\newblock Data structures for statistical computing in python.
+\newblock In {\em Proceedings of the 9th Python in Science Conference}, volume
+  445, pages 51--56. van der Voort S, Millman J, 2010.
+
+\bibitem{walt2011numpy}
+van~der Walt S, Colbert C, and Varoquaux G.
+\newblock {The NumPy array: a structure for efficient numerical computation}.
+\newblock {\em Computing in Science \& Engineering}, 13(2):22--30, 2011.
+
+\bibitem{Li2011}
+Li J, Hingston P, and Kendall G.
+\newblock {Engineering Design of Strategies for Winning Iterated Prisoner's
+  Dilemma Competitions}.
+\newblock {\em IEEE Transactions on Computational Intelligence and AI in
+  Games}, 3(4):348--360, 2011.
+
+\bibitem{kendall2007iterated}
+Kendall G, Yao X, and Chong S.
+\newblock {\em The Iterated Prisoners' Dilemma: 20 Years on}.
+\newblock Advances in natural computation. World Scientific, 2007.
 
 \bibitem{Tzafestas2000}
-Elpida Tzafestas.
+Tzafestas E.
 \newblock {Toward adaptive cooperative behavior}.
 \newblock {\em From Animals to animals: Proceedings of the 6th International
   Conference on the Simulation of Adaptive Behavior {(SAB-2000)}}, 2:334--340,
   2000.
+
+\bibitem{Axelrod1984}
+Axelrod R.
+\newblock {\em The Evolution of Cooperation}.
+\newblock Basic books. Basic Books, 1984.
+
+\bibitem{Mittal2009}
+Mittal S and Deb K.
+\newblock {Optimal strategies of the iterated prisoner's dilemma problem for
+  multiple conflicting objectives}.
+\newblock {\em IEEE Transactions on Evolutionary Computation}, 13(3):554--565,
+  2009.
+
+\bibitem{Hilbe2013}
+Hilbe C, Nowak M, and Traulsen A.
+\newblock {Adaptive dynamics of extortion and compliance}.
+\newblock {\em PloS one}, 8(11):e77886, 2013.
+
+\bibitem{Nachbar1992}
+Nachbar J.
+\newblock {Evolution in the finitely repeated prisoner's dilemma}.
+\newblock {\em Journal of Economic Behavior \& Organization}, 19(3):307--326,
+  1992.
+
+\bibitem{Axelrod1995}
+Wu J and Axelrod R .
+\newblock {How to cope with noise in the iterated prisoner's dilemma}.
+\newblock {\em Journal of Conflict resolution}, 39(1):183--189, 1995.
+
+
+\bibitem{Berg2015}
+Van~den Berg P and Weissing F.
+\newblock {The importance of mechanisms for the evolution of cooperation}.
+\newblock In {\em Proc. R. Soc. B}, volume 282, page 20151382. The Royal
+  Society, 2015.
+
+\bibitem{Axelrod1980b}
+Axelrod R.
+\newblock {More Effective Choice in the Prisoner's Dilemma}.
+\newblock {\em Journal of Conflict Resolution}, 24(3):379--403, 1980.
+
+\bibitem{Frean1994}
+Frean M.
+\newblock {The prisoner's dilemma without synchrony}.
+\newblock {\em Proceedings of the Royal Society of London B: Biological
+  Sciences}, 257(1348):75--79, 1994.
+
+\bibitem{Nowak1993}
+Nowak M and Sigmund K.
+\newblock {A strategy of win-stay, lose-shift that outperforms tit-for-tat in
+  the Prisoner's Dilemma game.}
+\newblock {\em Nature}, 364(6432):56--58, 1993.
+
+\bibitem{Beaufils1997}
+Beaufils B, Delahaye J, and Mathieu P.
+\newblock {Our meeting with gradual, a good strategy for the iterated
+  prisoner’s dilemma}.
+\newblock In {\em Proceedings of the Fifth International Workshop on the
+  Synthesis and Simulation of Living Systems}, pages 202--209, 1997.
+
+\bibitem{Banks1990}
+Banks J and Sundaram R.
+\newblock {Repeated games, finite automata, and complexity}.
+\newblock {\em Games and Economic Behavior}, 2(2):97--117, 1990.
+
+\bibitem{Stewart2012}
+Stewart A and Plotkin J.
+\newblock {Extortion and cooperation in the Prisoner’s Dilemma}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  109(26):10134--10135, 2012.
 
 \bibitem{PD2017}
 Unkwown.
 \newblock www.prisoners-dilemma.com.
 \newblock http://www.prisoners-dilemma.com/, 2017.
 
-\bibitem{Berg2015}
-Pieter Van~den Berg and Franz~J Weissing.
-\newblock {The importance of mechanisms for the evolution of cooperation}.
-\newblock In {\em Proc. R. Soc. B}, volume 282, page 20151382. The Royal
-  Society, 2015.
+\bibitem{Eckhart2015}
+Eckhart A.
+\newblock Coopsim v0.9.9 beta 6.
+\newblock https://github.com/jecki/CoopSim/, 2015.
 
-\bibitem{walt2011numpy}
-St{\'e}fan van~der Walt, S~Chris Colbert, and Gael Varoquaux.
-\newblock {The NumPy array: a structure for efficient numerical computation}.
-\newblock {\em Computing in Science \& Engineering}, 13(2):22--30, 2011.
+\bibitem{Ashlock2014}
+Ashlock W, Tsang J, and Ashlock D.
+\newblock {The evolution of exploitation}.
+\newblock In {\em Foundations of Computational Intelligence (FOCI), 2014 IEEE
+  Symposium on}, pages 135--142. IEEE, 2014.
 
-\bibitem{West2016}
-Jeffrey West, Zaki Hasnain, Jeremy Mason, and Paul~K Newton.
-\newblock {The prisoner’s dilemma as a cancer model}.
-\newblock {\em Convergent Science Physical Oncology}, 2(3):035002, 2016.
+\bibitem{Ashlock2008}
+Ashlock D and Kim E.
+\newblock {Fingerprinting: Visualization and automatic analysis of prisoner's
+  dilemma strategies}.
+\newblock {\em IEEE Transactions on Evolutionary Computation}, 12(5):647--659,
+  2008.
 
-\bibitem{Wilson2014}
-Greg Wilson, D~A Aruliah, C~Titus Brown, Neil~P Chue~Hong, Matt Davis,
-  Richard~T Guy, Steven H~D Haddock, Kathryn~D Huff, Ian~M Mitchell, Mark~D
-  Plumbley, Ben Waugh, Ethan~P White, and Paul Wilson.
-\newblock {Best Practices for Scientific Computing}.
-\newblock {\em PLOS Biology}, 12(1):1--7, 01 2014.
+\bibitem{Andre2013}
+Carvalho A, Rocha H, Amaral F, and Guimaraes F.
+\newblock {Iterated Prisoner’s Dilemma-An extended analysis}.
+\newblock pages 1--6, 2013.
 
-\bibitem{Axelrod1995}
-Jianzhong Wu and Robert Axelrod.
-\newblock {How to cope with noise in the iterated prisoner's dilemma}.
-\newblock {\em Journal of Conflict resolution}, 39(1):183--189, 1995.
+\bibitem{Ashlock2015}
+Ashlock D, Brown J, and Hingston P.
+\newblock {Multiple Opponent Optimization of Prisoner’s Dilemma Playing
+  Agents}.
+\newblock {\em IEEE Transactions on Computational Intelligence and AI in
+  Games}, 7(1):53--65, 2015.
+
+\bibitem{Kraines1989}
+Kraines D and Kraines V.
+\newblock {Pavlov and the prisoner's dilemma}.
+\newblock {\em Theory and decision}, 26(1):47--79, 1989.
+
+\bibitem{Mathieu2015}
+Mathieu P and Delahaye J.
+\newblock {New Winning Strategies for the Iterated Prisoner's Dilemma (Extended
+  Abstract)}.
+\newblock {\em 14th International Conference on Autonomous Agents and
+  Multiagent Systems (AAMAS 2015)}, pages 1665--1666, 2015.
+
+\bibitem{Kuhn2017}
+Kuhn S.
+\newblock Prisoner's dilemma.
+\newblock In Edward~N. Zalta, editor, {\em The Stanford Encyclopedia of
+  Philosophy}. Metaphysics Research Lab, Stanford University, spring 2017
+  edition, 2017.
 
 \end{thebibliography}
 
@@ -2107,74 +2066,74 @@ population sizes.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig17.eps}
+    %\includegraphics[ width=\textwidth]{./Fig12.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=3\)}
     \label{invasion-3}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig18.eps}
+    %\includegraphics[ width=\textwidth]{./Fig13.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=4\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig19.eps}
+    %\includegraphics[ width=\textwidth]{./Fig14.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=5\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig20.eps}
+    %\includegraphics[ width=\textwidth]{./Fig15.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=6\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig21.eps}
+    %\includegraphics[ width=\textwidth]{./Fig16.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=7\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig22.eps}
+    %\includegraphics[ width=\textwidth]{./Fig17.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=8\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig23.eps}
+    %\includegraphics[ width=\textwidth]{./Fig18.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=9\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig24.eps}
+    %\includegraphics[ width=\textwidth]{./Fig19.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=10\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig25.eps}
+    %\includegraphics[ width=\textwidth]{./Fig20.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=11\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig26.eps}
+    %\includegraphics[ width=\textwidth]{./Fig21.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=12\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig27.eps}
+    %\includegraphics[ width=\textwidth]{./Fig22.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=13\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig28.eps}
+    %\includegraphics[ width=\textwidth]{./Fig23.eps}
     \caption{The fixation probabilities \(x_1\) for \(N=14\)}
     \label{invasion-14}
 \end{figure}
@@ -2182,74 +2141,74 @@ population sizes.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig29.eps}
+    %\includegraphics[ width=\textwidth]{./Fig24.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=3\)}
     \label{resistance-3}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig30.eps}
+    %\includegraphics[ width=\textwidth]{./Fig25.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=4\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig31.eps}
+    %\includegraphics[ width=\textwidth]{./Fig26.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=5\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig32.eps}
+    %\includegraphics[ width=\textwidth]{./Fig27.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=6\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig33.eps}
+    %\includegraphics[ width=\textwidth]{./Fig28.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=7\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig34.eps}
+    %\includegraphics[ width=\textwidth]{./Fig29.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=8\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig35.eps}
+    %\includegraphics[ width=\textwidth]{./Fig30.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=9\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig36.eps}
+    %\includegraphics[ width=\textwidth]{./Fig31.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=10\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig37.eps}
+    %\includegraphics[ width=\textwidth]{./Fig32.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=11\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig38.eps}
+    %\includegraphics[ width=\textwidth]{./Fig33.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=12\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig39.eps}
+    %\includegraphics[ width=\textwidth]{./Fig34.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=13\)}
 \end{figure}
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[draft, width=\textwidth]{./Fig40.eps}
+    %\includegraphics[ width=\textwidth]{./Fig35.eps}
     \caption{The fixation probabilities \(x_{N-1}\) for \(N=14\)}
     \label{resistance-14}
 \end{figure}
